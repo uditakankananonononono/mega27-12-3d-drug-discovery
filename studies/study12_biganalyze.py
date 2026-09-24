@@ -23,11 +23,16 @@ RES = ROOT / "results"
 
 # ---------- load both sources into one labeled set ----------
 records = []
+skipped = []
 for p in sorted((RES / "bigscreen").glob("*.json")):
     r = json.loads(p.read_text())
+    if "affinity" not in r:  # dock-timeout skips (macrocycles)
+        skipped.append(r["chembl_id"]); continue
     records.append({"name": r["chembl_id"], "smiles": r["smiles"],
                     "affinity": float(r["affinity"]), "label": r["label"],
                     "source": "bigscreen"})
+if skipped:
+    print(f"bigscreen skipped (dock timeout): {skipped}")
 for p in sorted((RES / "screen").glob("*.json")):
     r = json.loads(p.read_text())
     records.append({"name": r["name"], "smiles": r["smiles"],
@@ -147,6 +152,7 @@ summary = {
     "auroc_gnn2d_loo_per_seed": seed_aurocs,
     "protocol": "balanced ChEMBL bigscreen (50) + literature screen (22); "
                 "LOO CV for learned rankers; GNN = 2D bond-graph GCN, 5 seeds",
+    "bigscreen_skipped_dock_timeout": skipped,
     "verdict": ("GNN beats raw Vina" if gnn_mean > auroc_raw
                 else "GNN does NOT beat raw Vina at this n"),
 }
