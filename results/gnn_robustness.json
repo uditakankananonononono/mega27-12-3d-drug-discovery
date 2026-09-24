@@ -1,0 +1,15 @@
+{
+ "per_seed_auroc": {
+  "seed_0": 0.8928571428571428,
+  "seed_1": 0.9107142857142857,
+  "seed_2": 0.8214285714285714,
+  "seed_3": 0.8035714285714286,
+  "seed_4": 0.9285714285714286
+ },
+ "mean": 0.8714285714285716,
+ "std": 0.04974424384708613,
+ "min": 0.8035714285714286,
+ "max": 0.9285714285714286,
+ "committed_single_seed_value": 0.9464285714285714,
+ "note": "LOO is per-ligand (one pose graph per compound, held out whole); n=15"
+}
