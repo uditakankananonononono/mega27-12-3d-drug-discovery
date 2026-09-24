@@ -1,0 +1,7 @@
+{
+ "chembl_id": "CHEMBL4873357",
+ "smiles": "CC(C)C[C@H](NC(=O)[C@@H](NC(=O)[C@H](C)NC(=O)[C@H](C)NC(=O)[C@@H]1CSCN1)C(C)C)C(=O)N[C@@H](CCC(N)=O)C(=O)N[C@@H](C)C(=O)N[C@@H](Cc1ccnc(C#N)c1)C(N)=O",
+ "skipped": "dock_worker_crash_flexible_peptide",
+ "label": "inactive",
+ "best_potency_nM": 100000.0
+}

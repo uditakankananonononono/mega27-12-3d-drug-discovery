@@ -1,0 +1,14 @@
+{
+ "chembl_id": "CHEMBL5171142",
+ "smiles": "COCCn1c(C(=O)NCC(O)c2ccccc2)nc2ccccc2c1=O",
+ "affinity": -7.405,
+ "all_affinities": [
+  -7.405,
+  -7.253,
+  -7.203,
+  -7.068,
+  -7.044
+ ],
+ "label": "inactive",
+ "best_potency_nM": 54000.0
+}

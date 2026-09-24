@@ -1,0 +1,14 @@
+{
+ "chembl_id": "CHEMBL445978",
+ "smiles": "COc1ccc(-c2cc(=O)c3c(O)c(OC)c(O[C@@H]4O[C@H](CO[C@@H]5O[C@@H](C)[C@H](O)[C@@H](O)[C@H]5O)[C@@H](O)[C@H](O)[C@H]4O)cc3o2)cc1",
+ "affinity": -8.97,
+ "all_affinities": [
+  -8.97,
+  -8.874,
+  -8.815,
+  -8.677,
+  -8.663
+ ],
+ "label": "inactive",
+ "best_potency_nM": 38000.0
+}

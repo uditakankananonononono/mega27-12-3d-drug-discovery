@@ -1,0 +1,7 @@
+{
+ "chembl_id": "CHEMBL5187156",
+ "smiles": "O=C(Nc1ccc2c(c1)B(O)OC2)c1cccc(OCc2ccccc2)n1",
+ "skipped": "unsupported_element_B_no_vina_parameters",
+ "label": "inactive",
+ "best_potency_nM": 38500.0
+}

@@ -127,6 +127,17 @@ if __name__ == "__main__":
                     "best_potency_nM": rec["best_potency_nM"]}, indent=1))
                 print(f"  SKIPPED {cid}: dock timeout [{done}/{len(sample)}]", flush=True)
                 continue
+            except RuntimeError as exc:
+                if "died without result" in str(exc):
+                    skip += 1
+                    cache.write_text(json.dumps({"chembl_id": cid, "smiles": smi,
+                        "skipped": "dock_worker_crash_flexible_peptide",
+                        "label": rec["label"],
+                        "best_potency_nM": rec["best_potency_nM"]}, indent=1))
+                    print(f"  SKIPPED {cid}: dock worker crash "
+                          f"[{done}/{len(sample)}]", flush=True)
+                    continue
+                raise
             cache.write_text(json.dumps({"chembl_id": cid, "smiles": smi,
                 "affinity": best, "all_affinities": all_aff,
                 "label": rec["label"], "best_potency_nM": rec["best_potency_nM"]}, indent=1))
