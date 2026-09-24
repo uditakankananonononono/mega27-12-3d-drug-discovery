@@ -1,0 +1,13 @@
+{
+ "name": "remdesivir",
+ "smiles": "CCC(CC)COC(=O)C(C)NP(=O)(OCC1C(C(C(O1)(C#N)C2=CC=C3N2N=CN=C3N)O)O)OC4=CC=CC=C4",
+ "affinity": -7.649,
+ "all_affinities": [
+  -7.649,
+  -7.345,
+  -7.224,
+  -7.188,
+  -7.103
+ ],
+ "known_class": "unknown"
+}

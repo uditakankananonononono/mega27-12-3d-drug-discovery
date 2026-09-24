@@ -1,0 +1,13 @@
+{
+ "name": "nirmatrelvir",
+ "smiles": "CC1(C2C1C(N(C2)C(=O)C(C(C)(C)C)NC(=O)C(F)(F)F)C(=O)NC(CC3CCNC3=O)C#N)C",
+ "affinity": -8.029,
+ "all_affinities": [
+  -8.029,
+  -7.734,
+  -7.673,
+  -7.632,
+  -7.593
+ ],
+ "known_class": "active"
+}
