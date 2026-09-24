@@ -1,0 +1,13 @@
+{
+ "name": "ritonavir",
+ "smiles": "CC(C)C1=NC(=CS1)CN(C)C(=O)NC(C(C)C)C(=O)NC(CC2=CC=CC=C2)CC(C(CC3=CC=CC=C3)NC(=O)OCC4=CN=CS4)O",
+ "affinity": -7.8,
+ "all_affinities": [
+  -7.8,
+  -7.194,
+  -7.137,
+  -7.071,
+  -6.956
+ ],
+ "known_class": "unknown"
+}

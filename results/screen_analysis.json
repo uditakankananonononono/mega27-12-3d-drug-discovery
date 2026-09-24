@@ -1,0 +1,122 @@
+{
+ "n_docked": 22,
+ "n_labeled": 15,
+ "actives": 7,
+ "top8_actives": 3,
+ "hypergeometric_p": 0.8997668997668997,
+ "auroc_raw_vina": 0.3392857142857143,
+ "auroc_nn_rescorer_loo": 0.6785714285714286,
+ "auroc_gnn_rescorer_loo": 0.9464285714285714,
+ "ranking": [
+  {
+   "name": "nilotinib",
+   "affinity": -9.31,
+   "class": "unknown"
+  },
+  {
+   "name": "saquinavir",
+   "affinity": -9.231,
+   "class": "inactive"
+  },
+  {
+   "name": "masitinib",
+   "affinity": -8.77,
+   "class": "active"
+  },
+  {
+   "name": "nelfinavir",
+   "affinity": -8.752,
+   "class": "inactive"
+  },
+  {
+   "name": "lopinavir",
+   "affinity": -8.724,
+   "class": "inactive"
+  },
+  {
+   "name": "nafamostat",
+   "affinity": -8.251,
+   "class": "unknown"
+  },
+  {
+   "name": "darunavir",
+   "affinity": -8.193,
+   "class": "inactive"
+  },
+  {
+   "name": "tideglusib",
+   "affinity": -8.182,
+   "class": "active"
+  },
+  {
+   "name": "indinavir",
+   "affinity": -8.132,
+   "class": "inactive"
+  },
+  {
+   "name": "nirmatrelvir",
+   "affinity": -8.029,
+   "class": "active"
+  },
+  {
+   "name": "boceprevir",
+   "affinity": -7.893,
+   "class": "active"
+  },
+  {
+   "name": "camostat",
+   "affinity": -7.849,
+   "class": "unknown"
+  },
+  {
+   "name": "ritonavir",
+   "affinity": -7.8,
+   "class": "unknown"
+  },
+  {
+   "name": "atazanavir",
+   "affinity": -7.715,
+   "class": "inactive"
+  },
+  {
+   "name": "telaprevir",
+   "affinity": -7.658,
+   "class": "active"
+  },
+  {
+   "name": "remdesivir",
+   "affinity": -7.649,
+   "class": "unknown"
+  },
+  {
+   "name": "molnupiravir",
+   "affinity": -7.155,
+   "class": "unknown"
+  },
+  {
+   "name": "hydroxychloroquine",
+   "affinity": -6.276,
+   "class": "inactive"
+  },
+  {
+   "name": "chloroquine",
+   "affinity": -6.095,
+   "class": "inactive"
+  },
+  {
+   "name": "carmofur",
+   "affinity": -6.046,
+   "class": "active"
+  },
+  {
+   "name": "favipiravir",
+   "affinity": -5.312,
+   "class": "unknown"
+  },
+  {
+   "name": "disulfiram",
+   "affinity": -4.611,
+   "class": "active"
+  }
+ ]
+}

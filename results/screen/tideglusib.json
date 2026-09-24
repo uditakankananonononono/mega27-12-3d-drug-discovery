@@ -1,0 +1,13 @@
+{
+ "name": "tideglusib",
+ "smiles": "C1=CC=C(C=C1)CN2C(=O)N(SC2=O)C3=CC=CC4=CC=CC=C43",
+ "affinity": -8.182,
+ "all_affinities": [
+  -8.182,
+  -7.919,
+  -7.823,
+  -7.715,
+  -7.664
+ ],
+ "known_class": "active"
+}
