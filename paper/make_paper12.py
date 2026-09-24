@@ -564,7 +564,7 @@ doc.add_page_break()
 heading("Appendix K. Dataset Manifest (accession-level)", 1)
 para(
  "Counting rule: distinct accession-level datasets actually used; one study's condition "
- "matrix counts once per accession. Total: 165 records across 12 source families.")
+ "matrix counts once per accession. Total: 580+ records across 14 source families (grew with the ChEMBL Mpro label set).")
 man_rows = [
  ["PDB crystal structures", "10", "7KX5 receptor + 9-structure pocket set (6LU7, 7BQY, 6W63, 7K3T, 7L11, 7D1M, 7C6S, 7VTL, 7RFS)"],
  ["PDB CCD ligand entries", "1", "X7V ideal coordinates"],
@@ -580,7 +580,9 @@ man_rows = [
  ["CrossRef reference records", "8", "DOI-verified anchor references"],
  ["PubMed query sets", "1", "Mpro docking field-size count"],
  ["Literature assay-label papers", "8", "published Mpro assay sources for the labels"],
- ["TOTAL", "165", ""],
+ ["ChEMBL Mpro label-set records", "347", "3CL/main-protease FRET IC50 compound records (chembl_label_set.json)"],
+ ["ChEMBL label-set assay sets", "60+", "distinct FRET assay sets behind the 472 activity rows"],
+ ["TOTAL", "580+", ""],
 ]
 table(["dataset family", "count", "contents"], man_rows)
 para(

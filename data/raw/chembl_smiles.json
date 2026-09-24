@@ -16,5 +16,14 @@
  "CHEMBL5208244": "NC(=O)CCN(NC(=O)[C@H](CC1CCCCC1)NC(=O)c1cc2ccccc2[nH]1)C(=O)CCl",
  "CHEMBL5180494": "O=C(NCc1ccco1)[C@H]1CN(C(=O)c2cc(=O)[nH]c(=O)[nH]2)CCN1c1ccc(Cl)c(Cl)c1",
  "CHEMBL5205478": "CC(C)C[C@H](NC(=O)c1cc2ccccc2[nH]1)C(=O)NN(C[C@H]1CCNC1=O)C(=O)CCl",
- "CHEMBL5179778": "CC(C)C[C@H](NC(=O)c1cc2c(F)cccc2[nH]1)C(=O)NN(C[C@@H]1CCNC1=O)C(=O)[C@H](F)Cl"
+ "CHEMBL5179778": "CC(C)C[C@H](NC(=O)c1cc2c(F)cccc2[nH]1)C(=O)NN(C[C@@H]1CCNC1=O)C(=O)[C@H](F)Cl",
+ "CHEMBL5197155": "Cn1cc2cc(Nc3nc(=O)n(Cc4cc5ccsc5[nH]c4=O)c(=O)n3Cc3cc(F)c(F)c(F)c3)c(Cl)cc2n1",
+ "CHEMBL5182106": "CC(C)C[C@H](NC(=O)c1cc2ccccc2[nH]1)C(=O)NN(C[C@@H]1CCNC1=O)C(=O)CCl",
+ "CHEMBL5186059": "Cc1cc(C(=O)N[C@@H](CC2CCCCC2)C(=O)NN(CCC(N)=O)C(=O)CCl)no1",
+ "CHEMBL5179611": "CC(C)C[C@H](NC(=O)c1cc2c(F)cccc2[nH]1)C(=O)NN(C[C@H]1CCNC1=O)C(=O)[C@H](F)Cl",
+ "CHEMBL5205477": "CC(C)[C@H](NC(=O)OCc1ccccc1)C(=O)N[C@@H](CC1CC1)C(=O)N[C@H](C=O)C[C@@H]1CCNC1=O",
+ "CHEMBL5188818": "Cn1cnc(Cn2c(=O)nc(Nc3cc4cn(C)nc4cc3Cl)n(Cc3cc(Cl)c(F)cc3F)c2=O)n1",
+ "CHEMBL5206128": "Cn1cnc(Cn2c(=O)nc(Nc3cc4cn(C)nc4cc3Cl)n(Cc3cc(Cl)c(F)c(Cl)c3)c2=O)n1",
+ "CHEMBL18786": "CN(C)CCCSc1ccccc1NC(=O)/C=C/c1ccccc1",
+ "CHEMBL4868572": "CC(C)C[C@@H]1NC(=O)[C@H](C(C)C)NC(=O)[C@H](C(C)C)NC(=O)[C@@H]2CSC(=N2)c2cc(ccn2)C[C@@H](C(N)=O)NC(=O)[C@H](CCC(N)=O)NC1=O"
 }
