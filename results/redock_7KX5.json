@@ -1,0 +1,9 @@
+{
+ "ligand": "JUN8-76-3A (X7V)",
+ "structure": "7KX5",
+ "best_affinity_kcal_mol": -9.319,
+ "rmsd_A": 0.9701221892010544,
+ "gate": "PASS",
+ "exhaustiveness": 16,
+ "method": "heavy-atom assignment RMSD vs crystal pose"
+}

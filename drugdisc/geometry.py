@@ -2,6 +2,9 @@
 from __future__ import annotations
 import numpy as np
 
+KNOWN_ELEMENTS = {"C", "N", "O", "S", "F", "P", "Cl", "Br", "I", "B",
+                "Si", "Se", "Zn", "Fe", "Mg", "Ca", "Na", "K", "Cu", "Mn"}
+
 
 def kabsch_rmsd(p: np.ndarray, q: np.ndarray) -> float:
     """Minimum RMSD between two Nx3 point sets under optimal rigid superposition."""
@@ -38,8 +41,11 @@ def parse_pose_pdbqt(pdbqt_text: str):
         if line.startswith("ENDMDL"):
             break
         if line.startswith(("ATOM", "HETATM")) and (in_model or "ROOT" in pdbqt_text):
-            el = line[77:78].strip() or line[12:16].strip()[0]
-            if el.upper() == "H":
+            # element from the atom-name field: strip digits, leading letters
+            name = line[12:16].strip()
+            alpha = "".join(c for c in name if c.isalpha())
+            el = alpha[:2].capitalize() if alpha[:2].capitalize() in KNOWN_ELEMENTS else alpha[:1]
+            if el.upper() == "H" or not el:
                 continue
             coords.append([float(line[30:38]), float(line[38:46]), float(line[46:54])])
             elements.append(el.capitalize())

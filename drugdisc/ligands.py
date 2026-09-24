@@ -27,11 +27,17 @@ PUBCHEM = "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name"
 
 
 def fetch_smiles(name: str, timeout: int = 30) -> str:
-    """Canonical SMILES for a drug name from PubChem (live)."""
-    url = f"{PUBCHEM}/{requests.utils.quote(name)}/property/CanonicalSMILES/JSON"
+    """Canonical/isomeric SMILES for a drug name from PubChem (live).
+    PubChem renamed CanonicalSMILES to ConnectivitySMILES; accept either."""
+    url = (f"{PUBCHEM}/{requests.utils.quote(name)}"
+           f"/property/ConnectivitySMILES,IsomericSMILES/JSON")
     resp = requests.get(url, timeout=timeout)
     resp.raise_for_status()
-    return resp.json()["PropertyTable"]["Properties"][0]["CanonicalSMILES"]
+    props = resp.json()["PropertyTable"]["Properties"][0]
+    for key in ("IsomericSMILES", "ConnectivitySMILES", "SMILES", "CanonicalSMILES"):
+        if props.get(key):
+            return props[key]
+    raise KeyError(f"no SMILES property in PubChem response for {name}")
 
 
 def fetch_screen_set(cache_path: str) -> dict:
