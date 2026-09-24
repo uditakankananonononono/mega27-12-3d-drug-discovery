@@ -1,0 +1,7 @@
+{
+ "chembl_id": "CHEMBL4846937",
+ "smiles": "CC[C@@H]1NC(=O)[C@@H]2CSC(=N2)c2cc(ccn2)C[C@@H](C(N)=O)NC(=O)[C@H](CCC(N)=O)NC(=O)[C@H](CC2CC2)NC(=O)[C@H](C(C)(C)C)NC1=O",
+ "skipped": "dock_timeout_300s_macrocycle",
+ "label": "inactive",
+ "best_potency_nM": 100000.0
+}

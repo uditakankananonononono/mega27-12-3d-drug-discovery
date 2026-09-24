@@ -1,0 +1,107 @@
+{
+ "rule": "exclude any ring >= 12 atoms (macrocycle) - outside the validated small-molecule protocol; vina does not terminate on macrocycle closure spaces",
+ "excluded": [
+  {
+   "chembl_id": "CHEMBL4868572",
+   "reason": "macrocycle",
+   "max_ring_atoms": 22,
+   "mw": 715.9
+  },
+  {
+   "chembl_id": "CHEMBL4859153",
+   "reason": "macrocycle",
+   "max_ring_atoms": 22,
+   "mw": 744.9
+  },
+  {
+   "chembl_id": "CHEMBL4846937",
+   "reason": "macrocycle",
+   "max_ring_atoms": 22,
+   "mw": 713.9
+  },
+  {
+   "chembl_id": "CHEMBL4873791",
+   "reason": "macrocycle",
+   "max_ring_atoms": 22,
+   "mw": 717.8
+  },
+  {
+   "chembl_id": "CHEMBL4871930",
+   "reason": "macrocycle",
+   "max_ring_atoms": 22,
+   "mw": 715.9
+  },
+  {
+   "chembl_id": "CHEMBL4855260",
+   "reason": "macrocycle",
+   "max_ring_atoms": 22,
+   "mw": 703.8
+  },
+  {
+   "chembl_id": "CHEMBL4864163",
+   "reason": "macrocycle",
+   "max_ring_atoms": 28,
+   "mw": 830.0
+  },
+  {
+   "chembl_id": "CHEMBL4867088",
+   "reason": "macrocycle",
+   "max_ring_atoms": 28,
+   "mw": 856.0
+  },
+  {
+   "chembl_id": "CHEMBL4872397",
+   "reason": "macrocycle",
+   "max_ring_atoms": 25,
+   "mw": 800.9
+  },
+  {
+   "chembl_id": "CHEMBL4851348",
+   "reason": "macrocycle",
+   "max_ring_atoms": 31,
+   "mw": 901.1
+  },
+  {
+   "chembl_id": "CHEMBL4851196",
+   "reason": "macrocycle",
+   "max_ring_atoms": 28,
+   "mw": 846.0
+  },
+  {
+   "chembl_id": "CHEMBL4876522",
+   "reason": "macrocycle",
+   "max_ring_atoms": 22,
+   "mw": 716.9
+  },
+  {
+   "chembl_id": "CHEMBL4858748",
+   "reason": "macrocycle",
+   "max_ring_atoms": 22,
+   "mw": 745.9
+  },
+  {
+   "chembl_id": "CHEMBL4848940",
+   "reason": "macrocycle",
+   "max_ring_atoms": 28,
+   "mw": 816.0
+  },
+  {
+   "chembl_id": "CHEMBL4847752",
+   "reason": "macrocycle",
+   "max_ring_atoms": 22,
+   "mw": 766.9
+  },
+  {
+   "chembl_id": "CHEMBL4873945",
+   "reason": "macrocycle",
+   "max_ring_atoms": 43,
+   "mw": 1451.7
+  },
+  {
+   "chembl_id": "CHEMBL4846266",
+   "reason": "macrocycle",
+   "max_ring_atoms": 35,
+   "mw": 986.2
+  }
+ ]
+}
