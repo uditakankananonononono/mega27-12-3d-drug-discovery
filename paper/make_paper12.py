@@ -15,6 +15,7 @@ RES = ROOT / "results"
 BLUE = RGBColor(0x1F, 0x4E, 0x9C)
 
 redock = json.loads((RES / "redock_7KX5.json").read_text())
+transfer = json.loads((RES / "redock_8V8E_transfer.json").read_text())
 analysis = json.loads((RES / "screen_analysis.json").read_text())
 denovo = json.loads((RES / "denovo_mpro_d1.json").read_text())
 verif = json.loads((RES / "external_verification.json").read_text())
@@ -340,6 +341,25 @@ para(
 doc.add_picture(str(RES / "redock_overlay.png"), width=Inches(6.0))
 doc.paragraphs[-1].alignment = WD_ALIGN_PARAGRAPH.CENTER
 para("Figure 1. Redocking validation: crystal vs docked pose of JUN8-76-3A in Mpro (7KX5).", italic=True, align="center")
+
+heading("3.1b Protocol transfer: a second structure and chemotype", 2)
+para(
+ f"A validation that only works on the structure it was tuned on is curve-fitting, not "
+ f"calibration. We therefore re-ran the identical protocol on an independent deposit: "
+ f"the room-temperature WT Mpro catalytic domains (8V8E, 2.0 A) in complex with "
+ f"ensitrelvir (S-217622), a non-covalent clinical inhibitor of a different chemotype "
+ f"from X7V. Structure selection was audited, not convenient: 7VU6 (1.8 A) and 8HUR "
+ f"(1.64 A) were both rejected because their deposits truncate binding-site sidechains "
+ f"(ARG188 at 3.6 A from the ligand in every chain; 7VU6 also truncates LEU50 and "
+ f"GLU47), while 8V8E chain A presents a complete site (HIS41, MET49, CYS145, HIS163, "
+ f"GLU166, ARG188, GLN189 all full sidechains); four incomplete residues far from the "
+ f"pocket (VAL86 at 9.7 A, VAL125/CYS128/MET130 at 14.5 A or more) were removed by the "
+ f"preparer and are documented in data/raw/transfer_structure_audit.json. The transfer "
+ f"redock passes the same gate: heavy-atom RMSD {transfer['rmsd_A']:.2f} A (< 2.0 A), "
+ f"best affinity {transfer['best_affinity_kcal_mol']:.2f} kcal/mol at exhaustiveness "
+ f"{transfer['exhaustiveness']}. The mpro-dock protocol now validates on two "
+ f"independent structures and two chemotypes, which is the honest scope of every "
+ f"ranking claim in this paper.")
 
 heading("3.2 Screening campaign and an honest negative", 2)
 para(
