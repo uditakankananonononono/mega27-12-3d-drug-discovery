@@ -1,0 +1,11 @@
+vina>=1.2
+meeko>=0.6
+rdkit>=2023.9
+gemmi>=0.6
+numpy>=1.24
+pandas>=2.0
+scipy>=1.10
+requests>=2.28
+pytest>=7.0
+matplotlib>=3.7
+torch>=2.0
