@@ -1,0 +1,118 @@
+{
+ "candidate_name": "MPRO-D1",
+ "smiles": "NC(=O)C(c1ccccc1)N(C(=O)c1ccc(Cl)cc1)c1ccc(-c2ccccc2)cc1",
+ "core": "biphenyl_amide",
+ "predicted_affinity_kcal_mol": -8.761,
+ "ligand_efficiency": -0.27378125,
+ "complexity_score": 2.101,
+ "tanimoto_max_vs_screened_drugs": 0.1590909090909091,
+ "best_screened_drug_affinity": -9.31,
+ "beats_best_screened": false,
+ "novelty_pubchem": {
+  "status": "NOT_FOUND_EXACT",
+  "exact_identity_check": "PubChem fastidentity 404 - exact structure not deposited",
+  "pug_smiles_artifact": "smiles/cids endpoint returned [0], an invalid-CID artifact; treated as not found and verified via fastidentity",
+  "nearest_neighbors": {
+   "similarity_2d_>=0.95_cids": [
+    122437350,
+    132557491,
+    155299243,
+    155299246,
+    155299251
+   ],
+   "similarity_2d_>=0.85_cids_sample": [
+    155664124,
+    23648347,
+    24768117,
+    44520888,
+    71059966
+   ],
+   "interpretation": "close analogs exist in PubChem; MPRO-D1 is a novel exact compound, not a new chemotype"
+  }
+ },
+ "library_size": 38,
+ "falsifiable_prediction": "MPRO-D1 docks within the validated 7KX5 Mpro protocol at the stated affinity and pose class; a crystal or ITC test of the synthesized compound decides it.",
+ "top10": [
+  {
+   "smiles": "NC(=O)C(c1ccccc1)N(C(=O)c1ccc(Cl)cc1)c1ccc(-c2ccccc2)cc1",
+   "core": "biphenyl_amide",
+   "affinity": -8.761,
+   "tanimoto_max_vs_screen": 0.1591,
+   "ligand_efficiency": -0.2738,
+   "complexity": 2.101
+  },
+  {
+   "smiles": "NC(=O)C(c1cccnc1)N(C(=O)c1ccc(F)cc1)c1ccc(-c2ccccc2)cc1",
+   "core": "pyridyl_amide",
+   "affinity": -8.57,
+   "tanimoto_max_vs_screen": 0.1939,
+   "ligand_efficiency": -0.2678,
+   "complexity": 2.16
+  },
+  {
+   "smiles": "O=C(NC(Cc1ccccc1)c1ccc2ccccc2c1)c1ccco1",
+   "core": "naphthyl_amide",
+   "affinity": -8.374,
+   "tanimoto_max_vs_screen": 0.2165,
+   "ligand_efficiency": -0.3221,
+   "complexity": 1.999
+  },
+  {
+   "smiles": "NC(=O)C(c1ccccc1)N(C(=O)c1ccc(F)cc1)c1ccc(-c2ccccc2)cc1",
+   "core": "biphenyl_amide",
+   "affinity": -8.362,
+   "tanimoto_max_vs_screen": 0.1607,
+   "ligand_efficiency": -0.2613,
+   "complexity": 2.097
+  },
+  {
+   "smiles": "O=C(NC(c1ccc(Cl)cc1)c1ccc2ccccc2c1)c1ccco1",
+   "core": "naphthyl_amide",
+   "affinity": -8.272,
+   "tanimoto_max_vs_screen": 0.1667,
+   "ligand_efficiency": -0.3182,
+   "complexity": 2.08
+  },
+  {
+   "smiles": "NC(=O)C(c1ccccc1)N(C(=O)COc1ccccc1)c1ccc(-c2ccccc2)cc1",
+   "core": "biphenyl_amide",
+   "affinity": -8.226,
+   "tanimoto_max_vs_screen": 0.1977,
+   "ligand_efficiency": -0.2493,
+   "complexity": 2.09
+  },
+  {
+   "smiles": "O=C(NC(c1ccncc1)c1ccc2ccccc2c1)c1ccco1",
+   "core": "naphthyl_amide",
+   "affinity": -8.211,
+   "tanimoto_max_vs_screen": 0.18,
+   "ligand_efficiency": -0.3284,
+   "complexity": 2.086
+  },
+  {
+   "smiles": "NC(=O)C(c1cccnc1)N(C(=O)c1ccc(Cl)cc1)c1ccc(-c2ccccc2)cc1",
+   "core": "pyridyl_amide",
+   "affinity": -8.191,
+   "tanimoto_max_vs_screen": 0.2021,
+   "ligand_efficiency": -0.256,
+   "complexity": 2.163
+  },
+  {
+   "smiles": "O=C(NC(c1ccccc1)c1ccc2ccccc2c1)c1ccco1",
+   "core": "naphthyl_amide",
+   "affinity": -8.19,
+   "tanimoto_max_vs_screen": 0.1837,
+   "ligand_efficiency": -0.3276,
+   "complexity": 2.005
+  },
+  {
+   "smiles": "O=C(NC(c1ccc(F)cc1)c1ccc2ccccc2c1)c1ccco1",
+   "core": "naphthyl_amide",
+   "affinity": -8.18,
+   "tanimoto_max_vs_screen": 0.1667,
+   "ligand_efficiency": -0.3146,
+   "complexity": 2.077
+  }
+ ],
+ "novelty_statement": "Exact structure absent from PubChem (verified live, 2026-09-24); nearest neighbors at >=0.95 2D Tanimoto exist, so the honest claim is 'novel exact compound in a populated chemical neighborhood', not 'unprecedented scaffold'."
+}

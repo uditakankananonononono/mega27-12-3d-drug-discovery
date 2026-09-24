@@ -69,8 +69,8 @@ def pubchem_exact(smiles: str):
 novelty = {}
 for c in docked[:5]:
     try:
-        cids = pubchem_exact(c["smiles"])
-        novelty[c["smiles"]] = {"status": "FOUND", "cids": cids}
+        cids = [c2 for c2 in pubchem_exact(c["smiles"]) if c2]
+        novelty[c["smiles"]] = ({"status": "FOUND", "cids": cids} if cids else {"status": "NOT_FOUND_EXACT", "cids": []})
     except Exception as exc:
         novelty[c["smiles"]] = {"status": "ERROR", "detail": str(exc)[:200]}
     time.sleep(0.3)

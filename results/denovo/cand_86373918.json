@@ -1,0 +1,9 @@
+{
+ "smiles": "O=C(NC(c1ccsc1)c1ccc2ccccc2c1)c1ccco1",
+ "core": "naphthyl_amide",
+ "r_group": "c1ccsc1",
+ "mw": 333.4120000000001,
+ "rotatable": 4,
+ "heavy": 24,
+ "affinity": -8.101
+}

@@ -1,0 +1,9 @@
+{
+ "smiles": "NC(=O)C(c1cccnc1)N(C(=O)c1ccco1)c1ccc(-c2ccccc2)cc1",
+ "core": "pyridyl_amide",
+ "r_group": "c1ccco1",
+ "mw": 397.43400000000014,
+ "rotatable": 6,
+ "heavy": 30,
+ "affinity": -7.905
+}

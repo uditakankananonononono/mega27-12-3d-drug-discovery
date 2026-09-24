@@ -1,0 +1,9 @@
+{
+ "smiles": "NC(=O)C(c1ccccc1)N(C(=O)Cc1ccccc1)c1ccc(-c2ccccc2)cc1",
+ "core": "biphenyl_amide",
+ "r_group": "Cc1ccccc1",
+ "mw": 420.51200000000017,
+ "rotatable": 7,
+ "heavy": 32,
+ "affinity": -7.402
+}

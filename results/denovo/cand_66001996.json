@@ -1,0 +1,9 @@
+{
+ "smiles": "O=C(NC(c1ccccc1)c1ccc(Cl)cc1)c1ccco1",
+ "core": "benzyl_furamide",
+ "r_group": "c1ccc(Cl)cc1",
+ "mw": 311.76800000000003,
+ "rotatable": 4,
+ "heavy": 22,
+ "affinity": -7.306
+}
