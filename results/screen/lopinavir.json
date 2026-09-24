@@ -1,0 +1,13 @@
+{
+ "name": "lopinavir",
+ "smiles": "CC1=C(C(=CC=C1)C)OCC(=O)NC(CC2=CC=CC=C2)C(CC(CC3=CC=CC=C3)NC(=O)C(C(C)C)N4CCCNC4=O)O",
+ "affinity": -8.724,
+ "all_affinities": [
+  -8.724,
+  -8.66,
+  -8.623,
+  -8.613,
+  -8.58
+ ],
+ "known_class": "inactive"
+}

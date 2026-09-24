@@ -1,0 +1,13 @@
+{
+ "name": "disulfiram",
+ "smiles": "CCN(CC)C(=S)SSC(=S)N(CC)CC",
+ "affinity": -4.611,
+ "all_affinities": [
+  -4.611,
+  -4.607,
+  -4.51,
+  -4.494,
+  -4.493
+ ],
+ "known_class": "active"
+}

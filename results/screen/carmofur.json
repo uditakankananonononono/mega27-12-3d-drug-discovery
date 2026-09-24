@@ -1,0 +1,13 @@
+{
+ "name": "carmofur",
+ "smiles": "CCCCCCNC(=O)N1C=C(C(=O)NC1=O)F",
+ "affinity": -6.046,
+ "all_affinities": [
+  -6.046,
+  -5.974,
+  -5.889,
+  -5.834,
+  -5.758
+ ],
+ "known_class": "active"
+}

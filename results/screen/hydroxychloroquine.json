@@ -1,0 +1,13 @@
+{
+ "name": "hydroxychloroquine",
+ "smiles": "CCN(CCCC(C)NC1=C2C=CC(=CC2=NC=C1)Cl)CCO",
+ "affinity": -6.276,
+ "all_affinities": [
+  -6.276,
+  -6.238,
+  -6.216,
+  -6.088,
+  -6.023
+ ],
+ "known_class": "inactive"
+}

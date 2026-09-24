@@ -1,0 +1,13 @@
+{
+ "name": "favipiravir",
+ "smiles": "C1=C(N=C(C(=O)N1)C(=O)N)F",
+ "affinity": -5.312,
+ "all_affinities": [
+  -5.312,
+  -5.279,
+  -5.267,
+  -5.197,
+  -5.037
+ ],
+ "known_class": "unknown"
+}

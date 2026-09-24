@@ -1,0 +1,13 @@
+{
+ "name": "indinavir",
+ "smiles": "CC(C)(C)NC(=O)C1CN(CCN1CC(CC(CC2=CC=CC=C2)C(=O)NC3C(CC4=CC=CC=C34)O)O)CC5=CN=CC=C5",
+ "affinity": -8.132,
+ "all_affinities": [
+  -8.132,
+  -7.996,
+  -7.983,
+  -7.943,
+  -7.772
+ ],
+ "known_class": "inactive"
+}

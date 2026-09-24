@@ -1,0 +1,13 @@
+{
+ "name": "darunavir",
+ "smiles": "CC(C)CN(CC(C(CC1=CC=CC=C1)NC(=O)OC2COC3C2CCO3)O)S(=O)(=O)C4=CC=C(C=C4)N",
+ "affinity": -8.193,
+ "all_affinities": [
+  -8.193,
+  -7.936,
+  -7.829,
+  -7.784,
+  -7.775
+ ],
+ "known_class": "inactive"
+}
