@@ -21,6 +21,7 @@ denovo = json.loads((RES / "denovo_mpro_d1.json").read_text())
 verif = json.loads((RES / "external_verification.json").read_text())
 verif2 = json.loads((RES / "external_verification2.json").read_text())
 gnnrob = json.loads((RES / "gnn_robustness.json").read_text())
+big = json.loads((RES / "bigscreen_analysis.json").read_text())
 
 doc = Document()
 style = doc.styles["Normal"]
@@ -412,9 +413,43 @@ para(
  "0.946 on rerun (0.893 - torch thread nondeterminism at n=15). The corrected claim: "
  "the GNN rescorer ranks this label set at LOO AUROC 0.87 +/- 0.05 - still clearly "
  "above the descriptor MLP (0.679) and the raw engine (0.339), so the ORDERING of the "
- "benchmark survives, but the point value does not. The n~65 extended screen now "
- "running is the verdict that matters; until it lands, every GNN number in this paper "
+ "benchmark survives, but the point value does not. The n=59 extended screen reported in Section 3.3c "
+ "is that verdict; until Section 3.3c, every GNN number in this paper "
  "should be read with this correction attached. The 0.946 figure is withdrawn.")
+
+heading("3.3c The bigscreen verdict: learned rescoring at n = 59", 3)
+para(
+ f"The extended benchmark (studies/study12_bigscreen.py, study12_biganalyze.py) grows "
+ f"the label set from 15 to {big['n_labeled']} ({big['n_active']} active / "
+ f"{big['n_inactive']} inactive): the 22-ligand literature screen plus a balanced "
+ f"50-compound ChEMBL sample (25 strongest actives + 25 weakest inactives, enzyme "
+ f"labels). Eligibility was documented before scoring, not after: 17 macrocycles "
+ f"(any ring of 12+ atoms) were excluded as outside the validated small-molecule "
+ f"protocol, with the inactive pool backfilled to keep the balance; 6 further "
+ f"compounds were skip-recorded with reasons (4 benzoxaboroles - vina has no boron "
+ f"parameters; 2 flexible peptides on which the engine's worker crashed). The full "
+ f"exclusion ledger is results/bigscreen_exclusions.json and the per-compound cache "
+ f"is results/bigscreen/. Three scorers, one protocol (LOO; GNN over five seeds): "
+ f"raw Vina {big['auroc_raw_vina']:.3f}; descriptor MLP {big['auroc_mlp_loo']:.3f}; "
+ f"2D molecular-graph GNN {big['auroc_gnn2d_loo_mean']:.3f} +/- "
+ f"{big['auroc_gnn2d_loo_std']:.3f} (per-seed "
+ f"{', '.join(f'{v:.3f}' for v in big['auroc_gnn2d_loo_per_seed'])}). Two findings, "
+ f"both reported as measured. First, the benchmark break survives and grows: learned "
+ f"rescoring beats the raw engine by ~0.30 AUROC on a label set four times larger - "
+ f"the raw engine sits at the chance line (0.534) while learned models reach 0.83. "
+ f"Second, an honest reversal: the pose-GNN's large edge over the descriptor MLP at "
+ f"n = 15 (0.871 vs 0.679) does NOT replicate at n = 59 (0.83 vs 0.83 - within one "
+ f"standard error of each other). Small-n geometry superiority was partly small-n "
+ f"noise; at n = 59 the defensible claim is that LEARNED rescoring - descriptor or "
+ f"graph - is what breaks the raw engine, with no decided winner between the two "
+ f"learned families at this n. The GNN here is a 2D bond-graph network, architecturally "
+ f"distinct from the n = 15 pose-graph rescorer, because the bigscreen cache did not "
+ f"retain poses; the two architectures are therefore reported, not merged.")
+doc.add_picture(str(RES / "bigscreen_auroc.png"), width=Inches(5.6))
+doc.paragraphs[-1].alignment = WD_ALIGN_PARAGRAPH.CENTER
+para("Figure 2b. The bigscreen verdict at n = 59: raw Vina vs descriptor MLP vs 2D-GNN "
+     "(LOO; GNN five-seed mean +/- std). The learned scorers, not the winner between "
+     "them, are the result.", italic=True, align="center")
 
 heading("3.4 MPRO-D1: a de novo candidate with a novelty record", 2)
 para(
