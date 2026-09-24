@@ -1,0 +1,13 @@
+{
+ "name": "camostat",
+ "smiles": "CN(C)C(=O)COC(=O)CC1=CC=C(C=C1)OC(=O)C2=CC=C(C=C2)N=C(N)N",
+ "affinity": -7.849,
+ "all_affinities": [
+  -7.849,
+  -7.788,
+  -7.616,
+  -7.61,
+  -7.464
+ ],
+ "known_class": "unknown"
+}
