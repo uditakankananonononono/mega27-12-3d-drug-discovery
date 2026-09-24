@@ -1,0 +1,379 @@
+{
+ "queries": {
+  "rcsb_7KX5": {
+   "title": "Crystal structure of the SARS-CoV-2 (COVID-19) main protease in complex with noncovalent inhibitor Jun8-76-3A",
+   "resolution": [
+    2.6
+   ],
+   "method": "X-RAY DIFFRACTION"
+  },
+  "pdbe_7KX5_ligands": {
+   "ligands": []
+  },
+  "chembl_mpro_target": {
+   "hits": [
+    {
+     "chembl_id": "CHEMBL4303835",
+     "pref_name": "SARS-CoV-2"
+    },
+    {
+     "chembl_id": "CHEMBL4303836",
+     "pref_name": "SARS-CoV"
+    },
+    {
+     "chembl_id": "CHEMBL3927",
+     "pref_name": "Replicase polyprotein 1a"
+    }
+   ]
+  },
+  "chembl_bioactivities": {
+   "nirmatrelvir": {
+    "chembl_id": "CHEMBL5201264",
+    "sample_activities": [
+     {
+      "target": "Replicase polyprotein 1ab",
+      "type": "EC50",
+      "value": "3400.0",
+      "units": "nM"
+     },
+     {
+      "target": "Replicase polyprotein 1ab",
+      "type": "IC50",
+      "value": "66.0",
+      "units": "nM"
+     },
+     {
+      "target": "Replicase polyprotein 1ab",
+      "type": "IC50",
+      "value": "13.0",
+      "units": "nM"
+     }
+    ]
+   },
+   "boceprevir": {
+    "chembl_id": "CHEMBL4868590",
+    "sample_activities": [
+     {
+      "target": "Replicase polyprotein 1ab",
+      "type": "IC50",
+      "value": "10000.0",
+      "units": "nM"
+     },
+     {
+      "target": "Replicase polyprotein 1ab",
+      "type": "IC50",
+      "value": "4130.0",
+      "units": "nM"
+     }
+    ]
+   },
+   "masitinib": {
+    "chembl_id": "CHEMBL1908391",
+    "sample_activities": [
+     {
+      "target": "Dual specificity protein kinase CLK1",
+      "type": "Kd",
+      "value": "10000.0",
+      "units": "nM"
+     },
+     {
+      "target": "NT-3 growth factor receptor",
+      "type": "Kd",
+      "value": "10000.0",
+      "units": "nM"
+     },
+     {
+      "target": "Mitogen-activated protein kinase 12",
+      "type": "Kd",
+      "value": "10000.0",
+      "units": "nM"
+     },
+     {
+      "target": "Tyrosine-protein kinase Mer",
+      "type": "Kd",
+      "value": "10000.0",
+      "units": "nM"
+     },
+     {
+      "target": "SRSF protein kinase 2",
+      "type": "Kd",
+      "value": "10000.0",
+      "units": "nM"
+     }
+    ]
+   },
+   "carmofur": {
+    "chembl_id": "CHEMBL460499",
+    "sample_activities": [
+     {
+      "target": "Amine oxidase [flavin-containing] A",
+      "type": "Activity",
+      "value": null,
+      "units": null
+     },
+     {
+      "target": "Acetylcholinesterase",
+      "type": "IC50",
+      "value": null,
+      "units": null
+     },
+     {
+      "target": "Acetylcholinesterase",
+      "type": "Ki",
+      "value": null,
+      "units": null
+     },
+     {
+      "target": "Adenosine receptor A1",
+      "type": "IC50",
+      "value": null,
+      "units": null
+     },
+     {
+      "target": "Adenosine receptor A1",
+      "type": "Ki",
+      "value": null,
+      "units": null
+     }
+    ]
+   },
+   "nelfinavir": {
+    "chembl_id": "CHEMBL365442",
+    "sample_activities": []
+   }
+  },
+  "pubchem_properties_22": {
+   "nirmatrelvir": {
+    "CID": 155903259,
+    "MolecularWeight": "499.5",
+    "XLogP": 2.2,
+    "TPSA": 131,
+    "HBondDonorCount": 3,
+    "HBondAcceptorCount": 8
+   },
+   "boceprevir": {
+    "CID": 10324367,
+    "MolecularWeight": "519.7",
+    "XLogP": 3.1,
+    "TPSA": 151,
+    "HBondDonorCount": 4,
+    "HBondAcceptorCount": 5
+   },
+   "telaprevir": {
+    "CID": 3010818,
+    "MolecularWeight": "679.8",
+    "XLogP": 4.2,
+    "TPSA": 180,
+    "HBondDonorCount": 4,
+    "HBondAcceptorCount": 8
+   },
+   "carmofur": {
+    "CID": 2577,
+    "MolecularWeight": "257.26",
+    "XLogP": 2.6,
+    "TPSA": 78.5,
+    "HBondDonorCount": 2,
+    "HBondAcceptorCount": 4
+   },
+   "disulfiram": {
+    "CID": 3117,
+    "MolecularWeight": "296.5",
+    "XLogP": 3.9,
+    "TPSA": 121,
+    "HBondDonorCount": 0,
+    "HBondAcceptorCount": 4
+   },
+   "tideglusib": {
+    "CID": 11313622,
+    "MolecularWeight": "334.4",
+    "XLogP": 4.3,
+    "TPSA": 65.9,
+    "HBondDonorCount": 0,
+    "HBondAcceptorCount": 3
+   },
+   "masitinib": {
+    "CID": 10074640,
+    "MolecularWeight": "498.6",
+    "XLogP": 4.3,
+    "TPSA": 102,
+    "HBondDonorCount": 2,
+    "HBondAcceptorCount": 7
+   },
+   "lopinavir": {
+    "CID": 92727,
+    "MolecularWeight": "628.8",
+    "XLogP": 5.9,
+    "TPSA": 120,
+    "HBondDonorCount": 4,
+    "HBondAcceptorCount": 5
+   },
+   "atazanavir": {
+    "CID": 148192,
+    "MolecularWeight": "704.9",
+    "XLogP": 5.6,
+    "TPSA": 171,
+    "HBondDonorCount": 5,
+    "HBondAcceptorCount": 9
+   },
+   "darunavir": {
+    "CID": 213039,
+    "MolecularWeight": "547.7",
+    "XLogP": 2.9,
+    "TPSA": 149,
+    "HBondDonorCount": 3,
+    "HBondAcceptorCount": 9
+   },
+   "saquinavir": {
+    "CID": 441243,
+    "MolecularWeight": "670.8",
+    "XLogP": 4.2,
+    "TPSA": 167,
+    "HBondDonorCount": 5,
+    "HBondAcceptorCount": 7
+   },
+   "indinavir": {
+    "CID": 5362440,
+    "MolecularWeight": "613.8",
+    "XLogP": 2.8,
+    "TPSA": 118,
+    "HBondDonorCount": 4,
+    "HBondAcceptorCount": 7
+   },
+   "nelfinavir": {
+    "CID": 64143,
+    "MolecularWeight": "567.8",
+    "XLogP": 5.7,
+    "TPSA": 127,
+    "HBondDonorCount": 4,
+    "HBondAcceptorCount": 6
+   },
+   "chloroquine": {
+    "CID": 2719,
+    "MolecularWeight": "319.9",
+    "XLogP": 4.6,
+    "TPSA": 28.2,
+    "HBondDonorCount": 1,
+    "HBondAcceptorCount": 3
+   },
+   "hydroxychloroquine": {
+    "CID": 3652,
+    "MolecularWeight": "335.9",
+    "XLogP": 3.6,
+    "TPSA": 48.4,
+    "HBondDonorCount": 2,
+    "HBondAcceptorCount": 4
+   },
+   "ritonavir": {
+    "CID": 392622,
+    "MolecularWeight": "720.9",
+    "XLogP": 6,
+    "TPSA": 202,
+    "HBondDonorCount": 4,
+    "HBondAcceptorCount": 9
+   },
+   "remdesivir": {
+    "CID": 121304016,
+    "MolecularWeight": "602.6",
+    "XLogP": 1.9,
+    "TPSA": 204,
+    "HBondDonorCount": 4,
+    "HBondAcceptorCount": 13
+   },
+   "molnupiravir": {
+    "CID": 145996610,
+    "MolecularWeight": "329.31",
+    "XLogP": -0.8,
+    "TPSA": 141,
+    "HBondDonorCount": 4,
+    "HBondAcceptorCount": 7
+   },
+   "favipiravir": {
+    "CID": 492405,
+    "MolecularWeight": "157.10",
+    "XLogP": -0.6,
+    "TPSA": 84.6,
+    "HBondDonorCount": 2,
+    "HBondAcceptorCount": 4
+   },
+   "camostat": {
+    "CID": 2536,
+    "MolecularWeight": "398.4",
+    "XLogP": 1.1,
+    "TPSA": 137,
+    "HBondDonorCount": 2,
+    "HBondAcceptorCount": 6
+   },
+   "nafamostat": {
+    "CID": 4413,
+    "MolecularWeight": "347.4",
+    "XLogP": 2,
+    "TPSA": 141,
+    "HBondDonorCount": 4,
+    "HBondAcceptorCount": 4
+   },
+   "nilotinib": {
+    "CID": 644241,
+    "MolecularWeight": "529.5",
+    "XLogP": 4.9,
+    "TPSA": 97.6,
+    "HBondDonorCount": 2,
+    "HBondAcceptorCount": 9
+   }
+  },
+  "europepmc_lit_counts": {
+   "nirmatrelvir": {
+    "mpro_hit_count": 1616
+   },
+   "boceprevir": {
+    "mpro_hit_count": 646
+   },
+   "telaprevir": {
+    "mpro_hit_count": 332
+   },
+   "carmofur": {
+    "mpro_hit_count": 291
+   },
+   "disulfiram": {
+    "mpro_hit_count": 349
+   },
+   "tideglusib": {
+    "mpro_hit_count": 165
+   },
+   "masitinib": {
+    "mpro_hit_count": 81
+   },
+   "lopinavir": {
+    "mpro_hit_count": 2162
+   },
+   "atazanavir": {
+    "mpro_hit_count": 364
+   },
+   "darunavir": {
+    "mpro_hit_count": 698
+   },
+   "saquinavir": {
+    "mpro_hit_count": 484
+   },
+   "indinavir": {
+    "mpro_hit_count": 380
+   }
+  },
+  "ncbi_pubmed_count": {
+   "pubmed_mpro_docking_count": 1063
+  },
+  "clinicaltrials_nirmatrelvir": {
+   "nirmatrelvir_trial_count": 78
+  },
+  "alphafold_P0DTD1": {
+   "model_url": "https://alphafold.ebi.ac.uk/files/AF-0000000365840311-model_v1.pdb",
+   "uniprot": "P0DTD1"
+  },
+  "crossref_jin2020": {
+   "title": "Structure of Mpro from SARS-CoV-2 and discovery of its inhibitors",
+   "journal": "Nature"
+  }
+ },
+ "errors": {
+  "uniprot_P0DTD1": "HTTP Error 400: Bad Request"
+ }
+}

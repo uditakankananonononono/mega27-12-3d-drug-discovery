@@ -1,0 +1,349 @@
+{
+ "queries": {
+  "uniprot_P0DTD1": {
+   "accession": "P0DTD1",
+   "id": "R1AB_SARS2",
+   "length": 7096
+  },
+  "chembl_bioactivities_22": {
+   "nirmatrelvir": {
+    "chembl_id": "CHEMBL5201264",
+    "n_activities_sampled": 3,
+    "assay_ids": [
+     "CHEMBL5117299",
+     "CHEMBL5117300",
+     "CHEMBL5117305"
+    ]
+   },
+   "boceprevir": {
+    "chembl_id": "CHEMBL4868590",
+    "n_activities_sampled": 2,
+    "assay_ids": [
+     "CHEMBL4810314",
+     "CHEMBL4810319"
+    ]
+   },
+   "telaprevir": {
+    "chembl_id": "CHEMBL231813",
+    "n_activities_sampled": 3,
+    "assay_ids": [
+     "CHEMBL894776",
+     "CHEMBL894777",
+     "CHEMBL894778"
+    ]
+   },
+   "carmofur": {
+    "chembl_id": "CHEMBL460499",
+    "n_activities_sampled": 3,
+    "assay_ids": [
+     "CHEMBL965578",
+     "CHEMBL1614544",
+     "CHEMBL1613842"
+    ]
+   },
+   "disulfiram": {
+    "chembl_id": "CHEMBL964",
+    "n_activities_sampled": 3,
+    "assay_ids": [
+     "CHEMBL697213",
+     "CHEMBL693364",
+     "CHEMBL656110"
+    ]
+   },
+   "tideglusib": {
+    "chembl_id": "CHEMBL3545157",
+    "n_activities_sampled": 3,
+    "assay_ids": [
+     "CHEMBL3736924",
+     "CHEMBL3803770",
+     "CHEMBL3803778"
+    ]
+   },
+   "masitinib": {
+    "chembl_id": "CHEMBL1908391",
+    "n_activities_sampled": 3,
+    "assay_ids": [
+     "CHEMBL1908461",
+     "CHEMBL1908462",
+     "CHEMBL1908463"
+    ]
+   },
+   "lopinavir": {
+    "chembl_id": "CHEMBL729",
+    "n_activities_sampled": 3,
+    "assay_ids": [
+     "CHEMBL767931",
+     "CHEMBL713251",
+     "CHEMBL632558"
+    ]
+   },
+   "atazanavir": {
+    "chembl_id": "CHEMBL1200678",
+    "n_activities_sampled": 3,
+    "assay_ids": [
+     "CHEMBL4303805",
+     "CHEMBL4495582",
+     "CHEMBL4513082"
+    ]
+   },
+   "darunavir": {
+    "chembl_id": "CHEMBL1201127",
+    "n_activities_sampled": 3,
+    "assay_ids": [
+     "CHEMBL4303805",
+     "CHEMBL4495582",
+     "CHEMBL4495582"
+    ]
+   },
+   "saquinavir": {
+    "chembl_id": "CHEMBL4575419",
+    "n_activities_sampled": 3,
+    "assay_ids": [
+     "CHEMBL4495582",
+     "CHEMBL4513082",
+     "CHEMBL4513082"
+    ]
+   },
+   "indinavir": {
+    "chembl_id": "CHEMBL1735",
+    "n_activities_sampled": 3,
+    "assay_ids": [
+     "CHEMBL769378",
+     "CHEMBL761814",
+     "CHEMBL983350"
+    ]
+   },
+   "nelfinavir": {
+    "chembl_id": "CHEMBL365442",
+    "n_activities_sampled": 3,
+    "assay_ids": [
+     "CHEMBL3215001",
+     "CHEMBL3214813",
+     "CHEMBL4495582"
+    ]
+   },
+   "chloroquine": {
+    "chembl_id": "CHEMBL76",
+    "n_activities_sampled": 3,
+    "assay_ids": [
+     "CHEMBL879992",
+     "CHEMBL666883",
+     "CHEMBL712897"
+    ]
+   },
+   "hydroxychloroquine": {
+    "chembl_id": "CHEMBL1535",
+    "n_activities_sampled": 3,
+    "assay_ids": [
+     "CHEMBL930274",
+     "CHEMBL1614544",
+     "CHEMBL1614670"
+    ]
+   },
+   "ritonavir": {
+    "chembl_id": "CHEMBL3114713",
+    "n_activities_sampled": 3,
+    "assay_ids": [
+     "CHEMBL3118922",
+     "CHEMBL3118924",
+     "CHEMBL3118923"
+    ]
+   },
+   "remdesivir": {
+    "chembl_id": "CHEMBL5280654",
+    "n_activities_sampled": 3,
+    "assay_ids": [
+     "CHEMBL5245811",
+     "CHEMBL5245812",
+     "CHEMBL5245813"
+    ]
+   },
+   "molnupiravir": {
+    "chembl_id": "CHEMBL4650320",
+    "n_activities_sampled": 3,
+    "assay_ids": [
+     "CHEMBL4651403",
+     "CHEMBL4651403",
+     "CHEMBL4651404"
+    ]
+   },
+   "favipiravir": {
+    "chembl_id": "CHEMBL221722",
+    "n_activities_sampled": 3,
+    "assay_ids": [
+     "CHEMBL916359",
+     "CHEMBL916360",
+     "CHEMBL916361"
+    ]
+   },
+   "camostat": {
+    "chembl_id": "CHEMBL590799",
+    "n_activities_sampled": 3,
+    "assay_ids": [
+     "CHEMBL1072832",
+     "CHEMBL1072832",
+     "CHEMBL1794345"
+    ]
+   },
+   "nafamostat": {
+    "chembl_id": "CHEMBL3989553",
+    "n_activities_sampled": 3,
+    "assay_ids": [
+     "CHEMBL4303819",
+     "CHEMBL4303805",
+     "CHEMBL4303806"
+    ]
+   },
+   "nilotinib": {
+    "chembl_id": "CHEMBL255863",
+    "n_activities_sampled": 3,
+    "assay_ids": [
+     "CHEMBL951323",
+     "CHEMBL924611",
+     "CHEMBL1032716"
+    ]
+   }
+  },
+  "europepmc_lit_counts_rest": {
+   "nelfinavir": {
+    "mpro_hit_count": 725
+   },
+   "chloroquine": {
+    "mpro_hit_count": 1913
+   },
+   "hydroxychloroquine": {
+    "mpro_hit_count": 1933
+   },
+   "ritonavir": {
+    "mpro_hit_count": 2885
+   },
+   "remdesivir": {
+    "mpro_hit_count": 3621
+   },
+   "molnupiravir": {
+    "mpro_hit_count": 1096
+   },
+   "favipiravir": {
+    "mpro_hit_count": 1386
+   },
+   "camostat": {
+    "mpro_hit_count": 597
+   },
+   "nafamostat": {
+    "mpro_hit_count": 382
+   },
+   "nilotinib": {
+    "mpro_hit_count": 110
+   }
+  },
+  "clinicaltrials_repurposed": {
+   "remdesivir": {
+    "covid_trial_count": 117
+   },
+   "molnupiravir": {
+    "covid_trial_count": 19
+   },
+   "lopinavir": {
+    "covid_trial_count": 76
+   },
+   "hydroxychloroquine": {
+    "covid_trial_count": 235
+   }
+  },
+  "crossref_references": {
+   "jin2020": {
+    "title": "Structure of Mpro from SARS-CoV-2 and discovery of its inhibitors",
+    "year": 2020
+   },
+   "trott2010": {
+    "title": "AutoDock Vina: Improving the speed and accuracy of docking with a new scoring fu",
+    "year": 2009
+   },
+   "eberhardt2021": {
+    "title": "AutoDock Vina 1.2.0: New Docking Methods, Expanded Force Field, and Python Bindi",
+    "year": 2021
+   },
+   "owen2021": {
+    "title": "An oral SARS-CoV-2 M\n                    <sup>pro</sup>\n                    inhi",
+    "year": 2021
+   },
+   "douangamath2020": {
+    "title": "Crystal structure of SARS-CoV-2 main protease provides a basis for design of imp",
+    "year": 2020
+   },
+   "drayman2021": {
+    "error": "HTTP Error 404: Not Found"
+   },
+   "forli2016": {
+    "title": "Computational protein\u2013ligand docking and virtual drug screening with the AutoDoc",
+    "year": 2016
+   },
+   "gilmer2017": {
+    "status": "no DOI (conference paper)"
+   }
+  },
+  "mpro_structure_set_10": {
+   "7KX5": {
+    "title": "Crystal structure of the SARS-CoV-2 (COVID-19) main protease in comple",
+    "resolution": [
+     2.6
+    ]
+   },
+   "6LU7": {
+    "title": "The crystal structure of COVID-19 main protease in complex with an inh",
+    "resolution": [
+     2.16
+    ]
+   },
+   "7BQY": {
+    "title": "THE CRYSTAL STRUCTURE OF COVID-19 MAIN PROTEASE IN COMPLEX WITH AN INH",
+    "resolution": [
+     1.7
+    ]
+   },
+   "6W63": {
+    "title": "Structure of COVID-19 main protease bound to potent broad-spectrum non",
+    "resolution": [
+     2.1
+    ]
+   },
+   "7K3T": {
+    "title": "Crystal Structure of SARS-CoV-2 Main Protease (3CLpro/Mpro) at 1.2 A R",
+    "resolution": [
+     1.2
+    ]
+   },
+   "7L11": {
+    "title": "CRYSTAL STRUCTURE OF THE SARS-COV-2(2019-NCOV) MAIN PROTEASE IN COMPLE",
+    "resolution": [
+     1.8
+    ]
+   },
+   "7D1M": {
+    "title": "CRYSTAL STRUCTURE OF THE SARS-CoV-2 MAIN PROTEASE COMPLEXED WITH GC376",
+    "resolution": [
+     1.35
+    ]
+   },
+   "7C6S": {
+    "title": "Crystal structure of the SARS-CoV-2 main protease complexed with Bocep",
+    "resolution": [
+     1.6
+    ]
+   },
+   "7VTL": {
+    "title": "Crystal structure of GH family 64 beta-1,3-glucanase complexed with La",
+    "resolution": [
+     2.07037904157
+    ]
+   },
+   "7RFS": {
+    "title": "Structure of SARS-CoV-2 main protease in complex with a covalent inhib",
+    "resolution": [
+     1.91
+    ]
+   }
+  }
+ },
+ "errors": {}
+}
