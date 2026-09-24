@@ -70,10 +70,38 @@ for i in range(len(y)):
 auroc_nn = roc_auc_score(y, loo_pred)
 print(f"neural rescorer LOO AUROC={auroc_nn:.3f} vs raw Vina AUROC={auroc_raw:.3f}")
 
+# ---- GNN pose-graph rescorer (third ranker): re-dock labeled ligands for poses
+from drugdisc.prep import smiles_to_pdbqt
+from drugdisc.dock import dock_ligand
+from drugdisc.geometry import parse_pose_pdbqt
+from drugdisc.gnn_rescorer import pose_graph, loo_gnn_scores
+
+RAW = ROOT / "data/raw"
+POSES = ROOT / "results/screen/poses"
+POSES.mkdir(parents=True, exist_ok=True)
+box = json.loads((RAW / "box_7kx5.json").read_text())
+graphs = []
+for r in [r for r in records if r["known_class"] != "unknown"]:
+    pose_file = POSES / f"{r['name']}_pose.pdbqt"
+    if not pose_file.exists():
+        pdbqt = RAW / f"lig_{r['name']}.pdbqt"
+        if not pdbqt.exists():
+            smiles_to_pdbqt(r["smiles"], str(pdbqt))
+        _, pose = dock_ligand(str(RAW / "7KX5_A_receptor.pdbqt"), str(pdbqt),
+                              box["center"], box["size"], ligand_name=r["name"],
+                              exhaustiveness=4, n_poses=1, cpu=2)
+        pose_file.write_text(pose)
+        print(f"  rescoring pose: {r['name']}", flush=True)
+    coords, elements = parse_pose_pdbqt(pose_file.read_text())
+    graphs.append(pose_graph(coords, elements))
+auroc_gnn = roc_auc_score(y, loo_gnn_scores(graphs, y, epochs=120, seed=0))
+print(f"GNN pose-graph rescorer LOO AUROC={auroc_gnn:.3f}")
+
 summary = {"n_docked": len(records), "n_labeled": int(len(y)),
            "actives": int(n_act), "top8_actives": int(top.sum()),
            "hypergeometric_p": p_hyper, "auroc_raw_vina": float(auroc_raw),
            "auroc_nn_rescorer_loo": float(auroc_nn),
+           "auroc_gnn_rescorer_loo": float(auroc_gnn),
            "ranking": [{"name": r["name"], "affinity": r["affinity"],
                         "class": r["known_class"]}
                        for r in sorted(records, key=lambda r: r["affinity"])]}
