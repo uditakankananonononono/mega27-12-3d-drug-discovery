@@ -1,0 +1,13 @@
+{
+ "name": "nafamostat",
+ "smiles": "C1=CC(=CC=C1C(=O)OC2=CC3=C(C=C2)C=C(C=C3)C(=N)N)N=C(N)N",
+ "affinity": -8.251,
+ "all_affinities": [
+  -8.251,
+  -8.099,
+  -8.045,
+  -7.834,
+  -7.779
+ ],
+ "known_class": "unknown"
+}

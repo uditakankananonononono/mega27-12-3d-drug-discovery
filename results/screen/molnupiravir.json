@@ -1,0 +1,13 @@
+{
+ "name": "molnupiravir",
+ "smiles": "CC(C)C(=O)OCC1C(C(C(O1)N2C=CC(=NC2=O)NO)O)O",
+ "affinity": -7.155,
+ "all_affinities": [
+  -7.155,
+  -7.017,
+  -6.987,
+  -6.913,
+  -6.749
+ ],
+ "known_class": "unknown"
+}
