@@ -38,6 +38,15 @@ def fetch_smiles(cid, smi_map):
             time.sleep(0.2)
     return smi_map.get(cid)
 
+VINA_SUPPORTED = {"H", "C", "N", "O", "F", "P", "S", "Cl", "Br", "I"}
+
+def unsupported_elements(smi: str) -> list[str]:
+    mol = Chem.MolFromSmiles(smi)
+    if mol is None:
+        return []
+    return sorted({a.GetSymbol() for a in mol.GetAtoms()
+                   if a.GetSymbol() not in VINA_SUPPORTED})
+
 def macrocycle_ring_size(smi: str) -> int:
     mol = Chem.MolFromSmiles(smi)
     if mol is None:
@@ -92,6 +101,16 @@ if __name__ == "__main__":
             smi = fetch_smiles(cid, smi_map)
             if not smi:
                 fail += 1; continue
+            bad_el = unsupported_elements(smi)
+            if bad_el:
+                skip += 1
+                cache.write_text(json.dumps({"chembl_id": cid, "smiles": smi,
+                    "skipped": f"unsupported_element_{'_'.join(bad_el)}_no_vina_parameters",
+                    "label": rec["label"],
+                    "best_potency_nM": rec["best_potency_nM"]}, indent=1))
+                print(f"  SKIPPED {cid}: unsupported elements {bad_el} "
+                      f"(no vina parameters) [{done}/{len(sample)}]", flush=True)
+                continue
             pdbqt = RAW / f"lig_{cid}.pdbqt"
             if not pdbqt.exists():
                 smiles_to_pdbqt(smi, str(pdbqt))
