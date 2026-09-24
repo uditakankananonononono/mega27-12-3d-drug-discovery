@@ -1,0 +1,33 @@
+{
+ "n_docked_total": 66,
+ "n_labeled": 59,
+ "n_active": 32,
+ "n_inactive": 27,
+ "sources": {
+  "bigscreen": 44,
+  "screen22": 22
+ },
+ "auroc_raw_vina": 0.5335648148148149,
+ "auroc_mlp_loo": 0.829861111111111,
+ "auroc_gnn2d_loo_mean": 0.8328703703703704,
+ "auroc_gnn2d_loo_std": 0.01036768318359201,
+ "auroc_gnn2d_loo_per_seed": [
+  0.8391203703703705,
+  0.8333333333333334,
+  0.8240740740740741,
+  0.8483796296296297,
+  0.8194444444444444
+ ],
+ "protocol": "balanced ChEMBL bigscreen (50) + literature screen (22); LOO CV for learned rankers; GNN = 2D bond-graph GCN, 5 seeds",
+ "bigscreen_skipped_dock_timeout": [
+  "CHEMBL4846937",
+  "CHEMBL4873357",
+  "CHEMBL4873791",
+  "CHEMBL4875501",
+  "CHEMBL5181062",
+  "CHEMBL5187156",
+  "CHEMBL5188282",
+  "CHEMBL5200317"
+ ],
+ "verdict": "GNN beats raw Vina"
+}
