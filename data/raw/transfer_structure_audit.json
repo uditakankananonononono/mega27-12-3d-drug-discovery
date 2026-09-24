@@ -1,0 +1,34 @@
+{
+ "purpose": "structure selection for the ensitrelvir transfer pilot (study12_transfer_8v8e.py)",
+ "candidates": [
+  {
+   "pdb": "7VU6",
+   "resolution_A": 1.8,
+   "verdict": "REJECTED",
+   "reason": "deposit truncates binding-site sidechains in both chains: ARG188 (5 atoms, 3.6 A from ligand), plus GLU47/LEU50/LEU67/PHE137 within 12 A in chain A"
+  },
+  {
+   "pdb": "8HUR",
+   "resolution_A": 1.64,
+   "verdict": "REJECTED",
+   "reason": "ARG188 truncated to 5 atoms (3.6 A from ligand) in chain A; chain B truncates GLU47/LEU50 near the site"
+  },
+  {
+   "pdb": "8DZ0",
+   "resolution_A": 2.29,
+   "verdict": "not needed",
+   "reason": "complete ARG188 (11 atoms) but lower resolution than 8V8E"
+  },
+  {
+   "pdb": "8V8E",
+   "resolution_A": 2.0,
+   "verdict": "SELECTED",
+   "reason": "room-temperature WT catalytic domains (6-190); complete binding site (HIS41, MET49, CYS145, HIS163, GLU166, ARG188, GLN189 full sidechains); ensitrelvir in both chains; 4 incomplete residues removed (VAL86 9.7 A, VAL125 14.6 A, CYS128 14.7 A, MET130 14.5 A), none contact residues"
+  }
+ ],
+ "sources": [
+  "https://data.rcsb.org/rest/v1/core/entry/<PDB>",
+  "https://files.rcsb.org/download/<PDB>.pdb",
+  "https://data.rcsb.org/rest/v1/core/chemcomp/7YY"
+ ]
+}
