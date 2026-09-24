@@ -55,12 +55,22 @@ def extract_protein_pdb(pdb_path: str, chain: str, out_path: str) -> int:
     return n
 
 
-def prepare_receptor(protein_pdb: str, out_pdbqt: str) -> str:
+def prepare_receptor(protein_pdb: str, out_pdbqt: str,
+                     extra_args: list[str] | None = None) -> str:
     """Run meeko's receptor preparation (real CLI)."""
-    subprocess.run(["mk_prepare_receptor.py", "--read_pdb", protein_pdb,
-                    "-o", out_pdbqt, "-p", "-v"],
+    cmd = ["mk_prepare_receptor.py", "--read_pdb", protein_pdb,
+           "-o", out_pdbqt, "-p"]
+    if extra_args:
+        cmd += list(extra_args)
+    subprocess.run(cmd,
                    check=True, capture_output=True, text=True, timeout=300)
-    if not Path(out_pdbqt).exists():
+    produced = Path(out_pdbqt)
+    if not produced.exists():
+        # meeko appends .pdbqt when -p is used with an .pdbqt-suffixed -o
+        alt = Path(out_pdbqt + ".pdbqt")
+        if alt.exists():
+            alt.rename(produced)
+    if not produced.exists():
         raise RuntimeError("receptor preparation produced no output")
     return out_pdbqt
 
