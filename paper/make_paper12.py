@@ -19,6 +19,7 @@ analysis = json.loads((RES / "screen_analysis.json").read_text())
 denovo = json.loads((RES / "denovo_mpro_d1.json").read_text())
 verif = json.loads((RES / "external_verification.json").read_text())
 verif2 = json.loads((RES / "external_verification2.json").read_text())
+gnnrob = json.loads((RES / "gnn_robustness.json").read_text())
 
 doc = Document()
 style = doc.styles["Normal"]
@@ -109,7 +110,7 @@ para(f"WHAT WAS FOUND: (1) the protocol is validated - redocking JUN8-76-3A into
      f"(AUROC {analysis['auroc_raw_vina']:.3f}, below random; top-8 hypergeometric p = "
      f"{analysis['hypergeometric_p']:.3f}). (3) A benchmark head-to-head: a pose-graph "
      f"neural rescorer trained on re-docked poses lifts leave-one-out AUROC to "
-     f"{analysis['auroc_gnn_rescorer_loo']:.3f} versus {analysis['auroc_nn_rescorer_loo']:.3f} "
+     f"{gnnrob['mean']:.3f} +/- {gnnrob['std']:.3f} (5 seeds) versus {analysis['auroc_nn_rescorer_loo']:.3f} "
      f"for a descriptor MLP and {analysis['auroc_raw_vina']:.3f} for the raw engine, on the "
      f"same {analysis['n_labeled']} labeled compounds. (4) A de novo candidate, MPRO-D1, "
      f"docking at {denovo['predicted_affinity_kcal_mol']:.2f} kcal/mol under the validated "
@@ -138,7 +139,7 @@ para(
  f"(hypergeometric p = {analysis['hypergeometric_p']:.3f}). A descriptor MLP rescorer "
  f"recovers to {analysis['auroc_nn_rescorer_loo']:.3f} leave-one-out AUROC, and a "
  "pose-graph neural rescorer - message passing over the docked protein-ligand contact "
- f"graph - reaches {analysis['auroc_gnn_rescorer_loo']:.3f} on the same labels, a "
+ f"graph - reaches {gnnrob['mean']:.3f} +/- {gnnrob['std']:.3f} (five seeds) on the same labels, a "
  "quantified head-to-head benchmark of learned rescoring against the physics-empirical "
  "engine. Finally, a constrained de novo enumerator proposes MPRO-D1, a biphenyl-amide "
  f"ligand docking at {denovo['predicted_affinity_kcal_mol']:.2f} kcal/mol, Tanimoto "
@@ -186,7 +187,7 @@ para(
  "compounds whose labels come from published Mpro assays, not from other docking papers. "
  "(3) An honest negative for raw Vina ranking, with exact statistics. (4) A pose-graph "
  "neural rescorer benchmarked head-to-head against the raw engine and a descriptor MLP "
- f"under leave-one-out cross-validation ({analysis['auroc_gnn_rescorer_loo']:.3f} vs "
+ f"under leave-one-out cross-validation ({gnnrob['mean']:.3f} +/- {gnnrob['std']:.3f} vs "
  f"{analysis['auroc_nn_rescorer_loo']:.3f} vs {analysis['auroc_raw_vina']:.3f}). "
  "(5) MPRO-D1, a de novo candidate with a live-verified novelty record and a falsifiable "
  "prediction. (6) A hermetic test suite that keeps every claim honest on every commit.")
@@ -365,7 +366,7 @@ para(
  f"Three scorers, one label set, one protocol (leave-one-out, n = "
  f"{analysis['n_labeled']}): raw Vina {analysis['auroc_raw_vina']:.3f}; descriptor MLP "
  f"{analysis['auroc_nn_rescorer_loo']:.3f}; pose-graph GNN "
- f"{analysis['auroc_gnn_rescorer_loo']:.3f}. The ordering is the finding: the scalar "
+ f"{gnnrob['mean']:.3f} +/- {gnnrob['std']:.3f} (corrected, five seeds). The ordering is the finding: the scalar "
  "engine score carries almost no ranking signal, physicochemical descriptors recover "
  "part of it, and the docked pose geometry - contacts, not properties - carries nearly "
  "all of what is recoverable at this n. We state the caveat in the same breath: 15 "
@@ -378,7 +379,22 @@ para("Table 2. Head-to-head ranking benchmark (leave-one-out AUROC, n = 15 label
 table(["scorer", "input", "LOO AUROC"],
       [["raw Vina affinity", "scalar engine score", f"{analysis['auroc_raw_vina']:.3f}"],
        ["descriptor MLP", "8 physchem + docking descriptors", f"{analysis['auroc_nn_rescorer_loo']:.3f}"],
-       ["pose-graph GNN", "docked contact graph", f"{analysis['auroc_gnn_rescorer_loo']:.3f}"]])
+       ["pose-graph GNN (5-seed mean)", "docked contact graph", f"{gnnrob['mean']:.3f} +/- {gnnrob['std']:.3f}"]])
+
+
+heading("3.3b Correction: The GNN Number Is Seed-Dependent", 3)
+para(
+ "INTEGRITY NOTE (supersedes earlier versions of this paper). The first analysis "
+ "reported the GNN rescorer's leave-one-out AUROC as 0.946. A five-seed robustness "
+ "rerun (results/gnn_robustness.json) shows that value was single-seed luck: the "
+ f"per-seed values are {', '.join(f'{v:.3f}' for v in gnnrob['per_seed_auroc'].values())}, "
+ f"mean {gnnrob['mean']:.3f} +/- {gnnrob['std']:.3f}, and even seed 0 did not reproduce "
+ "0.946 on rerun (0.893 - torch thread nondeterminism at n=15). The corrected claim: "
+ "the GNN rescorer ranks this label set at LOO AUROC 0.87 +/- 0.05 - still clearly "
+ "above the descriptor MLP (0.679) and the raw engine (0.339), so the ORDERING of the "
+ "benchmark survives, but the point value does not. The n~65 extended screen now "
+ "running is the verdict that matters; until it lands, every GNN number in this paper "
+ "should be read with this correction attached. The 0.946 figure is withdrawn.")
 
 heading("3.4 MPRO-D1: a de novo candidate with a novelty record", 2)
 para(
@@ -438,7 +454,7 @@ para(
  "A validated, reproducible, structure-based discovery pipeline for SARS-CoV-2 Mpro now "
  f"exists in this repository: redock-validated at {redock['rmsd_A']:.2f} A; an honestly "
  f"negative raw-docking screen (AUROC {analysis['auroc_raw_vina']:.3f}); a pose-graph "
- f"rescoring benchmark that recovers ranking to {analysis['auroc_gnn_rescorer_loo']:.3f} "
+ f"rescoring benchmark that recovers ranking to {gnnrob['mean']:.3f} +/- {gnnrob['std']:.3f} "
  "leave-one-out on the same labels; and MPRO-D1, a novel de novo candidate with a "
  "live-verified novelty record and a falsifiable prediction. The pipeline extends to "
  "new targets by changing one structure file and one ligand list.")
@@ -757,7 +773,7 @@ table(["quantity", "value"],
        ["hypergeometric p", f"{analysis['hypergeometric_p']:.4f}"],
        ["AUROC raw Vina", f"{analysis['auroc_raw_vina']:.3f}"],
        ["AUROC descriptor MLP (LOO)", f"{analysis['auroc_nn_rescorer_loo']:.3f}"],
-       ["AUROC pose-graph GNN (LOO)", f"{analysis['auroc_gnn_rescorer_loo']:.3f}"]])
+       ["AUROC pose-graph GNN (LOO, 5-seed mean)", f"{gnnrob['mean']:.3f} +/- {gnnrob['std']:.3f}"]])
 para("Table C3. MPRO-D1 record (results/denovo_mpro_d1.json).")
 table(["field", "value"],
       [["SMILES", denovo["smiles"]],
@@ -858,7 +874,7 @@ para(f"Claim 2 - raw docking does not rank this label set. Evidence: AUROC "
      f"{analysis['auroc_raw_vina']:.3f}, p = {analysis['hypergeometric_p']:.3f}. Check: "
      "study12_analyze.py recomputes both from the shipped poses.")
 para(f"Claim 3 - learned pose rescoring recovers the signal. Evidence: LOO AUROC "
-     f"{analysis['auroc_nn_rescorer_loo']:.3f} (MLP) and {analysis['auroc_gnn_rescorer_loo']:.3f} "
+     f"{analysis['auroc_nn_rescorer_loo']:.3f} (MLP) and {gnnrob['mean']:.3f} +/- {gnnrob['std']:.3f} "
      "(GNN) on the same labels and folds. Check: the fold predictions are recomputed by "
      "the same script.")
 para("Claim 4 - MPRO-D1 is novel and falsifiable. Evidence: live PubChem identity check "
