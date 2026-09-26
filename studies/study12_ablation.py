@@ -30,7 +30,8 @@ Locked design:
   the seed-0 held-out compounds only for the decisive comparisons.
 - GATES (locked):
   G-pose: pose-geometry contribution is supported ONLY if arm E beats arm D
-    AND arm G on mean AUROC, with seed-0 DeLong p < 0.01 vs arm D. If E does
+    AND arm G on mean AUROC over the SAME pose-available held-out set,
+    with seed-0 DeLong p < 0.01 vs arm D. If E does
     not beat D, the chemistry-only reading stands and the pose-geometry
     discovery claim (PREREGISTER G4) is withdrawn; pivot per PREREGISTER.
   G-leak: if arm C mean AUROC falls below arm B mean AUROC by more than
@@ -227,7 +228,11 @@ def main():
         d_mu, d_sd = D7[tr].mean(0), D7[tr].std(0) + 1e-9
         Dn = ((D7 - d_mu) / d_sd).astype(np.float32)
         m = train_gnn(gr_tr, Dn[tr], y[tr], seed, "plain")
-        res["gnn2d"] = roc_auc_score(y[te], score_gnn(m, gr_te, Dn[te], "plain"))
+        score_2d = score_gnn(m, gr_te, Dn[te], "plain")
+        res["gnn2d"] = roc_auc_score(y[te], score_2d)
+        res["gnn2d_pose_subset"] = roc_auc_score(y[tep], score_2d[np.isin(te, tep)])
+        if seed == 0:
+            out["seed0_scores"]["gnn2d_pose_subset"] = score_2d[np.isin(te, tep)].tolist()
         rngl = np.random.default_rng(99)
         m = train_gnn(gr_tr, Dn[tr], y[tr][rngl.permutation(len(tr))], seed, "plain")
         res["gnn2d_randlab"] = roc_auc_score(y[te], score_gnn(m, gr_te, Dn[te], "plain"))
@@ -253,14 +258,14 @@ def main():
     yp = np.array(s0["y_pose"])
     out["summary"] = summ
     out["delong_seed0"] = {
-        "gnnpose_vs_gnn2d": None,  # different test sets (pose subset); declared not comparable
+        "gnnpose_vs_gnn2d": delong_p(yp, np.array(s0["gnnpose"]), np.array(s0["gnn2d_pose_subset"])),
         "gnnpose_vs_gnnrand": delong_p(yp, np.array(s0["gnnpose"]), np.array(s0["gnnrand"])),
         "fusion_vs_gnnpose": delong_p(yp, np.array(s0["fusion"]), np.array(s0["gnnpose"])),
     }
     out["gates"] = {
-        "G_pose": bool(summ["gnnpose"]["mean"] > summ["gnn2d"]["mean"]
+        "G_pose": bool(summ["gnnpose"]["mean"] > float(np.mean([s["gnn2d_pose_subset"] for s in out["splits"]]))
                        and summ["gnnpose"]["mean"] > summ["gnnrand"]["mean"]
-                       and out["delong_seed0"]["gnnpose_vs_gnnrand"] < 0.01),
+                       and out["delong_seed0"]["gnnpose_vs_gnn2d"] < 0.01),
         "G_leak": bool(summ["mlp8"]["mean"] - summ["mlp7"]["mean"] > 0.05),
         "G_sanity_ok": bool(all(s["gnn2d_randlab"] <= 0.65 for s in out["splits"])),
     }
