@@ -100,18 +100,27 @@ def bootstrap_ci(vals, n_boot=2000, seed=0):
     boots = [np.mean(rng.choice(v, len(v), replace=True)) for _ in range(n_boot)]
     return float(np.percentile(boots, 2.5)), float(np.percentile(boots, 97.5))
 
-def delong_p(y_true, s1, s2, seed=0):
-    # fast bootstrap approximation of DeLong: paired resampling of AUROC diff
-    rng = np.random.default_rng(seed); n = len(y_true); diffs = []
-    y_true = np.asarray(y_true)
-    for _ in range(2000):
-        idx = rng.integers(0, n, n)
-        if len(np.unique(y_true[idx])) < 2:
-            continue
-        diffs.append(roc_auc_score(y_true[idx], s1[idx]) - roc_auc_score(y_true[idx], s2[idx]))
-    diffs = np.array(diffs)
-    p = 2 * min(float((diffs <= 0).mean()), float((diffs >= 0).mean()))
-    return p
+def delong_p(y_true, s1, s2):
+    """Two-sided paired DeLong test using placement-value covariance.
+
+    All compared scores are for the same held-out compounds. No repeat
+    observation across overlapping scaffold splits enters this test.
+    """
+    from scipy.stats import norm
+    y_true = np.asarray(y_true, dtype=bool)
+    pos1, neg1 = np.asarray(s1)[y_true], np.asarray(s1)[~y_true]
+    pos2, neg2 = np.asarray(s2)[y_true], np.asarray(s2)[~y_true]
+    if min(len(pos1), len(neg1)) < 2:
+        raise ValueError("DeLong requires >=2 positives and negatives")
+    def placements(pos, neg):
+        c = (pos[:, None] > neg[None, :]).astype(float) + 0.5 * (pos[:, None] == neg[None, :])
+        return c.mean(axis=1), c.mean(axis=0)
+    v10a, v01a = placements(pos1, neg1)
+    v10b, v01b = placements(pos2, neg2)
+    diff = float(v10a.mean() - v10b.mean())
+    var = float(np.var(v10a - v10b, ddof=1) / len(pos1)
+                + np.var(v01a - v01b, ddof=1) / len(neg1))
+    return float(2 * norm.sf(abs(diff) / np.sqrt(var))) if var > 0 else (1.0 if diff == 0 else 0.0)
 
 def main():
     records = load_records()
@@ -122,26 +131,27 @@ def main():
     print(f"unique scaffolds: {len(set(scaf))}", flush=True)
     Xraw = descriptors(records)
     out = {"n": len(records), "n_scaffolds": len(set(scaf)), "splits": []}
-    oof = {"vina": -aff.copy(), "mlp": np.full(len(y), np.nan), "gnn2d": np.full(len(y), np.nan)}
+    seed0_scores = None
     for seed in range(5):
         tr, te = scaffold_split(scaf, seed)
         X = (Xraw - Xraw[tr].mean(0)) / (Xraw[tr].std(0) + 1e-9)
         mlp = train_mlp(X[tr], y[tr], seed)
         import torch
         with torch.no_grad():
-            oof["mlp"][te] = torch.sigmoid(mlp(torch.from_numpy(X[te])).squeeze(-1)).numpy()
-        a_v = roc_auc_score(y[te], -aff[te]); a_m = roc_auc_score(y[te], oof["mlp"][te])
+            mlp_scores = torch.sigmoid(mlp(torch.from_numpy(X[te])).squeeze(-1)).numpy()
+        if seed == 0:
+            seed0_scores = (y[te].copy(), mlp_scores.copy(), (-aff[te]).copy())
+        a_v = roc_auc_score(y[te], -aff[te]); a_m = roc_auc_score(y[te], mlp_scores)
         out["splits"].append({"seed": seed, "n_train": int(len(tr)), "n_test": int(len(te)),
                               "auroc_vina": float(a_v), "auroc_mlp": float(a_m)})
         print(f"split {seed}: vina {a_v:.3f} mlp {a_m:.3f}", flush=True)
     mv = [s["auroc_vina"] for s in out["splits"]]; mm = [s["auroc_mlp"] for s in out["splits"]]
     out["mean_auroc_vina"] = float(np.mean(mv)); out["mean_auroc_mlp"] = float(np.mean(mm))
     out["ci95_mlp"] = bootstrap_ci(mm); out["ci95_vina"] = bootstrap_ci(mv)
-    tested = ~np.isnan(oof["mlp"])
-    out["delong_p_mlp_vs_vina"] = delong_p(y[tested], oof["mlp"][tested], (-aff)[tested])
-    out["gate_pass"] = bool(out["ci95_mlp"][0] > out["mean_auroc_vina"] and out["delong_p_mlp_vs_vina"] < 0.01)
+    out["delong_p_mlp_vs_vina_seed0"] = delong_p(*seed0_scores)
+    out["gate_pass"] = bool(out["ci95_mlp"][0] > out["mean_auroc_vina"] and out["delong_p_mlp_vs_vina_seed0"] < 0.01)
     json.dump(out, open(RES / "scaffold_split.json", "w"), indent=1)
-    print(json.dumps({k: out[k] for k in ("mean_auroc_vina", "mean_auroc_mlp", "ci95_mlp", "delong_p_mlp_vs_vina", "gate_pass")}, indent=1))
+    print(json.dumps({k: out[k] for k in ("mean_auroc_vina", "mean_auroc_mlp", "ci95_mlp", "delong_p_mlp_vs_vina_seed0", "gate_pass")}, indent=1))
 
 if __name__ == "__main__":
     main()
