@@ -25,6 +25,14 @@ Locked design:
     draws (same elements, same atom count; destroys geometry)
   H random-label control: arm D trained on labels permuted with seed 99
     (sanity check; expected AUROC ~0.5)
+  I scaffold-matched shuffled-pose falsifier (judge round 2, committed
+    BEFORE any ablation outcome): arm E with each compound's pose graph
+    replaced by another compound's pose graph, permuted deterministically
+    (seed 13) within Bemis-Murcko scaffold groups; singleton scaffolds are
+    permuted among themselves. Labels unchanged. If arm E does not beat
+    arm I, pose-GCN gains are generic pose statistics, not ligand-specific
+    geometry. Pose-availability bias is reported descriptively (MW,
+    rotatable bonds, logP, activity rate: pose-available vs all).
 - Statistics: AUROC per arm per split; mean +/- bootstrap 95% CI across
   splits (splits overlap; CI is descriptive, declared). Paired DeLong on
   the seed-0 held-out compounds only for the decisive comparisons.
@@ -205,10 +213,31 @@ def main():
         graphs_pose[i] = (x, a)
         rc = rng.normal(size=np.asarray(coords).shape)
         graphs_rand[i] = pose_graph(rc, elements)
+    # Scaffold-matched shuffled pose assignment (seed 13), pre-outcome.
+    scaf_arr = np.array(scaf)
+    graphs_shuf = {}
+    rngs = np.random.default_rng(13)
+    ok_arr = np.array(ok)
+    for group in [scaf_arr[ok_arr] == s_ for s_ in np.unique(scaf_arr[ok_arr])]:
+        idx = ok_arr[group]
+        if len(idx) == 1:
+            continue
+        perm = rngs.permutation(idx)
+        while (perm == idx).any():
+            perm = rngs.permutation(idx)
+        for a, b in zip(idx, perm):
+            graphs_shuf[a] = graphs_pose[b]
+    singles = [i for i in ok if i not in graphs_shuf]
+    if len(singles) > 1:
+        perm = rngs.permutation(singles)
+        while any(a == b for a, b in zip(singles, perm)):
+            perm = rngs.permutation(singles)
+        for a, b in zip(singles, perm):
+            graphs_shuf[a] = graphs_pose[b]
     D7 = np.array([rdkit7(r["smiles"]) for r in records], dtype=np.float32)
     D8 = np.hstack([D7, (aff / D7[:, 2].clip(1)).reshape(-1, 1).astype(np.float32)])
 
-    arms = ["vina", "mlp8", "mlp7", "gnn2d", "gnnpose", "fusion", "gnnrand", "gnn2d_randlab"]
+    arms = ["vina", "mlp8", "mlp7", "gnn2d", "gnnpose", "fusion", "gnnrand", "gnnpose_shuf", "gnn2d_randlab"]
     out = {"n": len(records), "pose_failures": failed, "splits": [],
            "seed0_scores": {}}
     for seed in range(5):
@@ -238,6 +267,7 @@ def main():
         res["gnn2d_randlab"] = roc_auc_score(y[te], score_gnn(m, gr_te, Dn[te], "plain"))
         for tag, GD, kind in (("gnnpose", graphs_pose, "plain"),
                               ("gnnrand", graphs_rand, "plain"),
+                              ("gnnpose_shuf", graphs_shuf, "plain"),
                               ("fusion", graphs_pose, "fusion")):
             m = train_gnn([GD[i] for i in trp], Dn[trp], y[trp], seed, kind)
             s = score_gnn(m, [GD[i] for i in tep], Dn[tep], kind)
@@ -261,14 +291,23 @@ def main():
         "gnnpose_vs_gnn2d": delong_p(yp, np.array(s0["gnnpose"]), np.array(s0["gnn2d_pose_subset"])),
         "gnnpose_vs_gnnrand": delong_p(yp, np.array(s0["gnnpose"]), np.array(s0["gnnrand"])),
         "fusion_vs_gnnpose": delong_p(yp, np.array(s0["fusion"]), np.array(s0["gnnpose"])),
+        "gnnpose_vs_gnnpose_shuf": delong_p(yp, np.array(s0["gnnpose"]), np.array(s0["gnnpose_shuf"])),
     }
     out["gates"] = {
         "G_pose": bool(summ["gnnpose"]["mean"] > float(np.mean([s["gnn2d_pose_subset"] for s in out["splits"]]))
                        and summ["gnnpose"]["mean"] > summ["gnnrand"]["mean"]
+                       and summ["gnnpose"]["mean"] > summ["gnnpose_shuf"]["mean"]
                        and out["delong_seed0"]["gnnpose_vs_gnn2d"] < 0.01),
         "G_leak": bool(summ["mlp8"]["mean"] - summ["mlp7"]["mean"] > 0.05),
         "G_sanity_ok": bool(all(s["gnn2d_randlab"] <= 0.65 for s in out["splits"])),
     }
+    avail = np.zeros(len(records), dtype=bool); avail[ok] = True
+    out["pose_availability"] = {
+        "n_pose": int(avail.sum()), "n_total": len(records),
+        "activity_rate_pose": float(y[avail].mean()), "activity_rate_all": float(y.mean()),
+        "molwt_mean_pose": float(D7[avail, 0].mean()), "molwt_mean_all": float(D7[:, 0].mean()),
+        "rotb_mean_pose": float(D7[avail, 1].mean()), "rotb_mean_all": float(D7[:, 1].mean()),
+        "logp_mean_pose": float(D7[avail, 6].mean()), "logp_mean_all": float(D7[:, 6].mean())}
     json.dump(out, open(RES / "ablation.json", "w"), indent=1)
     print(json.dumps({"summary": {k: round(v["mean"], 3) for k, v in summ.items()},
                       "gates": out["gates"]}, indent=1))
