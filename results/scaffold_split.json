@@ -1,0 +1,53 @@
+{
+ "n": 59,
+ "n_scaffolds": 39,
+ "splits": [
+  {
+   "seed": 0,
+   "n_train": 43,
+   "n_test": 16,
+   "auroc_vina": 0.20634920634920634,
+   "auroc_mlp": 0.9841269841269842
+  },
+  {
+   "seed": 1,
+   "n_train": 43,
+   "n_test": 16,
+   "auroc_vina": 0.671875,
+   "auroc_mlp": 0.828125
+  },
+  {
+   "seed": 2,
+   "n_train": 44,
+   "n_test": 15,
+   "auroc_vina": 0.6399999999999999,
+   "auroc_mlp": 0.9
+  },
+  {
+   "seed": 3,
+   "n_train": 44,
+   "n_test": 15,
+   "auroc_vina": 0.7045454545454546,
+   "auroc_mlp": 0.9772727272727273
+  },
+  {
+   "seed": 4,
+   "n_train": 43,
+   "n_test": 16,
+   "auroc_vina": 0.4791666666666667,
+   "auroc_mlp": 0.9166666666666666
+  }
+ ],
+ "mean_auroc_vina": 0.5403872655122655,
+ "mean_auroc_mlp": 0.9212382756132756,
+ "ci95_mlp": [
+  0.8737003968253969,
+  0.9678932178932179
+ ],
+ "ci95_vina": [
+  0.3538584821428571,
+  0.6784130681818182
+ ],
+ "delong_p_mlp_vs_vina_seed0": 1.9429462077034936e-10,
+ "gate_pass": true
+}

@@ -579,3 +579,26 @@ That negative result would still be scientifically credible. The danger is not f
    methodological discovery is now "pose-geometry signal survives scaffold
    split, ablation, leakage control, and cross-chemotype transfer" - all
    four required, none sufficient alone.
+
+### Round 1 novelty implementation and verification (2026-09-26, after the locked gate)
+- The judge's scaffold-generalization critique produced an actual new analysis:
+  `studies/study12_scaffold_split.py`, pre-outcome commit `706c9ed` for the
+  corrected paired DeLong test; raw Vina and a train-only-standardized
+  descriptor MLP now receive identical Bemis-Murcko grouped test sets over
+  five seeds. This turns an ordinary random-split rescoring claim into a
+  falsifiable scaffold-transport test. The input is 59 unique labeled
+  compounds, 39 scaffolds, with no train/test scaffold overlap in any of
+  five splits, checked by running the source script and split inspection.
+- Actual output (`results/scaffold_split.json`): Vina mean AUROC 0.5404,
+  descriptor MLP mean AUROC 0.9212; bootstrap across five split AUROCs
+  gave MLP 95% CI [0.8737, 0.9679]; paired DeLong on seed-0's 16
+  independent held-out compounds p=1.94e-10. The **script's narrow gate**
+  evaluates true. This is not proof of a pose-geometry mechanism: the MLP
+  includes ligand descriptors and a Vina-derived feature, the five
+  scaffold splits overlap, and the single seed-0 test is small. Do not
+  call its tiny p-value a robust multi-split significance claim.
+- Still open: ligand-only vs pose-contact-only GNN ablations, remove Vina
+  leakage, 8V8E no-retrain transfer, standard target benchmark and
+  external multi-target replication, and a novel validated discovery.
+  Until these land, Round 1 is a concrete novelty-improving method step,
+  not a completed project or the claimed G4 mechanistic discovery.
