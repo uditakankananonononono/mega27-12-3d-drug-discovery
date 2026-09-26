@@ -9,10 +9,12 @@ Locked design:
   grouped by scaffold; 5 split seeds; for each seed, scaffold groups are
   shuffled and assigned greedily to test until >=25% of compounds are in
   test; no scaffold crosses the boundary.
-- Models on EACH split: raw Vina affinity (no training), descriptor MLP
-  (same architecture/features as biganalyze, trained on train scaffolds
-  only), 2D-GNN (same architecture as biganalyze, trained on train
-  scaffolds only, seed fixed per split).
+- Models on EACH split (this script): raw Vina affinity (no training) and
+  descriptor MLP (same architecture/features as biganalyze, trained on
+  train scaffolds only). The 2D-GNN arm and the ligand-only / pose-only
+  ablations are deferred to a separate pre-registered follow-up script
+  (same split seeds) so each script stays reviewable; declared here before
+  any outcomes.
 - Statistics: AUROC per model per split; 2000-bootstrap 95% CI on the mean
   AUROC across splits; DeLong p-value of each learned model vs raw Vina on
   the concatenated out-of-scaffold predictions.
