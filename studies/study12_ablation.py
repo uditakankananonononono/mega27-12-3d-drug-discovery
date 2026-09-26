@@ -269,9 +269,10 @@ def main():
                               ("gnnrand", graphs_rand, "plain"),
                               ("gnnpose_shuf", graphs_shuf, "plain"),
                               ("fusion", graphs_pose, "fusion")):
-            m = train_gnn([GD[i] for i in trp], Dn[trp], y[trp], seed, kind)
-            s = score_gnn(m, [GD[i] for i in tep], Dn[tep], kind)
-            res[tag] = roc_auc_score(y[tep], s)
+            tri = [i for i in trp if i in GD]; tei = [i for i in tep if i in GD]
+            m = train_gnn([GD[i] for i in tri], Dn[tri], y[tri], seed, kind)
+            s = score_gnn(m, [GD[i] for i in tei], Dn[tei], kind)
+            res[tag] = roc_auc_score(y[tei], s)
             if seed == 0:
                 out["seed0_scores"][tag] = s.tolist()
                 out["seed0_scores"]["y_pose"] = y[tep].tolist()
