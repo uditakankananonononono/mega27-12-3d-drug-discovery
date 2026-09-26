@@ -602,3 +602,366 @@ That negative result would still be scientifically credible. The danger is not f
   external multi-target replication, and a novel validated discovery.
   Until these land, Round 1 is a concrete novelty-improving method step,
   not a completed project or the claimed G4 mechanistic discovery.
+
+
+## Round 2/10 - 2026-09-26 17:43 IST
+
+Surface: https://chatgpt.com/c/6ab7a5dd-06d8-83e8-bec0-2707215de4b4 (user account, Free tier). ChatGPT is external, untrusted critique - never empirical evidence, never authority over locked gates.
+
+### Verbatim prompt and response
+```
+Adversarial ISEF judge round 2 for a retrospective SARS-CoV-2 Mpro docking methodology project. Scope is validation/benchmarking only, no design, optimization or nomination of new bioactive compounds. New work after round 1: 59 labeled compounds across 39 Bemis-Murcko scaffolds; five scaffold splits gave mean raw Vina AUROC 0.5404 and descriptor MLP AUROC 0.9212 (descriptive split bootstrap CI 0.8737-0.9679). This is NOT proof of pose geometry; MLP includes a Vina-derived feature and the five test splits overlap. Independent 8V8E reference-ligand transfer redock RMSD 1.4323 Å. A locked pre-outcome ablation will compare raw Vina, descriptor MLP with/without Vina feature, ligand-only 2D GNN, docked-pose graph GCN, pose+descriptor fusion, randomized pose, random-label sanity. Pose GCN must beat ligand-only and randomized-pose on the same pose-available compounds, paired seed-0 DeLong p<.01 against ligand-only. The script has not yet produced results. Attack weaknesses of this test and propose ONE concrete novelty-improving methodological falsifier I can preregister now without seeing the outcome, staying within retrospective benchmarks. Include an independent control, a failure interpretation, and the smallest feasible implementation. Don't prescribe abandoning existing locked gates or compound discovery.
+Show more
+Adversarial ISEF judge round 2
+Current assessment
+
+The project has improved substantially because the central question is now clearer:
+
+Does docked pose geometry contain predictive information beyond ligand chemistry and docking score?
+
+However, the current locked ablation plan is necessary but not sufficient. A hostile judge will argue that even a Pose-GCN win could still be explained by hidden dataset artifacts.
+
+The key issue is identification, not performance.
+
+You are trying to prove a causal statement:
+
+“Pose geometry contributes transferable binding-relevant information.”
+
+Your current test mostly asks:
+
+“Can a graph model exploit information contained in docked poses?”
+
+Those are not identical.
+
+A) Weaknesses a hostile judge will attack in the planned ablation
+1. The MLP result exposes a major confound
+
+Your scaffold split result:
+
+Raw Vina AUROC: 0.5404
+
+Descriptor MLP: 0.9212
+
+This is scientifically interesting, but it changes the burden of proof.
+
+A judge will say:
+
+“Before proving pose geometry matters, prove you are not just rediscovering ligand identity.”
+
+The current benchmark is dominated by:
+
+chemical descriptors
+
+Vina-derived information
+
+scaffold distribution
+
+A Pose-GCN beating Vina does not demonstrate structural information.
+
+It must beat:
+
+ligand-only GNN
+
+descriptor model
+
+Vina-containing model
+
+or at least demonstrate a complementary signal.
+
+2. “Same compounds with available poses” creates a selection problem
+
+Your requirement:
+
+Pose GCN must beat ligand-only on same pose-available compounds
+
+is good.
+
+But the judge asks:
+
+“Are compounds with successful docking poses systematically different?”
+
+Examples:
+
+easier-to-dock molecules
+
+larger molecules
+
+certain scaffolds
+
+less flexible molecules
+
+The pose subset itself may create bias.
+
+Required reporting
+
+Before modeling:
+
+compare pose-available vs all compounds:
+
+molecular weight
+
+rotatable bonds
+
+cLogP
+
+scaffold counts
+
+activity distribution
+
+If they differ, acknowledge.
+
+3. Randomized-pose control may be too weak
+
+Randomizing coordinates can produce an obviously nonsensical graph.
+
+A model may win simply because:
+
+“real poses look chemically structured; random graphs look broken.”
+
+That proves the model detects pose plausibility, not necessarily activity-relevant geometry.
+
+A stronger falsifier is needed.
+
+4. Seed-0 DeLong p<0.01 is vulnerable
+
+This is a subtle statistical issue.
+
+A single seed comparison can be unstable.
+
+You already know:
+
+Earlier:
+
+0.946 → revised 0.871 ± 0.050
+
+That is exactly why.
+
+A judge will ask:
+
+“Did you choose seed 0 because it succeeded?”
+
+Even if you did not, seed dependence is real.
+
+Better:
+
+Predefine:
+
+number of seeds
+
+aggregation method
+
+significance test
+
+Example:
+
+“Median AUROC over 5 seeds; DeLong on pooled predictions from locked seed ensemble.”
+
+5. n=59 is still a small benchmark
+
+Even with scaffold splitting, this remains a retrospective benchmark.
+
+A judge will not reject it, but will expect language like:
+
+“evidence of improved ranking on this benchmark”
+
+not:
+
+“solves docking scoring.”
+
+B) ONE concrete novelty-improving methodological falsifier
+
+I would preregister:
+
+Pose-shuffling within scaffold-matched decoys (geometry necessity test)
+Scientific question
+
+Does the Pose-GCN use the correct ligand–protein interaction geometry, or merely generic properties of docked structures?
+
+Experiment
+
+For every compound:
+
+Generate the normal docked pose graph.
+
+This is the real condition:
+
+Correct pose graph
+
+Then create a matched falsifier:
+
+Scaffold-preserving pose permutation
+
+Randomly assign each ligand's docked pose graph to another ligand within the same Bemis-Murcko scaffold class or physicochemical neighborhood.
+
+Example:
+
+Compound A receives Compound B's pose geometry.
+
+Preserve:
+
+graph size distribution
+
+ligand complexity
+
+protein environment
+
+dataset composition
+
+Break:
+
+ligand-specific geometry relationship
+
+Train/test exactly as before.
+
+Compare:
+
+Model 1
+
+Real pose graph
+
+vs
+
+Model 2
+
+Scaffold-matched shuffled pose graph
+
+Independent control
+
+Include:
+
+Descriptor-only MLP
+
+Already planned.
+
+Purpose:
+
+Shows whether the information comes from chemistry alone.
+
+Expected outcomes and interpretation
+Outcome 1
+
+Real pose graph > shuffled pose graph
+
+Example:
+
+Real:
+AUROC 0.82
+
+Shuffled:
+AUROC 0.55
+
+Interpretation:
+
+Supports:
+
+ligand-specific docking geometry contributes predictive information.
+
+This is the strongest possible outcome.
+
+Outcome 2
+
+Real pose graph ≈ shuffled pose graph
+
+Interpretation:
+
+The GCN likely learns:
+
+ligand size
+
+contact count
+
+docking artifacts
+
+generic pose statistics
+
+The pose graph is not demonstrating biological geometry.
+
+Outcome 3
+
+Shuffled beats real pose graph
+
+Interpretation:
+
+Possible leakage or dataset artifact.
+
+The method is not learning intended information.
+
+Smallest feasible implementation
+
+This does not require:
+
+new docking
+
+new compounds
+
+new datasets
+
+architecture changes
+
+Implementation:
+
+Save existing pose graphs.
+
+Add a permutation function.
+
+Keep labels unchanged.
+
+Retrain the identical GCN.
+
+Compare AUROC.
+
+Likely effort:
+
+<1 week for a clean implementation.
+
+Why this is higher-value than adding another model
+
+A weaker project asks:
+
+“Can my model get higher AUROC?”
+
+A stronger project asks:
+
+“What information source causes the improvement?”
+
+Your current ablation answers:
+
+“Does a pose model perform better?”
+
+This falsifier answers:
+
+“Does ligand-specific structural arrangement matter?”
+
+That is the methodological discovery.
+
+Updated judge view after this preregistration
+
+If you obtain:
+
+Pose-GCN > ligand-only GNN
+
+Pose-GCN > randomized pose
+
+Pose-GCN > scaffold-matched shuffled pose
+
+External 8V8E transfer succeeds
+
+Performance survives removal of Vina feature
+
+then your claim becomes much stronger:
+
+“Docked pose topology provides an independent ranking signal beyond ligand descriptors and docking score in retrospective Mpro benchmarks.”
+
+If the falsifier fails, the project still has a valid conclusion:
+
+“Retrospective docking improvement is driven by ligand-level information rather than recoverable pose geometry.”
+
+That is exactly the kind of falsifiable methodological question ISEF judges tend to reward.
+```
+
+### Independent assessment and novelty foldback (adopted on this lane's own judgment)
+- ADOPTED (committed BEFORE the ablation outcome, commits c6c5a99 / 728e7ce / c8a05b8): the scaffold-matched shuffled-pose falsifier as arm I of `studies/study12_ablation.py`. Each compound's pose graph is swapped with another compound's within its Bemis-Murcko scaffold group (deterministic seed 13, deranged; singleton scaffolds permuted among themselves; one declared exception path guarantees full coverage so all arm test sets stay identical for paired DeLong). Labels unchanged. The G-pose gate now additionally requires arm E (real pose) to beat arm I (shuffled pose) on mean AUROC across the same pose-available held-out compounds. If E does not beat I, any pose-GCN gain is generic pose statistics, not ligand-specific geometry, and the pose-geometry claim is withdrawn per the pivot ladder.
+- ADOPTED (same commits): pose-availability bias is now reported descriptively in the output (activity rate, MW, rotatable bonds, logP: pose-available vs all compounds), answering the "are dockable compounds systematically different" attack without changing any gate.
+- NOT ADOPTED as a gate change: replacing the locked seed-0 DeLong with a pooled-seed test. The judge's seed-dependence point is fair, but the seed-0 DeLong and thresholds were locked before outcomes; moving them now would be goalpost-shifting. Mitigation within the lock: mean AUROC across all 5 splits (already computed) is reported alongside, and the seed-0 DeLong is interpreted only together with the cross-split means.
+- NOT ADOPTED: the judge's round-1-style advice to broaden to multi-target external validation remains future work (G2 gate), not this round's change.
+This concrete novelty change (arm I falsifier + availability audit) is why this round counts toward the 10-round minimum under the 5:00:38 PM user rule.
