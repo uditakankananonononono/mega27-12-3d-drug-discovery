@@ -228,6 +228,13 @@ def main():
         for a, b in zip(idx, perm):
             graphs_shuf[a] = graphs_pose[b]
     singles = [i for i in ok if i not in graphs_shuf]
+    if len(singles) == 1:
+        # one leftover: borrow any other ok compound's pose (declared
+        # scaffold-match exception) so every pose-available compound keeps
+        # an arm-I graph and all arm test sets stay identical.
+        others = [i for i in ok if i != singles[0]]
+        graphs_shuf[singles[0]] = graphs_pose[int(rngs.choice(others))]
+        singles = []
     if len(singles) > 1:
         perm = rngs.permutation(singles)
         while any(a == b for a, b in zip(singles, perm)):
@@ -274,6 +281,7 @@ def main():
             s = score_gnn(m, [GD[i] for i in tei], Dn[tei], kind)
             res[tag] = roc_auc_score(y[tei], s)
             if seed == 0:
+                assert tei == tep, "arm test sets diverged; DeLong pairing broken"
                 out["seed0_scores"][tag] = s.tolist()
                 out["seed0_scores"]["y_pose"] = y[tep].tolist()
         out["splits"].append(res)
