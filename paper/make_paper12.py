@@ -23,6 +23,7 @@ verif2 = json.loads((RES / "external_verification2.json").read_text())
 gnnrob = json.loads((RES / "gnn_robustness.json").read_text())
 big = json.loads((RES / "bigscreen_analysis.json").read_text())
 abl = json.loads((RES / "ablation.json").read_text())
+delong = json.loads((RES / "ablation_delong_intervals.json").read_text())
 
 doc = Document()
 style = doc.styles["Normal"]
@@ -545,6 +546,28 @@ para(
  "family - beats the physics-empirical engine; the choice among learned architectures "
  "is undecided at this n, and the pose graph in particular confers no measurable "
  "advantage.")
+
+para("Table 2d. Post-outcome paired DeLong 95% CIs (normal approximation, unbounded) "
+     "for the four predeclared seed-0 contrasts, on the n = 14 pose-available held-out "
+     "subset (9 positives, 5 negatives) - a single split, NOT an all-pairs grid and not "
+     "CIs for the five-split means.", italic=True)
+table(["contrast", "AUROC A", "AUROC B", "diff (A - B)", "95% CI (DeLong)"],
+      [[{"gnnpose_vs_gnn2d": "pose GNN vs 2D GNN",
+         "gnnpose_vs_gnnrand": "pose GNN vs random-coord pose GNN",
+         "fusion_vs_gnnpose": "fusion vs pose GNN",
+         "gnnpose_vs_gnnpose_shuf": "pose GNN vs shuffled-coord pose GNN"}[k],
+        f"{c['auroc_a']:.3f}", f"{c['auroc_b']:.3f}",
+        f"{c['difference']:+.4f}",
+        f"[{c['ci95_normal_unbounded'][0]:+.4f}, {c['ci95_normal_unbounded'][1]:+.4f}]"]
+       for k, c in delong["comparisons"].items()])
+para(
+ "Every interval crosses zero, consistent with the failed gates above: at n = 14 on a "
+ "single seed-0 split none of the four predeclared contrasts is resolvable. The "
+ "intervals are wide (half-widths 0.10-0.19 AUROC), so they exclude only large effects "
+ "in either direction; they are reported so the undecided architecture choice carries "
+ "an explicit uncertainty statement rather than bare p-values. These are exploratory "
+ "post-outcome intervals - they do not reopen the preregistered gates, which stand as "
+ "failed.")
 
 heading("3.4 MPRO-D1: a de novo candidate with a novelty record", 2)
 para(
