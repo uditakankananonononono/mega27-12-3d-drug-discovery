@@ -52,3 +52,13 @@ P1 different public target subset within the same benchmark family;
 P2 different rescoring feature set; P3 discovery reframed to the validated
 failure-mode map; P4 full negative write-up only after P1-P3 exhausted,
 and even then the lane stays open per rule 4.
+
+
+## Judge requirement amendment, 2026-09-27 10:00 IST
+The user changed the numeric requirement from ten ChatGPT checks to ONE
+round she provides (original WhatsApp wamid.HBgMOTE4MTM0MDk4NTcxFQIAEhgWM0VCMDJCMTZGRTVEMkQwMTFBQzc4MQA=). The older ten-round
+text above records the earlier protocol, not the current finish line. All
+previous judge transcripts remain intact, but prior agent-initiated rounds
+are not assumed to satisfy the new user-provided courier round without a
+verified project-specific handoff. Any supplementary Gemini or other LLM
+consult is separate and does not count as the user-provided ChatGPT verdict.
