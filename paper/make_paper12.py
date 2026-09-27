@@ -1078,8 +1078,7 @@ for t, m in [
 doc.add_page_break()
 heading("Appendix Y. Data and Code Availability", 1)
 para(
- "Repository: github.com/uditakankananonononono/mega27-12-3d-drug-discovery (branch "
- "main). Layout: src/drugdisc (prep, dock, geometry, ligands, rescore, gnn_rescorer, "
+ "Repository: the project repository (branch main). Layout: src/drugdisc (prep, dock, geometry, ligands, rescore, gnn_rescorer, "
  "denovo); studies/ (redock, screen, analyze, denovo, external verification rounds "
  "1-2); results/ (every record this paper reads); tests/ (17 hermetic tests); paper/ "
  "(this generator). The paper regenerates end-to-end: python paper/make_paper12.py "
@@ -1204,5 +1203,7 @@ refs = [
 for i, r in enumerate(refs, 1):
     para(f"[{i}] {r}")
 
+doc.core_properties.author = ""
+doc.core_properties.last_modified_by = ""
 doc.save(ROOT / "paper" / "MEGA27-12_3d_drug_discovery_paper.docx")
 print("paper written")
