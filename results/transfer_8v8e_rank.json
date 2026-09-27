@@ -1,0 +1,46 @@
+{
+ "prereg": "docs/PREREG_TRANSFER_8V8E_RANK_20260928.md",
+ "n_committed_records": 52,
+ "n_docked_both": 44,
+ "n_skipped": 8,
+ "skipped": [
+  {
+   "chembl_id": "CHEMBL5187156",
+   "skipped": "no_7kx5_affinity_in_committed_record"
+  },
+  {
+   "chembl_id": "CHEMBL4875501",
+   "skipped": "no_7kx5_affinity_in_committed_record"
+  },
+  {
+   "chembl_id": "CHEMBL5188282",
+   "skipped": "no_7kx5_affinity_in_committed_record"
+  },
+  {
+   "chembl_id": "CHEMBL5200317",
+   "skipped": "no_7kx5_affinity_in_committed_record"
+  },
+  {
+   "chembl_id": "CHEMBL5181062",
+   "skipped": "no_7kx5_affinity_in_committed_record"
+  },
+  {
+   "chembl_id": "CHEMBL4873791",
+   "skipped": "no_7kx5_affinity_in_committed_record"
+  },
+  {
+   "chembl_id": "CHEMBL4846937",
+   "skipped": "no_7kx5_affinity_in_committed_record"
+  },
+  {
+   "chembl_id": "CHEMBL4873357",
+   "skipped": "no_7kx5_affinity_in_committed_record"
+  }
+ ],
+ "spearman_rho": 0.7517970401691332,
+ "spearman_p": 4.059146929226093e-09,
+ "gate_rank_transfer": "PASS_rho>=0.50",
+ "top10_retention": 5,
+ "auroc_8v8e_raw_vina_descriptive": 0.6042105263157895,
+ "auroc_7kx5_raw_vina_reference": 0.54
+}

@@ -1,0 +1,15 @@
+{
+ "chembl_id": "CHEMBL5206128",
+ "smiles": "Cn1cnc(Cn2c(=O)nc(Nc3cc4cn(C)nc4cc3Cl)n(Cc3cc(Cl)c(F)c(Cl)c3)c2=O)n1",
+ "affinity_8v8e": -8.666,
+ "all_affinities_8v8e": [
+  -8.666,
+  -8.496,
+  -8.272,
+  -8.267,
+  -7.953
+ ],
+ "affinity_7kx5": -8.255,
+ "label": "active",
+ "best_potency_nM": 5.0
+}
