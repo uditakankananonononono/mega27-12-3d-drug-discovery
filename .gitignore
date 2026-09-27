@@ -3,3 +3,5 @@ __pycache__/
 *.egg-info/
 build/
 dist/
+results/transfer8v8e/_inflight.json
+results/transfer8v8e/_partials/
