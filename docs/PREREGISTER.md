@@ -62,3 +62,11 @@ previous judge transcripts remain intact, but prior agent-initiated rounds
 are not assumed to satisfy the new user-provided courier round without a
 verified project-specific handoff. Any supplementary Gemini or other LLM
 consult is separate and does not count as the user-provided ChatGPT verdict.
+
+## Judge clarification, 2026-09-27 10:01 IST
+The user clarified: "EACH PROJECTS NEED ONE FROM ME TO PASS" (WhatsApp
+wamid.HBgMOTE4MTM0MDk4NTcxFQIAEhgWM0VCMDMwREI5RDQ0QUNCRDc2MTNDMwA=).
+This lane currently has **0 of 1 user-provided ChatGPT verdicts**; the earlier
+agent-initiated ChatGPT interactions remain preserved as supplementary history,
+not counted toward this one-verdict gate. A courier paste from the user and
+its project-specific original wamid must be recorded before declaring pass.
