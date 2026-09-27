@@ -69,3 +69,28 @@ run before this lock.
 Six docking runs (2 complexes x 3 seeds) launched detached at ~05:10 IST;
 results and the RMSD audit land in results/covalent_redock.json on completion.
 Inputs and DPFs committed under studies/covalent/.
+
+## 2026-09-28 05:21 IST - 7c6s DPF bug found and fixed (pre-outcome)
+
+First launch: all three 7c6s runs segfaulted during DPF parsing (exit 139,
+DLG truncated after the X1-F intnbp_r_eps line). Root cause: the shared
+intnbp_pairs.txt and the 7c6s template were generated from the 7vh8 ligand
+type list and carried 7vh8-only types (F, N5). Atom type F is absent from the
+7c6s ligand (boc_lig.pdbqt types: C C1 C2 C3 HD N N3 O5 O6 OA), and the
+unbound-conformation internal-energy pass indexes pair tables by the ligand's
+own type list, so the F/N5 pair lines crashed the run. No 7c6s docking
+outcome was ever produced, so this fix precedes any outcome for that complex.
+
+Fix: intnbp_pairs_7c6s.txt rebuilt for the 7c6s ligand's actual types. O5/O6
+are derived from OA in AD4.1_bound_custom.dat (identical Rii 3.20, eps 0.200),
+so the O5/O6 pair lines duplicate the locked OA values; the four reactive
+overrides are unchanged (X3-C1 13-7 1.8 A/eps 2.5, X1-C1 and X2-C1 12-6 2.0 A,
+X4-C1 near-zero). Coverage check: all 4 X types x all 10 7c6s ligand types =
+40 lines, verified programmatically. The locked protocol (grid, box, seeds,
+LGA runs x evals, RMSD criterion) is unchanged.
+
+Second issue found on relaunch: the 7c6s seed DPFs had been generated with
+{EVALS}/{NRUN} placeholders unsubstituted (the original run had substituted
+them only in the 7vh8 DPFs); autodock4 exited 1 with "syntax error in
+GA_NUM_EVALS line". Regenerated with ga_num_evals 1000000, ga_run 10, matching
+the locked protocol and the 7vh8 DPFs. Relaunched 05:21 IST.
