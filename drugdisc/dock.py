@@ -46,7 +46,8 @@ def _dock_worker(receptor, pdbqt, center, size, name, queue):
 
 def dock_ligand_with_timeout(receptor_pdbqt: str, ligand_pdbqt: str, center,
                              box_size, ligand_name: str = "ligand",
-                             timeout_s: int = 300, worker=None):
+                             timeout_s: int = 300, worker=None,
+                             pid_sink=None):
     """Dock one ligand in a spawned child process with a hard wall-clock
     timeout. Vina's torsion search can spin indefinitely on macrocycles; the
     python binding cannot be interrupted in-process, so the child is killed.
@@ -59,6 +60,8 @@ def dock_ligand_with_timeout(receptor_pdbqt: str, ligand_pdbqt: str, center,
                        args=(receptor_pdbqt, ligand_pdbqt, center, box_size,
                              ligand_name, queue))
     proc.start()
+    if pid_sink is not None:
+        pid_sink.append(proc.pid)
     proc.join(timeout_s)
     if proc.is_alive():
         proc.terminate(); proc.join()

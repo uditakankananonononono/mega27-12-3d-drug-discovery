@@ -2,74 +2,184 @@
 docs/PREREG_TRANSFER_8V8E_RANK_20260928.md (locked before any 8V8E campaign
 dock). Resumable: one cache file per compound in results/transfer8v8e/;
 stops at the wall-clock budget; re-invoke until the final JSON is written.
+
+Result transport is crash-safe: the dock worker writes its result to
+results/transfer8v8e/_partials/<CHEMBL_ID>.json before signalling the
+parent, and the parent records the worker pid in _inflight.json. If the
+invocation's wall-clock wrapper kills the parent mid-dock, the next
+invocation adopts the orphaned worker's partial (or enforces the
+preregistered 300 s timeout on it). Docking parameters are identical to
+the 7KX5 campaign worker either way.
 """
-import json, os, pathlib, sys, time
+import json, os, pathlib, signal, sys, threading, time
 import numpy as np
 from scipy.stats import spearmanr
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent.parent))
 from drugdisc.prep import smiles_to_pdbqt
-from drugdisc.dock import dock_ligand_with_timeout
+from drugdisc.dock import dock_ligand, dock_ligand_with_timeout
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 RAW = ROOT / "data/raw"
 SRC = ROOT / "results/bigscreen"
 OUT = ROOT / "results/transfer8v8e"
-BUDGET = float(os.environ.get("T8V8E_BUDGET", "90"))
+PARTIALS = OUT / "_partials"
+INFLIGHT = OUT / "_inflight.json"
+BUDGET = float(os.environ.get("T8V8E_BUDGET", "100"))
+DOCK_TIMEOUT_S = 300
 FINAL = ROOT / "results/transfer_8v8e_rank.json"
+
+
+def worker_file(receptor, pdbqt, center, size, name, queue):
+    """Same dock call as the 7KX5 campaign worker; also drops the result
+    to a partial file first so an orphaned worker is adoptable."""
+    res, _ = dock_ligand(receptor, pdbqt, center, size, ligand_name=name,
+                         exhaustiveness=8, n_poses=5, cpu=2)
+    PARTIALS.mkdir(exist_ok=True)
+    (PARTIALS / f"{name}.json").write_text(json.dumps(
+        {"best": res.best_affinity, "all": res.all_affinities}))
+    queue.put((res.best_affinity, res.all_affinities))
+
+
+def pid_alive(pid):
+    try:
+        os.kill(pid, 0)
+        return True
+    except ProcessLookupError:
+        return False
+    except PermissionError:
+        return True
 
 
 def main():
     OUT.mkdir(exist_ok=True)
-    records = sorted(SRC.glob("*.json"))
+    PARTIALS.mkdir(exist_ok=True)
+    records = {json.loads(f.read_text())["chembl_id"]: json.loads(f.read_text())
+               for f in sorted(SRC.glob("*.json"))}
     assert len(records) == 52, f"expected 52 committed campaign records, found {len(records)}"
     box = json.loads((RAW / "box_8v8e.json").read_text())
     t0 = time.time()
 
-    for f in records:
-        rec = json.loads(f.read_text())
-        cid = rec["chembl_id"]
+    def cache_for(cid, payload):
+        rec = records[cid]
+        out = {"chembl_id": cid, "smiles": rec["smiles"],
+               "affinity_8v8e": payload["best"], "all_affinities_8v8e": payload["all"],
+               "affinity_7kx5": rec.get("affinity"), "label": rec.get("label"),
+               "best_potency_nM": rec.get("best_potency_nM")}
+        (OUT / f"{cid}.json").write_text(json.dumps(out, indent=1))
+        print(f"{cid}: {payload['best']} (adopted partial) [{len(list(OUT.glob('*.json')))}/52]", flush=True)
+
+    def skip_for(cid, reason):
+        rec = records[cid]
+        out = {"chembl_id": cid, "smiles": rec["smiles"], "skipped": reason,
+               "affinity_7kx5": rec.get("affinity"), "label": rec.get("label"),
+               "best_potency_nM": rec.get("best_potency_nM")}
+        (OUT / f"{cid}.json").write_text(json.dumps(out, indent=1))
+        print(f"{cid}: {reason} [{len(list(OUT.glob('*.json')))}/52]", flush=True)
+
+    def collect_partials():
+        for p in list(PARTIALS.glob("*.json")):
+            cid = p.stem
+            if cid not in records:
+                p.unlink(); continue
+            if not (OUT / f"{cid}.json").exists():
+                cache_for(cid, json.loads(p.read_text()))
+            p.unlink()
+            if INFLIGHT.exists() and json.loads(INFLIGHT.read_text()).get("chembl_id") == cid:
+                INFLIGHT.unlink()
+
+    collect_partials()
+
+    # Adopt or enforce the timeout on a worker orphaned by a killed invocation.
+    if INFLIGHT.exists():
+        inf = json.loads(INFLIGHT.read_text())
+        cid, pid, started = inf["chembl_id"], inf["pid"], inf["started"]
+        if (OUT / f"{cid}.json").exists():
+            INFLIGHT.unlink()
+        elif not pid_alive(pid):
+            skip_for(cid, "dock_worker_crashed")
+            INFLIGHT.unlink()
+        elif time.time() - started >= DOCK_TIMEOUT_S:
+            try:
+                os.kill(pid, signal.SIGKILL)
+            except ProcessLookupError:
+                pass
+            skip_for(cid, f"dock_timeout_{DOCK_TIMEOUT_S}s")
+            INFLIGHT.unlink()
+        else:
+            while time.time() - t0 <= BUDGET and pid_alive(pid) and not (PARTIALS / f"{cid}.json").exists():
+                time.sleep(5)
+            collect_partials()
+            if not (OUT / f"{cid}.json").exists():
+                if not pid_alive(pid):
+                    skip_for(cid, "dock_worker_crashed")
+                    INFLIGHT.unlink()
+                elif time.time() - started >= DOCK_TIMEOUT_S:
+                    try:
+                        os.kill(pid, signal.SIGKILL)
+                    except ProcessLookupError:
+                        pass
+                    skip_for(cid, f"dock_timeout_{DOCK_TIMEOUT_S}s")
+                    INFLIGHT.unlink()
+                else:
+                    print(f"{cid}: still docking (pid {pid}); invocation budget spent", flush=True)
+                    return
+
+    for cid, rec in records.items():
         cache = OUT / f"{cid}.json"
         if cache.exists() or time.time() - t0 > BUDGET:
             continue
-        smi = rec["smiles"]
         if "affinity" not in rec:
-            cache.write_text(json.dumps(
-                {"chembl_id": cid, "smiles": smi,
-                 "skipped": "no_7kx5_affinity_in_committed_record",
-                 "label": rec.get("label"),
-                 "best_potency_nM": rec.get("best_potency_nM")}, indent=1))
-            print(f"{cid}: excluded, no 7KX5 affinity", flush=True)
+            skip_for(cid, "no_7kx5_affinity_in_committed_record")
             continue
         pdbqt = RAW / f"lig_{cid}.pdbqt"
         try:
             if not pdbqt.exists():
-                smiles_to_pdbqt(smi, str(pdbqt))
-            best, all_aff = dock_ligand_with_timeout(
-                str(RAW / "8V8E_A_receptor.pdbqt"), str(pdbqt),
-                box["center"], box["size"], ligand_name=cid, timeout_s=300)
-            out = {"chembl_id": cid, "smiles": smi, "affinity_8v8e": best,
-                   "all_affinities_8v8e": all_aff,
+                smiles_to_pdbqt(rec["smiles"], str(pdbqt))
+            pids, holder = [], {}
+            def run():
+                try:
+                    holder["res"] = dock_ligand_with_timeout(
+                        str(RAW / "8V8E_A_receptor.pdbqt"), str(pdbqt),
+                        box["center"], box["size"], ligand_name=cid,
+                        timeout_s=DOCK_TIMEOUT_S, worker=worker_file,
+                        pid_sink=pids)
+                except Exception as exc:
+                    holder["err"] = exc
+            th = threading.Thread(target=run, daemon=True)
+            th.start()
+            while not pids and th.is_alive():
+                time.sleep(0.2)
+            if pids:
+                INFLIGHT.write_text(json.dumps(
+                    {"chembl_id": cid, "pid": pids[0], "started": time.time()}))
+            th.join()
+            INFLIGHT.unlink(missing_ok=True)
+            if "err" in holder:
+                raise holder["err"]
+            best, all_aff = holder["res"]
+            partial = PARTIALS / f"{cid}.json"
+            if partial.exists():
+                partial.unlink()
+            out = {"chembl_id": cid, "smiles": rec["smiles"],
+                   "affinity_8v8e": best, "all_affinities_8v8e": all_aff,
                    "affinity_7kx5": rec["affinity"], "label": rec["label"],
                    "best_potency_nM": rec["best_potency_nM"]}
         except TimeoutError:
-            out = {"chembl_id": cid, "smiles": smi, "skipped": "dock_timeout_300s",
+            out = {"chembl_id": cid, "smiles": rec["smiles"],
+                   "skipped": f"dock_timeout_{DOCK_TIMEOUT_S}s",
                    "affinity_7kx5": rec["affinity"], "label": rec["label"],
                    "best_potency_nM": rec["best_potency_nM"]}
         except RuntimeError as exc:
-            if "died without result" in str(exc):
-                out = {"chembl_id": cid, "smiles": smi,
-                       "skipped": "dock_worker_crashed",
-                       "affinity_7kx5": rec["affinity"], "label": rec["label"],
-                       "best_potency_nM": rec["best_potency_nM"]}
-            else:
-                out = {"chembl_id": cid, "smiles": smi,
-                       "skipped": f"error_{type(exc).__name__}",
-                       "affinity_7kx5": rec["affinity"], "label": rec["label"],
-                       "best_potency_nM": rec["best_potency_nM"]}
+            reason = "dock_worker_crashed" if "died without result" in str(exc) \
+                else f"error_{type(exc).__name__}"
+            out = {"chembl_id": cid, "smiles": rec["smiles"], "skipped": reason,
+                   "affinity_7kx5": rec["affinity"], "label": rec["label"],
+                   "best_potency_nM": rec["best_potency_nM"]}
         except Exception as exc:
-            out = {"chembl_id": cid, "smiles": smi, "skipped": f"error_{type(exc).__name__}",
+            out = {"chembl_id": cid, "smiles": rec["smiles"],
+                   "skipped": f"error_{type(exc).__name__}",
                    "affinity_7kx5": rec["affinity"], "label": rec["label"],
                    "best_potency_nM": rec["best_potency_nM"]}
         cache.write_text(json.dumps(out, indent=1))
