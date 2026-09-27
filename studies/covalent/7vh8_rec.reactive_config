@@ -1,0 +1,186 @@
+ligand_types S S2 S3 S1 P P1 P3 P2 Br B4 B5 B6 F F2 F1 F3 HD H5 H6 1H5 H4 Cl C4 C6 C5 Si S7 S8 S9 I I2 I1 I3 C 1C3 1C2 C2 C3 C1 N N1 N3 N2 A A1 A2 A3 OA O6 O5 O4 NA N5 N4 N6 B B3 B2 B1 SA S5 S6 1S4 S4
+fld 7vh8_rec_rigid.maps.fld
+map 7vh8_rec_rigid.S.map
+map 7vh8_rec_rigid.S.map
+map 7vh8_rec_rigid.S.map
+map 7vh8_rec_rigid.S.map
+map 7vh8_rec_rigid.P.map
+map 7vh8_rec_rigid.P.map
+map 7vh8_rec_rigid.P.map
+map 7vh8_rec_rigid.P.map
+map 7vh8_rec_rigid.Br.map
+map 7vh8_rec_rigid.Br.map
+map 7vh8_rec_rigid.Br.map
+map 7vh8_rec_rigid.Br.map
+map 7vh8_rec_rigid.F.map
+map 7vh8_rec_rigid.F.map
+map 7vh8_rec_rigid.F.map
+map 7vh8_rec_rigid.F.map
+map 7vh8_rec_rigid.HD.map
+map 7vh8_rec_rigid.HD.map
+map 7vh8_rec_rigid.HD.map
+map 7vh8_rec_rigid.HD.map
+map 7vh8_rec_rigid.HD.map
+map 7vh8_rec_rigid.Cl.map
+map 7vh8_rec_rigid.Cl.map
+map 7vh8_rec_rigid.Cl.map
+map 7vh8_rec_rigid.Cl.map
+map 7vh8_rec_rigid.Si.map
+map 7vh8_rec_rigid.Si.map
+map 7vh8_rec_rigid.Si.map
+map 7vh8_rec_rigid.Si.map
+map 7vh8_rec_rigid.I.map
+map 7vh8_rec_rigid.I.map
+map 7vh8_rec_rigid.I.map
+map 7vh8_rec_rigid.I.map
+map 7vh8_rec_rigid.C.map
+map 7vh8_rec_rigid.C.map
+map 7vh8_rec_rigid.C.map
+map 7vh8_rec_rigid.C.map
+map 7vh8_rec_rigid.C.map
+map 7vh8_rec_rigid.C.map
+map 7vh8_rec_rigid.N.map
+map 7vh8_rec_rigid.N.map
+map 7vh8_rec_rigid.N.map
+map 7vh8_rec_rigid.N.map
+map 7vh8_rec_rigid.A.map
+map 7vh8_rec_rigid.A.map
+map 7vh8_rec_rigid.A.map
+map 7vh8_rec_rigid.A.map
+map 7vh8_rec_rigid.OA.map
+map 7vh8_rec_rigid.OA.map
+map 7vh8_rec_rigid.OA.map
+map 7vh8_rec_rigid.OA.map
+map 7vh8_rec_rigid.NA.map
+map 7vh8_rec_rigid.NA.map
+map 7vh8_rec_rigid.NA.map
+map 7vh8_rec_rigid.NA.map
+map 7vh8_rec_rigid.B.map
+map 7vh8_rec_rigid.B.map
+map 7vh8_rec_rigid.B.map
+map 7vh8_rec_rigid.B.map
+map 7vh8_rec_rigid.SA.map
+map 7vh8_rec_rigid.SA.map
+map 7vh8_rec_rigid.SA.map
+map 7vh8_rec_rigid.SA.map
+map 7vh8_rec_rigid.SA.map
+intnbp_r_eps 0.010000 0.001000  12   6  1H5   S2
+intnbp_r_eps 2.000000 0.033240  12   6  1S4   S2
+intnbp_r_eps 2.000000 0.028787  12   6  1C2   S2
+intnbp_r_eps 0.010000 0.001000  12   6  1H5   P1
+intnbp_r_eps 1.800000 2.500000  13   7  1S4   P1
+intnbp_r_eps 2.050000 0.028787  12   6  1C3   P1
+intnbp_r_eps 2.050000 0.028787  12   6  1C2   P1
+intnbp_r_eps 0.010000 0.001000  12   6  1H5   B4
+intnbp_r_eps 1.800000 2.500000  13   7  1S4   B4
+intnbp_r_eps 2.082500 0.040147  12   6  1C3   B4
+intnbp_r_eps 2.082500 0.040147  12   6  1C2   B4
+intnbp_r_eps 0.010000 0.001000  12   6  1H5   F2
+intnbp_r_eps 0.010000 0.001000  12   6  1S4   F2
+intnbp_r_eps 0.010000 0.001000  12   6  1C2   F2
+intnbp_r_eps 0.010000 0.001000  12   6  1H5   H5
+intnbp_r_eps 0.010000 0.001000  12   6  1S4   H5
+intnbp_r_eps 0.010000 0.001000  12   6  1C2   H5
+intnbp_r_eps 0.010000 0.001000  12   6  1H5   C4
+intnbp_r_eps 1.800000 2.500000  13   7  1S4   C4
+intnbp_r_eps 2.022500 0.033817  12   6  1C3   C4
+intnbp_r_eps 2.022500 0.033817  12   6  1C2   C4
+intnbp_r_eps 0.010000 0.001000  12   6  1H5   B5
+intnbp_r_eps 2.082500 0.046358  12   6  1S4   B5
+intnbp_r_eps 2.082500 0.040147  12   6  1C2   B5
+intnbp_r_eps 0.010000 0.001000  12   6  1H5   S7
+intnbp_r_eps 1.800000 2.500000  13   7  1S4   S7
+intnbp_r_eps 2.025000 0.028787  12   6  1C3   S7
+intnbp_r_eps 2.025000 0.028787  12   6  1C2   S7
+intnbp_r_eps 0.010000 0.001000  12   6  1H5   I2
+intnbp_r_eps 2.180000 0.055122  12   6  1S4   I2
+intnbp_r_eps 2.180000 0.047737  12   6  1C2   I2
+intnbp_r_eps 0.010000 0.001000  12   6  1H5   S8
+intnbp_r_eps 2.025000 0.033240  12   6  1S4   S8
+intnbp_r_eps 2.025000 0.028787  12   6  1C2   S8
+intnbp_r_eps 0.010000 0.001000  12   6  1H5   N1
+intnbp_r_eps 1.800000 2.500000  13   7  1S4   N1
+intnbp_r_eps 1.875000 0.025748  12   6  1C3   N1
+intnbp_r_eps 1.875000 0.025748  12   6  1C2   N1
+intnbp_r_eps 0.010000 0.001000  12   6  1H5   A1
+intnbp_r_eps 1.800000 2.500000  13   7  1S4   A1
+intnbp_r_eps 2.000000 0.024930  12   6  1C3   A1
+intnbp_r_eps 2.000000 0.024930  12   6  1C2   A1
+intnbp_r_eps 1.875000 0.029731  12   6  1S4   N3
+intnbp_r_eps 0.010000 0.001000  12   6  1H5   A2
+intnbp_r_eps 2.000000 0.028787  12   6  1S4   A2
+intnbp_r_eps 2.000000 0.024930  12   6  1C2   A2
+intnbp_r_eps 2.000000 0.028787  12   6  1S4   A3
+intnbp_r_eps 0.010000 0.001000  12   6  1H5   C2
+intnbp_r_eps 2.000000 0.028787  12   6  1S4   C2
+intnbp_r_eps 2.000000 0.024930  12   6  1C2   C2
+intnbp_r_eps 1.800000 0.033240  12   6  1S4   O6
+intnbp_r_eps 0.010000 0.001000  12   6  1H5   N5
+intnbp_r_eps 1.875000 0.029731  12   6  1S4   N5
+intnbp_r_eps 1.875000 0.025748  12   6  1C2   N5
+intnbp_r_eps 2.082500 0.046358  12   6  1S4   B6
+intnbp_r_eps 0.010000 0.001000  12   6  1S4   H6
+intnbp_r_eps 2.000000 0.028787  12   6  1S4   C3
+intnbp_r_eps 2.050000 0.033240  12   6  1S4   P3
+intnbp_r_eps 2.000000 0.033240  12   6  1S4   S3
+intnbp_r_eps 2.022500 0.039048  12   6  1S4   C6
+intnbp_r_eps 1.960000 0.029263  12   6  1S4   B3
+intnbp_r_eps 0.010000 0.001000  12   6  1H5   N4
+intnbp_r_eps 1.800000 2.500000  13   7  1S4   N4
+intnbp_r_eps 1.875000 0.025748  12   6  1C3   N4
+intnbp_r_eps 1.875000 0.025748  12   6  1C2   N4
+intnbp_r_eps 0.010000 0.001000  12   6  1H5   P2
+intnbp_r_eps 2.050000 0.033240  12   6  1S4   P2
+intnbp_r_eps 2.050000 0.028787  12   6  1C2   P2
+intnbp_r_eps 0.010000 0.001000  12   6  1H5   N2
+intnbp_r_eps 1.875000 0.029731  12   6  1S4   N2
+intnbp_r_eps 1.875000 0.025748  12   6  1C2   N2
+intnbp_r_eps 0.010000 0.001000  12   6  1H5   C5
+intnbp_r_eps 2.022500 0.039048  12   6  1S4   C5
+intnbp_r_eps 2.022500 0.033817  12   6  1C2   C5
+intnbp_r_eps 1.875000 0.029731  12   6  1S4   N6
+intnbp_r_eps 0.010000 0.001000  12   6  1H5   I1
+intnbp_r_eps 1.800000 2.500000  13   7  1S4   I1
+intnbp_r_eps 2.180000 0.047737  12   6  1C3   I1
+intnbp_r_eps 2.180000 0.047737  12   6  1C2   I1
+intnbp_r_eps 0.010000 0.001000  12   6  1H5   F1
+intnbp_r_eps 1.800000 2.500000  13   7  1S4   F1
+intnbp_r_eps 0.010000 0.001000  12   6  1C3   F1
+intnbp_r_eps 0.010000 0.001000  12   6  1C2   F1
+intnbp_r_eps 0.010000 0.001000  12   6  1H5   S1
+intnbp_r_eps 1.800000 2.500000  13   7  1S4   S1
+intnbp_r_eps 2.000000 0.028787  12   6  1C3   S1
+intnbp_r_eps 2.000000 0.028787  12   6  1C2   S1
+intnbp_r_eps 0.010000 0.001000  12   6  1H5   O5
+intnbp_r_eps 1.800000 0.033240  12   6  1S4   O5
+intnbp_r_eps 1.800000 0.028787  12   6  1C2   O5
+intnbp_r_eps 0.010000 0.001000  12   6  1H5   S5
+intnbp_r_eps 2.000000 0.033240  12   6  1S4   S5
+intnbp_r_eps 2.000000 0.028787  12   6  1C2   S5
+intnbp_r_eps 0.010000 0.001000  12   6  1H5   O4
+intnbp_r_eps 1.800000 2.500000  13   7  1S4   O4
+intnbp_r_eps 1.800000 0.028787  12   6  1C3   O4
+intnbp_r_eps 1.800000 0.028787  12   6  1C2   O4
+intnbp_r_eps 0.010000 0.001000  12   6  1H5   B2
+intnbp_r_eps 1.960000 0.029263  12   6  1S4   B2
+intnbp_r_eps 1.960000 0.025342  12   6  1C2   B2
+intnbp_r_eps 2.000000 0.033240  12   6  1S4   S6
+intnbp_r_eps 0.010000 0.001000  12   6  1S4   F3
+intnbp_r_eps 2.025000 0.033240  12   6  1S4   S9
+intnbp_r_eps 2.180000 0.055122  12   6  1S4   I3
+intnbp_r_eps 0.010000 0.001000  12   6  1H5   B1
+intnbp_r_eps 1.800000 2.500000  13   7  1S4   B1
+intnbp_r_eps 1.960000 0.025342  12   6  1C3   B1
+intnbp_r_eps 1.960000 0.025342  12   6  1C2   B1
+intnbp_r_eps 0.010000 0.001000  12   6  1H5   H4
+intnbp_r_eps 1.800000 2.500000  13   7  1S4   H4
+intnbp_r_eps 0.010000 0.001000  12   6  1C3   H4
+intnbp_r_eps 0.010000 0.001000  12   6  1C2   H4
+intnbp_r_eps 0.010000 0.001000  12   6  1H5   S4
+intnbp_r_eps 1.800000 2.500000  13   7  1S4   S4
+intnbp_r_eps 2.000000 0.028787  12   6  1C3   S4
+intnbp_r_eps 2.000000 0.028787  12   6  1C2   S4
+intnbp_r_eps 0.010000 0.001000  12   6  1H5   C1
+intnbp_r_eps 1.800000 2.500000  13   7  1S4   C1
+intnbp_r_eps 2.000000 0.024930  12   6  1C3   C1
+intnbp_r_eps 2.000000 0.024930  12   6  1C2   C1

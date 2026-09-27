@@ -1,0 +1,16 @@
+npts 64 64 64
+gridfld 7c6s_rec_rigid.maps.fld
+spacing 0.375
+receptor_types A C HD N NA OA SA
+ligand_types C HD N OA F
+receptor 7c6s_rec_rigid.pdbqt
+gridcenter -19.915 -21.076 0.485
+smooth 0.5
+map 7c6s_rec_rigid.C.map
+map 7c6s_rec_rigid.HD.map
+map 7c6s_rec_rigid.N.map
+map 7c6s_rec_rigid.OA.map
+map 7c6s_rec_rigid.F.map
+elecmap 7c6s_rec_rigid.e.map
+dsolvmap 7c6s_rec_rigid.d.map
+dielectric -0.1465

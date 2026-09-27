@@ -1,0 +1,86 @@
+autodock_parameter_version 4.2
+outlev 1
+parameter_file /tmp/cov/AD4.1_bound_custom.dat
+intelec
+seed 77001 88001
+ligand_types C C1 C2 C3 F HD N N3 N5 OA
+fld 7vh8_rec_rigid.maps.fld
+map 7vh8_rec_rigid.C.map
+map 7vh8_rec_rigid.C1.map
+map 7vh8_rec_rigid.C2.map
+map 7vh8_rec_rigid.C3.map
+map 7vh8_rec_rigid.F.map
+map 7vh8_rec_rigid.HD.map
+map 7vh8_rec_rigid.N.map
+map 7vh8_rec_rigid.N3.map
+map 7vh8_rec_rigid.N5.map
+map 7vh8_rec_rigid.OA.map
+elecmap 7vh8_rec_rigid.e.map
+desolvmap 7vh8_rec_rigid.d.map
+move nir_lig.pdbqt
+flexres 7vh8_rec_flex.pdbqt
+intnbp_r_eps 8.000000 0.150000  12   6  X1   C
+intnbp_r_eps 2.000000 0.024930  12   6  X1   C1
+intnbp_r_eps 8.000000 0.150000  12   6  X1   C2
+intnbp_r_eps 8.000000 0.150000  12   6  X1   C3
+intnbp_r_eps 7.090000 0.109545  12   6  X1   F
+intnbp_r_eps 6.000000 0.054772  12   6  X1   HD
+intnbp_r_eps 7.500000 0.154919  12   6  X1   N
+intnbp_r_eps 7.500000 0.154919  12   6  X1   N3
+intnbp_r_eps 7.500000 0.154919  12   6  X1   N5
+intnbp_r_eps 7.200000 0.173205  12   6  X1   OA
+intnbp_r_eps 8.000000 0.150000  12   6  X2   C
+intnbp_r_eps 2.000000 0.024930  12   6  X2   C1
+intnbp_r_eps 8.000000 0.150000  12   6  X2   C2
+intnbp_r_eps 8.000000 0.150000  12   6  X2   C3
+intnbp_r_eps 7.090000 0.109545  12   6  X2   F
+intnbp_r_eps 6.000000 0.054772  12   6  X2   HD
+intnbp_r_eps 7.500000 0.154919  12   6  X2   N
+intnbp_r_eps 7.500000 0.154919  12   6  X2   N3
+intnbp_r_eps 7.500000 0.154919  12   6  X2   N5
+intnbp_r_eps 7.200000 0.173205  12   6  X2   OA
+intnbp_r_eps 8.000000 0.173205  12   6  X3   C
+intnbp_r_eps 1.800000 2.500000  13   7  X3   C1
+intnbp_r_eps 8.000000 0.173205  12   6  X3   C2
+intnbp_r_eps 8.000000 0.173205  12   6  X3   C3
+intnbp_r_eps 7.090000 0.126491  12   6  X3   F
+intnbp_r_eps 6.000000 0.063246  12   6  X3   HD
+intnbp_r_eps 7.500000 0.178885  12   6  X3   N
+intnbp_r_eps 7.500000 0.178885  12   6  X3   N3
+intnbp_r_eps 7.500000 0.178885  12   6  X3   N5
+intnbp_r_eps 7.200000 0.200000  12   6  X3   OA
+intnbp_r_eps 6.000000 0.054772  12   6  X4   C
+intnbp_r_eps 0.010000 0.001000  12   6  X4   C1
+intnbp_r_eps 6.000000 0.054772  12   6  X4   C2
+intnbp_r_eps 6.000000 0.054772  12   6  X4   C3
+intnbp_r_eps 5.090000 0.040000  12   6  X4   F
+intnbp_r_eps 4.000000 0.020000  12   6  X4   HD
+intnbp_r_eps 5.500000 0.056569  12   6  X4   N
+intnbp_r_eps 5.500000 0.056569  12   6  X4   N3
+intnbp_r_eps 5.500000 0.056569  12   6  X4   N5
+intnbp_r_eps 5.200000 0.063246  12   6  X4   OA
+about -19.054 15.539 -31.610
+tran0 random
+quaternion0 random
+dihe0 random
+torsdof 9
+ga_pop_size 150
+ga_num_evals 1000000
+ga_num_generations 27000
+ga_elitism 1
+ga_mutation_rate 0.02
+ga_crossover_rate 0.8
+ga_window_size 10
+ga_cauchy_alpha 0.0
+ga_cauchy_beta 1.0
+set_ga
+sw_max_its 300
+sw_max_succ 4
+sw_max_fail 4
+sw_rho 1.0
+sw_lb_rho 0.01
+ls_search_freq 0.06
+set_sw1
+unbound_model bound
+ga_run 10
+analysis
