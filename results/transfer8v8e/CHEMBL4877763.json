@@ -1,0 +1,15 @@
+{
+ "chembl_id": "CHEMBL4877763",
+ "smiles": "CC[C@H](N)C(=O)N[C@H](C(=O)N[C@@H](CC1CC1)C(=O)N[C@@H](CCC(N)=O)C(=O)N[C@@H](Cc1ccnc(C#N)c1)C(N)=O)C(C)(C)C",
+ "affinity_8v8e": -7.798,
+ "all_affinities_8v8e": [
+  -7.798,
+  -7.605,
+  -7.551,
+  -7.54,
+  -7.471
+ ],
+ "affinity_7kx5": -7.979,
+ "label": "inactive",
+ "best_potency_nM": 100000.0
+}

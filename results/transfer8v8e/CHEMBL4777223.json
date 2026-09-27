@@ -1,0 +1,15 @@
+{
+ "chembl_id": "CHEMBL4777223",
+ "smiles": "COc1cccc2[nH]c(C(=O)N[C@@H](CC(C)C)C(=O)N[C@@H](C[C@@H]3CCNC3=O)C(=O)CO)cc12",
+ "affinity_8v8e": -7.301,
+ "all_affinities_8v8e": [
+  -7.301,
+  -7.242,
+  -7.24,
+  -7.226,
+  -7.142
+ ],
+ "affinity_7kx5": -7.703,
+ "label": "active",
+ "best_potency_nM": 1.7
+}
