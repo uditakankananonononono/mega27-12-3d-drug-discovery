@@ -1,0 +1,7 @@
+{
+ "chembl_id": "CHEMBL5181062",
+ "smiles": "O=C(Nc1ccc2c(c1)B(O)OC2)c1cccc(NCc2ccccc2)c1",
+ "skipped": "no_7kx5_affinity_in_committed_record",
+ "label": "inactive",
+ "best_potency_nM": 56900.0
+}
