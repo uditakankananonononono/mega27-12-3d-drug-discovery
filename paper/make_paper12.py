@@ -25,6 +25,8 @@ big = json.loads((RES / "bigscreen_analysis.json").read_text())
 abl = json.loads((RES / "ablation.json").read_text())
 delong = json.loads((RES / "ablation_delong_intervals.json").read_text())
 rank8v8e = json.loads((RES / "transfer_8v8e_rank.json").read_text())
+hydr = json.loads((RES / "hydration.json").read_text())
+hydr_sites = json.loads((RES / "hydration_sites.json").read_text())
 
 doc = Document()
 style = doc.styles["Normal"]
@@ -417,6 +419,52 @@ para(
  "catalytic-domain construct), so this is robustness to a change of receptor "
  "structure and crystallization condition. Transfer to a different protease target "
  "remains untested.")
+
+heading("3.1d Hydration audit: conserved waters and a gated feature test (preregistered)", 2)
+para(
+ "Rigid-receptor docking discards the solvent, and this pocket is known to use "
+ "water-mediated contacts. Before computing any hydration outcome we locked the "
+ "design (docs/PREREG_HYDRATION_20260928.md): a descriptive conserved-water map "
+ "across the eight public Mpro deposits in data/raw, a single explicit-water "
+ "redock, and one gated feature test on the committed benchmark - with all "
+ "radii, conservation cutoffs and the decision rule fixed in advance.")
+para(
+ f"The map is descriptive. Each structure's chain A was superposed on the 7KX5 "
+ f"binding-site frame (52 CA anchors, alignment RMSD "
+ f"{min(a['align_rmsd_A'] for k,a in hydr_sites['alignment'].items() if a['status']=='aligned' and k!='7KX5'):.2f}-"
+ f"{max(a['align_rmsd_A'] for a in hydr_sites['alignment'].values() if a['status']=='aligned'):.2f} A). "
+ f"Of {hydr_sites['n_waters_in_box']} crystal waters inside the docking box, greedy "
+ f"clustering at 1.5 A gives {len(hydr_sites['clusters'])} sites, but only "
+ f"{hydr['part_c_hydration_arm']['n_sites_used']} appear in three or more structures "
+ f"(the best in seven of eight). Most crystal waters in this pocket are "
+ f"deposit-specific; conservation is the exception, not the rule "
+ f"(results/hydration_sites.json).")
+para(
+ f"The explicit-water redock is a single descriptive check. X7V was redocked into "
+ f"7KX5 with its eight crystal waters retained as rigid receptor atoms under the "
+ f"identical box, seed and exhaustiveness: heavy-atom RMSD "
+ f"{hydr['part_b_explicit_water_redock']['rmsd_A']:.2f} A versus "
+ f"{hydr['part_b_explicit_water_redock']['apo_rmsd_A']:.2f} A without waters, best "
+ f"affinity {hydr['part_b_explicit_water_redock']['best_affinity_kcal_mol']:.2f} "
+ f"versus {hydr['part_b_explicit_water_redock']['apo_best_affinity_kcal_mol']:.2f} "
+ f"kcal/mol. With n = 1 no statistical claim attaches; keeping the waters did not "
+ f"harm the redock under this protocol.")
+para(
+ f"The gated test adds two pose features from the conserved map - sites occluded "
+ f"by the pose (any ligand heavy atom within 2.5 A) and sites in bridging "
+ f"geometry (2.5-3.5 A from a ligand N/O, not occluded) - to the "
+ f"leakage-controlled seven-descriptor arm, with the identical trainer, scaffold "
+ f"splits and statistics as the ablation. Outcome, reported as measured: mean "
+ f"AUROC moves {hydr['part_c_hydration_arm']['mean_auroc_mlp7']:.4f} -> "
+ f"{hydr['part_c_hydration_arm']['mean_auroc_mlp9']:.4f} across the five splits, a "
+ f"small descriptive lift, but the locked seed-0 paired DeLong clause gives p = "
+ f"{hydr['part_c_hydration_arm']['delong_seed0_p_mlp9_vs_mlp7']:.4f}, far from the "
+ f"required 0.05: G-hyd FAILS. The hydration-feature contribution is NOT "
+ f"SUPPORTED on this benchmark. Thresholds were not moved and no alternative "
+ f"radii or conservation cutoffs were tried after outcomes. The honest reading: "
+ f"crystallographic water positions are real pocket information, but with "
+ f"13-16 held-out pose-available compounds per split this pipeline cannot show "
+ f"they carry label information beyond the chemical descriptors.")
 
 heading("3.2 Screening campaign and an honest negative", 2)
 para(
