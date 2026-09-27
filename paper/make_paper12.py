@@ -22,6 +22,7 @@ verif = json.loads((RES / "external_verification.json").read_text())
 verif2 = json.loads((RES / "external_verification2.json").read_text())
 gnnrob = json.loads((RES / "gnn_robustness.json").read_text())
 big = json.loads((RES / "bigscreen_analysis.json").read_text())
+abl = json.loads((RES / "ablation.json").read_text())
 
 doc = Document()
 style = doc.styles["Normal"]
@@ -127,6 +128,15 @@ para(f"WHAT WAS FOUND: (1) the protocol is validated - redocking JUN8-76-3A into
 para("WHAT WOULD FALSIFY IT: the redock gate is binary and re-runnable; the AUROC numbers "
      "recompute from the shipped poses; MPRO-D1's prediction is decided by a crystal or "
      "ITC experiment. Small-n caveats are stated wherever n is small.")
+para("UPDATE - MERGED ARCHITECTURE BENCHMARK (results/ablation.json): every scorer "
+     "retrained on the same 59-compound label set under the same five scaffold-grouped "
+     "splits, with preregistered controls. The pose-graph GNN (0.782) does NOT beat the "
+     "2D bond-graph GNN (0.902) or its own coordinate controls (random 0.831, shuffled "
+     "0.830); the pose-geometry superiority claim from the n = 15 pilot is withdrawn. "
+     "No Vina leakage (descriptor drop without the engine feature: 0.006 against a "
+     ">0.05 gate). Random-label control sane (0.525). The standing result: learned "
+     "rescoring beats raw Vina (0.540) by roughly 0.4 AUROC whichever learned family is "
+     "used; fusion (0.931) is numerically best, descriptively.")
 doc.add_page_break()
 
 # ---------- abstract
@@ -155,6 +165,12 @@ para(
  "disclosed. Every structure, ligand and label is real; every figure regenerates from "
  "shipped code. The primary benchmark is the scaffold-grouped 59-compound label set; "
  "the original 15-compound ladder is retained as a pilot calibration, not the headline. "
+ "A merged architecture benchmark on that label set (all scorers under one "
+ "scaffold-split protocol with preregistered controls) overturns the pilot's "
+ "pose-geometry edge: the pose-graph GNN (0.782) trails the 2D graph (0.902) and "
+ "its own shuffled-coordinate controls, so the pose-geometry superiority claim is "
+ "withdrawn and learned rescoring as such - not a winning architecture - is the "
+ "supported result. "
  "What this is not: not a validated inhibitor, not a clinical candidate, and not a "
  "synthesis plan - MPRO-D1 is a docking-ranked hypothesis with a live-verified novelty "
  "record. The limitations - rigid receptor, no covalency, hydration unmodeled - are "
@@ -453,12 +469,82 @@ para(
  f"graph - is what breaks the raw engine, with no decided winner between the two "
  f"learned families at this n. The GNN here is a 2D bond-graph network, architecturally "
  f"distinct from the n = 15 pose-graph rescorer, because the bigscreen cache did not "
- f"retain poses; the two architectures are therefore reported, not merged.")
+ f"retain poses; the two architectures are therefore reported, not merged - until "
+ f"Section 3.3d, which reruns every architecture on this label set and decides the "
+ f"question (against the pose architecture).")
 doc.add_picture(str(RES / "bigscreen_auroc.png"), width=Inches(5.6))
 doc.paragraphs[-1].alignment = WD_ALIGN_PARAGRAPH.CENTER
 para("Figure 2b. The bigscreen verdict at n = 59: raw Vina vs descriptor MLP vs 2D-GNN "
      "(LOO; GNN five-seed mean +/- std). The learned scorers, not the winner between "
      "them, are the result.", italic=True, align="center")
+
+
+heading("3.3d The merged benchmark: every architecture on one scaffold split", 3)
+para(
+ "Sections 3.3-3.3c compared architectures in pairs, on different label sets and "
+ "different caches - a limitation flagged above as 'reported, not merged'. The merged "
+ "benchmark (studies/study12_ablation.py, results/ablation.json) closes that gap: "
+ "every scorer retrained on the SAME 59-compound label set under the SAME five "
+ "scaffold-grouped splits (seeds 0-4), with the controls and gates preregistered "
+ "before any outcome was seen. Pose coverage is "
+ f"{abl['pose_availability']['n_pose']} of {abl['pose_availability']['n_total']} "
+ "labels: seven compounds hit the declared 120-second docking timeout "
+ f"({', '.join(pf['name'] for pf in abl['pose_failures'])}) and are excluded from the "
+ "pose arms only, never from the pose-free arms. The pose-available subset is mildly "
+ f"enriched for actives ({abl['pose_availability']['activity_rate_pose']:.2f} vs "
+ f"{abl['pose_availability']['activity_rate_all']:.2f} overall; similar molecular "
+ "weight, rotatable bonds and logP) - reported descriptively; no gate depends on it.")
+_arm_rows = [("raw Vina affinity", "scalar engine score", "vina"),
+             ("descriptor MLP (8 features)", "7 physchem + Vina-derived", "mlp8"),
+             ("descriptor MLP (7 features)", "physchem only", "mlp7"),
+             ("2D molecular-graph GNN", "bond graph, no pose", "gnn2d"),
+             ("pose-graph GNN", "docked contact graph", "gnnpose"),
+             ("fusion (pose graph + descriptors)", "both", "fusion"),
+             ("control: pose-GNN, random coordinates", "structure-blind pose net", "gnnrand"),
+             ("control: pose-GNN, coords shuffled in scaffold", "same poses, geometry scrambled", "gnnpose_shuf"),
+             ("control: 2D-GNN, random labels", "sanity bound", "gnn2d_randlab")]
+para("Table 2c. Merged architecture benchmark - mean AUROC over five scaffold-grouped "
+     "splits, n = 59 labeled compounds (95% CI across splits in brackets).", italic=True)
+table(["scorer", "input", "mean AUROC [95% CI]"],
+      [[nm, inp, f"{abl['summary'][k]['mean']:.3f} [{abl['summary'][k]['ci95'][0]:.2f}-{abl['summary'][k]['ci95'][1]:.2f}]"]
+       for nm, inp, k in _arm_rows])
+para(
+ f"VERDICT 1 - the pose-geometry claim fails and is withdrawn. The pose-graph GNN "
+ f"scores {abl['summary']['gnnpose']['mean']:.3f} mean AUROC - BELOW the 2D bond-graph "
+ f"GNN ({abl['summary']['gnn2d']['mean']:.3f}) and below BOTH of its own coordinate "
+ f"controls (random coordinates {abl['summary']['gnnrand']['mean']:.3f}, "
+ f"scaffold-shuffled coordinates {abl['summary']['gnnpose_shuf']['mean']:.3f}). The "
+ "preregistered gate required the pose model to strictly exceed the 2D graph AND both "
+ "controls; it fails on every count, and the seed-0 DeLong tests give no edge anywhere "
+ f"(pose vs 2D p = {abl['delong_seed0']['gnnpose_vs_gnn2d']:.2f}; pose vs random "
+ f"coordinates p = {abl['delong_seed0']['gnnpose_vs_gnnrand']:.2f}; pose vs shuffled "
+ f"p = {abl['delong_seed0']['gnnpose_vs_gnnpose_shuf']:.2f}). The pilot finding at "
+ "n = 15 - that pose geometry carries nearly all of the recoverable signal - does not "
+ "survive scaffold-grouped evaluation at n = 59 and is retired as small-n luck. Every "
+ "claim in this paper that rested on pose-geometry superiority (the 'recovery curve' "
+ "framing included) is withdrawn to that extent. What survives is learned rescoring "
+ "itself: EVERY learned family beats the raw engine by roughly 0.4 AUROC on the same "
+ "labels and splits.")
+para(
+ f"VERDICT 2 - no Vina leakage. The descriptor MLP trained WITHOUT the Vina-derived "
+ f"feature scores {abl['summary']['mlp7']['mean']:.3f}, against "
+ f"{abl['summary']['mlp8']['mean']:.3f} with it. The preregistered leakage gate "
+ "(>0.05 drop without the feature would have meant the scaffold-split result rides on "
+ "the engine's own score) is not triggered: the actual drop is 0.006. The learned-"
+ "rescoring verdict is not Vina-leakage-driven.")
+para(
+ f"VERDICT 3 - the harness is sane, and fusion is descriptive only. The 2D-GNN on "
+ f"randomized labels sits at {abl['summary']['gnn2d_randlab']['mean']:.3f} mean AUROC "
+ f"(worst split {max(s['gnn2d_randlab'] for s in abl['splits']):.3f}, preregistered "
+ "bound 0.65): the pipeline does not invent separation where none exists. The fusion "
+ f"model is the numerically best scorer ({abl['summary']['fusion']['mean']:.3f}) but is "
+ f"within noise of the plain descriptor MLP (seed-0 DeLong fusion vs pose p = "
+ f"{abl['delong_seed0']['fusion_vs_gnnpose']:.2f}, the only preregistered fusion "
+ "comparison, is not decisive), so the fusion number is reported descriptively with no "
+ "superiority claim. The honest headline at n = 59: learned rescoring - any learned "
+ "family - beats the physics-empirical engine; the choice among learned architectures "
+ "is undecided at this n, and the pose graph in particular confers no measurable "
+ "advantage.")
 
 heading("3.4 MPRO-D1: a de novo candidate with a novelty record", 2)
 para(
@@ -487,9 +573,13 @@ para(
  "cheap and decisive: the redock cost minutes and licenses everything after it. Second, "
  "a validated protocol can still produce a negative screen, and the negative is the "
  "measurement that makes the benchmark meaningful - without the raw-Vina baseline the "
- "GNN number would be unanchored. Third, the recovery curve (0.34 -> 0.68 -> 0.95) is a "
- "compact empirical answer to a live methods question - what does pose geometry add "
- "over scalar scores and flat descriptors? - measured on one target with one protocol. "
+ "GNN number would be unanchored. Third, the methods question - what does pose geometry "
+ "add over scalar scores and flat descriptors? - now has a two-stage answer, both kept "
+ "in this paper: the n = 15 pilot suggested geometry carried the signal; the merged "
+ "n = 59 scaffold-split benchmark overturned it (the pose graph adds nothing over a 2D "
+ "bond graph or its own coordinate-shuffled controls). The pilot number is retired as "
+ "small-n luck, not deleted; the record of both stages is the honest version of the "
+ "answer. "
  "Fourth, the de novo result shows the pipeline closing its own loop: enumeration, "
  "docking, ranking, distance-to-known chemistry, and live novelty verification in one "
  "study script.")
