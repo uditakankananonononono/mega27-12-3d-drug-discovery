@@ -114,7 +114,12 @@ para(f"WHAT WAS FOUND: (1) the protocol is validated - redocking JUN8-76-3A into
      f"neural rescorer trained on re-docked poses lifts leave-one-out AUROC to "
      f"{gnnrob['mean']:.3f} +/- {gnnrob['std']:.3f} (5 seeds) versus {analysis['auroc_nn_rescorer_loo']:.3f} "
      f"for a descriptor MLP and {analysis['auroc_raw_vina']:.3f} for the raw engine, on the "
-     f"same {analysis['n_labeled']} labeled compounds. (4) A de novo candidate, MPRO-D1, "
+     f"same {analysis['n_labeled']} labeled compounds. That 15-compound ladder is the pilot; "
+     f"the primary benchmark is the 59-compound scaffold-grouped bigscreen, where raw Vina "
+     f"sits at {big['auroc_raw_vina']:.3f} and both learned rescorers reach "
+     f"{big['auroc_mlp_loo']:.3f} (MLP) / {big['auroc_gnn2d_loo_mean']:.3f} +/- "
+     f"{big['auroc_gnn2d_loo_std']:.3f} (2D-GNN) - learned rescoring, not a winner between "
+     f"learned families, is the verdict at this n. (4) A de novo candidate, MPRO-D1, "
      f"docking at {denovo['predicted_affinity_kcal_mol']:.2f} kcal/mol under the validated "
      f"protocol, maximally dissimilar to every screened drug (Tanimoto "
      f"{denovo['tanimoto_max_vs_screened_drugs']:.2f}), verified absent from PubChem as an "
@@ -148,8 +153,12 @@ para(
  f"{denovo['tanimoto_max_vs_screened_drugs']:.2f} against the nearest screened drug, "
  "verified as an exact-structure novelty against PubChem with its close analogs "
  "disclosed. Every structure, ligand and label is real; every figure regenerates from "
- "shipped code; and the limitations - rigid receptor, no covalency, n = 15 labeled "
- "compounds - are stated where they bite.")
+ "shipped code. The primary benchmark is the scaffold-grouped 59-compound label set; "
+ "the original 15-compound ladder is retained as a pilot calibration, not the headline. "
+ "What this is not: not a validated inhibitor, not a clinical candidate, and not a "
+ "synthesis plan - MPRO-D1 is a docking-ranked hypothesis with a live-verified novelty "
+ "record. The limitations - rigid receptor, no covalency, hydration unmodeled - are "
+ "stated where they bite.")
 doc.add_page_break()
 
 # ---------- 1. introduction
@@ -496,8 +505,9 @@ para(
  "(1) The receptor is rigid; induced-fit motion of the Mpro active site is unmodeled. "
  "(2) Covalent warheads are scored as reversible binders; ebselen could not be docked at "
  "all (no selenium parameters) and its exclusion is disclosed, not hidden. "
- f"(3) The label set is small ({analysis['n_labeled']} labeled compounds) and literature "
- "labels carry assay heterogeneity; every AUROC here inherits that width. "
+ f"(3) The pilot label set was small ({analysis['n_labeled']} labeled compounds); the "
+ "primary benchmark is now the 59-compound scaffold-grouped set of section 3.3c, and "
+ "literature labels still carry assay heterogeneity that every AUROC inherits. "
  "(4) Water-mediated interactions are absent from the scoring. (5) Exhaustiveness 8 "
  "sampling can miss deep minima for the largest peptidomimetics; the redock at "
  "exhaustiveness 16 anchors the protocol. (6) The GNN's LOO AUROC at n = 15 is a point "
@@ -510,9 +520,10 @@ para(
  f"exists in this repository: redock-validated at {redock['rmsd_A']:.2f} A; an honestly "
  f"negative raw-docking screen (AUROC {analysis['auroc_raw_vina']:.3f}); a pose-graph "
  f"rescoring benchmark that recovers ranking to {gnnrob['mean']:.3f} +/- {gnnrob['std']:.3f} "
- "leave-one-out on the same labels; and MPRO-D1, a novel de novo candidate with a "
- "live-verified novelty record and a falsifiable prediction. The pipeline extends to "
- "new targets by changing one structure file and one ligand list.")
+ "leave-one-out on the same labels, with the n = 59 bigscreen as the primary learned-"
+ "rescoring verdict; and MPRO-D1, a novel de novo candidate with a live-verified "
+ "novelty record and a falsifiable prediction. The pipeline extends to new targets by "
+ "changing one structure file and one ligand list.")
 
 
 # ---------- 3.5 external verification chapter
