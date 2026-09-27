@@ -1,0 +1,189 @@
+{
+ "prereg": "docs/PREREG_HYDRATION_20260928.md",
+ "part_b_explicit_water_redock": {
+  "best_affinity_kcal_mol": -9.273,
+  "all_affinities": [
+   -9.273,
+   -9.02,
+   -8.641,
+   -8.624,
+   -8.617,
+   -8.553,
+   -8.524,
+   -8.483,
+   -8.437
+  ],
+  "rmsd_A": 0.9220578436797581,
+  "apo_rmsd_A": 0.9701221892010544,
+  "apo_best_affinity_kcal_mol": -9.319,
+  "note": "n=1 descriptive; no statistical claim"
+ },
+ "part_c_hydration_arm": {
+  "n_sites_used": 6,
+  "min_conservation": 3,
+  "occ_radius_A": 2.5,
+  "bridge_range_A": [
+   2.5,
+   3.5
+  ],
+  "splits": [
+   {
+    "seed": 0,
+    "n_test_pose": 14,
+    "n_train_pose": 38,
+    "auroc_mlp7": 0.9555555555555555,
+    "auroc_mlp9": 1.0
+   },
+   {
+    "seed": 1,
+    "n_test_pose": 16,
+    "n_train_pose": 36,
+    "auroc_mlp7": 0.8125,
+    "auroc_mlp9": 0.890625
+   },
+   {
+    "seed": 2,
+    "n_test_pose": 14,
+    "n_train_pose": 38,
+    "auroc_mlp7": 0.9,
+    "auroc_mlp9": 0.9
+   },
+   {
+    "seed": 3,
+    "n_test_pose": 13,
+    "n_train_pose": 39,
+    "auroc_mlp7": 1.0,
+    "auroc_mlp9": 1.0
+   },
+   {
+    "seed": 4,
+    "n_test_pose": 14,
+    "n_train_pose": 38,
+    "auroc_mlp7": 0.9166666666666666,
+    "auroc_mlp9": 0.875
+   }
+  ],
+  "mean_auroc_mlp7": 0.9169444444444445,
+  "mean_auroc_mlp9": 0.9331250000000001,
+  "delong_seed0_p_mlp9_vs_mlp7": 0.39376863464299205,
+  "seed0": {
+   "y": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    1
+   ],
+   "s7": [
+    0.13158966600894928,
+    0.999420166015625,
+    0.6129664182662964,
+    0.9860728979110718,
+    0.9860728979110718,
+    0.9728585481643677,
+    0.9907723665237427,
+    0.09063919633626938,
+    0.08579882979393005,
+    0.22336004674434662,
+    0.08031313866376877,
+    0.9728585481643677,
+    0.2257496863603592,
+    0.999420166015625
+   ],
+   "s9": [
+    0.8606330156326294,
+    0.9985727071762085,
+    0.8317561149597168,
+    0.990276575088501,
+    0.975767970085144,
+    0.9830905199050903,
+    0.9795618057250977,
+    0.00010692181240301579,
+    0.014637056738138199,
+    0.005731726996600628,
+    0.0002973868977278471,
+    0.9761970639228821,
+    0.29701709747314453,
+    0.9976828098297119
+   ],
+   "n_pos": 9,
+   "n_neg": 5
+  },
+  "gate_G_hyd": "FAIL",
+  "feature_summary": {
+   "h_occ_mean": 0.25,
+   "h_br_mean": 0.3076923191547394
+  }
+ },
+ "part_a_summary": {
+  "n_waters_in_box": 77,
+  "n_clusters": 49,
+  "alignment": {
+   "6LU7": {
+    "status": "aligned",
+    "matched_ca": 52,
+    "align_rmsd_A": 0.594,
+    "waters_chainA": 84,
+    "waters_in_box": 4
+   },
+   "6YB7": {
+    "status": "aligned",
+    "matched_ca": 52,
+    "align_rmsd_A": 0.658,
+    "waters_chainA": 393,
+    "waters_in_box": 22
+   },
+   "7BB2": {
+    "status": "aligned",
+    "matched_ca": 52,
+    "align_rmsd_A": 0.523,
+    "waters_chainA": 357,
+    "waters_in_box": 21
+   },
+   "7BQY": {
+    "status": "aligned",
+    "matched_ca": 52,
+    "align_rmsd_A": 0.592,
+    "waters_chainA": 157,
+    "waters_in_box": 6
+   },
+   "7KX5": {
+    "status": "aligned",
+    "matched_ca": 52,
+    "align_rmsd_A": 0.0,
+    "waters_chainA": 8,
+    "waters_in_box": 0
+   },
+   "7RFS": {
+    "status": "aligned",
+    "matched_ca": 52,
+    "align_rmsd_A": 0.689,
+    "waters_chainA": 83,
+    "waters_in_box": 7
+   },
+   "8HUR": {
+    "status": "aligned",
+    "matched_ca": 52,
+    "align_rmsd_A": 0.784,
+    "waters_chainA": 67,
+    "waters_in_box": 3
+   },
+   "8V8E": {
+    "status": "aligned",
+    "matched_ca": 51,
+    "align_rmsd_A": 0.88,
+    "waters_chainA": 81,
+    "waters_in_box": 14
+   }
+  }
+ }
+}
