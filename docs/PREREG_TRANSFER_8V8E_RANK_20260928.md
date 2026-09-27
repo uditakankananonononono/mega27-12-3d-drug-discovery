@@ -36,3 +36,12 @@ complete binding site) but tested one ligand only.
 - This study does not reopen any withdrawn claim (the pose-geometry verdict
   stands) and makes no clinical or per-compound activity claim; it measures
   ranking robustness to the receptor structure.
+
+## Erratum (2026-09-28, appended after campaign completion; gates untouched)
+The Question section labeled 8V8E as "SARS-CoV-1 Mpro". That label is wrong:
+per RCSB (https://www.rcsb.org/structure/8V8E, PDB header SOURCE records),
+8V8E is the room-temperature X-ray structure of the SARS-CoV-2 main protease
+catalytic domain (residues 1-199) in complex with ensitrelvir - the same
+protein target as 7KX5. The locked gates above are unchanged and were
+evaluated exactly as written; the correction narrows the interpretation of a
+PASS from "cross-protease" to "cross-structure" rank transfer.

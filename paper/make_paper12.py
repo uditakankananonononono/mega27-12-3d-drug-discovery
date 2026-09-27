@@ -24,6 +24,7 @@ gnnrob = json.loads((RES / "gnn_robustness.json").read_text())
 big = json.loads((RES / "bigscreen_analysis.json").read_text())
 abl = json.loads((RES / "ablation.json").read_text())
 delong = json.loads((RES / "ablation_delong_intervals.json").read_text())
+rank8v8e = json.loads((RES / "transfer_8v8e_rank.json").read_text())
 
 doc = Document()
 style = doc.styles["Normal"]
@@ -387,6 +388,35 @@ para(
  f"{transfer['exhaustiveness']}. The mpro-dock protocol now validates on two "
  f"independent structures and two chemotypes, which is the honest scope of every "
  f"ranking claim in this paper.")
+
+heading("3.1c Rank transfer across receptor structures (preregistered)", 2)
+para(
+ "A ranking that only holds for one crystal form could be an artifact of a single "
+ "refinement. Before any campaign compound was docked into the second structure, we "
+ "preregistered the test (docs/PREREG_TRANSFER_8V8E_RANK_20260928.md): all 52 "
+ "committed campaign records were to be redocked into 8V8E with the identical "
+ "protocol, failures counted and never imputed, and rank transfer declared only if "
+ "the Spearman correlation between 7KX5 and 8V8E best affinities reached 0.50 - one "
+ "threshold, fixed in advance.")
+para(
+ f"Outcome, reported as measured: {rank8v8e['n_docked_both']} compounds docked in "
+ f"both structures and {rank8v8e['n_skipped']} were counted skips (committed records "
+ "that carry no 7KX5 affinity; no compound failed or timed out in 8V8E). The "
+ f"Spearman correlation is {rank8v8e['spearman_rho']:.3f} (p = "
+ f"{rank8v8e['spearman_p']:.1e}), above the locked 0.50 gate: the campaign ranking "
+ "transfers across the two receptor structures and is not an artifact of one "
+ "crystal form.")
+para(
+ f"Descriptive observations only, with no gate attached: "
+ f"{rank8v8e['top10_retention']} of the 7KX5 affinity top-10 remain in the 8V8E "
+ f"top-10, and raw Vina on 8V8E ranks the committed ChEMBL labels at AUROC "
+ f"{rank8v8e['auroc_8v8e_raw_vina_descriptive']:.3f} against the 7KX5 reference of "
+ f"{rank8v8e['auroc_7kx5_raw_vina_reference']:.3f} - above the chance line on this "
+ "structure, still weak, and not a rescoring claim. The scope is stated plainly: "
+ "both deposits are the SARS-CoV-2 main protease (8V8E is the room-temperature "
+ "catalytic-domain construct), so this is robustness to a change of receptor "
+ "structure and crystallization condition. Transfer to a different protease target "
+ "remains untested.")
 
 heading("3.2 Screening campaign and an honest negative", 2)
 para(
