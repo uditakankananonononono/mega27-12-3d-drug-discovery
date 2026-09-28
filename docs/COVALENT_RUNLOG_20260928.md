@@ -149,3 +149,41 @@ restore or move the locked gate):
   locked-protocol outcome and the negative stands. A corrected-protocol
   rerun (arithmetic-mean Rij) would be a new experiment requiring its own
   dated prereg before any outcome; that decision belongs to the parent/user.
+
+## Corrected-protocol branch (prereg PREREG_COVALENT_CORRECTED_20260928.md) - 2026-09-28 06:10 IST
+
+Execution record:
+- Corrected DPFs (arithmetic-mean combining rule: X1-C 4.00 A, X1-N 3.75 A,
+  X1-OA 3.60 A, X4-C 3.00 A, etc.; the three hand-set reactive overrides
+  unchanged) committed pre-outcome (commit 39b49d1).
+- Same pinned seeds (77000/88000 + seed index), same archived binaries, same
+  analysis script (v2, committed in 3158ea1) as the locked branch. Six runs
+  (2 complexes x 3 seeds), all exit 0, 05:46-06:04 IST.
+- Engine-side evidence that the correction was live: every locked DLG carried
+  parse-time warnings that Rij 8.00/7.50/7.20 A lies outside the engine's
+  0.90-6.00 A sanity range; the corrected DLGs carry no such warning.
+
+Outcome:
+- Every computed quantity is byte-identical to the locked branch: all DOCKED
+  coordinates, all reported energies, all cluster tables, all six runs. The
+  only differing DLG lines are header/footer timestamps, the initial
+  pid/time seed line (superseded by the pinned DPF seeds), the DPF> intnbp
+  echo lines, and the warnings themselves.
+- results/covalent_redock_corrected.json therefore equals the locked JSON:
+  7VH8 14.789/21.936/22.199 A, 7C6S 10.830/6.926/9.376 A; 0/3 seeds at or
+  below 2.0 A per complex. Verdict under the unchanged locked criterion:
+  FAIL - plain negative, reported separately from the locked outcome.
+
+Interpretation correction (supersedes the post-hoc note above where the two
+conflict):
+- The intnbp X-pair minima are INERT in this engine configuration: the
+  doubled locked values and the corrected arithmetic-mean values produced
+  identical trajectories and energies everywhere. The post-hoc hypothesis
+  recorded above - that the Rii-sum parameterization error contributed to
+  the locked failure - is empirically falsified by this branch. The locked
+  negative cannot be attributed to that error.
+- What produces the failed poses, and 7VH8's reported +4.1e6 kcal/mol
+  energies (identical on both branches), inside the reactive setup is
+  unidentified. No further post-outcome parameter changes were run.
+- The locked-protocol outcome and verdict (commit 3158ea1) stand unchanged;
+  this branch is reported separately per the parent's 05:43 IST ruling.

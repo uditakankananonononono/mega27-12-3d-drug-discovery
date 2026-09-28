@@ -28,6 +28,7 @@ rank8v8e = json.loads((RES / "transfer_8v8e_rank.json").read_text())
 hydr = json.loads((RES / "hydration.json").read_text())
 hydr_sites = json.loads((RES / "hydration_sites.json").read_text())
 cov = json.loads((RES / "covalent_redock.json").read_text())
+covc = json.loads((RES / "covalent_redock_corrected.json").read_text())
 
 doc = Document()
 style = doc.styles["Normal"]
@@ -520,6 +521,30 @@ para(
  "preregistration. The honest summary: the lane can run a reactive engine, but it "
  "does not today have a validated covalent scoring path, and the non-covalent numbers "
  "above are the whole of the supported result.")
+
+para(
+ "A corrected-parameterization branch was then executed under its own dated "
+ "preregistration (docs/PREREG_COVALENT_CORRECTED_20260928.md), locked before any "
+ "outcome: identical protocol, seeds, analysis code and decision rule, with only "
+ "the marker-atom pair minima rebuilt under the engine's arithmetic-mean combining "
+ "rule. The engine parsed the corrected table without a single sanity warning, and "
+ "the outcome is the locked outcome to the last digit: every docked coordinate and "
+ "every reported energy is identical across all six runs, giving corrected "
+ f"best-pose RMSDs of {covc['7vh8']['seeds']['0']['rmsd']:.2f}, "
+ f"{covc['7vh8']['seeds']['1']['rmsd']:.2f} and "
+ f"{covc['7vh8']['seeds']['2']['rmsd']:.2f} A for 7VH8 and "
+ f"{covc['7c6s']['seeds']['0']['rmsd']:.2f}, "
+ f"{covc['7c6s']['seeds']['1']['rmsd']:.2f} and "
+ f"{covc['7c6s']['seeds']['2']['rmsd']:.2f} A for 7C6S, again 0 of 3 seeds passing "
+ "in each complex (results/covalent_redock_corrected.json). Two conclusions "
+ "follow. The corrected branch is itself a plain negative and leaves the verdict "
+ "above untouched. And the post-hoc suspicion recorded above is empirically "
+ "falsified: doubling or halving the marker-atom pair minima moved no coordinate "
+ "and no energy anywhere in the six runs, so those terms played no measurable "
+ "scored role in this configuration, and the locked failure cannot be attributed "
+ "to the radius-sum parameterization error. What drives the failure inside the "
+ "reactive setup remains unidentified; no covalent capability is claimed on "
+ "either branch.")
 
 heading("3.2 Screening campaign and an honest negative", 2)
 para(
