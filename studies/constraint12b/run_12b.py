@@ -38,7 +38,7 @@ def write_map(path, head, vals):
         for i in range(0, len(vals), 6):
             f.write(''.join('%13.5f' % v for v in vals[i:i+6]) + '\n')
 
-def bias_maps(tag, sg, center, spacing=0.375, n=64):
+def bias_maps(tag, sg, center, spacing=0.375, n=65):
     """biased map set: copy all, add Gaussian well to Cl map only."""
     bdir = f'{OUT}/biased_{tag}'
     os.makedirs(bdir, exist_ok=True)
@@ -70,9 +70,26 @@ def g2_audit(tag, bdir):
     return diffs
 
 def fixed_pose_score(tag, maps_prefix=None):
+    """G1: same randomized in-box pose scored via compute_vina_maps vs load_maps.
+    Pose made once per complex (pre-outcome machinery) and cached."""
+    pose_pdbqt = f'{OUT}/{tag}_g1_pose.pdbqt'
+    if not os.path.exists(pose_pdbqt):
+        # translate the input ligand so its heavy-atom centroid sits at the box
+        # center; deterministic, in-box by construction (vina randomize proved
+        # unreliable for far-out-of-box inputs).
+        cx, cy, cz = JOBS[tag]['center']
+        lines = open(f'{OUT}/{tag}_lig_true.pdbqt').read().splitlines(keepends=True)
+        pts = [(i, float(l[30:38]), float(l[38:46]), float(l[46:54]))
+               for i, l in enumerate(lines) if l.startswith(('ATOM', 'HETATM'))]
+        mx = sum(p[1] for p in pts)/len(pts); my = sum(p[2] for p in pts)/len(pts); mz = sum(p[3] for p in pts)/len(pts)
+        dx, dy, dz = cx-mx, cy-my, cz-mz
+        for i, x, y, z in pts:
+            l = lines[i]
+            lines[i] = l[:30] + '%8.3f%8.3f%8.3f' % (x+dx, y+dy, z+dz) + l[54:]
+        open(pose_pdbqt, 'w').write(''.join(lines))
     v = Vina(sf_name='vina', seed=77000, verbosity=0)
     v.set_receptor(JOBS[tag]['rec'])
-    v.set_ligand_from_file(f'{OUT}/{tag}_lig_true.pdbqt')
+    v.set_ligand_from_file(pose_pdbqt)
     if maps_prefix:
         v.load_maps(maps_prefix)
     else:

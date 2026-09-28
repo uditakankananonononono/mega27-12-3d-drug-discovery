@@ -1,0 +1,44 @@
+# AVS field file
+#
+# AutoDock Atomic Affinity and Electrostatic Grids
+#
+# Created by /home/sandbox/work/12/bin/ad4/autogrid4 4.2.8.
+#
+#SPACING 0.375
+#NELEMENTS 64 64 64
+#CENTER -19.054 15.539 -31.610
+#MACROMOLECULE /home/sandbox/work/12/studies/covalent/7vh8_rec_rigid.pdbqt
+#GRID_PARAMETER_FILE /home/sandbox/work/12/studies/constraint12b/7vh8_std.gpf
+#
+ndim=3			# number of dimensions in the field
+dim1=65			# number of x-elements
+dim2=65			# number of y-elements
+dim3=65			# number of z-elements
+nspace=3		# number of physical coordinates per point
+veclen=9		# number of affinity values at each point
+data=float		# data type (byte, integer, float, double)
+field=uniform		# field type (uniform, rectilinear, irregular)
+coord 1 file=/home/sandbox/work/12/studies/constraint12b/7vh8_std.maps.xyz filetype=ascii offset=0
+coord 2 file=/home/sandbox/work/12/studies/constraint12b/7vh8_std.maps.xyz filetype=ascii offset=2
+coord 3 file=/home/sandbox/work/12/studies/constraint12b/7vh8_std.maps.xyz filetype=ascii offset=4
+label=C-affinity	# component label for variable 1
+label=Cl-affinity	# component label for variable 2
+label=F-affinity	# component label for variable 3
+label=HD-affinity	# component label for variable 4
+label=N-affinity	# component label for variable 5
+label=NA-affinity	# component label for variable 6
+label=OA-affinity	# component label for variable 7
+label=Electrostatics	# component label for variable 8
+label=Desolvation	# component label for variable 9
+#
+# location of affinity grid files and how to read them
+#
+variable 1 file=/home/sandbox/work/12/studies/constraint12b/7vh8_std.C.map filetype=ascii skip=6
+variable 2 file=/home/sandbox/work/12/studies/constraint12b/7vh8_std.Cl.map filetype=ascii skip=6
+variable 3 file=/home/sandbox/work/12/studies/constraint12b/7vh8_std.F.map filetype=ascii skip=6
+variable 4 file=/home/sandbox/work/12/studies/constraint12b/7vh8_std.HD.map filetype=ascii skip=6
+variable 5 file=/home/sandbox/work/12/studies/constraint12b/7vh8_std.N.map filetype=ascii skip=6
+variable 6 file=/home/sandbox/work/12/studies/constraint12b/7vh8_std.NA.map filetype=ascii skip=6
+variable 7 file=/home/sandbox/work/12/studies/constraint12b/7vh8_std.OA.map filetype=ascii skip=6
+variable 8 file=/home/sandbox/work/12/studies/constraint12b/7vh8_std.e.map filetype=ascii skip=6
+variable 9 file=/home/sandbox/work/12/studies/constraint12b/7vh8_std.d.map filetype=ascii skip=6
