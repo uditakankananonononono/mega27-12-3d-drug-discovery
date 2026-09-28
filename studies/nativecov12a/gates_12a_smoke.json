@@ -1,12 +1,12 @@
 {
  "7vh8": {
-  "rc": 255,
-  "n_models": 0,
-  "G3_pass": false
+  "rc": 0,
+  "n_models": 1,
+  "G3_pass": true
  },
  "7c6s": {
-  "rc": 255,
-  "n_models": 0,
-  "G3_pass": false
+  "rc": 0,
+  "n_models": 1,
+  "G3_pass": true
  }
 }

@@ -26,6 +26,7 @@ def ocl_env():
     e = dict(os.environ)
     e['LD_LIBRARY_PATH'] = f'{POCL}/usr/lib/x86_64-linux-gnu:{POCL}/usr/lib/x86_64-linux-gnu/pocl:' + e.get('LD_LIBRARY_PATH', '')
     e['OCL_ICD_VENDORS'] = f'{ROOT}/bin/pocl-vendors/pocl.icd'
+    e['POCL_WORK_GROUP_METHOD'] = 'cbs'  # default workgroup method SIGSEGVs in the evolution loop on CPU; cbs is stable (machinery-only runtime setting)
     return e
 
 def sh(cmd, cwd=OUT, timeout=None, env=None):

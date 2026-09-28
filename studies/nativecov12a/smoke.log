@@ -1,13 +1,11 @@
-[09:43:50] Warning: molecule is tagged as 2D, but at least one Z coordinate is not zero. Marking the mol as 3D.
-[09:43:50] Warning: molecule is tagged as 2D, but at least one Z coordinate is not zero. Marking the mol as 3D.
 {
  "7vh8": {
-  "rc": 255,
+  "rc": -11,
   "n_models": 0,
   "G3_pass": false
  },
  "7c6s": {
-  "rc": 255,
+  "rc": -11,
   "n_models": 0,
   "G3_pass": false
  }
