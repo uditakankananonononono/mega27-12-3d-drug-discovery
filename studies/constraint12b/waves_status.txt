@@ -1,0 +1,12 @@
+rc=0 dock_ad4_7vh8_A0_seed1.dlg
+rc=0 dock_ad4_7vh8_A0_seed0.dlg
+rc=0 dock_ad4_7vh8_A0_seed2.dlg
+rc=0 dock_ad4_7vh8_A1_seed2.dlg
+rc=0 dock_ad4_7vh8_A1_seed1.dlg
+rc=0 dock_ad4_7vh8_A1_seed0.dlg
+rc=0 dock_ad4_7c6s_A0_seed1.dlg
+rc=0 dock_ad4_7c6s_A0_seed2.dlg
+rc=0 dock_ad4_7c6s_A0_seed0.dlg
+rc=0 dock_ad4_7c6s_A1_seed2.dlg
+rc=0 dock_ad4_7c6s_A1_seed1.dlg
+rc=0 dock_ad4_7c6s_A1_seed0.dlg

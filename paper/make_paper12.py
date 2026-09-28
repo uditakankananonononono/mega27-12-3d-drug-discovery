@@ -29,6 +29,7 @@ hydr = json.loads((RES / "hydration.json").read_text())
 hydr_sites = json.loads((RES / "hydration_sites.json").read_text())
 cov = json.loads((RES / "covalent_redock.json").read_text())
 covc = json.loads((RES / "covalent_redock_corrected.json").read_text())
+cg = json.loads((RES / "constraint_guided_12b.json").read_text())
 
 doc = Document()
 style = doc.styles["Normal"]
@@ -447,6 +448,54 @@ para(
  "to the radius-sum parameterization error. What drives the failure inside the "
  "reactive setup remains unidentified; no covalent capability is claimed on "
  "either branch.")
+
+heading("3.1c Constraint-guided placement audit: verified constraint machinery, an inconclusive first execution", 2)
+para(
+ "A second route to the same covalent question was locked before any outcome "
+ "(docs/PREREG_CONSTRAINT_GUIDED_12B_20260928.md): add one fixed Gaussian well, "
+ "centred on the crystallographic attachment point, to a single atom-type "
+ "affinity map, hold every other element of the protocol constant, and ask "
+ "whether the constrained search then reproduces the crystallographic pose "
+ "under the same decision rule as the audits above (best-energy pose, 2.0 A, "
+ "at least two of three fixed seeds, on the same two complexes). The "
+ "constraint machinery passed all three locked integrity gates before any "
+ "outcome was read: score-only evaluation recovered the added well exactly "
+ "(observed energy shift -2.6014 kcal/mol against -2.6014 expected for 7VH8; "
+ "-2.6863 against -2.6863 for 7C6S), a byte-level audit confirmed that only "
+ "the intended map file differed from engine-generated output, and the pose "
+ "matcher mapped each crystallographic adduct onto itself at 0.0 A.")
+para(
+ "The locked engine for this branch, the Vina 1.2.7 Python bindings, could "
+ "not read grid maps in this environment: the map loader fails to discover "
+ "existing map files, the map writer crashes, and no compatible earlier build "
+ "is installable. Under a dated amendment preregistration committed before "
+ "any arm executed (docs/PREREG_CONSTRAINT_GUIDED_12B_AMENDMENT_ENGINE_20260928.md), "
+ "the identical constraint, maps, seeds and decision rule were therefore run "
+ "on the autodock4 4.2.7.x engine compiled for the audit of Section 3.1b. "
+ "This is an engine substitution from the original lock and is disclosed as "
+ "such; every other locked element carried over unchanged.")
+para(
+ f"Outcome, reported as measured (results/constraint_guided_12b.json): under "
+ f"the locked criterion the result is NOT SUPPORTED, with best-pose RMSDs of "
+ f"{cg['complexes']['7vh8']['A2']['seeds']['0']['rmsd']:.2f}, "
+ f"{cg['complexes']['7vh8']['A2']['seeds']['1']['rmsd']:.2f} and "
+ f"{cg['complexes']['7vh8']['A2']['seeds']['2']['rmsd']:.2f} A for 7VH8 and "
+ f"{cg['complexes']['7c6s']['A2']['seeds']['0']['rmsd']:.2f}, "
+ f"{cg['complexes']['7c6s']['A2']['seeds']['1']['rmsd']:.2f} and "
+ f"{cg['complexes']['7c6s']['A2']['seeds']['2']['rmsd']:.2f} A for 7C6S - zero "
+ "of three seeds passing in either complex. Two measured facts show that this "
+ "execution did not actually test the constraint question. In all six "
+ "constrained runs, every reported model energy and the best-pose coordinates "
+ "are identical at full precision to the control runs that lacked the well, "
+ "so the verified bias had no measurable effect on the search; and the 7VH8 "
+ "docked energies are physically implausible (about +4.1e6 kcal/mol), the "
+ "same signature as the mis-parameterized reactive runs of Section 3.1b. "
+ "This execution is therefore recorded as machinery-limited: it neither "
+ "supports nor falsifies constraint-guided placement, and it does not count "
+ "toward exhaustion of the question. The adjudicated next test is the "
+ "originally locked Vina engine built from source; only if that build also "
+ "fails mechanically is the question declared machinery-exhausted, at which "
+ "point the study pivots under a new dated preregistration.")
 
 heading("3.2 Screening campaign and an honest negative", 2)
 para(

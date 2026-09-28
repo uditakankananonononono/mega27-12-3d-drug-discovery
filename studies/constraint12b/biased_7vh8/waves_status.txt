@@ -1,0 +1,3 @@
+rc=0 dock_ad4_7vh8_A2_seed0.dlg
+rc=0 dock_ad4_7vh8_A2_seed1.dlg
+rc=0 dock_ad4_7vh8_A2_seed2.dlg

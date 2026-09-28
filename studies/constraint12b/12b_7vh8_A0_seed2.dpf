@@ -1,0 +1,41 @@
+autodock_parameter_version 4.2
+outlev 1
+parameter_file /home/sandbox/work/12/studies/constraint12b/AD4.1_bound.dat
+intelec
+seed 77002 88002
+ligand_types C F HD N NA OA
+fld 7vh8_std.maps.fld
+map 7vh8_std.C.map
+map 7vh8_std.F.map
+map 7vh8_std.HD.map
+map 7vh8_std.N.map
+map 7vh8_std.NA.map
+map 7vh8_std.OA.map
+elecmap 7vh8_std.e.map
+desolvmap 7vh8_std.d.map
+move /home/sandbox/work/12/studies/constraint12b/7vh8_lig_true.pdbqt
+about -19.054 15.539 -31.61
+tran0 random
+quaternion0 random
+dihe0 random
+torsdof 9
+ga_pop_size 150
+ga_num_evals 1000000
+ga_num_generations 27000
+ga_elitism 1
+ga_mutation_rate 0.02
+ga_crossover_rate 0.8
+ga_window_size 10
+ga_cauchy_alpha 0.0
+ga_cauchy_beta 1.0
+set_ga
+sw_max_its 300
+sw_max_succ 4
+sw_max_fail 4
+sw_rho 1.0
+sw_lb_rho 0.01
+ls_search_freq 0.06
+set_sw1
+unbound_model bound
+ga_run 10
+analysis

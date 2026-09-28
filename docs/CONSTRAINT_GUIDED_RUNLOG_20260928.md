@@ -86,3 +86,50 @@ Gate results (studies/constraint12b/gates_ad4.json, all PASS):
 Next: 18 docking runs (2 complexes x arms A0/A1/A2 x seeds 77000+s/88000+s)
 with the item-6 LGA parameters locked in the amendment, 900 s cap per run,
 launched in waves of 6 (2-core machine; item-6 timing precedent 3-11 min).
+
+
+## 2026-09-28 09:15 IST - 12B AD4 execution OUTCOME: NOT SUPPORTED, recorded as machinery-limited (question remains untested)
+
+All 18 docking runs (2 complexes x arms A0/A1/A2 x seeds 77000+s/88000+s)
+completed rc=0 inside the 900 s cap (waves.log, waves_status.txt; launched
+~08:09, ALL_DONE 03:39:53 UTC). Analysis: studies/constraint12b/run_12b_ad4.py
+analyze -> results/constraint_guided_12b.json, locked carried-over criterion
+(best-energy pose, symmetry-corrected heavy-atom RMSD <= 2.0 A in >= 2/3
+seeds per complex; both = SUPPORTED, one = mixed, zero = NOT SUPPORTED).
+
+Measured outcome (locked criterion, reported as measured):
+- 7VH8 A2 (constrained): best-pose RMSDs 22.307 / 22.550 / 15.151 A, 0/3 seeds.
+- 7C6S A2 (constrained): best-pose RMSDs 7.588 / 8.613 / 7.050 A, 0/3 seeds.
+- Verdict under the locked rule: NOT SUPPORTED for both complexes.
+
+Machinery-limited finding (parent adjudication 2026-09-28 09:15 IST, recorded
+verbatim in substance):
+1. In every seed of both complexes, ALL reported model energies and the
+   best-pose coordinates of the constrained arm (A2, biased Cl map) are
+   identical at full float precision to the typing control (A1, same ligand,
+   unmodified maps). The biased maps WERE loaded (DLG headers show the biased
+   directory's fld/map set; G2 byte audit had confirmed only Cl.map differs,
+   with the well present at ~5.1k gridpoints, max delta 2.83-2.92 kcal/mol),
+   and G1 proved score-only recovery of the well is exact (observed delta =
+   expected delta to 4 decimals). Yet the verified well had ZERO measurable
+   effect on any search outcome.
+2. 7VH8 docked energies are physically implausible (+4.14e6 to +4.17e6
+   kcal/mol across seeds; 7C6S -2.60 to -3.25 kcal/mol), the same signature
+   as the item-6 mis-parameterized reactive runs.
+
+Consequence (adjudication): the constraint channel did not measurably reach
+the AD4 search; this execution is machinery-limited and does NOT count as a
+locked-method failure toward exhaustion of the constraint-guided question.
+The scientific question remains untested by this run.
+
+Next step (approved by the same adjudication): option (b) - build
+autodock-vina from source and execute the ORIGINAL locked 12B prereg
+(docs/PREREG_CONSTRAINT_GUIDED_12B_20260928.md, commit 3d48644) with the
+intended Vina engine and the locked biased-map constraint. No new prereg is
+needed for this: the original lock stands and has never had a valid
+execution. If the source build fails mechanically, the constraint-guided
+question is declared machinery-exhausted with BOTH failures documented
+(Vina 1.2.7 load_maps/segfault; AD4 substitution constraint-delivery failure
++ build failure), and only then does 12A start under a NEW dated prereg.
+12A remains prohibited until then. Thresholds were not moved; no alternative
+parameterization was tried after outcomes.

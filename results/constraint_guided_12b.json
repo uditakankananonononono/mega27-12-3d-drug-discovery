@@ -1,0 +1,157 @@
+{
+ "prereg": "docs/PREREG_CONSTRAINT_GUIDED_12B_20260928.md",
+ "amendment": "docs/PREREG_CONSTRAINT_GUIDED_12B_AMENDMENT_ENGINE_20260928.md",
+ "engine": "autodock4 4.2.7.x (amendment: substitution from Vina 1.2.7, machinery failure)",
+ "criterion": "A2 best-energy-pose symmetry-corrected RMSD <= 2.0 A in >= 2/3 seeds per complex; both=SUPPORTED, one=mixed, zero=NOT SUPPORTED",
+ "complexes": {
+  "7vh8": {
+   "A0": {
+    "seeds": {
+     "0": {
+      "best_energy": 4560000.0,
+      "rmsd": 23.448,
+      "atoms_matched": 35,
+      "n_models": 10
+     },
+     "1": {
+      "best_energy": 4540000.0,
+      "rmsd": 22.481,
+      "atoms_matched": 35,
+      "n_models": 10
+     },
+     "2": {
+      "best_energy": 4230000.0,
+      "rmsd": 14.575,
+      "atoms_matched": 35,
+      "n_models": 10
+     }
+    },
+    "seeds_passing": 0,
+    "complex_pass": false
+   },
+   "A1": {
+    "seeds": {
+     "0": {
+      "best_energy": 4150000.0,
+      "rmsd": 22.307,
+      "atoms_matched": 35,
+      "n_models": 10
+     },
+     "1": {
+      "best_energy": 4170000.0,
+      "rmsd": 22.55,
+      "atoms_matched": 35,
+      "n_models": 10
+     },
+     "2": {
+      "best_energy": 4140000.0,
+      "rmsd": 15.151,
+      "atoms_matched": 35,
+      "n_models": 10
+     }
+    },
+    "seeds_passing": 0,
+    "complex_pass": false
+   },
+   "A2": {
+    "seeds": {
+     "0": {
+      "best_energy": 4150000.0,
+      "rmsd": 22.307,
+      "atoms_matched": 35,
+      "n_models": 10
+     },
+     "1": {
+      "best_energy": 4170000.0,
+      "rmsd": 22.55,
+      "atoms_matched": 35,
+      "n_models": 10
+     },
+     "2": {
+      "best_energy": 4140000.0,
+      "rmsd": 15.151,
+      "atoms_matched": 35,
+      "n_models": 10
+     }
+    },
+    "seeds_passing": 0,
+    "complex_pass": false
+   }
+  },
+  "7c6s": {
+   "A0": {
+    "seeds": {
+     "0": {
+      "best_energy": -2.67,
+      "rmsd": 6.938,
+      "atoms_matched": 37,
+      "n_models": 10
+     },
+     "1": {
+      "best_energy": -2.46,
+      "rmsd": 8.592,
+      "atoms_matched": 37,
+      "n_models": 10
+     },
+     "2": {
+      "best_energy": -2.63,
+      "rmsd": 8.585,
+      "atoms_matched": 37,
+      "n_models": 10
+     }
+    },
+    "seeds_passing": 0,
+    "complex_pass": false
+   },
+   "A1": {
+    "seeds": {
+     "0": {
+      "best_energy": -2.6,
+      "rmsd": 7.588,
+      "atoms_matched": 37,
+      "n_models": 10
+     },
+     "1": {
+      "best_energy": -2.61,
+      "rmsd": 8.613,
+      "atoms_matched": 37,
+      "n_models": 10
+     },
+     "2": {
+      "best_energy": -3.25,
+      "rmsd": 7.05,
+      "atoms_matched": 37,
+      "n_models": 10
+     }
+    },
+    "seeds_passing": 0,
+    "complex_pass": false
+   },
+   "A2": {
+    "seeds": {
+     "0": {
+      "best_energy": -2.6,
+      "rmsd": 7.588,
+      "atoms_matched": 37,
+      "n_models": 10
+     },
+     "1": {
+      "best_energy": -2.61,
+      "rmsd": 8.613,
+      "atoms_matched": 37,
+      "n_models": 10
+     },
+     "2": {
+      "best_energy": -3.25,
+      "rmsd": 7.05,
+      "atoms_matched": 37,
+      "n_models": 10
+     }
+    },
+    "seeds_passing": 0,
+    "complex_pass": false
+   }
+  }
+ },
+ "verdict": "NOT SUPPORTED"
+}
