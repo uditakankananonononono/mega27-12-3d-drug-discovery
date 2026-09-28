@@ -1,0 +1,32 @@
+{
+ "7vh8": {
+  "epdb_unmod_1": 347809.5532,
+  "epdb_unmod_2": 347809.5532,
+  "epdb_biased": 347806.9518,
+  "observed_delta": -2.6014,
+  "expected_delta": -2.6014,
+  "G1_deterministic": true,
+  "G1_abserr": 0.0,
+  "G1_pass": true,
+  "G2_noncl_diffs": [],
+  "G2_pass": true,
+  "G3_self_rmsd": 0.0,
+  "G3_atoms": 35,
+  "G3_pass": true
+ },
+ "7c6s": {
+  "epdb_unmod_1": 1118315.4778,
+  "epdb_unmod_2": 1118315.4778,
+  "epdb_biased": 1118312.7915,
+  "observed_delta": -2.6863,
+  "expected_delta": -2.6863,
+  "G1_deterministic": true,
+  "G1_abserr": 0.0,
+  "G1_pass": true,
+  "G2_noncl_diffs": [],
+  "G2_pass": true,
+  "G3_self_rmsd": 0.0,
+  "G3_atoms": 37,
+  "G3_pass": true
+ }
+}

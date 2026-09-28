@@ -21,7 +21,7 @@ def dpf_text(tag, variant, s, mode, pose=None):
          f'seed {77000+s} {88000+s}', 'ligand_types ' + ' '.join(types), f'fld {tag}_std.maps.fld']
     L += [f'map {tag}_std.{t}.map' for t in types]
     L += [f'elecmap {tag}_std.e.map', f'desolvmap {tag}_std.d.map',
-          f'move {OUT}/{tag}_lig_{variant}.pdbqt',
+          f'move {pose if mode == "epdb" else OUT + "/" + tag + "_lig_" + variant + ".pdbqt"}',
           'about %g %g %g' % tuple(j['center']),
           'tran0 random', 'quaternion0 random', 'dihe0 random', f'torsdof {TORSDOF[tag]}',
           'ga_pop_size 150', 'ga_num_evals 1000000', 'ga_num_generations 27000',
@@ -29,7 +29,7 @@ def dpf_text(tag, variant, s, mode, pose=None):
           'ga_window_size 10', 'ga_cauchy_alpha 0.0', 'ga_cauchy_beta 1.0', 'set_ga',
           'sw_max_its 300', 'sw_max_succ 4', 'sw_max_fail 4', 'sw_rho 1.0', 'sw_lb_rho 0.01',
           'ls_search_freq 0.06', 'set_sw1', 'unbound_model bound']
-    L.append(f'epdb {pose}' if mode == 'epdb' else 'ga_run 10')
+    L.append('epdb' if mode == 'epdb' else 'ga_run 10')
     if mode == 'dock': L.append('analysis')
     return '\n'.join(L) + '\n'
 
@@ -40,16 +40,23 @@ def run_ad4(dpf, dlg, cwd, timeout=900):
     assert r.returncode == 0, (dpf, r.returncode)
 
 def g1_pose(tag):
+    """Fixed Cl-typed gate pose: translate the ligand so the warhead (Cl) atom
+    sits exactly on the locked SG target, making the expected well delta
+    ~ -3.0 kcal/mol and the G1 gate sensitive (a centroid-anchored pose sits
+    ~5 A away, where the expected delta is ~0 and the gate would be vacuous).
+    Machinery refinement pre-outcome; the gate formulation is unchanged."""
     p = f'{OUT}/{tag}_g1_pose_cl.pdbqt'
     if not os.path.exists(p):
-        cx, cy, cz = JOBS[tag]['center']
+        sx, sy, sz = JOBS[tag]['sg']
         lines = open(f'{OUT}/{tag}_lig_cl.pdbqt').read().splitlines(keepends=True)
-        pts = [(i, float(l[30:38]), float(l[38:46]), float(l[46:54]))
+        pts = [(i, float(l[30:38]), float(l[38:46]), float(l[46:54]), l[77:79].strip())
                for i, l in enumerate(lines) if l.startswith(('ATOM', 'HETATM'))]
-        mx = sum(q[1] for q in pts)/len(pts); my = sum(q[2] for q in pts)/len(pts); mz = sum(q[3] for q in pts)/len(pts)
-        for i, x, y, z in pts:
+        cl = [q for q in pts if q[4] == 'Cl']
+        assert len(cl) == 1
+        _, wx, wy, wz, _ = cl[0]
+        for i, x, y, z, _ in pts:
             l = lines[i]
-            lines[i] = l[:30] + '%8.3f%8.3f%8.3f' % (x+cx-mx, y+cy-my, z+cz-mz) + l[54:]
+            lines[i] = l[:30] + '%8.3f%8.3f%8.3f' % (x+sx-wx, y+sy-wy, z+sz-wz) + l[54:]
         open(p, 'w').write(''.join(lines))
     return p
 
@@ -60,9 +67,12 @@ def warhead_xyz(pose_path):
     raise ValueError('no Cl in ' + pose_path)
 
 def epdb_energy(dlg):
+    """Full-precision intermolecular vdW+Hbond+desolv energy from the epdb report
+    (the summary line prints only 3 significant figures, which cannot resolve
+    the -3.0 kcal/mol well delta against a clash-dominated total)."""
     for l in open(dlg):
-        if 'Estimated Free Energy of Binding' in l and not l.startswith('DOCKED'):
-            return float(re.search(r'=\s*(-?\d+\.?\d*)\s*kcal/mol', l).group(1))
+        if l.startswith('Total Intermolecular vdW + Hbond + desolv Energy'):
+            return float(re.search(r'=\s*(-?[0-9.eE+-]+?)\s*kcal/mol', l).group(1))
     raise ValueError('no epdb energy in ' + dlg)
 
 def trilin(vals, n, center, p, spacing=0.375):
@@ -143,7 +153,7 @@ def best_pose_from_dlg(path):
         s = line[8:]
         if s.startswith('MODEL'): cur = []; cur_e = None
         elif 'Estimated Free Energy of Binding' in s:
-            cur_e = float(re.search(r'=\s*(-?\d+\.?\d*)\s*kcal/mol', s).group(1))
+            cur_e = float(re.search(r'=\s*(-?[0-9.eE+-]+?)\s*kcal/mol', s).group(1))
         elif s.startswith(('ATOM', 'HETATM')):
             cur.append((float(s[30:38]), float(s[38:46]), float(s[46:54])))
         elif s.startswith('ENDMDL'):
