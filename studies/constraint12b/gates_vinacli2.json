@@ -1,0 +1,44 @@
+{
+ "7vh8": {
+  "gate_pose": "/home/sandbox/work/12/studies/constraint12b/7vh8_g1_pose_cl.pdbqt",
+  "warhead_xyz": [
+   -15.937,
+   18.658,
+   -30.181
+  ],
+  "score_unmod_1": 2996.249,
+  "score_unmod_2": 2996.249,
+  "score_biased": 2994.545,
+  "observed_delta": -1.704,
+  "expected_delta": -2.6014,
+  "G1_deterministic": true,
+  "G1_abserr": 0.8974,
+  "G1_pass": false,
+  "G2_noncl_diffs": [],
+  "G2_pass": true,
+  "G3_self_rmsd": 0.0,
+  "G3_atoms": 35,
+  "G3_pass": true
+ },
+ "7c6s": {
+  "gate_pose": "/home/sandbox/work/12/studies/constraint12b/7c6s_g1_pose_cl_inbox.pdbqt",
+  "warhead_xyz": [
+   -18.709,
+   -22.655,
+   4.666
+  ],
+  "score_unmod_1": 6978.51,
+  "score_unmod_2": 6978.51,
+  "score_biased": 6976.875,
+  "observed_delta": -1.635,
+  "expected_delta": -2.6863,
+  "G1_deterministic": true,
+  "G1_abserr": 1.0513,
+  "G1_pass": false,
+  "G2_noncl_diffs": [],
+  "G2_pass": true,
+  "G3_self_rmsd": 0.0,
+  "G3_atoms": 37,
+  "G3_pass": true
+ }
+}

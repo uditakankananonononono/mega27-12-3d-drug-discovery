@@ -183,3 +183,68 @@ protocol's own integrity gate fails. Reported to parent for adjudication:
 (i) declare machinery-exhausted with both failures documented -> 12A under a
 NEW dated prereg, or (ii) NEW dated amendment (e.g., corrected G1
 formulation) and rerun, or (iii) other. 12A remains prohibited meanwhile.
+
+## 2026-09-28 09:30 IST - corrected-G1 amendment executed per adjudication 09:23 (option ii); corrected G1 FAILS both complexes; constraint-guided question declared MACHINERY-EXHAUSTED; 12A next under a NEW dated prereg
+
+Parent adjudication 2026-09-28 09:23 IST approved option (ii): NEW dated
+amendment to the original lock 3d48644, committed BEFORE any arm executes,
+replacing the false-premise G1 with a well-recovery gate.
+
+Amendment docs/PREREG_CONSTRAINT_GUIDED_12B_AMENDMENT_G1_20260928.md committed
+at e81071e BEFORE any gate run or arm execution, with all four required
+elements: (1) the false premise recorded exactly (locked G1 compute_vina_maps
+vs load_maps: 7VH8 6374.512, 7C6S 5336.108 kcal/mol vs locked tol 0.05;
+different potential sets evaluated differently - invalid comparison, not a
+constraint failure; plus the correction that the wheel was not defective and
+the X-Score map-naming root cause); (2) replacement G1 locked in writing
+pre-outcome: the anchored Cl-typed gate pose (warhead exactly on the locked SG
+target) scored --score_only against the unmodified (twice; must agree exactly)
+and biased XS map sets with the source-built binary, observed delta required
+to match the trilinear map-difference interpolation at the warhead within
+0.05 kcal/mol (tolerance locked before running); G2/G3 unchanged; (3) every
+other locked element carried over unchanged; (4) paper disclosure locked.
+
+Pre-outcome ordering record: the first corrected-gate invocation crashed on a
+vina cache bounds check ("ligand is outside the grid box", 7c6s) BEFORE any
+gate value was printed or persisted (the runner writes gate values only after
+all scorings complete). The bounds-check addendum (d69a300: rigid rotation of
+the 7c6s gate pose ABOUT THE WARHEAD - warhead stays exactly on the SG target;
+7vh8 pose already in-box, unchanged; gate semantics and expected delta
+unchanged because non-warhead atoms sample byte-identical maps in both sets)
+was committed before the first completed gate evaluation. The rotation is not
+implicated in the failure: 7vh8 used the committed unrotated pose and fails
+identically.
+
+Corrected gate results (run_12b_vinacli.py gates -> gates_vinacli2.json;
+gates_vinacli.json preserved unchanged):
+- G1 well recovery: FAILS both complexes. 7VH8: unmodified scorings 2996.249
+  and 2996.249 (deterministic, exact), biased 2994.545; observed delta -1.704
+  vs expected -2.6014; abserr 0.8974 vs locked tol 0.05. 7C6S: 6978.510 /
+  6978.510, biased 6976.875; observed -1.635 vs expected -2.6863; abserr
+  1.0513. The measured shift is present and correctly signed but does not
+  match the locked expected value, so delivery of the well into this engine's
+  grid evaluation cannot be verified under the locked formulation.
+- G2 byte audit: PASS both complexes (only Cl.map values differ).
+- G3 self-RMSD: PASS both complexes (0.0; 35 and 37 atoms).
+The runner aborted per locked conduct; NO docking arm of the original lock has
+ever executed. No gate, threshold, parameter, seed or map value was moved.
+
+Descriptive post-hoc observation (cannot restore the failed gate): the
+observed/expected ratio is systematic across both complexes (0.655 7VH8,
+0.609 7C6S), consistent with a grid-convention difference between the gate's
+reference interpolation and the engine's cache evaluation rather than an
+absent well. Resolving that would require a new gate formulation, which the
+locked rules do not permit after a gate failure without adjudication.
+
+DECLARATION (per adjudication 09:23 IST): the constraint-guided placement
+question is MACHINERY-EXHAUSTED in this environment, with all four machinery
+limitations documented in sequence:
+1. Vina map-discovery blocker (root-caused: X-Score vs AD4 map naming; the
+   wheel was not defective);
+2. AD4 engine-substitution constraint-delivery failure (verified well had zero
+   measurable search effect; A2 identical to A1 at full precision; Section
+   3.1c; machinery-limited, did not count toward exhaustion);
+3. original-lock G1 false premise (compute vs load_maps comparison invalid);
+4. corrected-G1 well-recovery failure (numbers above).
+12A (native covalent engine) is now the only remaining adjudicated pivot and
+starts under a NEW dated prereg, per the same adjudication.

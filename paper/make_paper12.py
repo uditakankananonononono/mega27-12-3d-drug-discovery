@@ -497,6 +497,50 @@ para(
  "fails mechanically is the question declared machinery-exhausted, at which "
  "point the study pivots under a new dated preregistration.")
 
+
+heading("3.1d Constraint-guided placement audit, continued: the locked engine recovered, the question machinery-exhausted", 2)
+para(
+ "The originally locked engine was then recovered: AutoDock Vina 1.2.7 was "
+ "built from source in this environment (tag v1.2.7, static link), and the "
+ "original 12B lock was executed with the intended engine for the first time. "
+ "The build also resolved the map-loading blocker at its root: with the vina "
+ "scoring function the map loader discovers grid files by X-Score atom-type "
+ "names rather than AD4 type names, so the previously suspected packaging "
+ "defect was no defect at all - the from-source build behaves identically. "
+ "Byte-identical map views under the expected names restored map loading "
+ "without altering any locked map value, and two of the three locked "
+ "integrity gates passed: the byte audit confirmed that only the intended map "
+ "differs, and the pose matcher again self-mapped at 0.0 A.")
+para(
+ "The lock's first integrity gate, however, rested on a false premise, "
+ "discovered before any docking arm ran: it presumed that Vina-computed grids "
+ "and the locked autogrid AD4-potential maps would score a fixed pose "
+ "equivalently, and they differ by 6,374.5 and 5,336.1 kcal/mol on the two "
+ "complexes against a locked tolerance of 0.05 - different potential sets, "
+ "not a constraint failure. Under a second dated amendment committed before "
+ "any arm executed (docs/PREREG_CONSTRAINT_GUIDED_12B_AMENDMENT_G1_20260928.md), "
+ "that gate was replaced with a well-recovery gate of the same form the "
+ "substituted engine had passed: score a probe pose anchored with its warhead "
+ "exactly on the crystallographic attachment point against the unmodified and "
+ "biased map sets, requiring the measured shift to match the map-implied "
+ "shift within 0.05 kcal/mol, the tolerance locked before the gate was run.")
+para(
+ "The corrected gate fails on both complexes: measured shifts of -1.704 and "
+ "-1.635 kcal/mol against map-implied shifts of -2.601 and -2.686 kcal/mol "
+ "(absolute errors 0.897 and 1.051 against the locked 0.05 tolerance; the "
+ "engine scorings are exactly deterministic and the byte audit and self-map "
+ "checks passed). The measured shift is present and correctly signed but does "
+ "not match the locked expectation, so delivery of the well into this "
+ "engine's grid evaluation cannot be verified, and no docking arm was run. "
+ "With four machinery limitations now documented in sequence - the "
+ "map-discovery blocker, the substituted engine's undelivered constraint "
+ "(Section 3.1c), the original lock's false-premise gate, and the failed "
+ "well-recovery gate - the constraint-guided question is declared "
+ "machinery-exhausted in this environment: it cannot be tested here under "
+ "locked, verifiable conditions. Per the adjudicated pivot order the study "
+ "turns to the remaining preregistered route, a native covalent engine, "
+ "under a new dated preregistration.")
+
 heading("3.2 Screening campaign and an honest negative", 2)
 para(
  f"All {analysis['n_docked']} resolved compounds docked successfully. Table 1 reports "
