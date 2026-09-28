@@ -181,7 +181,7 @@ para(
  "synthesis plan - MPRO-D1 is a docking-ranked hypothesis with a live-verified novelty "
  "record. The limitations - rigid receptor, no covalency, hydration unmodeled - are "
  "stated where they bite - including a preregistered reactive-engine self-redock "
- "audit that fails its locked criterion (Section 3.1e), so no covalent scoring capability "
+ "audit that fails its locked criterion (Section 3.1b), so no covalent scoring capability "
  "is claimed.")
 doc.add_page_break()
 
@@ -346,22 +346,6 @@ table(["parameter", "value"],
   ["Cys145 state", "reduced"],
   ["ligand geometry source", "isomeric SMILES -> ETKDGv3 -> MMFF94"]])
 
-# ---------- 3.6 pose-level analysis
-heading("3.6 Pose-Level Observations", 2)
-para(
- "Three pose-level patterns recur in the docked ensemble and are worth recording for "
- "the next campaign. First, the top-ranked peptidomimetics (saquinavir, lopinavir, "
- "darunavir) all adopt extended conformations spanning S1' to S4 - maximizing contact "
- "count, which the empirical score rewards, while their assay inactivity shows the "
- "contacts are the wrong ones. Second, the true actives cluster their hydrogen bonds "
- "on the His163-Glu166 anchor pair in S1, a pattern the GNN can see and the scalar "
- "score cannot weight. Third, MPRO-D1's winning pose places the biphenyl deep in S2 "
- "with the primary amide capping S1' - the same grammar as the clinical non-covalent "
- "inhibitors, arrived at by enumeration rather than by imitation. These observations "
- "are qualitative; they are recorded as hypotheses for the enlarged label set, not as "
- "conclusions.")
-
-
 # ---------- 3. results
 heading("3. Results", 1)
 heading("3.1 Protocol validation: redocking", 2)
@@ -376,101 +360,15 @@ doc.add_picture(str(RES / "redock_overlay.png"), width=Inches(6.0))
 doc.paragraphs[-1].alignment = WD_ALIGN_PARAGRAPH.CENTER
 para("Figure 1. Redocking validation: crystal vs docked pose of JUN8-76-3A in Mpro (7KX5).", italic=True, align="center")
 
-heading("3.1b Protocol transfer: a second structure and chemotype", 2)
 para(
- f"A validation that only works on the structure it was tuned on is curve-fitting, not "
- f"calibration. We therefore re-ran the identical protocol on an independent deposit: "
- f"the room-temperature WT Mpro catalytic domains (8V8E, 2.0 A) in complex with "
- f"ensitrelvir (S-217622), a non-covalent clinical inhibitor of a different chemotype "
- f"from X7V. Structure selection was audited, not convenient: 7VU6 (1.8 A) and 8HUR "
- f"(1.64 A) were both rejected because their deposits truncate binding-site sidechains "
- f"(ARG188 at 3.6 A from the ligand in every chain; 7VU6 also truncates LEU50 and "
- f"GLU47), while 8V8E chain A presents a complete site (HIS41, MET49, CYS145, HIS163, "
- f"GLU166, ARG188, GLN189 all full sidechains); four incomplete residues far from the "
- f"pocket (VAL86 at 9.7 A, VAL125/CYS128/MET130 at 14.5 A or more) were removed by the "
- f"preparer and are documented in data/raw/transfer_structure_audit.json. The transfer "
- f"redock passes the same gate: heavy-atom RMSD {transfer['rmsd_A']:.2f} A (< 2.0 A), "
- f"best affinity {transfer['best_affinity_kcal_mol']:.2f} kcal/mol at exhaustiveness "
- f"{transfer['exhaustiveness']}. The mpro-dock protocol now validates on two "
- f"independent structures and two chemotypes, which is the honest scope of every "
- f"ranking claim in this paper.")
+ "Three preregistered supporting audits - transfer of the validated protocol to a "
+ "second structure and chemotype, rank transfer across receptor structures, and a "
+ "gated hydration-feature test - are preserved in full as Appendices AE, AF and AG. "
+ "Their verdicts are unchanged and feed the Discussion; the main text now keeps the "
+ "pillars only: the validated protocol and the benchmark built on it, the honest "
+ "negatives, and the candidate.")
 
-heading("3.1c Rank transfer across receptor structures (preregistered)", 2)
-para(
- "A ranking that only holds for one crystal form could be an artifact of a single "
- "refinement. Before any campaign compound was docked into the second structure, we "
- "preregistered the test (docs/PREREG_TRANSFER_8V8E_RANK_20260928.md): all 52 "
- "committed campaign records were to be redocked into 8V8E with the identical "
- "protocol, failures counted and never imputed, and rank transfer declared only if "
- "the Spearman correlation between 7KX5 and 8V8E best affinities reached 0.50 - one "
- "threshold, fixed in advance.")
-para(
- f"Outcome, reported as measured: {rank8v8e['n_docked_both']} compounds docked in "
- f"both structures and {rank8v8e['n_skipped']} were counted skips (committed records "
- "that carry no 7KX5 affinity; no compound failed or timed out in 8V8E). The "
- f"Spearman correlation is {rank8v8e['spearman_rho']:.3f} (p = "
- f"{rank8v8e['spearman_p']:.1e}), above the locked 0.50 gate: the campaign ranking "
- "transfers across the two receptor structures and is not an artifact of one "
- "crystal form.")
-para(
- f"Descriptive observations only, with no gate attached: "
- f"{rank8v8e['top10_retention']} of the 7KX5 affinity top-10 remain in the 8V8E "
- f"top-10, and raw Vina on 8V8E ranks the committed ChEMBL labels at AUROC "
- f"{rank8v8e['auroc_8v8e_raw_vina_descriptive']:.3f} against the 7KX5 reference of "
- f"{rank8v8e['auroc_7kx5_raw_vina_reference']:.3f} - above the chance line on this "
- "structure, still weak, and not a rescoring claim. The scope is stated plainly: "
- "both deposits are the SARS-CoV-2 main protease (8V8E is the room-temperature "
- "catalytic-domain construct), so this is robustness to a change of receptor "
- "structure and crystallization condition. Transfer to a different protease target "
- "remains untested.")
-
-heading("3.1d Hydration audit: conserved waters and a gated feature test (preregistered)", 2)
-para(
- "Rigid-receptor docking discards the solvent, and this pocket is known to use "
- "water-mediated contacts. Before computing any hydration outcome we locked the "
- "design (docs/PREREG_HYDRATION_20260928.md): a descriptive conserved-water map "
- "across the eight public Mpro deposits in data/raw, a single explicit-water "
- "redock, and one gated feature test on the committed benchmark - with all "
- "radii, conservation cutoffs and the decision rule fixed in advance.")
-para(
- f"The map is descriptive. Each structure's chain A was superposed on the 7KX5 "
- f"binding-site frame (52 CA anchors, alignment RMSD "
- f"{min(a['align_rmsd_A'] for k,a in hydr_sites['alignment'].items() if a['status']=='aligned' and k!='7KX5'):.2f}-"
- f"{max(a['align_rmsd_A'] for a in hydr_sites['alignment'].values() if a['status']=='aligned'):.2f} A). "
- f"Of {hydr_sites['n_waters_in_box']} crystal waters inside the docking box, greedy "
- f"clustering at 1.5 A gives {len(hydr_sites['clusters'])} sites, but only "
- f"{hydr['part_c_hydration_arm']['n_sites_used']} appear in three or more structures "
- f"(the best in seven of eight). Most crystal waters in this pocket are "
- f"deposit-specific; conservation is the exception, not the rule "
- f"(results/hydration_sites.json).")
-para(
- f"The explicit-water redock is a single descriptive check. X7V was redocked into "
- f"7KX5 with its eight crystal waters retained as rigid receptor atoms under the "
- f"identical box, seed and exhaustiveness: heavy-atom RMSD "
- f"{hydr['part_b_explicit_water_redock']['rmsd_A']:.2f} A versus "
- f"{hydr['part_b_explicit_water_redock']['apo_rmsd_A']:.2f} A without waters, best "
- f"affinity {hydr['part_b_explicit_water_redock']['best_affinity_kcal_mol']:.2f} "
- f"versus {hydr['part_b_explicit_water_redock']['apo_best_affinity_kcal_mol']:.2f} "
- f"kcal/mol. With n = 1 no statistical claim attaches; keeping the waters did not "
- f"harm the redock under this protocol.")
-para(
- f"The gated test adds two pose features from the conserved map - sites occluded "
- f"by the pose (any ligand heavy atom within 2.5 A) and sites in bridging "
- f"geometry (2.5-3.5 A from a ligand N/O, not occluded) - to the "
- f"leakage-controlled seven-descriptor arm, with the identical trainer, scaffold "
- f"splits and statistics as the ablation. Outcome, reported as measured: mean "
- f"AUROC moves {hydr['part_c_hydration_arm']['mean_auroc_mlp7']:.4f} -> "
- f"{hydr['part_c_hydration_arm']['mean_auroc_mlp9']:.4f} across the five splits, a "
- f"small descriptive lift, but the locked seed-0 paired DeLong clause gives p = "
- f"{hydr['part_c_hydration_arm']['delong_seed0_p_mlp9_vs_mlp7']:.4f}, far from the "
- f"required 0.05: G-hyd FAILS. The hydration-feature contribution is NOT "
- f"SUPPORTED on this benchmark. Thresholds were not moved and no alternative "
- f"radii or conservation cutoffs were tried after outcomes. The honest reading: "
- f"crystallographic water positions are real pocket information, but with "
- f"13-16 held-out pose-available compounds per split this pipeline cannot show "
- f"they carry label information beyond the chemical descriptors.")
-
-heading("3.1e Covalent docking audit (bounded preregistration): a runnable engine and a plain negative", 2)
+heading("3.1b Covalent docking audit (bounded preregistration): a runnable engine and a plain negative", 2)
 para(
  "The pipeline above is non-covalent, and the pocket's best-known ligands act by "
  "bonding the catalytic cysteine - so a fair question is whether this lane can score "
@@ -748,6 +646,71 @@ rows = [[f"#{i+1}", c["core"], f"{c['affinity']:.2f}", f"{c['tanimoto_max_vs_scr
 table(["rank", "core", "affinity", "Tanimoto max", "lig. eff.", "complexity"], rows)
 
 # ---------- 4. discussion
+# ---------- 3.5 external verification chapter
+heading("3.5 Independent Verification Against Public Databases", 2)
+para(
+ "Every load-bearing input to this study was verified against an independent public "
+ "source at analysis time, live, with the query records shipped (results/external_"
+ "verification.json and external_verification2.json). The protein identity checks out: "
+ "UniProt P0DTD1 (replicase polyprotein 1ab, 7096 aa) is the Mpro source; RCSB and PDBe "
+ "independently confirm 7KX5's title, method and ligand inventory; AlphaFold DB carries "
+ "a consistent predicted model. The compound identities check out: PubChem property "
+ "records were pulled for all 22 screened compounds, and ChEMBL molecule records plus "
+ "65 sampled assay sets anchor the bioactivity labels in curated assay data rather than "
+ "in secondary reviews. The literature context checks out: Europe PMC hit counts per "
+ "compound against 'main protease + SARS-CoV-2' show the actives are the most-studied "
+ "compounds in the set; ClinicalTrials.gov counts quantify the clinical stakes of the "
+ "repurposed failures; CrossRef verifies every anchor reference by DOI. And the pocket "
+ "checks out across ten independent Mpro crystal structures (Table 4), so the protocol "
+ "is not fitted to one lucky deposit.")
+up = verif2["queries"]["uniprot_P0DTD1"]
+para(f"UniProt: {up['accession']} ({up['id']}), length {up['length']} aa. "
+     f"RCSB: resolution {verif['queries']['rcsb_7KX5']['resolution']} A by "
+     f"{verif['queries']['rcsb_7KX5']['method']}. "
+     f"PubMed 'SARS-CoV-2 main protease docking' count: {verif['queries']['ncbi_pubmed_count']['pubmed_mpro_docking_count']}. "
+     f"ClinicalTrials.gov nirmatrelvir studies: {verif['queries']['clinicaltrials_nirmatrelvir']['nirmatrelvir_trial_count']}.")
+para("Table 4. Ten-structure Mpro pocket set (RCSB, live).", italic=True)
+rows = [[k, (v.get("title") or "")[:55], str(v.get("resolution"))] for k, v in verif2["queries"]["mpro_structure_set_10"].items()]
+table(["PDB", "title (truncated)", "resolution (A)"], rows)
+para("Table 5. Europe PMC literature counts per compound (query: compound AND main protease AND SARS-CoV-2).", italic=True)
+epmc = dict(verif["queries"]["europepmc_lit_counts"]); epmc.update(verif2["queries"]["europepmc_lit_counts_rest"])
+rows = [[k, str(v.get("mpro_hit_count"))] for k, v in epmc.items()]
+table(["compound", "Mpro literature hits"], rows)
+para("Table 6. PubChem property records for the screened set (live pull).", italic=True)
+rows = [[k, str(v.get("MolecularWeight", "")), str(v.get("XLogP", "")), str(v.get("TPSA", "")),
+         str(v.get("HBondDonorCount", "")), str(v.get("HBondAcceptorCount", ""))]
+        for k, v in verif["queries"]["pubchem_properties_22"].items()]
+table(["compound", "MW", "XLogP", "TPSA", "HBD", "HBA"], rows)
+para("Table 7. ChEMBL molecule anchors for the screened set (22 live molecule records; 65 assay sets sampled).", italic=True)
+chem = verif2["queries"]["chembl_bioactivities_22"]
+rows = [[k, v.get("chembl_id", "-"), str(v.get("n_activities_sampled", 0))] for k, v in chem.items()]
+table(["compound", "ChEMBL ID", "assays sampled"], rows)
+para("Table 8. ClinicalTrials.gov COVID-19 study counts for repurposed candidates.", italic=True)
+ct = dict(verif2["queries"]["clinicaltrials_repurposed"])
+ct["nirmatrelvir"] = {"covid_trial_count": verif["queries"]["clinicaltrials_nirmatrelvir"]["nirmatrelvir_trial_count"]}
+rows = [[k, str(v.get("covid_trial_count"))] for k, v in ct.items()]
+table(["compound", "COVID-19 studies"], rows)
+para("Table 9. CrossRef DOI verification of anchor references.", italic=True)
+rows = [[k, (v.get("title") or v.get("status", ""))[:60], str(v.get("year", ""))] for k, v in verif2["queries"]["crossref_references"].items()]
+table(["reference key", "verified title (truncated)", "year"], rows)
+
+
+# ---------- 3.6 pose-level analysis
+heading("3.6 Pose-Level Observations", 2)
+para(
+ "Three pose-level patterns recur in the docked ensemble and are worth recording for "
+ "the next campaign. First, the top-ranked peptidomimetics (saquinavir, lopinavir, "
+ "darunavir) all adopt extended conformations spanning S1' to S4 - maximizing contact "
+ "count, which the empirical score rewards, while their assay inactivity shows the "
+ "contacts are the wrong ones. Second, the true actives cluster their hydrogen bonds "
+ "on the His163-Glu166 anchor pair in S1, a pattern the GNN can see and the scalar "
+ "score cannot weight. Third, MPRO-D1's winning pose places the biphenyl deep in S2 "
+ "with the primary amide capping S1' - the same grammar as the clinical non-covalent "
+ "inhibitors, arrived at by enumeration rather than by imitation. These observations "
+ "are qualitative; they are recorded as hypotheses for the enlarged label set, not as "
+ "conclusions.")
+
+
 heading("4. Discussion", 1)
 para(
  "Four findings matter beyond this campaign. First, validation-before-screening is "
@@ -796,54 +759,6 @@ para(
  "novelty record and a falsifiable prediction. The pipeline extends to new targets by "
  "changing one structure file and one ligand list.")
 
-
-# ---------- 3.5 external verification chapter
-heading("3.5 Independent Verification Against Public Databases", 2)
-para(
- "Every load-bearing input to this study was verified against an independent public "
- "source at analysis time, live, with the query records shipped (results/external_"
- "verification.json and external_verification2.json). The protein identity checks out: "
- "UniProt P0DTD1 (replicase polyprotein 1ab, 7096 aa) is the Mpro source; RCSB and PDBe "
- "independently confirm 7KX5's title, method and ligand inventory; AlphaFold DB carries "
- "a consistent predicted model. The compound identities check out: PubChem property "
- "records were pulled for all 22 screened compounds, and ChEMBL molecule records plus "
- "65 sampled assay sets anchor the bioactivity labels in curated assay data rather than "
- "in secondary reviews. The literature context checks out: Europe PMC hit counts per "
- "compound against 'main protease + SARS-CoV-2' show the actives are the most-studied "
- "compounds in the set; ClinicalTrials.gov counts quantify the clinical stakes of the "
- "repurposed failures; CrossRef verifies every anchor reference by DOI. And the pocket "
- "checks out across ten independent Mpro crystal structures (Table 4), so the protocol "
- "is not fitted to one lucky deposit.")
-up = verif2["queries"]["uniprot_P0DTD1"]
-para(f"UniProt: {up['accession']} ({up['id']}), length {up['length']} aa. "
-     f"RCSB: resolution {verif['queries']['rcsb_7KX5']['resolution']} A by "
-     f"{verif['queries']['rcsb_7KX5']['method']}. "
-     f"PubMed 'SARS-CoV-2 main protease docking' count: {verif['queries']['ncbi_pubmed_count']['pubmed_mpro_docking_count']}. "
-     f"ClinicalTrials.gov nirmatrelvir studies: {verif['queries']['clinicaltrials_nirmatrelvir']['nirmatrelvir_trial_count']}.")
-para("Table 4. Ten-structure Mpro pocket set (RCSB, live).", italic=True)
-rows = [[k, (v.get("title") or "")[:55], str(v.get("resolution"))] for k, v in verif2["queries"]["mpro_structure_set_10"].items()]
-table(["PDB", "title (truncated)", "resolution (A)"], rows)
-para("Table 5. Europe PMC literature counts per compound (query: compound AND main protease AND SARS-CoV-2).", italic=True)
-epmc = dict(verif["queries"]["europepmc_lit_counts"]); epmc.update(verif2["queries"]["europepmc_lit_counts_rest"])
-rows = [[k, str(v.get("mpro_hit_count"))] for k, v in epmc.items()]
-table(["compound", "Mpro literature hits"], rows)
-para("Table 6. PubChem property records for the screened set (live pull).", italic=True)
-rows = [[k, str(v.get("MolecularWeight", "")), str(v.get("XLogP", "")), str(v.get("TPSA", "")),
-         str(v.get("HBondDonorCount", "")), str(v.get("HBondAcceptorCount", ""))]
-        for k, v in verif["queries"]["pubchem_properties_22"].items()]
-table(["compound", "MW", "XLogP", "TPSA", "HBD", "HBA"], rows)
-para("Table 7. ChEMBL molecule anchors for the screened set (22 live molecule records; 65 assay sets sampled).", italic=True)
-chem = verif2["queries"]["chembl_bioactivities_22"]
-rows = [[k, v.get("chembl_id", "-"), str(v.get("n_activities_sampled", 0))] for k, v in chem.items()]
-table(["compound", "ChEMBL ID", "assays sampled"], rows)
-para("Table 8. ClinicalTrials.gov COVID-19 study counts for repurposed candidates.", italic=True)
-ct = dict(verif2["queries"]["clinicaltrials_repurposed"])
-ct["nirmatrelvir"] = {"covid_trial_count": verif["queries"]["clinicaltrials_nirmatrelvir"]["nirmatrelvir_trial_count"]}
-rows = [[k, str(v.get("covid_trial_count"))] for k, v in ct.items()]
-table(["compound", "COVID-19 studies"], rows)
-para("Table 9. CrossRef DOI verification of anchor references.", italic=True)
-rows = [[k, (v.get("title") or v.get("status", ""))[:60], str(v.get("year", ""))] for k, v in verif2["queries"]["crossref_references"].items()]
-table(["reference key", "verified title (truncated)", "year"], rows)
 
 # ---------- appendix: tools
 doc.add_page_break()
@@ -1456,7 +1371,107 @@ for ref, note in [
 ]:
     para(f"{ref}. {note}")
 
-heading("Appendix AD. Closing Statement", 1)
+doc.add_page_break()
+heading("Appendix AE. Protocol transfer audit: a second structure and chemotype (preregistered supporting audit)", 1)
+para(
+ f"A validation that only works on the structure it was tuned on is curve-fitting, not "
+ f"calibration. We therefore re-ran the identical protocol on an independent deposit: "
+ f"the room-temperature WT Mpro catalytic domains (8V8E, 2.0 A) in complex with "
+ f"ensitrelvir (S-217622), a non-covalent clinical inhibitor of a different chemotype "
+ f"from X7V. Structure selection was audited, not convenient: 7VU6 (1.8 A) and 8HUR "
+ f"(1.64 A) were both rejected because their deposits truncate binding-site sidechains "
+ f"(ARG188 at 3.6 A from the ligand in every chain; 7VU6 also truncates LEU50 and "
+ f"GLU47), while 8V8E chain A presents a complete site (HIS41, MET49, CYS145, HIS163, "
+ f"GLU166, ARG188, GLN189 all full sidechains); four incomplete residues far from the "
+ f"pocket (VAL86 at 9.7 A, VAL125/CYS128/MET130 at 14.5 A or more) were removed by the "
+ f"preparer and are documented in data/raw/transfer_structure_audit.json. The transfer "
+ f"redock passes the same gate: heavy-atom RMSD {transfer['rmsd_A']:.2f} A (< 2.0 A), "
+ f"best affinity {transfer['best_affinity_kcal_mol']:.2f} kcal/mol at exhaustiveness "
+ f"{transfer['exhaustiveness']}. The mpro-dock protocol now validates on two "
+ f"independent structures and two chemotypes, which is the honest scope of every "
+ f"ranking claim in this paper.")
+
+
+doc.add_page_break()
+heading("Appendix AF. Rank transfer across receptor structures (preregistered supporting audit)", 1)
+para(
+ "A ranking that only holds for one crystal form could be an artifact of a single "
+ "refinement. Before any campaign compound was docked into the second structure, we "
+ "preregistered the test (docs/PREREG_TRANSFER_8V8E_RANK_20260928.md): all 52 "
+ "committed campaign records were to be redocked into 8V8E with the identical "
+ "protocol, failures counted and never imputed, and rank transfer declared only if "
+ "the Spearman correlation between 7KX5 and 8V8E best affinities reached 0.50 - one "
+ "threshold, fixed in advance.")
+para(
+ f"Outcome, reported as measured: {rank8v8e['n_docked_both']} compounds docked in "
+ f"both structures and {rank8v8e['n_skipped']} were counted skips (committed records "
+ "that carry no 7KX5 affinity; no compound failed or timed out in 8V8E). The "
+ f"Spearman correlation is {rank8v8e['spearman_rho']:.3f} (p = "
+ f"{rank8v8e['spearman_p']:.1e}), above the locked 0.50 gate: the campaign ranking "
+ "transfers across the two receptor structures and is not an artifact of one "
+ "crystal form.")
+para(
+ f"Descriptive observations only, with no gate attached: "
+ f"{rank8v8e['top10_retention']} of the 7KX5 affinity top-10 remain in the 8V8E "
+ f"top-10, and raw Vina on 8V8E ranks the committed ChEMBL labels at AUROC "
+ f"{rank8v8e['auroc_8v8e_raw_vina_descriptive']:.3f} against the 7KX5 reference of "
+ f"{rank8v8e['auroc_7kx5_raw_vina_reference']:.3f} - above the chance line on this "
+ "structure, still weak, and not a rescoring claim. The scope is stated plainly: "
+ "both deposits are the SARS-CoV-2 main protease (8V8E is the room-temperature "
+ "catalytic-domain construct), so this is robustness to a change of receptor "
+ "structure and crystallization condition. Transfer to a different protease target "
+ "remains untested.")
+
+
+doc.add_page_break()
+heading("Appendix AG. Hydration audit: conserved waters and a gated feature test (preregistered supporting audit)", 1)
+para(
+ "Rigid-receptor docking discards the solvent, and this pocket is known to use "
+ "water-mediated contacts. Before computing any hydration outcome we locked the "
+ "design (docs/PREREG_HYDRATION_20260928.md): a descriptive conserved-water map "
+ "across the eight public Mpro deposits in data/raw, a single explicit-water "
+ "redock, and one gated feature test on the committed benchmark - with all "
+ "radii, conservation cutoffs and the decision rule fixed in advance.")
+para(
+ f"The map is descriptive. Each structure's chain A was superposed on the 7KX5 "
+ f"binding-site frame (52 CA anchors, alignment RMSD "
+ f"{min(a['align_rmsd_A'] for k,a in hydr_sites['alignment'].items() if a['status']=='aligned' and k!='7KX5'):.2f}-"
+ f"{max(a['align_rmsd_A'] for a in hydr_sites['alignment'].values() if a['status']=='aligned'):.2f} A). "
+ f"Of {hydr_sites['n_waters_in_box']} crystal waters inside the docking box, greedy "
+ f"clustering at 1.5 A gives {len(hydr_sites['clusters'])} sites, but only "
+ f"{hydr['part_c_hydration_arm']['n_sites_used']} appear in three or more structures "
+ f"(the best in seven of eight). Most crystal waters in this pocket are "
+ f"deposit-specific; conservation is the exception, not the rule "
+ f"(results/hydration_sites.json).")
+para(
+ f"The explicit-water redock is a single descriptive check. X7V was redocked into "
+ f"7KX5 with its eight crystal waters retained as rigid receptor atoms under the "
+ f"identical box, seed and exhaustiveness: heavy-atom RMSD "
+ f"{hydr['part_b_explicit_water_redock']['rmsd_A']:.2f} A versus "
+ f"{hydr['part_b_explicit_water_redock']['apo_rmsd_A']:.2f} A without waters, best "
+ f"affinity {hydr['part_b_explicit_water_redock']['best_affinity_kcal_mol']:.2f} "
+ f"versus {hydr['part_b_explicit_water_redock']['apo_best_affinity_kcal_mol']:.2f} "
+ f"kcal/mol. With n = 1 no statistical claim attaches; keeping the waters did not "
+ f"harm the redock under this protocol.")
+para(
+ f"The gated test adds two pose features from the conserved map - sites occluded "
+ f"by the pose (any ligand heavy atom within 2.5 A) and sites in bridging "
+ f"geometry (2.5-3.5 A from a ligand N/O, not occluded) - to the "
+ f"leakage-controlled seven-descriptor arm, with the identical trainer, scaffold "
+ f"splits and statistics as the ablation. Outcome, reported as measured: mean "
+ f"AUROC moves {hydr['part_c_hydration_arm']['mean_auroc_mlp7']:.4f} -> "
+ f"{hydr['part_c_hydration_arm']['mean_auroc_mlp9']:.4f} across the five splits, a "
+ f"small descriptive lift, but the locked seed-0 paired DeLong clause gives p = "
+ f"{hydr['part_c_hydration_arm']['delong_seed0_p_mlp9_vs_mlp7']:.4f}, far from the "
+ f"required 0.05: G-hyd FAILS. The hydration-feature contribution is NOT "
+ f"SUPPORTED on this benchmark. Thresholds were not moved and no alternative "
+ f"radii or conservation cutoffs were tried after outcomes. The honest reading: "
+ f"crystallographic water positions are real pocket information, but with "
+ f"13-16 held-out pose-available compounds per split this pipeline cannot show "
+ f"they carry label information beyond the chemical descriptors.")
+
+
+heading("Appendix AH. Closing Statement", 1)
 para(
  "This paper reports a validated protocol, an honest negative, a benchmark recovery, "
  "and a novel candidate - in that order, because that is the order in which each "
