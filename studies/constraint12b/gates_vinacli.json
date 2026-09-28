@@ -1,0 +1,24 @@
+{
+ "7vh8": {
+  "G1_compute_vina_maps": 168.832,
+  "G1_load_maps": 6543.344,
+  "G1_absdiff": 6374.512,
+  "G1_pass": false,
+  "G2_noncl_diffs": [],
+  "G2_pass": true,
+  "G3_self_rmsd": 0.0,
+  "G3_atoms": 35,
+  "G3_pass": true
+ },
+ "7c6s": {
+  "G1_compute_vina_maps": 118.719,
+  "G1_load_maps": 5454.827,
+  "G1_absdiff": 5336.108,
+  "G1_pass": false,
+  "G2_noncl_diffs": [],
+  "G2_pass": true,
+  "G3_self_rmsd": 0.0,
+  "G3_atoms": 37,
+  "G3_pass": true
+ }
+}

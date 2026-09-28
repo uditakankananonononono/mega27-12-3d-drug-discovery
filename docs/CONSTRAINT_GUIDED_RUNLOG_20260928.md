@@ -133,3 +133,53 @@ question is declared machinery-exhausted with BOTH failures documented
 + build failure), and only then does 12A start under a NEW dated prereg.
 12A remains prohibited until then. Thresholds were not moved; no alternative
 parameterization was tried after outcomes.
+
+## 2026-09-28 09:22 IST - option (b) executed: Vina 1.2.7 built from source; ORIGINAL lock 3d48644 gates run pre-outcome; G1 FAILS as locked - NO outcomes produced
+
+Parent adjudication 2026-09-28 09:15 IST approved option (b): build
+autodock-vina from source and execute the ORIGINAL locked 12B prereg
+(docs/PREREG_CONSTRAINT_GUIDED_12B_20260928.md, 3d48644); the original lock
+stands and has never had a valid execution.
+
+Build: AutoDock-Vina v1.2.7 source (ccsb-scripps/AutoDock-Vina, tag v1.2.7)
+compiled clean here with g++ 11.4 + boost 1.74 (Ubuntu jammy .debs extracted
+unprivileged; static link). Binary: src/AutoDock-Vina/build/linux/release/vina,
+reports "AutoDock Vina v1.2.7". vina_split also built. Build log:
+src/vina_build.log (BUILD_RC=0).
+
+ROOT-CAUSE CORRECTION (supersedes the "wheel C++ discovery bug" attribution in
+the 08:02 blocker section): with sf_name vina, load_maps (cache::read in
+vina-1.2.7 src/lib/cache.cpp) discovers map files by X-Score type names
+(<prefix>.C_H.map, <prefix>.Cl_H.map, ...), NOT AD4 type names. The
+source-built binary reproduces the wheel's exact error ("No *.map files with
+prefix") on the AD4-named set, so the wheel was not defective; the locked
+map-set naming is incompatible with sf=vina discovery. Machinery fix (map
+VALUES untouched): byte-identical XS-named views (symlinks) of the locked AD4
+maps - C_H/C_P <- C, N_P/N_D <- N, N_A/N_DA <- NA, O_P/O_D/O_A/O_DA <- OA,
+F_H <- F, Cl_H <- Cl (biased set: Cl_H carries the locked well). Each ligand
+atom still samples exactly the map of its AD4 type - the locked semantics.
+The CLI front end (--maps / --score_only / --exhaustiveness / --num_modes) is
+the same engine code paths as the locked python API. Seeds 77000+s,
+exhaustiveness 32, n_poses 20, cpu 2, 300 s cap, arms A0/A1/A2, gates and
+decision rule exactly as locked in 3d48644.
+
+Gate results (studies/constraint12b/run_12b_vinacli.py gates ->
+gates_vinacli.json; script committed pre-outcome):
+- G1 map-pipeline equivalence (locked: one fixed pose, compute_vina_maps vs
+  load_maps score-only, |diff| <= 0.05 kcal/mol): FAILS both complexes.
+  7VH8: compute 168.832 vs load_maps 6543.344 (diff 6374.512).
+  7C6S: compute 118.719 vs load_maps 5454.827 (diff 5336.108).
+  The locked G1 formulation presumes vina-computed grids and the locked
+  autogrid AD4-potential map set score equivalently under sf=vina; they do
+  not (different grid potentials by thousands of kcal/mol on the fixed pose).
+- G2 modified-map audit: PASS (only Cl.map values differ; byte audit clean).
+- G3 RMSD machinery: PASS (self-RMSD 0.0; 35 and 37 atoms).
+
+Per the locked conduct the runner aborted BEFORE any arm executed: NO docking
+outcome of any arm exists under the original lock. No gate, threshold,
+parameter, seed or map value was moved. This is not the "build fails
+mechanically" case the adjudication pre-decided (the build works); the locked
+protocol's own integrity gate fails. Reported to parent for adjudication:
+(i) declare machinery-exhausted with both failures documented -> 12A under a
+NEW dated prereg, or (ii) NEW dated amendment (e.g., corrected G1
+formulation) and rerun, or (iii) other. 12A remains prohibited meanwhile.
