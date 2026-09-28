@@ -94,3 +94,20 @@ labeled descriptive and cannot restore a failed gate. Deliverables unchanged:
 runlog, results json, scripts under studies/constraint12b/, queue item-6
 addendum, paper paragraph (reported as measured either way, with the gate
 history disclosed).
+
+## Addendum (pre-outcome machinery accommodation, 2026-09-28 ~09:30 IST, committed BEFORE the corrected gate is run)
+
+Vina cache scoring hard-errors when any ligand atom lies outside the map grid
+box ("The ligand is outside the grid box"). The committed anchored gate poses:
+- 7vh8: fully in-box; used unchanged.
+- 7c6s: extends up to 1.83 A past the +x box edge; it is rotated rigidly ABOUT
+  THE WARHEAD (the warhead stays exactly on the locked SG target, verified to
+  0.002 A after rewrite) by the first deterministic axis/angle candidate that
+  brings every atom inside the box with a 0.5 A margin; written as
+  studies/constraint12b/7c6s_g1_pose_cl_inbox.pdbqt.
+The gate formulation is unchanged: the expected delta depends only on the
+warhead coordinate (every non-warhead atom samples byte-identical maps in the
+unmodified and biased sets, so their contributions cancel in the delta), so the
+rotation leaves both the observed-delta semantics and the expected delta
+unchanged. This mirrors the pre-outcome pose-anchoring refinement already used
+and disclosed for the AD4 gate. Disclosed here and in the runlog.

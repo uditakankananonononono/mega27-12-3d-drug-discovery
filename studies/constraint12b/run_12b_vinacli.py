@@ -40,6 +40,62 @@ def build_xs_views():
                     shutil.copyfile(src, f'{d}/{tag}_xs.{xs}.map')
     print('xs views built')
 
+
+def inbox_gate_pose(tag, margin=0.5):
+    """Vina cache scoring hard-errors when any ligand atom lies outside the map
+    grid box. The committed anchored gate pose (warhead exactly on the SG
+    target) is used unchanged when fully in-box (7vh8); otherwise it is rotated
+    rigidly ABOUT THE WARHEAD (warhead stays exactly on the SG target) by the
+    first deterministic axis/angle candidate that brings every atom inside the
+    box with margin. Rotation-invariance of the gate: every non-warhead atom
+    samples byte-identical maps in the unmodified and biased sets, so their
+    contributions cancel in the delta; the expected delta (warhead-only) is
+    unchanged. Pre-outcome machinery accommodation, disclosed in the runlog and
+    the G1 amendment addendum."""
+    import math as _m
+    j = JOBS[tag]
+    p_in = f'{OUT}/{tag}_g1_pose_cl.pdbqt'
+    lines = open(p_in).read().splitlines(keepends=True)
+    pts = [(i, float(l[30:38]), float(l[38:46]), float(l[46:54])) for i, l in enumerate(lines)
+           if l.startswith(('ATOM', 'HETATM'))]
+    wh = warhead_xyz(p_in)
+    cx, cy, cz = j['center']; half = 12.0 - margin
+    def fits(cs):
+        return all(abs(c[0]-cx) <= half and abs(c[1]-cy) <= half and abs(c[2]-cz) <= half for c in cs)
+    coords = [(x, y, z) for _, x, y, z in pts]
+    if fits(coords):
+        return p_in
+    axes = []
+    for a in (-1, 1):
+        axes += [(a,0,0),(0,a,0),(0,0,a)]
+        for b in (-1, 1):
+            axes += [(a,b,0),(a,0,b),(0,a,b),(a,b,b),(a,b,-b),(a,-b,b)]
+    axes = [v for v in {(round(x,6),round(y,6),round(z,6)) for x,y,z in axes}]
+    def rot(c, ax, th):
+        ux, uy, uz = ax; n = _m.sqrt(ux*ux+uy*uy+uz*uz); ux, uy, uz = ux/n, uy/n, uz/n
+        x, y, z = c[0]-wh[0], c[1]-wh[1], c[2]-wh[2]
+        ct, st = _m.cos(th), _m.sin(th)
+        d = ux*x+uy*y+uz*z
+        rx = x*ct + (uy*z-uz*y)*st + ux*d*(1-ct)
+        ry = y*ct + (uz*x-ux*z)*st + uy*d*(1-ct)
+        rz = z*ct + (ux*y-uy*x)*st + uz*d*(1-ct)
+        return (rx+wh[0], ry+wh[1], rz+wh[2])
+    for deg in range(5, 181, 5):
+        for ax in sorted(axes):
+            cs = [rot(c, ax, _m.radians(deg)) for c in coords]
+            if fits(cs):
+                out_p = f'{OUT}/{tag}_g1_pose_cl_inbox.pdbqt'
+                out_lines = list(lines)
+                for (i, _, _, _), c in zip(pts, cs):
+                    l = out_lines[i]
+                    out_lines[i] = l[:30] + '%8.3f%8.3f%8.3f' % c + l[54:]
+                open(out_p, 'w').write(''.join(out_lines))
+                w2 = warhead_xyz(out_p)
+                assert all(abs(w2[d]-j['sg'][d]) < 2e-3 for d in range(3)), (w2, j['sg'])
+                print('inbox pose for', tag, ': rotation', deg, 'deg about', ax, '->', out_p)
+                return out_p
+    raise RuntimeError('no in-box rotation found for ' + tag)
+
 def run_vina(args, timeout=300):
     r = subprocess.run([VINA] + args, capture_output=True, text=True, timeout=timeout)
     if r.returncode != 0:
@@ -65,7 +121,7 @@ def stage_gates():
         g2 = g2_audit(tag, f'{OUT}/biased_{tag}')
         matcher = build_matcher(j)
         r0, n0 = g3_validate(tag, j, matcher)
-        pose = g1_pose(tag)
+        pose = inbox_gate_pose(tag)
         wh = warhead_xyz(pose)
         _, vu = read_map(f'{OUT}/{tag}_std.Cl.map')
         _, vb = read_map(f'{OUT}/biased_{tag}/{tag}_std.Cl.map')
@@ -76,7 +132,8 @@ def stage_gates():
                                           '--maps', f'{OUT}/xs{kind}_{tag}/{tag}_xs',
                                           '--seed', '77000']))
         obs = e['b'] - e['u1']
-        out[tag] = {'score_unmod_1': round(e['u1'], 4), 'score_unmod_2': round(e['u2'], 4),
+        out[tag] = {'gate_pose': pose, 'warhead_xyz': [round(v, 3) for v in warhead_xyz(pose)],
+                    'score_unmod_1': round(e['u1'], 4), 'score_unmod_2': round(e['u2'], 4),
                     'score_biased': round(e['b'], 4), 'observed_delta': round(obs, 4),
                     'expected_delta': round(expected, 4),
                     'G1_deterministic': abs(e['u1'] - e['u2']) < 1e-9,
