@@ -13,7 +13,7 @@ from run_12b_ad4 import best_pose_from_dlg
 
 ROOT = '/home/sandbox/work/12'
 OUT = f'{ROOT}/studies/nativecov12a'
-ADGPU = f'{ROOT}/bin/adgpu/adgpu'
+ADGPU = f'{ROOT}/bin/adgpu/autodock_cpu_128wi'  # v1.6 source tag, DEVICE=CPU upstream build (adjudication 09:49)
 AG4 = f'{ROOT}/bin/ad4/autogrid4'
 MKL = '/home/sandbox/.local/bin/mk_prepare_ligand.py'
 MKR = '/home/sandbox/.local/bin/mk_prepare_receptor.py'
