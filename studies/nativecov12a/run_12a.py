@@ -25,7 +25,7 @@ CAP = 3600
 def ocl_env():
     e = dict(os.environ)
     e['LD_LIBRARY_PATH'] = f'{POCL}/usr/lib/x86_64-linux-gnu:{POCL}/usr/lib/x86_64-linux-gnu/pocl:' + e.get('LD_LIBRARY_PATH', '')
-    e['OCL_ICD_VENDORS'] = f'{POCL}/etc/OpenCL/vendors/pocl.icd'
+    e['OCL_ICD_VENDORS'] = f'{ROOT}/bin/pocl-vendors/pocl.icd'
     return e
 
 def sh(cmd, cwd=OUT, timeout=None, env=None):

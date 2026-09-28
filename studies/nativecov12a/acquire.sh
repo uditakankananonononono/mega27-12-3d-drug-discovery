@@ -8,7 +8,7 @@ echo "=== pocl debs ==="
 mkdir -p /tmp/pocl-debs && cd /tmp/pocl-debs
 # BFS over Depends
 declare -A seen
-queue="libpocl2 pocl-opencl-icd libpocl2-common"
+queue="libpocl2 pocl-opencl-icd libpocl2-common libhwloc15 libclang-cpp11"
 touch /tmp/pocl-debs/list.txt
 while [ -n "$queue" ]; do
   pkg=$(echo $queue | cut -d' ' -f1)
@@ -22,6 +22,9 @@ done
 echo "=== extract ==="
 mkdir -p /home/sandbox/work/12/bin/pocl-prefix
 for f in *.deb; do dpkg-deb -x "$f" /home/sandbox/work/12/bin/pocl-prefix; done
+# vendored ICD with absolute path to the extracted libpocl (deb icd points at /usr)
+mkdir -p /home/sandbox/work/12/bin/pocl-vendors
+echo "/home/sandbox/work/12/bin/pocl-prefix/usr/lib/x86_64-linux-gnu/libpocl.so.2.8.0" > /home/sandbox/work/12/bin/pocl-vendors/pocl.icd
 ls /home/sandbox/work/12/bin/pocl-prefix/etc/OpenCL/vendors/ 2>/dev/null
 echo "=== smoke adgpu ==="
 P=/home/sandbox/work/12/bin/pocl-prefix
