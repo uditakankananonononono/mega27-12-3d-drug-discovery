@@ -97,8 +97,8 @@ for _ in range(5):
 para("Structure-Based 3D Drug Discovery Against the SARS-CoV-2 Main Protease",
      bold=True, align="center").runs[0].font.size = Pt(22)
 doc.paragraphs[-1].runs[0].font.color.rgb = BLUE
-para("Validated Redocking, an Honest Docking Negative, a Pose-Graph Neural Rescoring "
-     "Benchmark, and the De Novo Candidate MPRO-D1",
+para("Validated Redocking, a Pose-Graph Neural Rescoring Benchmark, and the De Novo "
+     "Candidate MPRO-D1",
      italic=True, align="center").runs[0].font.size = Pt(13)
 doc.add_paragraph()
 para("MEGA-PROGRAM-27, Item 12", align="center")
@@ -114,23 +114,25 @@ para("WHAT WAS BUILT: an end-to-end, redock-validated structure-based discovery 
      "shipped as tested code with this paper.")
 para(f"WHAT WAS FOUND: (1) the protocol is validated - redocking JUN8-76-3A into 7KX5 "
      f"reproduces the crystal pose at {redock['rmsd_A']:.2f} A heavy-atom RMSD (gate "
-     f"2.0 A), affinity {redock['best_affinity_kcal_mol']:.2f} kcal/mol. (2) An honest "
-     f"negative: raw Vina affinity does NOT rank actives above inactives on this set "
-     f"(AUROC {analysis['auroc_raw_vina']:.3f}, below random; top-8 hypergeometric p = "
-     f"{analysis['hypergeometric_p']:.3f}). (3) A benchmark head-to-head: a pose-graph "
-     f"neural rescorer trained on re-docked poses lifts leave-one-out AUROC to "
-     f"{gnnrob['mean']:.3f} +/- {gnnrob['std']:.3f} (5 seeds) versus {analysis['auroc_nn_rescorer_loo']:.3f} "
-     f"for a descriptor MLP and {analysis['auroc_raw_vina']:.3f} for the raw engine, on the "
-     f"same {analysis['n_labeled']} labeled compounds. That 15-compound ladder is the pilot; "
+     f"2.0 A), affinity {redock['best_affinity_kcal_mol']:.2f} kcal/mol. (2) A benchmark "
+     f"head-to-head: a pose-graph neural rescorer trained on re-docked poses lifts "
+     f"leave-one-out AUROC to {gnnrob['mean']:.3f} +/- {gnnrob['std']:.3f} (5 seeds) versus "
+     f"{analysis['auroc_nn_rescorer_loo']:.3f} for a descriptor MLP and "
+     f"{analysis['auroc_raw_vina']:.3f} for the raw engine, on the same "
+     f"{analysis['n_labeled']} labeled compounds. That 15-compound ladder is the pilot; "
      f"the primary benchmark is the 59-compound scaffold-grouped bigscreen, where raw Vina "
      f"sits at {big['auroc_raw_vina']:.3f} and both learned rescorers reach "
      f"{big['auroc_mlp_loo']:.3f} (MLP) / {big['auroc_gnn2d_loo_mean']:.3f} +/- "
      f"{big['auroc_gnn2d_loo_std']:.3f} (2D-GNN) - learned rescoring, not a winner between "
-     f"learned families, is the verdict at this n. (4) A de novo candidate, MPRO-D1, "
+     f"learned families, is the verdict at this n. (3) A de novo candidate, MPRO-D1, "
      f"docking at {denovo['predicted_affinity_kcal_mol']:.2f} kcal/mol under the validated "
      f"protocol, maximally dissimilar to every screened drug (Tanimoto "
      f"{denovo['tanimoto_max_vs_screened_drugs']:.2f}), verified absent from PubChem as an "
-     f"exact structure, with close analogs disclosed.")
+     f"exact structure, with close analogs disclosed. (4) The baseline that anchors the "
+     f"benchmark, reported as measured: raw Vina affinity does NOT rank actives above "
+     f"inactives on this set (AUROC {analysis['auroc_raw_vina']:.3f}, below random; top-8 "
+     f"hypergeometric p = {analysis['hypergeometric_p']:.3f}) - without that negative the "
+     f"rescorer numbers would be unanchored.")
 para("WHAT WOULD FALSIFY IT: the redock gate is binary and re-runnable; the AUROC numbers "
      "recompute from the shipped poses; MPRO-D1's prediction is decided by a crystal or "
      "ITC experiment. Small-n caveats are stated wherever n is small.")
@@ -148,23 +150,25 @@ doc.add_page_break()
 # ---------- abstract
 heading("Abstract", 1)
 para(
- "Structure-based drug discovery begins from an honest question: does the docking "
- "protocol actually work on this target? This study answers that question first and "
- "refuses to hide the answer when a later one is unflattering. Using the real AutoDock "
+ "This study delivers a validated structure-based discovery pipeline for the "
+ "SARS-CoV-2 main protease (Mpro), a quantified head-to-head benchmark of learned "
+ "rescoring against the empirical docking engine, and MPRO-D1, a novel de novo "
+ "candidate with a live-verified novelty record. Using the real AutoDock "
  "Vina 1.2 engine, we validate the protocol by redocking the non-covalent inhibitor "
- f"JUN8-76-3A into the SARS-CoV-2 main protease (Mpro, PDB 7KX5): the docked pose "
+ f"JUN8-76-3A into Mpro (PDB 7KX5): the docked pose "
  f"reproduces the experimental binding mode at {redock['rmsd_A']:.2f} A heavy-atom RMSD, "
  f"inside the community-standard 2.0 A gate, at {redock['best_affinity_kcal_mol']:.2f} "
- f"kcal/mol. We then dock a curated set of {analysis['n_docked']} real approved and "
- "clinical compounds with literature Mpro labels. The campaign delivers an honest "
- f"negative: raw Vina affinity separates actives from inactives at AUROC "
- f"{analysis['auroc_raw_vina']:.3f} - below chance - and top-8 enrichment is absent "
- f"(hypergeometric p = {analysis['hypergeometric_p']:.3f}). A descriptor MLP rescorer "
- f"recovers to {analysis['auroc_nn_rescorer_loo']:.3f} leave-one-out AUROC, and a "
- "pose-graph neural rescorer - message passing over the docked protein-ligand contact "
- f"graph - reaches {gnnrob['mean']:.3f} +/- {gnnrob['std']:.3f} (five seeds) on the same labels, a "
- "quantified head-to-head benchmark of learned rescoring against the physics-empirical "
- "engine. Finally, a constrained de novo enumerator proposes MPRO-D1, a biphenyl-amide "
+ f"kcal/mol. Docking a curated set of {analysis['n_docked']} real approved and "
+ "clinical compounds with literature Mpro labels sets the baseline the benchmark must "
+ f"beat, and it is reported as measured: raw Vina affinity separates actives from "
+ f"inactives at AUROC {analysis['auroc_raw_vina']:.3f} - below chance - and top-8 "
+ f"enrichment is absent (hypergeometric p = {analysis['hypergeometric_p']:.3f}). "
+ f"A descriptor MLP rescorer recovers to {analysis['auroc_nn_rescorer_loo']:.3f} "
+ "leave-one-out AUROC, and a pose-graph neural rescorer - message passing over the "
+ f"docked protein-ligand contact graph - reaches {gnnrob['mean']:.3f} +/- "
+ f"{gnnrob['std']:.3f} (five seeds) on the same labels, a quantified head-to-head "
+ "benchmark of learned rescoring against the physics-empirical engine. Finally, a "
+ "constrained de novo enumerator proposes MPRO-D1, a biphenyl-amide "
  f"ligand docking at {denovo['predicted_affinity_kcal_mol']:.2f} kcal/mol, Tanimoto "
  f"{denovo['tanimoto_max_vs_screened_drugs']:.2f} against the nearest screened drug, "
  "verified as an exact-structure novelty against PubChem with its close analogs "
@@ -751,12 +755,13 @@ para(
 heading("6. Conclusion", 1)
 para(
  "A validated, reproducible, structure-based discovery pipeline for SARS-CoV-2 Mpro now "
- f"exists in this repository: redock-validated at {redock['rmsd_A']:.2f} A; an honestly "
- f"negative raw-docking screen (AUROC {analysis['auroc_raw_vina']:.3f}); a pose-graph "
+ f"exists in this repository: redock-validated at {redock['rmsd_A']:.2f} A; a pose-graph "
  f"rescoring benchmark that recovers ranking to {gnnrob['mean']:.3f} +/- {gnnrob['std']:.3f} "
  "leave-one-out on the same labels, with the n = 59 bigscreen as the primary learned-"
  "rescoring verdict; and MPRO-D1, a novel de novo candidate with a live-verified "
- "novelty record and a falsifiable prediction. The pipeline extends to new targets by "
+ "novelty record and a falsifiable prediction. The raw-docking screen's negative "
+ f"(AUROC {analysis['auroc_raw_vina']:.3f}) is kept as the measured baseline that "
+ "anchors the benchmark. The pipeline extends to new targets by "
  "changing one structure file and one ligand list.")
 
 
@@ -1473,9 +1478,9 @@ para(
 
 heading("Appendix AH. Closing Statement", 1)
 para(
- "This paper reports a validated protocol, an honest negative, a benchmark recovery, "
- "and a novel candidate - in that order, because that is the order in which each "
- "result licenses the next. The records are the deliverable; the paper is their "
+ "This paper reports a validated protocol, a benchmark recovery, and a novel "
+ "candidate, with the raw-engine negative kept as the measured baseline that makes "
+ "the benchmark mean something. The records are the deliverable; the paper is their "
  "index. Everything claimed here regenerates from shipped code against public data, "
  "and everything that failed is in the failure log with its reason. That is the "
  "standard the program holds, and this lane met it.")
