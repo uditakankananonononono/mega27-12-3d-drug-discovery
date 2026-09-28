@@ -1,0 +1,16 @@
+npts 64 64 64
+gridfld /home/sandbox/work/12/studies/constraint12b/7c6s_std.maps.fld
+spacing 0.375
+receptor_types A C HD N NA OA SA
+ligand_types C Cl HD N OA
+receptor /home/sandbox/work/12/studies/covalent/7c6s_rec_rigid.pdbqt
+gridcenter -19.915 -21.076 0.485
+smooth 0.5
+map /home/sandbox/work/12/studies/constraint12b/7c6s_std.C.map
+map /home/sandbox/work/12/studies/constraint12b/7c6s_std.Cl.map
+map /home/sandbox/work/12/studies/constraint12b/7c6s_std.HD.map
+map /home/sandbox/work/12/studies/constraint12b/7c6s_std.N.map
+map /home/sandbox/work/12/studies/constraint12b/7c6s_std.OA.map
+elecmap /home/sandbox/work/12/studies/constraint12b/7c6s_std.e.map
+dsolvmap /home/sandbox/work/12/studies/constraint12b/7c6s_std.d.map
+dielectric -0.1465

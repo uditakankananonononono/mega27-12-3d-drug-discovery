@@ -1,0 +1,18 @@
+npts 64 64 64
+gridfld /home/sandbox/work/12/studies/constraint12b/7vh8_std.maps.fld
+spacing 0.375
+receptor_types A C HD N NA OA SA
+ligand_types C Cl F HD N NA OA
+receptor /home/sandbox/work/12/studies/covalent/7vh8_rec_rigid.pdbqt
+gridcenter -19.054 15.539 -31.610
+smooth 0.5
+map /home/sandbox/work/12/studies/constraint12b/7vh8_std.C.map
+map /home/sandbox/work/12/studies/constraint12b/7vh8_std.Cl.map
+map /home/sandbox/work/12/studies/constraint12b/7vh8_std.F.map
+map /home/sandbox/work/12/studies/constraint12b/7vh8_std.HD.map
+map /home/sandbox/work/12/studies/constraint12b/7vh8_std.N.map
+map /home/sandbox/work/12/studies/constraint12b/7vh8_std.NA.map
+map /home/sandbox/work/12/studies/constraint12b/7vh8_std.OA.map
+elecmap /home/sandbox/work/12/studies/constraint12b/7vh8_std.e.map
+dsolvmap /home/sandbox/work/12/studies/constraint12b/7vh8_std.d.map
+dielectric -0.1465
