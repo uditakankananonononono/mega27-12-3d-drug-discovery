@@ -5,3 +5,4 @@ build/
 dist/
 results/transfer8v8e/_inflight.json
 results/transfer8v8e/_partials/
+bin/pocl-prefix/

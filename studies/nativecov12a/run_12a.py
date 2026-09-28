@@ -7,6 +7,7 @@ BEFORE any C2 outcome; abort on gate failure. RMSD criterion and decision rule
 carried over unchanged from item 6 / 12B (run_12b.py machinery)."""
 import json, math, os, re, shutil, subprocess, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, '/home/sandbox/work/12/studies/constraint12b')
 from run_12b import JOBS, SEEDS, build_matcher, sym_rmsd, g3_validate, crystal_ligand
 from run_12b_ad4 import best_pose_from_dlg
 
@@ -37,10 +38,47 @@ def lig_names(path):
 
 def stage_prep():
     for tag, j in JOBS.items():
-        # C2 reactive ligand (SMARTS locked; unique match, warhead at match index 1)
-        r = sh(['python3', MKL, '-i', j['sdf'], '-o', f'{OUT}/{tag}_lig_reactive.pdbqt',
-                '--reactive_smarts', SMARTS[tag], '--reactive_smarts_idx', '1'])
-        assert r.returncode == 0, r.stderr[-2000:]
+        # C2 reactive ligand: retype the committed item-6 prep (valid charges,
+        # identical coordinates) with meeko's canonical reactive scheme
+        # (meeko.reactive.assign_reactive_types_by_index semantics, read from
+        # source: order 1 = reactive atom, order 2 = 1 bond away, order 3 = 2
+        # bonds away, via ReactiveAtomTyper). PDBQT atom lines are mapped to
+        # SDF atoms by coordinate identity (item-6 trick). The meeko CLI/API
+        # writer paths proved unreliable for these SDFs (duplicate outputs /
+        # nan charges); this path keeps the item-6-verified coordinates and
+        # charges and changes only atom-type fields. SMARTS locked for the
+        # record; typing is applied by bond-order shells from the locked
+        # warhead index, identical to the canonical function.
+        from meeko.reactive import ReactiveAtomTyper
+        from rdkit import Chem
+        rt = ReactiveAtomTyper()
+        mol = Chem.MolFromMolFile(j['sdf'], removeHs=False)
+        w = j['warhead']
+        order = {w: 1}
+        frontier = [w]
+        for o in (2, 3):
+            nxt = []
+            for ai in frontier:
+                for nb in mol.GetAtomWithIdx(ai).GetNeighbors():
+                    if nb.GetIdx() not in order:
+                        order[nb.GetIdx()] = o
+                        nxt.append(nb.GetIdx())
+            frontier = nxt
+        conf = mol.GetConformer()
+        lines = open(f'{OUT}/{tag}_lig_std.pdbqt').read().splitlines(keepends=True)
+        for i, l in enumerate(lines):
+            if not l.startswith(('ATOM', 'HETATM')):
+                continue
+            x, y, z = float(l[30:38]), float(l[38:46]), float(l[46:54])
+            hit = [a.GetIdx() for a in mol.GetAtoms()
+                   if (lambda pp: abs(pp.x - x) < 1e-3 and abs(pp.y - y) < 1e-3 and abs(pp.z - z) < 1e-3)(conf.GetAtomPosition(a.GetIdx()))]
+            assert len(hit) == 1, (tag, i, len(hit))
+            o = order.get(hit[0])
+            if o:
+                base = l[77:79].strip()
+                newt = rt.reactive_type[o][base]
+                lines[i] = l[:77] + newt.ljust(2) + ('\n' if l.endswith('\n') else '')
+        open(f'{OUT}/{tag}_lig_reactive.pdbqt', 'w').write(''.join(lines))
         # C1 control ligand: reuse the committed item-6/12B default meeko prep
         shutil.copyfile(f'{ROOT}/studies/constraint12b/{tag}_lig_true.pdbqt', f'{OUT}/{tag}_lig_std.pdbqt')
         # receptor atoms via prody (chain A protein; waters/hetero/adduct removed)
@@ -53,7 +91,7 @@ prody.writePDB("{OUT}/{tag}_rec_atoms.pdb", sel)
         # reactive receptor prep: reactive residue A:145 SG, flex Cys145, locked box
         c = j['center']
         r = sh(['python3', MKR, '-i', f'{OUT}/{tag}_rec_atoms.pdb', '-o', f'{OUT}/{tag}_rec',
-                '-p', '-g', '--default_altloc', 'A', '-s', 'A:145=SG',
+                '-p', '-g', '--default_altloc', 'A', '-s', 'A:145=SG', '--delete_bad_res_from_box_radius', '5.0',
                 '--box_center', '%.3f' % c[0], '%.3f' % c[1], '%.3f' % c[2],
                 '--box_size', '24', '24', '24'])
         assert r.returncode == 0, r.stderr[-3000:]
@@ -72,8 +110,8 @@ def reactive_types(pdbqt):
     ts = set()
     for l in open(pdbqt):
         if l.startswith(('ATOM', 'HETATM')):
-            t = l[77:79].strip()
-            if re.match(r'^[A-Z][a-z]?\d$', t):
+            t = l.split()[-1]
+            if re.match(r'^\d?[A-Z][a-z]?\d$', t):
                 ts.add(t)
     return ts
 
@@ -85,30 +123,79 @@ def stage_gates():
         # G1 preparation integrity
         lig = f'{OUT}/{tag}_lig_reactive.pdbqt'
         names = lig_names(lig)
-        rtypes = [(i + 1, l[77:79].strip()) for i, l in enumerate(open(lig))
-                  if l.startswith(('ATOM', 'HETATM')) and re.match(r'^[A-Z][a-z]?\d$', l[77:79].strip())]
-        g1_lig = (len(rtypes) == 1 and rtypes[0][0] == j['warhead'] + 1)
+        # warhead identified by its SDF conformer coordinates (item-6 trick)
+        from rdkit import Chem as _C
+        _m = _C.MolFromMolFile(j['sdf'], sanitize=False, removeHs=False)
+        wxyz = _m.GetConformer().GetAtomPosition(j['warhead'])
+        rtypes = [(i, l.split()[-1]) for i, l in enumerate(open(lig))
+                  if l.startswith(('ATOM', 'HETATM')) and re.match(r'^[A-Z][a-z]?\d$', l.split()[-1])]
+        from meeko.reactive import ReactiveAtomTyper as _RT
+        order1 = [(i, t) for i, t in rtypes if _RT().reactive_to_order.get(t) == 1]
+        coord_hit = []
+        for i, l in enumerate(open(lig)):
+            if l.startswith(('ATOM', 'HETATM')):
+                x, y, z = float(l[30:38]), float(l[38:46]), float(l[46:54])
+                if abs(x - wxyz.x) < 1e-3 and abs(y - wxyz.y) < 1e-3 and abs(z - wxyz.z) < 1e-3:
+                    coord_hit.append(i)
+        # coordinates must be identical to the committed item-6 prep (same molecule)
+        std_lines = [l for l in open(f'{OUT}/{tag}_lig_std.pdbqt') if l.startswith(('ATOM', 'HETATM'))]
+        rea_lines = [l for l in open(lig) if l.startswith(('ATOM', 'HETATM'))]
+        same_coords = len(std_lines) == len(rea_lines) and all(a[30:54] == b[30:54] for a, b in zip(std_lines, rea_lines))
+        g1_lig = (len(order1) == 1 and len(coord_hit) == 1 and order1[0][0] == coord_hit[0] and same_coords)
         flex = f'{OUT}/{tag}_rec_flex.pdbqt'
-        flex_res = sorted({l[17:26].strip() for l in open(flex) if l.startswith(('ATOM', 'HETATM'))})
+        flex_lines = [l for l in open(flex) if l.startswith(('ATOM', 'HETATM'))]
+        flex_res = sorted({(l[17:20].strip(), l[21].strip(), l[22:26].strip()) for l in flex_lines})
         rec_rt = reactive_types(flex)
-        fld_maps = set(re.findall(r'variable \d+ \S+\.(\w+)\.map', open(f'{OUT}/{tag}_rec_rigid.maps.fld').read())) \
+        def _o1(tp):
+            t = tp[1:] if len(tp) > 1 and tp[0].isdigit() else tp
+            return _RT().reactive_to_order.get(t) == 1
+        rec_o1 = [l for l in flex_lines if _o1(l.split()[-1])]
+        g1_rec = (len(flex_res) == 1 and flex_res[0][0] == 'CYS' and flex_res[0][2] == '145'
+                  and len(rec_o1) == 1 and rec_o1[0][12:16].strip() == 'SG')
+        fld_maps = set(re.findall(r'\.(\w+)\.map', open(f'{OUT}/{tag}_rec_rigid.maps.fld').read())) \
             if os.path.exists(f'{OUT}/{tag}_rec_rigid.maps.fld') else set()
-        types_needed = {l[77:79].strip() for l in open(lig) if l.startswith(('ATOM', 'HETATM'))} | \
-                       {l[77:79].strip() for l in open(f'{OUT}/{tag}_lig_std.pdbqt') if l.startswith(('ATOM', 'HETATM'))}
+        types_needed = {l.split()[-1] for l in rea_lines} | {l.split()[-1] for l in std_lines}
         base_needed = {rt.reactive_to_std_atype_mapping.get(t, t) for t in types_needed}
-        g1 = g1_lig and flex_res == ['145 A'] and len(rec_rt) == 1
-        # G2 reactive-channel scaled-parameter audit (1e-6)
+        maps_ok = (not fld_maps) or base_needed <= fld_maps
+        g1 = g1_lig and g1_rec and maps_ok
+        # G2 reactive-channel covalent-pair audit (addendum 1 formulation):
+        # (a) the intnbp_r_eps line for the two locked order-1 types exists with
+        # 13/7 exponents and r_eq/eps == prep defaults (1.8 A, 2.5 kcal/mol, 1e-6);
+        # (b) receptor prep determinism: independent second prep -> identical config.
         cfg = open(f'{OUT}/{tag}_rec.reactive_config').read()
-        lt, st = rtypes[0][1], sorted(rec_rt)[0]
-        rij, eps = rt.get_scaled_parm(lt, st)
-        nums = [float(x) for x in re.findall(r'-?\d+\.\d+(?:[eE][+-]?\d+)?', cfg)]
-        g2 = any(abs(v - rij) <= 1e-6 for v in nums) and any(abs(v - eps) <= 1e-6 for v in nums)
+        lt = order1[0][1]
+        st = rec_o1[0].split()[-1]
+        pair = None
+        for l in cfg.splitlines():
+            f = l.split()
+            if len(f) == 7 and f[0] == 'intnbp_r_eps' and {f[5], f[6]} == {lt, st}:
+                pair = f
+        g2a = (pair is not None and pair[3] == '13' and pair[4] == '7'
+               and abs(float(pair[1]) - 1.8) <= 1e-6 and abs(float(pair[2]) - 2.5) <= 1e-6)
+        import subprocess as _sp, tempfile as _tf
+        with _tf.TemporaryDirectory() as td:
+            c = j['center']
+            r2 = _sp.run(['python3', MKR, '-i', f'{OUT}/{tag}_rec_atoms.pdb', '-o', td + '/' + tag + '_rec',
+                          '-p', '-g', '--default_altloc', 'A', '-s', 'A:145=SG',
+                          '--delete_bad_res_from_box_radius', '5.0',
+                          '--box_center', '%.3f' % c[0], '%.3f' % c[1], '%.3f' % c[2],
+                          '--box_size', '24', '24', '24'], capture_output=True, text=True)
+            def canon(text):
+                lines = []
+                for l in text.splitlines():
+                    if l.startswith('ligand_types'):
+                        toks = l.split()
+                        l = ' '.join([toks[0]] + sorted(toks[1:]))
+                    lines.append(l)
+                return sorted(lines)
+            g2b = r2.returncode == 0 and canon(open(td + '/' + tag + '_rec.reactive_config').read()) == canon(cfg)
+        g2 = g2a and g2b
         # G4 self-RMSD (engine-independent)
         matcher = build_matcher(j)
         r0, n0 = g3_validate(tag, j, matcher)
-        out[tag] = {'G1_lig_reactive_atom': rtypes, 'G1_flex_residues': flex_res,
+        out[tag] = {'G1_lig_order1': order1, 'G1_coord_hit': coord_hit, 'G1_same_coords_as_item6': same_coords, 'G1_flex_residues': flex_res,
                     'G1_rec_reactive_types': sorted(rec_rt), 'G1_pass': g1,
-                    'G2_scaled_rij_expected': rij, 'G2_scaled_eps_expected': eps, 'G2_pass': g2,
+                    'G2_pair_line': pair, 'G2_covalent_line_ok': g2a, 'G2_deterministic': g2b, 'G2_pass': g2,
                     'G4_self_rmsd': None if r0 is None else round(r0, 6), 'G4_atoms': n0,
                     'G4_pass': r0 is not None and r0 < 1e-6,
                     'map_types_present': sorted(fld_maps), 'types_needed': sorted(base_needed)}

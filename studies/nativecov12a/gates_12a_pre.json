@@ -1,0 +1,136 @@
+{
+ "7vh8": {
+  "G1_lig_order1": [
+   [
+    48,
+    "C1"
+   ]
+  ],
+  "G1_coord_hit": [
+   48
+  ],
+  "G1_same_coords_as_item6": true,
+  "G1_flex_residues": [
+   [
+    "CYS",
+    "A",
+    "145"
+   ]
+  ],
+  "G1_rec_reactive_types": [
+   "1C2",
+   "1C3",
+   "1H5",
+   "1S4"
+  ],
+  "G1_pass": true,
+  "G2_pair_line": [
+   "intnbp_r_eps",
+   "1.800000",
+   "2.500000",
+   "13",
+   "7",
+   "1S4",
+   "C1"
+  ],
+  "G2_covalent_line_ok": true,
+  "G2_deterministic": true,
+  "G2_pass": true,
+  "G4_self_rmsd": 0.0,
+  "G4_atoms": 35,
+  "G4_pass": true,
+  "map_types_present": [
+   "A",
+   "B",
+   "Br",
+   "C",
+   "Cl",
+   "F",
+   "HD",
+   "I",
+   "N",
+   "NA",
+   "OA",
+   "P",
+   "S",
+   "SA",
+   "Si",
+   "d",
+   "e"
+  ],
+  "types_needed": [
+   "C",
+   "F",
+   "HD",
+   "N",
+   "NA",
+   "OA"
+  ]
+ },
+ "7c6s": {
+  "G1_lig_order1": [
+   [
+    33,
+    "C1"
+   ]
+  ],
+  "G1_coord_hit": [
+   33
+  ],
+  "G1_same_coords_as_item6": true,
+  "G1_flex_residues": [
+   [
+    "CYS",
+    "A",
+    "145"
+   ]
+  ],
+  "G1_rec_reactive_types": [
+   "1C2",
+   "1C3",
+   "1H5",
+   "1S4"
+  ],
+  "G1_pass": true,
+  "G2_pair_line": [
+   "intnbp_r_eps",
+   "1.800000",
+   "2.500000",
+   "13",
+   "7",
+   "1S4",
+   "C1"
+  ],
+  "G2_covalent_line_ok": true,
+  "G2_deterministic": true,
+  "G2_pass": true,
+  "G4_self_rmsd": 0.0,
+  "G4_atoms": 37,
+  "G4_pass": true,
+  "map_types_present": [
+   "A",
+   "B",
+   "Br",
+   "C",
+   "Cl",
+   "F",
+   "HD",
+   "I",
+   "N",
+   "NA",
+   "OA",
+   "P",
+   "S",
+   "SA",
+   "Si",
+   "d",
+   "e"
+  ],
+  "types_needed": [
+   "C",
+   "HD",
+   "N",
+   "OA"
+  ]
+ }
+}

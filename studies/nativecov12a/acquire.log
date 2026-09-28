@@ -1,0 +1,1541 @@
++ cd /home/sandbox/work/12
++ echo '=== download adgpu binary ==='
+=== download adgpu binary ===
++ curl -sL -o bin/adgpu/adgpu https://github.com/ccsb-scripps/AutoDock-GPU/releases/download/v1.6/adgpu-v1.6_linux_x64_ocl_128wi
++ chmod +x bin/adgpu/adgpu
++ sha256sum bin/adgpu/adgpu
+8a22804c1fde62a59c030a45e8a9d9d960ff329d22e4927daf7464df393b8047  bin/adgpu/adgpu
++ echo '=== pocl debs ==='
+=== pocl debs ===
++ mkdir -p /tmp/pocl-debs
++ cd /tmp/pocl-debs
++ declare -A seen
++ queue='libpocl2 pocl-opencl-icd libpocl2-common'
++ touch /tmp/pocl-debs/list.txt
++ '[' -n 'libpocl2 pocl-opencl-icd libpocl2-common' ']'
+++ echo libpocl2 pocl-opencl-icd libpocl2-common
+++ cut '-d ' -f1
++ pkg=libpocl2
+++ echo libpocl2 pocl-opencl-icd libpocl2-common
+++ cut '-d ' -f2- -s
++ queue='pocl-opencl-icd libpocl2-common'
++ '[' -n '' ']'
++ seen[$pkg]=1
++ apt-get download libpocl2
++ echo libpocl2
+++ apt-cache depends libpocl2
+++ grep -v '[<>]'
+++ awk '{print $2}'
+++ grep -E '^\s+(PreDepends|Depends):'
+++ grep -v -E '^libc6$|^libstdc\+\+6$|^libgcc-s1$|^libzstd1$|^zlib1g$|^libxml2$|^libicu70$|^liblzma5$|^libncursesw6$|^libtinfo6$|^libedit2$|^libffi8$|^libbsd0$|^libmd0$'
++ deps='libpocl2-common
+clang-11
+libclang-cpp11
+libhwloc15
+libllvm11'
++ for d in $deps
++ '[' -z '' ']'
++ queue='pocl-opencl-icd libpocl2-common libpocl2-common'
++ for d in $deps
++ '[' -z '' ']'
++ queue='pocl-opencl-icd libpocl2-common libpocl2-common clang-11'
++ for d in $deps
++ '[' -z '' ']'
++ queue='pocl-opencl-icd libpocl2-common libpocl2-common clang-11 libclang-cpp11'
++ for d in $deps
++ '[' -z '' ']'
++ queue='pocl-opencl-icd libpocl2-common libpocl2-common clang-11 libclang-cpp11 libhwloc15'
++ for d in $deps
++ '[' -z '' ']'
++ queue='pocl-opencl-icd libpocl2-common libpocl2-common clang-11 libclang-cpp11 libhwloc15 libllvm11'
++ '[' -n 'pocl-opencl-icd libpocl2-common libpocl2-common clang-11 libclang-cpp11 libhwloc15 libllvm11' ']'
+++ echo pocl-opencl-icd libpocl2-common libpocl2-common clang-11 libclang-cpp11 libhwloc15 libllvm11
+++ cut '-d ' -f1
++ pkg=pocl-opencl-icd
+++ echo pocl-opencl-icd libpocl2-common libpocl2-common clang-11 libclang-cpp11 libhwloc15 libllvm11
+++ cut '-d ' -f2- -s
++ queue='libpocl2-common libpocl2-common clang-11 libclang-cpp11 libhwloc15 libllvm11'
++ '[' -n '' ']'
++ seen[$pkg]=1
++ apt-get download pocl-opencl-icd
++ echo pocl-opencl-icd
+++ apt-cache depends pocl-opencl-icd
+++ grep -v '[<>]'
+++ awk '{print $2}'
+++ grep -E '^\s+(PreDepends|Depends):'
+++ grep -v -E '^libc6$|^libstdc\+\+6$|^libgcc-s1$|^libzstd1$|^zlib1g$|^libxml2$|^libicu70$|^liblzma5$|^libncursesw6$|^libtinfo6$|^libedit2$|^libffi8$|^libbsd0$|^libmd0$'
++ deps=libpocl2
++ for d in $deps
++ '[' -z 1 ']'
++ '[' -n 'libpocl2-common libpocl2-common clang-11 libclang-cpp11 libhwloc15 libllvm11' ']'
+++ echo libpocl2-common libpocl2-common clang-11 libclang-cpp11 libhwloc15 libllvm11
+++ cut '-d ' -f1
++ pkg=libpocl2-common
+++ echo libpocl2-common libpocl2-common clang-11 libclang-cpp11 libhwloc15 libllvm11
+++ cut '-d ' -f2- -s
++ queue='libpocl2-common clang-11 libclang-cpp11 libhwloc15 libllvm11'
++ '[' -n '' ']'
++ seen[$pkg]=1
++ apt-get download libpocl2-common
++ echo libpocl2-common
+++ apt-cache depends libpocl2-common
+++ grep -v '[<>]'
+++ awk '{print $2}'
+++ grep -E '^\s+(PreDepends|Depends):'
+++ grep -v -E '^libc6$|^libstdc\+\+6$|^libgcc-s1$|^libzstd1$|^zlib1g$|^libxml2$|^libicu70$|^liblzma5$|^libncursesw6$|^libtinfo6$|^libedit2$|^libffi8$|^libbsd0$|^libmd0$'
++ deps=
++ '[' -n 'libpocl2-common clang-11 libclang-cpp11 libhwloc15 libllvm11' ']'
+++ echo libpocl2-common clang-11 libclang-cpp11 libhwloc15 libllvm11
+++ cut '-d ' -f1
++ pkg=libpocl2-common
+++ echo libpocl2-common clang-11 libclang-cpp11 libhwloc15 libllvm11
+++ cut '-d ' -f2- -s
++ queue='clang-11 libclang-cpp11 libhwloc15 libllvm11'
++ '[' -n 1 ']'
++ continue
++ '[' -n 'clang-11 libclang-cpp11 libhwloc15 libllvm11' ']'
+++ echo clang-11 libclang-cpp11 libhwloc15 libllvm11
+++ cut '-d ' -f1
++ pkg=clang-11
+++ echo clang-11 libclang-cpp11 libhwloc15 libllvm11
+++ cut '-d ' -f2- -s
++ queue='libclang-cpp11 libhwloc15 libllvm11'
++ '[' -n '' ']'
++ seen[$pkg]=1
++ apt-get download clang-11
++ echo clang-11
+++ apt-cache depends clang-11
+++ grep -v '[<>]'
+++ awk '{print $2}'
+++ grep -E '^\s+(PreDepends|Depends):'
+++ grep -v -E '^libc6$|^libstdc\+\+6$|^libgcc-s1$|^libzstd1$|^zlib1g$|^libxml2$|^libicu70$|^liblzma5$|^libncursesw6$|^libtinfo6$|^libedit2$|^libffi8$|^libbsd0$|^libmd0$'
++ deps='libclang-cpp11
+libllvm11
+libstdc++-11-dev
+libgcc-11-dev
+libobjc-11-dev
+libclang-common-11-dev
+llvm-11-linker-tools
+libclang1-11
+libc6-dev
+binutils'
++ for d in $deps
++ '[' -z '' ']'
++ queue='libclang-cpp11 libhwloc15 libllvm11 libclang-cpp11'
++ for d in $deps
++ '[' -z '' ']'
++ queue='libclang-cpp11 libhwloc15 libllvm11 libclang-cpp11 libllvm11'
++ for d in $deps
++ '[' -z '' ']'
++ queue='libclang-cpp11 libhwloc15 libllvm11 libclang-cpp11 libllvm11 libstdc++-11-dev'
++ for d in $deps
++ '[' -z '' ']'
++ queue='libclang-cpp11 libhwloc15 libllvm11 libclang-cpp11 libllvm11 libstdc++-11-dev libgcc-11-dev'
++ for d in $deps
++ '[' -z '' ']'
++ queue='libclang-cpp11 libhwloc15 libllvm11 libclang-cpp11 libllvm11 libstdc++-11-dev libgcc-11-dev libobjc-11-dev'
++ for d in $deps
++ '[' -z '' ']'
++ queue='libclang-cpp11 libhwloc15 libllvm11 libclang-cpp11 libllvm11 libstdc++-11-dev libgcc-11-dev libobjc-11-dev libclang-common-11-dev'
++ for d in $deps
++ '[' -z '' ']'
++ queue='libclang-cpp11 libhwloc15 libllvm11 libclang-cpp11 libllvm11 libstdc++-11-dev libgcc-11-dev libobjc-11-dev libclang-common-11-dev llvm-11-linker-tools'
++ for d in $deps
++ '[' -z '' ']'
++ queue='libclang-cpp11 libhwloc15 libllvm11 libclang-cpp11 libllvm11 libstdc++-11-dev libgcc-11-dev libobjc-11-dev libclang-common-11-dev llvm-11-linker-tools libclang1-11'
++ for d in $deps
++ '[' -z '' ']'
++ queue='libclang-cpp11 libhwloc15 libllvm11 libclang-cpp11 libllvm11 libstdc++-11-dev libgcc-11-dev libobjc-11-dev libclang-common-11-dev llvm-11-linker-tools libclang1-11 libc6-dev'
++ for d in $deps
++ '[' -z '' ']'
++ queue='libclang-cpp11 libhwloc15 libllvm11 libclang-cpp11 libllvm11 libstdc++-11-dev libgcc-11-dev libobjc-11-dev libclang-common-11-dev llvm-11-linker-tools libclang1-11 libc6-dev binutils'
++ '[' -n 'libclang-cpp11 libhwloc15 libllvm11 libclang-cpp11 libllvm11 libstdc++-11-dev libgcc-11-dev libobjc-11-dev libclang-common-11-dev llvm-11-linker-tools libclang1-11 libc6-dev binutils' ']'
+++ echo libclang-cpp11 libhwloc15 libllvm11 libclang-cpp11 libllvm11 libstdc++-11-dev libgcc-11-dev libobjc-11-dev libclang-common-11-dev llvm-11-linker-tools libclang1-11 libc6-dev binutils
+++ cut '-d ' -f1
++ pkg=libclang-cpp11
+++ echo libclang-cpp11 libhwloc15 libllvm11 libclang-cpp11 libllvm11 libstdc++-11-dev libgcc-11-dev libobjc-11-dev libclang-common-11-dev llvm-11-linker-tools libclang1-11 libc6-dev binutils
+++ cut '-d ' -f2- -s
++ queue='libhwloc15 libllvm11 libclang-cpp11 libllvm11 libstdc++-11-dev libgcc-11-dev libobjc-11-dev libclang-common-11-dev llvm-11-linker-tools libclang1-11 libc6-dev binutils'
++ '[' -n '' ']'
++ seen[$pkg]=1
++ apt-get download libclang-cpp11
++ echo libclang-cpp11
+++ apt-cache depends libclang-cpp11
+++ grep -v '[<>]'
+++ awk '{print $2}'
+++ grep -E '^\s+(PreDepends|Depends):'
+++ grep -v -E '^libc6$|^libstdc\+\+6$|^libgcc-s1$|^libzstd1$|^zlib1g$|^libxml2$|^libicu70$|^liblzma5$|^libncursesw6$|^libtinfo6$|^libedit2$|^libffi8$|^libbsd0$|^libmd0$'
++ deps=libllvm11
++ for d in $deps
++ '[' -z '' ']'
++ queue='libhwloc15 libllvm11 libclang-cpp11 libllvm11 libstdc++-11-dev libgcc-11-dev libobjc-11-dev libclang-common-11-dev llvm-11-linker-tools libclang1-11 libc6-dev binutils libllvm11'
++ '[' -n 'libhwloc15 libllvm11 libclang-cpp11 libllvm11 libstdc++-11-dev libgcc-11-dev libobjc-11-dev libclang-common-11-dev llvm-11-linker-tools libclang1-11 libc6-dev binutils libllvm11' ']'
+++ echo libhwloc15 libllvm11 libclang-cpp11 libllvm11 libstdc++-11-dev libgcc-11-dev libobjc-11-dev libclang-common-11-dev llvm-11-linker-tools libclang1-11 libc6-dev binutils libllvm11
+++ cut '-d ' -f1
++ pkg=libhwloc15
+++ echo libhwloc15 libllvm11 libclang-cpp11 libllvm11 libstdc++-11-dev libgcc-11-dev libobjc-11-dev libclang-common-11-dev llvm-11-linker-tools libclang1-11 libc6-dev binutils libllvm11
+++ cut '-d ' -f2- -s
++ queue='libllvm11 libclang-cpp11 libllvm11 libstdc++-11-dev libgcc-11-dev libobjc-11-dev libclang-common-11-dev llvm-11-linker-tools libclang1-11 libc6-dev binutils libllvm11'
++ '[' -n '' ']'
++ seen[$pkg]=1
++ apt-get download libhwloc15
++ echo libhwloc15
+++ apt-cache depends libhwloc15
+++ grep -v '[<>]'
+++ awk '{print $2}'
+++ grep -v -E '^libc6$|^libstdc\+\+6$|^libgcc-s1$|^libzstd1$|^zlib1g$|^libxml2$|^libicu70$|^liblzma5$|^libncursesw6$|^libtinfo6$|^libedit2$|^libffi8$|^libbsd0$|^libmd0$'
+++ grep -E '^\s+(PreDepends|Depends):'
++ deps=libudev1
++ for d in $deps
++ '[' -z '' ']'
++ queue='libllvm11 libclang-cpp11 libllvm11 libstdc++-11-dev libgcc-11-dev libobjc-11-dev libclang-common-11-dev llvm-11-linker-tools libclang1-11 libc6-dev binutils libllvm11 libudev1'
++ '[' -n 'libllvm11 libclang-cpp11 libllvm11 libstdc++-11-dev libgcc-11-dev libobjc-11-dev libclang-common-11-dev llvm-11-linker-tools libclang1-11 libc6-dev binutils libllvm11 libudev1' ']'
+++ echo libllvm11 libclang-cpp11 libllvm11 libstdc++-11-dev libgcc-11-dev libobjc-11-dev libclang-common-11-dev llvm-11-linker-tools libclang1-11 libc6-dev binutils libllvm11 libudev1
+++ cut '-d ' -f1
++ pkg=libllvm11
+++ echo libllvm11 libclang-cpp11 libllvm11 libstdc++-11-dev libgcc-11-dev libobjc-11-dev libclang-common-11-dev llvm-11-linker-tools libclang1-11 libc6-dev binutils libllvm11 libudev1
+++ cut '-d ' -f2- -s
++ queue='libclang-cpp11 libllvm11 libstdc++-11-dev libgcc-11-dev libobjc-11-dev libclang-common-11-dev llvm-11-linker-tools libclang1-11 libc6-dev binutils libllvm11 libudev1'
++ '[' -n '' ']'
++ seen[$pkg]=1
++ apt-get download libllvm11
++ echo libllvm11
+++ apt-cache depends libllvm11
+++ grep -v '[<>]'
+++ awk '{print $2}'
+++ grep -v -E '^libc6$|^libstdc\+\+6$|^libgcc-s1$|^libzstd1$|^zlib1g$|^libxml2$|^libicu70$|^liblzma5$|^libncursesw6$|^libtinfo6$|^libedit2$|^libffi8$|^libbsd0$|^libmd0$'
+++ grep -E '^\s+(PreDepends|Depends):'
++ deps=
++ '[' -n 'libclang-cpp11 libllvm11 libstdc++-11-dev libgcc-11-dev libobjc-11-dev libclang-common-11-dev llvm-11-linker-tools libclang1-11 libc6-dev binutils libllvm11 libudev1' ']'
+++ echo libclang-cpp11 libllvm11 libstdc++-11-dev libgcc-11-dev libobjc-11-dev libclang-common-11-dev llvm-11-linker-tools libclang1-11 libc6-dev binutils libllvm11 libudev1
+++ cut '-d ' -f1
++ pkg=libclang-cpp11
+++ echo libclang-cpp11 libllvm11 libstdc++-11-dev libgcc-11-dev libobjc-11-dev libclang-common-11-dev llvm-11-linker-tools libclang1-11 libc6-dev binutils libllvm11 libudev1
+++ cut '-d ' -f2- -s
++ queue='libllvm11 libstdc++-11-dev libgcc-11-dev libobjc-11-dev libclang-common-11-dev llvm-11-linker-tools libclang1-11 libc6-dev binutils libllvm11 libudev1'
++ '[' -n 1 ']'
++ continue
++ '[' -n 'libllvm11 libstdc++-11-dev libgcc-11-dev libobjc-11-dev libclang-common-11-dev llvm-11-linker-tools libclang1-11 libc6-dev binutils libllvm11 libudev1' ']'
+++ echo libllvm11 libstdc++-11-dev libgcc-11-dev libobjc-11-dev libclang-common-11-dev llvm-11-linker-tools libclang1-11 libc6-dev binutils libllvm11 libudev1
+++ cut '-d ' -f1
++ pkg=libllvm11
+++ echo libllvm11 libstdc++-11-dev libgcc-11-dev libobjc-11-dev libclang-common-11-dev llvm-11-linker-tools libclang1-11 libc6-dev binutils libllvm11 libudev1
+++ cut '-d ' -f2- -s
++ queue='libstdc++-11-dev libgcc-11-dev libobjc-11-dev libclang-common-11-dev llvm-11-linker-tools libclang1-11 libc6-dev binutils libllvm11 libudev1'
++ '[' -n 1 ']'
++ continue
++ '[' -n 'libstdc++-11-dev libgcc-11-dev libobjc-11-dev libclang-common-11-dev llvm-11-linker-tools libclang1-11 libc6-dev binutils libllvm11 libudev1' ']'
+++ echo libstdc++-11-dev libgcc-11-dev libobjc-11-dev libclang-common-11-dev llvm-11-linker-tools libclang1-11 libc6-dev binutils libllvm11 libudev1
+++ cut '-d ' -f1
++ pkg=libstdc++-11-dev
+++ echo libstdc++-11-dev libgcc-11-dev libobjc-11-dev libclang-common-11-dev llvm-11-linker-tools libclang1-11 libc6-dev binutils libllvm11 libudev1
+++ cut '-d ' -f2- -s
++ queue='libgcc-11-dev libobjc-11-dev libclang-common-11-dev llvm-11-linker-tools libclang1-11 libc6-dev binutils libllvm11 libudev1'
++ '[' -n '' ']'
++ seen[$pkg]=1
++ apt-get download libstdc++-11-dev
++ echo libstdc++-11-dev
+++ apt-cache depends libstdc++-11-dev
+++ grep -v '[<>]'
+++ awk '{print $2}'
+++ grep -v -E '^libc6$|^libstdc\+\+6$|^libgcc-s1$|^libzstd1$|^zlib1g$|^libxml2$|^libicu70$|^liblzma5$|^libncursesw6$|^libtinfo6$|^libedit2$|^libffi8$|^libbsd0$|^libmd0$'
+++ grep -E '^\s+(PreDepends|Depends):'
++ deps='gcc-11-base
+libgcc-11-dev
+libc6-dev'
++ for d in $deps
++ '[' -z '' ']'
++ queue='libgcc-11-dev libobjc-11-dev libclang-common-11-dev llvm-11-linker-tools libclang1-11 libc6-dev binutils libllvm11 libudev1 gcc-11-base'
++ for d in $deps
++ '[' -z '' ']'
++ queue='libgcc-11-dev libobjc-11-dev libclang-common-11-dev llvm-11-linker-tools libclang1-11 libc6-dev binutils libllvm11 libudev1 gcc-11-base libgcc-11-dev'
++ for d in $deps
++ '[' -z '' ']'
++ queue='libgcc-11-dev libobjc-11-dev libclang-common-11-dev llvm-11-linker-tools libclang1-11 libc6-dev binutils libllvm11 libudev1 gcc-11-base libgcc-11-dev libc6-dev'
++ '[' -n 'libgcc-11-dev libobjc-11-dev libclang-common-11-dev llvm-11-linker-tools libclang1-11 libc6-dev binutils libllvm11 libudev1 gcc-11-base libgcc-11-dev libc6-dev' ']'
+++ echo libgcc-11-dev libobjc-11-dev libclang-common-11-dev llvm-11-linker-tools libclang1-11 libc6-dev binutils libllvm11 libudev1 gcc-11-base libgcc-11-dev libc6-dev
+++ cut '-d ' -f1
++ pkg=libgcc-11-dev
+++ echo libgcc-11-dev libobjc-11-dev libclang-common-11-dev llvm-11-linker-tools libclang1-11 libc6-dev binutils libllvm11 libudev1 gcc-11-base libgcc-11-dev libc6-dev
+++ cut '-d ' -f2- -s
++ queue='libobjc-11-dev libclang-common-11-dev llvm-11-linker-tools libclang1-11 libc6-dev binutils libllvm11 libudev1 gcc-11-base libgcc-11-dev libc6-dev'
++ '[' -n '' ']'
++ seen[$pkg]=1
++ apt-get download libgcc-11-dev
++ echo libgcc-11-dev
+++ apt-cache depends libgcc-11-dev
+++ grep -v '[<>]'
+++ awk '{print $2}'
+++ grep -E '^\s+(PreDepends|Depends):'
+++ grep -v -E '^libc6$|^libstdc\+\+6$|^libgcc-s1$|^libzstd1$|^zlib1g$|^libxml2$|^libicu70$|^liblzma5$|^libncursesw6$|^libtinfo6$|^libedit2$|^libffi8$|^libbsd0$|^libmd0$'
++ deps='gcc-11-base
+libgomp1
+libitm1
+libatomic1
+libasan6
+liblsan0
+libtsan0
+libubsan1
+libquadmath0'
++ for d in $deps
++ '[' -z '' ']'
++ queue='libobjc-11-dev libclang-common-11-dev llvm-11-linker-tools libclang1-11 libc6-dev binutils libllvm11 libudev1 gcc-11-base libgcc-11-dev libc6-dev gcc-11-base'
++ for d in $deps
++ '[' -z '' ']'
++ queue='libobjc-11-dev libclang-common-11-dev llvm-11-linker-tools libclang1-11 libc6-dev binutils libllvm11 libudev1 gcc-11-base libgcc-11-dev libc6-dev gcc-11-base libgomp1'
++ for d in $deps
++ '[' -z '' ']'
++ queue='libobjc-11-dev libclang-common-11-dev llvm-11-linker-tools libclang1-11 libc6-dev binutils libllvm11 libudev1 gcc-11-base libgcc-11-dev libc6-dev gcc-11-base libgomp1 libitm1'
++ for d in $deps
++ '[' -z '' ']'
++ queue='libobjc-11-dev libclang-common-11-dev llvm-11-linker-tools libclang1-11 libc6-dev binutils libllvm11 libudev1 gcc-11-base libgcc-11-dev libc6-dev gcc-11-base libgomp1 libitm1 libatomic1'
++ for d in $deps
++ '[' -z '' ']'
++ queue='libobjc-11-dev libclang-common-11-dev llvm-11-linker-tools libclang1-11 libc6-dev binutils libllvm11 libudev1 gcc-11-base libgcc-11-dev libc6-dev gcc-11-base libgomp1 libitm1 libatomic1 libasan6'
++ for d in $deps
++ '[' -z '' ']'
++ queue='libobjc-11-dev libclang-common-11-dev llvm-11-linker-tools libclang1-11 libc6-dev binutils libllvm11 libudev1 gcc-11-base libgcc-11-dev libc6-dev gcc-11-base libgomp1 libitm1 libatomic1 libasan6 liblsan0'
++ for d in $deps
++ '[' -z '' ']'
++ queue='libobjc-11-dev libclang-common-11-dev llvm-11-linker-tools libclang1-11 libc6-dev binutils libllvm11 libudev1 gcc-11-base libgcc-11-dev libc6-dev gcc-11-base libgomp1 libitm1 libatomic1 libasan6 liblsan0 libtsan0'
++ for d in $deps
++ '[' -z '' ']'
++ queue='libobjc-11-dev libclang-common-11-dev llvm-11-linker-tools libclang1-11 libc6-dev binutils libllvm11 libudev1 gcc-11-base libgcc-11-dev libc6-dev gcc-11-base libgomp1 libitm1 libatomic1 libasan6 liblsan0 libtsan0 libubsan1'
++ for d in $deps
++ '[' -z '' ']'
++ queue='libobjc-11-dev libclang-common-11-dev llvm-11-linker-tools libclang1-11 libc6-dev binutils libllvm11 libudev1 gcc-11-base libgcc-11-dev libc6-dev gcc-11-base libgomp1 libitm1 libatomic1 libasan6 liblsan0 libtsan0 libubsan1 libquadmath0'
++ '[' -n 'libobjc-11-dev libclang-common-11-dev llvm-11-linker-tools libclang1-11 libc6-dev binutils libllvm11 libudev1 gcc-11-base libgcc-11-dev libc6-dev gcc-11-base libgomp1 libitm1 libatomic1 libasan6 liblsan0 libtsan0 libubsan1 libquadmath0' ']'
+++ echo libobjc-11-dev libclang-common-11-dev llvm-11-linker-tools libclang1-11 libc6-dev binutils libllvm11 libudev1 gcc-11-base libgcc-11-dev libc6-dev gcc-11-base libgomp1 libitm1 libatomic1 libasan6 liblsan0 libtsan0 libubsan1 libquadmath0
+++ cut '-d ' -f1
++ pkg=libobjc-11-dev
+++ echo libobjc-11-dev libclang-common-11-dev llvm-11-linker-tools libclang1-11 libc6-dev binutils libllvm11 libudev1 gcc-11-base libgcc-11-dev libc6-dev gcc-11-base libgomp1 libitm1 libatomic1 libasan6 liblsan0 libtsan0 libubsan1 libquadmath0
+++ cut '-d ' -f2- -s
++ queue='libclang-common-11-dev llvm-11-linker-tools libclang1-11 libc6-dev binutils libllvm11 libudev1 gcc-11-base libgcc-11-dev libc6-dev gcc-11-base libgomp1 libitm1 libatomic1 libasan6 liblsan0 libtsan0 libubsan1 libquadmath0'
++ '[' -n '' ']'
++ seen[$pkg]=1
++ apt-get download libobjc-11-dev
++ echo libobjc-11-dev
+++ apt-cache depends libobjc-11-dev
+++ grep -v '[<>]'
+++ awk '{print $2}'
+++ grep -v -E '^libc6$|^libstdc\+\+6$|^libgcc-s1$|^libzstd1$|^zlib1g$|^libxml2$|^libicu70$|^liblzma5$|^libncursesw6$|^libtinfo6$|^libedit2$|^libffi8$|^libbsd0$|^libmd0$'
+++ grep -E '^\s+(PreDepends|Depends):'
++ deps='gcc-11-base
+libgcc-11-dev
+libobjc4'
++ for d in $deps
++ '[' -z '' ']'
++ queue='libclang-common-11-dev llvm-11-linker-tools libclang1-11 libc6-dev binutils libllvm11 libudev1 gcc-11-base libgcc-11-dev libc6-dev gcc-11-base libgomp1 libitm1 libatomic1 libasan6 liblsan0 libtsan0 libubsan1 libquadmath0 gcc-11-base'
++ for d in $deps
++ '[' -z 1 ']'
++ for d in $deps
++ '[' -z '' ']'
++ queue='libclang-common-11-dev llvm-11-linker-tools libclang1-11 libc6-dev binutils libllvm11 libudev1 gcc-11-base libgcc-11-dev libc6-dev gcc-11-base libgomp1 libitm1 libatomic1 libasan6 liblsan0 libtsan0 libubsan1 libquadmath0 gcc-11-base libobjc4'
++ '[' -n 'libclang-common-11-dev llvm-11-linker-tools libclang1-11 libc6-dev binutils libllvm11 libudev1 gcc-11-base libgcc-11-dev libc6-dev gcc-11-base libgomp1 libitm1 libatomic1 libasan6 liblsan0 libtsan0 libubsan1 libquadmath0 gcc-11-base libobjc4' ']'
+++ echo libclang-common-11-dev llvm-11-linker-tools libclang1-11 libc6-dev binutils libllvm11 libudev1 gcc-11-base libgcc-11-dev libc6-dev gcc-11-base libgomp1 libitm1 libatomic1 libasan6 liblsan0 libtsan0 libubsan1 libquadmath0 gcc-11-base libobjc4
+++ cut '-d ' -f1
++ pkg=libclang-common-11-dev
+++ echo libclang-common-11-dev llvm-11-linker-tools libclang1-11 libc6-dev binutils libllvm11 libudev1 gcc-11-base libgcc-11-dev libc6-dev gcc-11-base libgomp1 libitm1 libatomic1 libasan6 liblsan0 libtsan0 libubsan1 libquadmath0 gcc-11-base libobjc4
+++ cut '-d ' -f2- -s
++ queue='llvm-11-linker-tools libclang1-11 libc6-dev binutils libllvm11 libudev1 gcc-11-base libgcc-11-dev libc6-dev gcc-11-base libgomp1 libitm1 libatomic1 libasan6 liblsan0 libtsan0 libubsan1 libquadmath0 gcc-11-base libobjc4'
++ '[' -n '' ']'
++ seen[$pkg]=1
++ apt-get download libclang-common-11-dev
++ echo libclang-common-11-dev
+++ apt-cache depends libclang-common-11-dev
+++ grep -v '[<>]'
+++ awk '{print $2}'
+++ grep -E '^\s+(PreDepends|Depends):'
+++ grep -v -E '^libc6$|^libstdc\+\+6$|^libgcc-s1$|^libzstd1$|^zlib1g$|^libxml2$|^libicu70$|^liblzma5$|^libncursesw6$|^libtinfo6$|^libedit2$|^libffi8$|^libbsd0$|^libmd0$'
++ deps='lib32gcc-s1
+lib32stdc++6
+libc6-i386
+libllvm11'
++ for d in $deps
++ '[' -z '' ']'
++ queue='llvm-11-linker-tools libclang1-11 libc6-dev binutils libllvm11 libudev1 gcc-11-base libgcc-11-dev libc6-dev gcc-11-base libgomp1 libitm1 libatomic1 libasan6 liblsan0 libtsan0 libubsan1 libquadmath0 gcc-11-base libobjc4 lib32gcc-s1'
++ for d in $deps
++ '[' -z '' ']'
++ queue='llvm-11-linker-tools libclang1-11 libc6-dev binutils libllvm11 libudev1 gcc-11-base libgcc-11-dev libc6-dev gcc-11-base libgomp1 libitm1 libatomic1 libasan6 liblsan0 libtsan0 libubsan1 libquadmath0 gcc-11-base libobjc4 lib32gcc-s1 lib32stdc++6'
++ for d in $deps
++ '[' -z '' ']'
++ queue='llvm-11-linker-tools libclang1-11 libc6-dev binutils libllvm11 libudev1 gcc-11-base libgcc-11-dev libc6-dev gcc-11-base libgomp1 libitm1 libatomic1 libasan6 liblsan0 libtsan0 libubsan1 libquadmath0 gcc-11-base libobjc4 lib32gcc-s1 lib32stdc++6 libc6-i386'
++ for d in $deps
++ '[' -z 1 ']'
++ '[' -n 'llvm-11-linker-tools libclang1-11 libc6-dev binutils libllvm11 libudev1 gcc-11-base libgcc-11-dev libc6-dev gcc-11-base libgomp1 libitm1 libatomic1 libasan6 liblsan0 libtsan0 libubsan1 libquadmath0 gcc-11-base libobjc4 lib32gcc-s1 lib32stdc++6 libc6-i386' ']'
+++ echo llvm-11-linker-tools libclang1-11 libc6-dev binutils libllvm11 libudev1 gcc-11-base libgcc-11-dev libc6-dev gcc-11-base libgomp1 libitm1 libatomic1 libasan6 liblsan0 libtsan0 libubsan1 libquadmath0 gcc-11-base libobjc4 lib32gcc-s1 lib32stdc++6 libc6-i386
+++ cut '-d ' -f1
++ pkg=llvm-11-linker-tools
+++ echo llvm-11-linker-tools libclang1-11 libc6-dev binutils libllvm11 libudev1 gcc-11-base libgcc-11-dev libc6-dev gcc-11-base libgomp1 libitm1 libatomic1 libasan6 liblsan0 libtsan0 libubsan1 libquadmath0 gcc-11-base libobjc4 lib32gcc-s1 lib32stdc++6 libc6-i386
+++ cut '-d ' -f2- -s
++ queue='libclang1-11 libc6-dev binutils libllvm11 libudev1 gcc-11-base libgcc-11-dev libc6-dev gcc-11-base libgomp1 libitm1 libatomic1 libasan6 liblsan0 libtsan0 libubsan1 libquadmath0 gcc-11-base libobjc4 lib32gcc-s1 lib32stdc++6 libc6-i386'
++ '[' -n '' ']'
++ seen[$pkg]=1
++ apt-get download llvm-11-linker-tools
++ echo llvm-11-linker-tools
+++ apt-cache depends llvm-11-linker-tools
+++ grep -v '[<>]'
+++ awk '{print $2}'
+++ grep -E '^\s+(PreDepends|Depends):'
+++ grep -v -E '^libc6$|^libstdc\+\+6$|^libgcc-s1$|^libzstd1$|^zlib1g$|^libxml2$|^libicu70$|^liblzma5$|^libncursesw6$|^libtinfo6$|^libedit2$|^libffi8$|^libbsd0$|^libmd0$'
++ deps=libllvm11
++ for d in $deps
++ '[' -z 1 ']'
++ '[' -n 'libclang1-11 libc6-dev binutils libllvm11 libudev1 gcc-11-base libgcc-11-dev libc6-dev gcc-11-base libgomp1 libitm1 libatomic1 libasan6 liblsan0 libtsan0 libubsan1 libquadmath0 gcc-11-base libobjc4 lib32gcc-s1 lib32stdc++6 libc6-i386' ']'
+++ echo libclang1-11 libc6-dev binutils libllvm11 libudev1 gcc-11-base libgcc-11-dev libc6-dev gcc-11-base libgomp1 libitm1 libatomic1 libasan6 liblsan0 libtsan0 libubsan1 libquadmath0 gcc-11-base libobjc4 lib32gcc-s1 lib32stdc++6 libc6-i386
+++ cut '-d ' -f1
++ pkg=libclang1-11
+++ echo libclang1-11 libc6-dev binutils libllvm11 libudev1 gcc-11-base libgcc-11-dev libc6-dev gcc-11-base libgomp1 libitm1 libatomic1 libasan6 liblsan0 libtsan0 libubsan1 libquadmath0 gcc-11-base libobjc4 lib32gcc-s1 lib32stdc++6 libc6-i386
+++ cut '-d ' -f2- -s
++ queue='libc6-dev binutils libllvm11 libudev1 gcc-11-base libgcc-11-dev libc6-dev gcc-11-base libgomp1 libitm1 libatomic1 libasan6 liblsan0 libtsan0 libubsan1 libquadmath0 gcc-11-base libobjc4 lib32gcc-s1 lib32stdc++6 libc6-i386'
++ '[' -n '' ']'
++ seen[$pkg]=1
++ apt-get download libclang1-11
++ echo libclang1-11
+++ apt-cache depends libclang1-11
+++ grep -v '[<>]'
+++ awk '{print $2}'
+++ grep -E '^\s+(PreDepends|Depends):'
+++ grep -v -E '^libc6$|^libstdc\+\+6$|^libgcc-s1$|^libzstd1$|^zlib1g$|^libxml2$|^libicu70$|^liblzma5$|^libncursesw6$|^libtinfo6$|^libedit2$|^libffi8$|^libbsd0$|^libmd0$'
++ deps=libllvm11
++ for d in $deps
++ '[' -z 1 ']'
++ '[' -n 'libc6-dev binutils libllvm11 libudev1 gcc-11-base libgcc-11-dev libc6-dev gcc-11-base libgomp1 libitm1 libatomic1 libasan6 liblsan0 libtsan0 libubsan1 libquadmath0 gcc-11-base libobjc4 lib32gcc-s1 lib32stdc++6 libc6-i386' ']'
+++ echo libc6-dev binutils libllvm11 libudev1 gcc-11-base libgcc-11-dev libc6-dev gcc-11-base libgomp1 libitm1 libatomic1 libasan6 liblsan0 libtsan0 libubsan1 libquadmath0 gcc-11-base libobjc4 lib32gcc-s1 lib32stdc++6 libc6-i386
+++ cut '-d ' -f1
++ pkg=libc6-dev
+++ echo libc6-dev binutils libllvm11 libudev1 gcc-11-base libgcc-11-dev libc6-dev gcc-11-base libgomp1 libitm1 libatomic1 libasan6 liblsan0 libtsan0 libubsan1 libquadmath0 gcc-11-base libobjc4 lib32gcc-s1 lib32stdc++6 libc6-i386
+++ cut '-d ' -f2- -s
++ queue='binutils libllvm11 libudev1 gcc-11-base libgcc-11-dev libc6-dev gcc-11-base libgomp1 libitm1 libatomic1 libasan6 liblsan0 libtsan0 libubsan1 libquadmath0 gcc-11-base libobjc4 lib32gcc-s1 lib32stdc++6 libc6-i386'
++ '[' -n '' ']'
++ seen[$pkg]=1
++ apt-get download libc6-dev
++ echo libc6-dev
+++ apt-cache depends libc6-dev
+++ grep -v '[<>]'
+++ awk '{print $2}'
+++ grep -E '^\s+(PreDepends|Depends):'
+++ grep -v -E '^libc6$|^libstdc\+\+6$|^libgcc-s1$|^libzstd1$|^zlib1g$|^libxml2$|^libicu70$|^liblzma5$|^libncursesw6$|^libtinfo6$|^libedit2$|^libffi8$|^libbsd0$|^libmd0$'
++ deps='libc-dev-bin
+linux-libc-dev
+libcrypt-dev
+rpcsvc-proto
+libtirpc-dev
+libnsl-dev'
++ for d in $deps
++ '[' -z '' ']'
++ queue='binutils libllvm11 libudev1 gcc-11-base libgcc-11-dev libc6-dev gcc-11-base libgomp1 libitm1 libatomic1 libasan6 liblsan0 libtsan0 libubsan1 libquadmath0 gcc-11-base libobjc4 lib32gcc-s1 lib32stdc++6 libc6-i386 libc-dev-bin'
++ for d in $deps
++ '[' -z '' ']'
++ queue='binutils libllvm11 libudev1 gcc-11-base libgcc-11-dev libc6-dev gcc-11-base libgomp1 libitm1 libatomic1 libasan6 liblsan0 libtsan0 libubsan1 libquadmath0 gcc-11-base libobjc4 lib32gcc-s1 lib32stdc++6 libc6-i386 libc-dev-bin linux-libc-dev'
++ for d in $deps
++ '[' -z '' ']'
++ queue='binutils libllvm11 libudev1 gcc-11-base libgcc-11-dev libc6-dev gcc-11-base libgomp1 libitm1 libatomic1 libasan6 liblsan0 libtsan0 libubsan1 libquadmath0 gcc-11-base libobjc4 lib32gcc-s1 lib32stdc++6 libc6-i386 libc-dev-bin linux-libc-dev libcrypt-dev'
++ for d in $deps
++ '[' -z '' ']'
++ queue='binutils libllvm11 libudev1 gcc-11-base libgcc-11-dev libc6-dev gcc-11-base libgomp1 libitm1 libatomic1 libasan6 liblsan0 libtsan0 libubsan1 libquadmath0 gcc-11-base libobjc4 lib32gcc-s1 lib32stdc++6 libc6-i386 libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto'
++ for d in $deps
++ '[' -z '' ']'
++ queue='binutils libllvm11 libudev1 gcc-11-base libgcc-11-dev libc6-dev gcc-11-base libgomp1 libitm1 libatomic1 libasan6 liblsan0 libtsan0 libubsan1 libquadmath0 gcc-11-base libobjc4 lib32gcc-s1 lib32stdc++6 libc6-i386 libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev'
++ for d in $deps
++ '[' -z '' ']'
++ queue='binutils libllvm11 libudev1 gcc-11-base libgcc-11-dev libc6-dev gcc-11-base libgomp1 libitm1 libatomic1 libasan6 liblsan0 libtsan0 libubsan1 libquadmath0 gcc-11-base libobjc4 lib32gcc-s1 lib32stdc++6 libc6-i386 libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev'
++ '[' -n 'binutils libllvm11 libudev1 gcc-11-base libgcc-11-dev libc6-dev gcc-11-base libgomp1 libitm1 libatomic1 libasan6 liblsan0 libtsan0 libubsan1 libquadmath0 gcc-11-base libobjc4 lib32gcc-s1 lib32stdc++6 libc6-i386 libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev' ']'
+++ echo binutils libllvm11 libudev1 gcc-11-base libgcc-11-dev libc6-dev gcc-11-base libgomp1 libitm1 libatomic1 libasan6 liblsan0 libtsan0 libubsan1 libquadmath0 gcc-11-base libobjc4 lib32gcc-s1 lib32stdc++6 libc6-i386 libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev
+++ cut '-d ' -f1
++ pkg=binutils
+++ echo binutils libllvm11 libudev1 gcc-11-base libgcc-11-dev libc6-dev gcc-11-base libgomp1 libitm1 libatomic1 libasan6 liblsan0 libtsan0 libubsan1 libquadmath0 gcc-11-base libobjc4 lib32gcc-s1 lib32stdc++6 libc6-i386 libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev
+++ cut '-d ' -f2- -s
++ queue='libllvm11 libudev1 gcc-11-base libgcc-11-dev libc6-dev gcc-11-base libgomp1 libitm1 libatomic1 libasan6 liblsan0 libtsan0 libubsan1 libquadmath0 gcc-11-base libobjc4 lib32gcc-s1 lib32stdc++6 libc6-i386 libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev'
++ '[' -n '' ']'
++ seen[$pkg]=1
++ apt-get download binutils
++ echo binutils
+++ apt-cache depends binutils
+++ grep -v '[<>]'
+++ awk '{print $2}'
+++ grep -E '^\s+(PreDepends|Depends):'
+++ grep -v -E '^libc6$|^libstdc\+\+6$|^libgcc-s1$|^libzstd1$|^zlib1g$|^libxml2$|^libicu70$|^liblzma5$|^libncursesw6$|^libtinfo6$|^libedit2$|^libffi8$|^libbsd0$|^libmd0$'
++ deps='binutils-common
+libbinutils
+binutils-x86-64-linux-gnu'
++ for d in $deps
++ '[' -z '' ']'
++ queue='libllvm11 libudev1 gcc-11-base libgcc-11-dev libc6-dev gcc-11-base libgomp1 libitm1 libatomic1 libasan6 liblsan0 libtsan0 libubsan1 libquadmath0 gcc-11-base libobjc4 lib32gcc-s1 lib32stdc++6 libc6-i386 libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common'
++ for d in $deps
++ '[' -z '' ']'
++ queue='libllvm11 libudev1 gcc-11-base libgcc-11-dev libc6-dev gcc-11-base libgomp1 libitm1 libatomic1 libasan6 liblsan0 libtsan0 libubsan1 libquadmath0 gcc-11-base libobjc4 lib32gcc-s1 lib32stdc++6 libc6-i386 libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils'
++ for d in $deps
++ '[' -z '' ']'
++ queue='libllvm11 libudev1 gcc-11-base libgcc-11-dev libc6-dev gcc-11-base libgomp1 libitm1 libatomic1 libasan6 liblsan0 libtsan0 libubsan1 libquadmath0 gcc-11-base libobjc4 lib32gcc-s1 lib32stdc++6 libc6-i386 libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu'
++ '[' -n 'libllvm11 libudev1 gcc-11-base libgcc-11-dev libc6-dev gcc-11-base libgomp1 libitm1 libatomic1 libasan6 liblsan0 libtsan0 libubsan1 libquadmath0 gcc-11-base libobjc4 lib32gcc-s1 lib32stdc++6 libc6-i386 libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu' ']'
+++ echo libllvm11 libudev1 gcc-11-base libgcc-11-dev libc6-dev gcc-11-base libgomp1 libitm1 libatomic1 libasan6 liblsan0 libtsan0 libubsan1 libquadmath0 gcc-11-base libobjc4 lib32gcc-s1 lib32stdc++6 libc6-i386 libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu
+++ cut '-d ' -f1
++ pkg=libllvm11
+++ echo libllvm11 libudev1 gcc-11-base libgcc-11-dev libc6-dev gcc-11-base libgomp1 libitm1 libatomic1 libasan6 liblsan0 libtsan0 libubsan1 libquadmath0 gcc-11-base libobjc4 lib32gcc-s1 lib32stdc++6 libc6-i386 libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu
+++ cut '-d ' -f2- -s
++ queue='libudev1 gcc-11-base libgcc-11-dev libc6-dev gcc-11-base libgomp1 libitm1 libatomic1 libasan6 liblsan0 libtsan0 libubsan1 libquadmath0 gcc-11-base libobjc4 lib32gcc-s1 lib32stdc++6 libc6-i386 libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu'
++ '[' -n 1 ']'
++ continue
++ '[' -n 'libudev1 gcc-11-base libgcc-11-dev libc6-dev gcc-11-base libgomp1 libitm1 libatomic1 libasan6 liblsan0 libtsan0 libubsan1 libquadmath0 gcc-11-base libobjc4 lib32gcc-s1 lib32stdc++6 libc6-i386 libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu' ']'
+++ echo libudev1 gcc-11-base libgcc-11-dev libc6-dev gcc-11-base libgomp1 libitm1 libatomic1 libasan6 liblsan0 libtsan0 libubsan1 libquadmath0 gcc-11-base libobjc4 lib32gcc-s1 lib32stdc++6 libc6-i386 libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu
+++ cut '-d ' -f1
++ pkg=libudev1
+++ echo libudev1 gcc-11-base libgcc-11-dev libc6-dev gcc-11-base libgomp1 libitm1 libatomic1 libasan6 liblsan0 libtsan0 libubsan1 libquadmath0 gcc-11-base libobjc4 lib32gcc-s1 lib32stdc++6 libc6-i386 libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu
+++ cut '-d ' -f2- -s
++ queue='gcc-11-base libgcc-11-dev libc6-dev gcc-11-base libgomp1 libitm1 libatomic1 libasan6 liblsan0 libtsan0 libubsan1 libquadmath0 gcc-11-base libobjc4 lib32gcc-s1 lib32stdc++6 libc6-i386 libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu'
++ '[' -n '' ']'
++ seen[$pkg]=1
++ apt-get download libudev1
++ echo libudev1
+++ apt-cache depends libudev1
+++ grep -v '[<>]'
+++ awk '{print $2}'
+++ grep -v -E '^libc6$|^libstdc\+\+6$|^libgcc-s1$|^libzstd1$|^zlib1g$|^libxml2$|^libicu70$|^liblzma5$|^libncursesw6$|^libtinfo6$|^libedit2$|^libffi8$|^libbsd0$|^libmd0$'
+++ grep -E '^\s+(PreDepends|Depends):'
++ deps=
++ '[' -n 'gcc-11-base libgcc-11-dev libc6-dev gcc-11-base libgomp1 libitm1 libatomic1 libasan6 liblsan0 libtsan0 libubsan1 libquadmath0 gcc-11-base libobjc4 lib32gcc-s1 lib32stdc++6 libc6-i386 libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu' ']'
+++ echo gcc-11-base libgcc-11-dev libc6-dev gcc-11-base libgomp1 libitm1 libatomic1 libasan6 liblsan0 libtsan0 libubsan1 libquadmath0 gcc-11-base libobjc4 lib32gcc-s1 lib32stdc++6 libc6-i386 libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu
+++ cut '-d ' -f1
++ pkg=gcc-11-base
+++ echo gcc-11-base libgcc-11-dev libc6-dev gcc-11-base libgomp1 libitm1 libatomic1 libasan6 liblsan0 libtsan0 libubsan1 libquadmath0 gcc-11-base libobjc4 lib32gcc-s1 lib32stdc++6 libc6-i386 libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu
+++ cut '-d ' -f2- -s
++ queue='libgcc-11-dev libc6-dev gcc-11-base libgomp1 libitm1 libatomic1 libasan6 liblsan0 libtsan0 libubsan1 libquadmath0 gcc-11-base libobjc4 lib32gcc-s1 lib32stdc++6 libc6-i386 libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu'
++ '[' -n '' ']'
++ seen[$pkg]=1
++ apt-get download gcc-11-base
++ echo gcc-11-base
+++ apt-cache depends gcc-11-base
+++ grep -v '[<>]'
+++ awk '{print $2}'
+++ grep -E '^\s+(PreDepends|Depends):'
+++ grep -v -E '^libc6$|^libstdc\+\+6$|^libgcc-s1$|^libzstd1$|^zlib1g$|^libxml2$|^libicu70$|^liblzma5$|^libncursesw6$|^libtinfo6$|^libedit2$|^libffi8$|^libbsd0$|^libmd0$'
++ deps=
++ '[' -n 'libgcc-11-dev libc6-dev gcc-11-base libgomp1 libitm1 libatomic1 libasan6 liblsan0 libtsan0 libubsan1 libquadmath0 gcc-11-base libobjc4 lib32gcc-s1 lib32stdc++6 libc6-i386 libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu' ']'
+++ echo libgcc-11-dev libc6-dev gcc-11-base libgomp1 libitm1 libatomic1 libasan6 liblsan0 libtsan0 libubsan1 libquadmath0 gcc-11-base libobjc4 lib32gcc-s1 lib32stdc++6 libc6-i386 libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu
+++ cut '-d ' -f1
++ pkg=libgcc-11-dev
+++ echo libgcc-11-dev libc6-dev gcc-11-base libgomp1 libitm1 libatomic1 libasan6 liblsan0 libtsan0 libubsan1 libquadmath0 gcc-11-base libobjc4 lib32gcc-s1 lib32stdc++6 libc6-i386 libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu
+++ cut '-d ' -f2- -s
++ queue='libc6-dev gcc-11-base libgomp1 libitm1 libatomic1 libasan6 liblsan0 libtsan0 libubsan1 libquadmath0 gcc-11-base libobjc4 lib32gcc-s1 lib32stdc++6 libc6-i386 libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu'
++ '[' -n 1 ']'
++ continue
++ '[' -n 'libc6-dev gcc-11-base libgomp1 libitm1 libatomic1 libasan6 liblsan0 libtsan0 libubsan1 libquadmath0 gcc-11-base libobjc4 lib32gcc-s1 lib32stdc++6 libc6-i386 libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu' ']'
+++ echo libc6-dev gcc-11-base libgomp1 libitm1 libatomic1 libasan6 liblsan0 libtsan0 libubsan1 libquadmath0 gcc-11-base libobjc4 lib32gcc-s1 lib32stdc++6 libc6-i386 libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu
+++ cut '-d ' -f1
++ pkg=libc6-dev
+++ echo libc6-dev gcc-11-base libgomp1 libitm1 libatomic1 libasan6 liblsan0 libtsan0 libubsan1 libquadmath0 gcc-11-base libobjc4 lib32gcc-s1 lib32stdc++6 libc6-i386 libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu
+++ cut '-d ' -f2- -s
++ queue='gcc-11-base libgomp1 libitm1 libatomic1 libasan6 liblsan0 libtsan0 libubsan1 libquadmath0 gcc-11-base libobjc4 lib32gcc-s1 lib32stdc++6 libc6-i386 libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu'
++ '[' -n 1 ']'
++ continue
++ '[' -n 'gcc-11-base libgomp1 libitm1 libatomic1 libasan6 liblsan0 libtsan0 libubsan1 libquadmath0 gcc-11-base libobjc4 lib32gcc-s1 lib32stdc++6 libc6-i386 libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu' ']'
+++ echo gcc-11-base libgomp1 libitm1 libatomic1 libasan6 liblsan0 libtsan0 libubsan1 libquadmath0 gcc-11-base libobjc4 lib32gcc-s1 lib32stdc++6 libc6-i386 libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu
+++ cut '-d ' -f1
++ pkg=gcc-11-base
+++ echo gcc-11-base libgomp1 libitm1 libatomic1 libasan6 liblsan0 libtsan0 libubsan1 libquadmath0 gcc-11-base libobjc4 lib32gcc-s1 lib32stdc++6 libc6-i386 libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu
+++ cut '-d ' -f2- -s
++ queue='libgomp1 libitm1 libatomic1 libasan6 liblsan0 libtsan0 libubsan1 libquadmath0 gcc-11-base libobjc4 lib32gcc-s1 lib32stdc++6 libc6-i386 libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu'
++ '[' -n 1 ']'
++ continue
++ '[' -n 'libgomp1 libitm1 libatomic1 libasan6 liblsan0 libtsan0 libubsan1 libquadmath0 gcc-11-base libobjc4 lib32gcc-s1 lib32stdc++6 libc6-i386 libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu' ']'
+++ echo libgomp1 libitm1 libatomic1 libasan6 liblsan0 libtsan0 libubsan1 libquadmath0 gcc-11-base libobjc4 lib32gcc-s1 lib32stdc++6 libc6-i386 libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu
+++ cut '-d ' -f1
++ pkg=libgomp1
+++ echo libgomp1 libitm1 libatomic1 libasan6 liblsan0 libtsan0 libubsan1 libquadmath0 gcc-11-base libobjc4 lib32gcc-s1 lib32stdc++6 libc6-i386 libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu
+++ cut '-d ' -f2- -s
++ queue='libitm1 libatomic1 libasan6 liblsan0 libtsan0 libubsan1 libquadmath0 gcc-11-base libobjc4 lib32gcc-s1 lib32stdc++6 libc6-i386 libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu'
++ '[' -n '' ']'
++ seen[$pkg]=1
++ apt-get download libgomp1
++ echo libgomp1
+++ apt-cache depends libgomp1
+++ grep -v '[<>]'
+++ awk '{print $2}'
+++ grep -E '^\s+(PreDepends|Depends):'
+++ grep -v -E '^libc6$|^libstdc\+\+6$|^libgcc-s1$|^libzstd1$|^zlib1g$|^libxml2$|^libicu70$|^liblzma5$|^libncursesw6$|^libtinfo6$|^libedit2$|^libffi8$|^libbsd0$|^libmd0$'
++ deps=gcc-12-base
++ for d in $deps
++ '[' -z '' ']'
++ queue='libitm1 libatomic1 libasan6 liblsan0 libtsan0 libubsan1 libquadmath0 gcc-11-base libobjc4 lib32gcc-s1 lib32stdc++6 libc6-i386 libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu gcc-12-base'
++ '[' -n 'libitm1 libatomic1 libasan6 liblsan0 libtsan0 libubsan1 libquadmath0 gcc-11-base libobjc4 lib32gcc-s1 lib32stdc++6 libc6-i386 libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu gcc-12-base' ']'
+++ echo libitm1 libatomic1 libasan6 liblsan0 libtsan0 libubsan1 libquadmath0 gcc-11-base libobjc4 lib32gcc-s1 lib32stdc++6 libc6-i386 libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu gcc-12-base
+++ cut '-d ' -f1
++ pkg=libitm1
+++ echo libitm1 libatomic1 libasan6 liblsan0 libtsan0 libubsan1 libquadmath0 gcc-11-base libobjc4 lib32gcc-s1 lib32stdc++6 libc6-i386 libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu gcc-12-base
+++ cut '-d ' -f2- -s
++ queue='libatomic1 libasan6 liblsan0 libtsan0 libubsan1 libquadmath0 gcc-11-base libobjc4 lib32gcc-s1 lib32stdc++6 libc6-i386 libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu gcc-12-base'
++ '[' -n '' ']'
++ seen[$pkg]=1
++ apt-get download libitm1
++ echo libitm1
+++ apt-cache depends libitm1
+++ grep -v '[<>]'
+++ awk '{print $2}'
+++ grep -E '^\s+(PreDepends|Depends):'
+++ grep -v -E '^libc6$|^libstdc\+\+6$|^libgcc-s1$|^libzstd1$|^zlib1g$|^libxml2$|^libicu70$|^liblzma5$|^libncursesw6$|^libtinfo6$|^libedit2$|^libffi8$|^libbsd0$|^libmd0$'
++ deps=gcc-12-base
++ for d in $deps
++ '[' -z '' ']'
++ queue='libatomic1 libasan6 liblsan0 libtsan0 libubsan1 libquadmath0 gcc-11-base libobjc4 lib32gcc-s1 lib32stdc++6 libc6-i386 libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu gcc-12-base gcc-12-base'
++ '[' -n 'libatomic1 libasan6 liblsan0 libtsan0 libubsan1 libquadmath0 gcc-11-base libobjc4 lib32gcc-s1 lib32stdc++6 libc6-i386 libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu gcc-12-base gcc-12-base' ']'
+++ echo libatomic1 libasan6 liblsan0 libtsan0 libubsan1 libquadmath0 gcc-11-base libobjc4 lib32gcc-s1 lib32stdc++6 libc6-i386 libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu gcc-12-base gcc-12-base
+++ cut '-d ' -f1
++ pkg=libatomic1
+++ echo libatomic1 libasan6 liblsan0 libtsan0 libubsan1 libquadmath0 gcc-11-base libobjc4 lib32gcc-s1 lib32stdc++6 libc6-i386 libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu gcc-12-base gcc-12-base
+++ cut '-d ' -f2- -s
++ queue='libasan6 liblsan0 libtsan0 libubsan1 libquadmath0 gcc-11-base libobjc4 lib32gcc-s1 lib32stdc++6 libc6-i386 libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu gcc-12-base gcc-12-base'
++ '[' -n '' ']'
++ seen[$pkg]=1
++ apt-get download libatomic1
++ echo libatomic1
+++ apt-cache depends libatomic1
+++ grep -v '[<>]'
+++ awk '{print $2}'
+++ grep -v -E '^libc6$|^libstdc\+\+6$|^libgcc-s1$|^libzstd1$|^zlib1g$|^libxml2$|^libicu70$|^liblzma5$|^libncursesw6$|^libtinfo6$|^libedit2$|^libffi8$|^libbsd0$|^libmd0$'
+++ grep -E '^\s+(PreDepends|Depends):'
++ deps=gcc-12-base
++ for d in $deps
++ '[' -z '' ']'
++ queue='libasan6 liblsan0 libtsan0 libubsan1 libquadmath0 gcc-11-base libobjc4 lib32gcc-s1 lib32stdc++6 libc6-i386 libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu gcc-12-base gcc-12-base gcc-12-base'
++ '[' -n 'libasan6 liblsan0 libtsan0 libubsan1 libquadmath0 gcc-11-base libobjc4 lib32gcc-s1 lib32stdc++6 libc6-i386 libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu gcc-12-base gcc-12-base gcc-12-base' ']'
+++ cut '-d ' -f1
+++ echo libasan6 liblsan0 libtsan0 libubsan1 libquadmath0 gcc-11-base libobjc4 lib32gcc-s1 lib32stdc++6 libc6-i386 libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu gcc-12-base gcc-12-base gcc-12-base
++ pkg=libasan6
+++ echo libasan6 liblsan0 libtsan0 libubsan1 libquadmath0 gcc-11-base libobjc4 lib32gcc-s1 lib32stdc++6 libc6-i386 libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu gcc-12-base gcc-12-base gcc-12-base
+++ cut '-d ' -f2- -s
++ queue='liblsan0 libtsan0 libubsan1 libquadmath0 gcc-11-base libobjc4 lib32gcc-s1 lib32stdc++6 libc6-i386 libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu gcc-12-base gcc-12-base gcc-12-base'
++ '[' -n '' ']'
++ seen[$pkg]=1
++ apt-get download libasan6
++ echo libasan6
+++ apt-cache depends libasan6
+++ grep -v '[<>]'
+++ awk '{print $2}'
+++ grep -E '^\s+(PreDepends|Depends):'
+++ grep -v -E '^libc6$|^libstdc\+\+6$|^libgcc-s1$|^libzstd1$|^zlib1g$|^libxml2$|^libicu70$|^liblzma5$|^libncursesw6$|^libtinfo6$|^libedit2$|^libffi8$|^libbsd0$|^libmd0$'
++ deps=gcc-11-base
++ for d in $deps
++ '[' -z 1 ']'
++ '[' -n 'liblsan0 libtsan0 libubsan1 libquadmath0 gcc-11-base libobjc4 lib32gcc-s1 lib32stdc++6 libc6-i386 libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu gcc-12-base gcc-12-base gcc-12-base' ']'
+++ echo liblsan0 libtsan0 libubsan1 libquadmath0 gcc-11-base libobjc4 lib32gcc-s1 lib32stdc++6 libc6-i386 libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu gcc-12-base gcc-12-base gcc-12-base
+++ cut '-d ' -f1
++ pkg=liblsan0
+++ echo liblsan0 libtsan0 libubsan1 libquadmath0 gcc-11-base libobjc4 lib32gcc-s1 lib32stdc++6 libc6-i386 libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu gcc-12-base gcc-12-base gcc-12-base
+++ cut '-d ' -f2- -s
++ queue='libtsan0 libubsan1 libquadmath0 gcc-11-base libobjc4 lib32gcc-s1 lib32stdc++6 libc6-i386 libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu gcc-12-base gcc-12-base gcc-12-base'
++ '[' -n '' ']'
++ seen[$pkg]=1
++ apt-get download liblsan0
++ echo liblsan0
+++ apt-cache depends liblsan0
+++ grep -v '[<>]'
+++ awk '{print $2}'
+++ grep -E '^\s+(PreDepends|Depends):'
+++ grep -v -E '^libc6$|^libstdc\+\+6$|^libgcc-s1$|^libzstd1$|^zlib1g$|^libxml2$|^libicu70$|^liblzma5$|^libncursesw6$|^libtinfo6$|^libedit2$|^libffi8$|^libbsd0$|^libmd0$'
++ deps=gcc-12-base
++ for d in $deps
++ '[' -z '' ']'
++ queue='libtsan0 libubsan1 libquadmath0 gcc-11-base libobjc4 lib32gcc-s1 lib32stdc++6 libc6-i386 libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu gcc-12-base gcc-12-base gcc-12-base gcc-12-base'
++ '[' -n 'libtsan0 libubsan1 libquadmath0 gcc-11-base libobjc4 lib32gcc-s1 lib32stdc++6 libc6-i386 libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu gcc-12-base gcc-12-base gcc-12-base gcc-12-base' ']'
+++ echo libtsan0 libubsan1 libquadmath0 gcc-11-base libobjc4 lib32gcc-s1 lib32stdc++6 libc6-i386 libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu gcc-12-base gcc-12-base gcc-12-base gcc-12-base
+++ cut '-d ' -f1
++ pkg=libtsan0
+++ echo libtsan0 libubsan1 libquadmath0 gcc-11-base libobjc4 lib32gcc-s1 lib32stdc++6 libc6-i386 libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu gcc-12-base gcc-12-base gcc-12-base gcc-12-base
+++ cut '-d ' -f2- -s
++ queue='libubsan1 libquadmath0 gcc-11-base libobjc4 lib32gcc-s1 lib32stdc++6 libc6-i386 libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu gcc-12-base gcc-12-base gcc-12-base gcc-12-base'
++ '[' -n '' ']'
++ seen[$pkg]=1
++ apt-get download libtsan0
++ echo libtsan0
+++ apt-cache depends libtsan0
+++ grep -v '[<>]'
+++ awk '{print $2}'
+++ grep -E '^\s+(PreDepends|Depends):'
+++ grep -v -E '^libc6$|^libstdc\+\+6$|^libgcc-s1$|^libzstd1$|^zlib1g$|^libxml2$|^libicu70$|^liblzma5$|^libncursesw6$|^libtinfo6$|^libedit2$|^libffi8$|^libbsd0$|^libmd0$'
++ deps=gcc-11-base
++ for d in $deps
++ '[' -z 1 ']'
++ '[' -n 'libubsan1 libquadmath0 gcc-11-base libobjc4 lib32gcc-s1 lib32stdc++6 libc6-i386 libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu gcc-12-base gcc-12-base gcc-12-base gcc-12-base' ']'
+++ echo libubsan1 libquadmath0 gcc-11-base libobjc4 lib32gcc-s1 lib32stdc++6 libc6-i386 libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu gcc-12-base gcc-12-base gcc-12-base gcc-12-base
+++ cut '-d ' -f1
++ pkg=libubsan1
+++ echo libubsan1 libquadmath0 gcc-11-base libobjc4 lib32gcc-s1 lib32stdc++6 libc6-i386 libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu gcc-12-base gcc-12-base gcc-12-base gcc-12-base
+++ cut '-d ' -f2- -s
++ queue='libquadmath0 gcc-11-base libobjc4 lib32gcc-s1 lib32stdc++6 libc6-i386 libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu gcc-12-base gcc-12-base gcc-12-base gcc-12-base'
++ '[' -n '' ']'
++ seen[$pkg]=1
++ apt-get download libubsan1
++ echo libubsan1
+++ apt-cache depends libubsan1
+++ grep -v '[<>]'
+++ awk '{print $2}'
+++ grep -v -E '^libc6$|^libstdc\+\+6$|^libgcc-s1$|^libzstd1$|^zlib1g$|^libxml2$|^libicu70$|^liblzma5$|^libncursesw6$|^libtinfo6$|^libedit2$|^libffi8$|^libbsd0$|^libmd0$'
+++ grep -E '^\s+(PreDepends|Depends):'
++ deps=gcc-12-base
++ for d in $deps
++ '[' -z '' ']'
++ queue='libquadmath0 gcc-11-base libobjc4 lib32gcc-s1 lib32stdc++6 libc6-i386 libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base'
++ '[' -n 'libquadmath0 gcc-11-base libobjc4 lib32gcc-s1 lib32stdc++6 libc6-i386 libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base' ']'
+++ echo libquadmath0 gcc-11-base libobjc4 lib32gcc-s1 lib32stdc++6 libc6-i386 libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base
+++ cut '-d ' -f1
++ pkg=libquadmath0
+++ echo libquadmath0 gcc-11-base libobjc4 lib32gcc-s1 lib32stdc++6 libc6-i386 libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base
+++ cut '-d ' -f2- -s
++ queue='gcc-11-base libobjc4 lib32gcc-s1 lib32stdc++6 libc6-i386 libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base'
++ '[' -n '' ']'
++ seen[$pkg]=1
++ apt-get download libquadmath0
++ echo libquadmath0
+++ apt-cache depends libquadmath0
+++ grep -v '[<>]'
+++ awk '{print $2}'
+++ grep -E '^\s+(PreDepends|Depends):'
+++ grep -v -E '^libc6$|^libstdc\+\+6$|^libgcc-s1$|^libzstd1$|^zlib1g$|^libxml2$|^libicu70$|^liblzma5$|^libncursesw6$|^libtinfo6$|^libedit2$|^libffi8$|^libbsd0$|^libmd0$'
++ deps=gcc-12-base
++ for d in $deps
++ '[' -z '' ']'
++ queue='gcc-11-base libobjc4 lib32gcc-s1 lib32stdc++6 libc6-i386 libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base'
++ '[' -n 'gcc-11-base libobjc4 lib32gcc-s1 lib32stdc++6 libc6-i386 libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base' ']'
+++ echo gcc-11-base libobjc4 lib32gcc-s1 lib32stdc++6 libc6-i386 libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base
+++ cut '-d ' -f1
++ pkg=gcc-11-base
+++ echo gcc-11-base libobjc4 lib32gcc-s1 lib32stdc++6 libc6-i386 libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base
+++ cut '-d ' -f2- -s
++ queue='libobjc4 lib32gcc-s1 lib32stdc++6 libc6-i386 libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base'
++ '[' -n 1 ']'
++ continue
++ '[' -n 'libobjc4 lib32gcc-s1 lib32stdc++6 libc6-i386 libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base' ']'
+++ echo libobjc4 lib32gcc-s1 lib32stdc++6 libc6-i386 libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base
+++ cut '-d ' -f1
++ pkg=libobjc4
+++ echo libobjc4 lib32gcc-s1 lib32stdc++6 libc6-i386 libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base
+++ cut '-d ' -f2- -s
++ queue='lib32gcc-s1 lib32stdc++6 libc6-i386 libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base'
++ '[' -n '' ']'
++ seen[$pkg]=1
++ apt-get download libobjc4
++ echo libobjc4
+++ apt-cache depends libobjc4
+++ grep -v '[<>]'
+++ awk '{print $2}'
+++ grep -v -E '^libc6$|^libstdc\+\+6$|^libgcc-s1$|^libzstd1$|^zlib1g$|^libxml2$|^libicu70$|^liblzma5$|^libncursesw6$|^libtinfo6$|^libedit2$|^libffi8$|^libbsd0$|^libmd0$'
+++ grep -E '^\s+(PreDepends|Depends):'
++ deps='gcc-12-base
+libgc1'
++ for d in $deps
++ '[' -z '' ']'
++ queue='lib32gcc-s1 lib32stdc++6 libc6-i386 libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base'
++ for d in $deps
++ '[' -z '' ']'
++ queue='lib32gcc-s1 lib32stdc++6 libc6-i386 libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base libgc1'
++ '[' -n 'lib32gcc-s1 lib32stdc++6 libc6-i386 libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base libgc1' ']'
+++ echo lib32gcc-s1 lib32stdc++6 libc6-i386 libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base libgc1
+++ cut '-d ' -f1
++ pkg=lib32gcc-s1
+++ echo lib32gcc-s1 lib32stdc++6 libc6-i386 libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base libgc1
+++ cut '-d ' -f2- -s
++ queue='lib32stdc++6 libc6-i386 libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base libgc1'
++ '[' -n '' ']'
++ seen[$pkg]=1
++ apt-get download lib32gcc-s1
++ echo lib32gcc-s1
+++ apt-cache depends lib32gcc-s1
+++ grep -v '[<>]'
+++ awk '{print $2}'
+++ grep -E '^\s+(PreDepends|Depends):'
+++ grep -v -E '^libc6$|^libstdc\+\+6$|^libgcc-s1$|^libzstd1$|^zlib1g$|^libxml2$|^libicu70$|^liblzma5$|^libncursesw6$|^libtinfo6$|^libedit2$|^libffi8$|^libbsd0$|^libmd0$'
++ deps='gcc-12-base
+libc6-i386'
++ for d in $deps
++ '[' -z '' ']'
++ queue='lib32stdc++6 libc6-i386 libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base libgc1 gcc-12-base'
++ for d in $deps
++ '[' -z '' ']'
++ queue='lib32stdc++6 libc6-i386 libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base libgc1 gcc-12-base libc6-i386'
++ '[' -n 'lib32stdc++6 libc6-i386 libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base libgc1 gcc-12-base libc6-i386' ']'
+++ echo lib32stdc++6 libc6-i386 libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base libgc1 gcc-12-base libc6-i386
+++ cut '-d ' -f1
++ pkg=lib32stdc++6
+++ cut '-d ' -f2- -s
+++ echo lib32stdc++6 libc6-i386 libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base libgc1 gcc-12-base libc6-i386
++ queue='libc6-i386 libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base libgc1 gcc-12-base libc6-i386'
++ '[' -n '' ']'
++ seen[$pkg]=1
++ apt-get download lib32stdc++6
++ echo lib32stdc++6
+++ apt-cache depends lib32stdc++6
+++ grep -v '[<>]'
+++ awk '{print $2}'
+++ grep -E '^\s+(PreDepends|Depends):'
+++ grep -v -E '^libc6$|^libstdc\+\+6$|^libgcc-s1$|^libzstd1$|^zlib1g$|^libxml2$|^libicu70$|^liblzma5$|^libncursesw6$|^libtinfo6$|^libedit2$|^libffi8$|^libbsd0$|^libmd0$'
++ deps='gcc-12-base
+lib32gcc-s1
+libc6-i386'
++ for d in $deps
++ '[' -z '' ']'
++ queue='libc6-i386 libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base libgc1 gcc-12-base libc6-i386 gcc-12-base'
++ for d in $deps
++ '[' -z 1 ']'
++ for d in $deps
++ '[' -z '' ']'
++ queue='libc6-i386 libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base libgc1 gcc-12-base libc6-i386 gcc-12-base libc6-i386'
++ '[' -n 'libc6-i386 libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base libgc1 gcc-12-base libc6-i386 gcc-12-base libc6-i386' ']'
+++ cut '-d ' -f1
+++ echo libc6-i386 libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base libgc1 gcc-12-base libc6-i386 gcc-12-base libc6-i386
++ pkg=libc6-i386
+++ cut '-d ' -f2- -s
+++ echo libc6-i386 libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base libgc1 gcc-12-base libc6-i386 gcc-12-base libc6-i386
++ queue='libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base libgc1 gcc-12-base libc6-i386 gcc-12-base libc6-i386'
++ '[' -n '' ']'
++ seen[$pkg]=1
++ apt-get download libc6-i386
++ echo libc6-i386
+++ apt-cache depends libc6-i386
+++ grep -v '[<>]'
+++ awk '{print $2}'
+++ grep -v -E '^libc6$|^libstdc\+\+6$|^libgcc-s1$|^libzstd1$|^zlib1g$|^libxml2$|^libicu70$|^liblzma5$|^libncursesw6$|^libtinfo6$|^libedit2$|^libffi8$|^libbsd0$|^libmd0$'
+++ grep -E '^\s+(PreDepends|Depends):'
++ deps=
++ '[' -n 'libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base libgc1 gcc-12-base libc6-i386 gcc-12-base libc6-i386' ']'
+++ echo libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base libgc1 gcc-12-base libc6-i386 gcc-12-base libc6-i386
+++ cut '-d ' -f1
++ pkg=libc-dev-bin
+++ echo libc-dev-bin linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base libgc1 gcc-12-base libc6-i386 gcc-12-base libc6-i386
+++ cut '-d ' -f2- -s
++ queue='linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base libgc1 gcc-12-base libc6-i386 gcc-12-base libc6-i386'
++ '[' -n '' ']'
++ seen[$pkg]=1
++ apt-get download libc-dev-bin
++ echo libc-dev-bin
+++ apt-cache depends libc-dev-bin
+++ grep -v '[<>]'
+++ awk '{print $2}'
+++ grep -E '^\s+(PreDepends|Depends):'
+++ grep -v -E '^libc6$|^libstdc\+\+6$|^libgcc-s1$|^libzstd1$|^zlib1g$|^libxml2$|^libicu70$|^liblzma5$|^libncursesw6$|^libtinfo6$|^libedit2$|^libffi8$|^libbsd0$|^libmd0$'
++ deps=
++ '[' -n 'linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base libgc1 gcc-12-base libc6-i386 gcc-12-base libc6-i386' ']'
+++ cut '-d ' -f1
+++ echo linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base libgc1 gcc-12-base libc6-i386 gcc-12-base libc6-i386
++ pkg=linux-libc-dev
+++ cut '-d ' -f2- -s
+++ echo linux-libc-dev libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base libgc1 gcc-12-base libc6-i386 gcc-12-base libc6-i386
++ queue='libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base libgc1 gcc-12-base libc6-i386 gcc-12-base libc6-i386'
++ '[' -n '' ']'
++ seen[$pkg]=1
++ apt-get download linux-libc-dev
++ echo linux-libc-dev
+++ awk '{print $2}'
+++ grep -E '^\s+(PreDepends|Depends):'
+++ apt-cache depends linux-libc-dev
+++ grep -v '[<>]'
+++ grep -v -E '^libc6$|^libstdc\+\+6$|^libgcc-s1$|^libzstd1$|^zlib1g$|^libxml2$|^libicu70$|^liblzma5$|^libncursesw6$|^libtinfo6$|^libedit2$|^libffi8$|^libbsd0$|^libmd0$'
++ deps=
++ '[' -n 'libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base libgc1 gcc-12-base libc6-i386 gcc-12-base libc6-i386' ']'
+++ echo libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base libgc1 gcc-12-base libc6-i386 gcc-12-base libc6-i386
+++ cut '-d ' -f1
++ pkg=libcrypt-dev
+++ echo libcrypt-dev rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base libgc1 gcc-12-base libc6-i386 gcc-12-base libc6-i386
+++ cut '-d ' -f2- -s
++ queue='rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base libgc1 gcc-12-base libc6-i386 gcc-12-base libc6-i386'
++ '[' -n '' ']'
++ seen[$pkg]=1
++ apt-get download libcrypt-dev
++ echo libcrypt-dev
+++ apt-cache depends libcrypt-dev
+++ grep -v '[<>]'
+++ awk '{print $2}'
+++ grep -v -E '^libc6$|^libstdc\+\+6$|^libgcc-s1$|^libzstd1$|^zlib1g$|^libxml2$|^libicu70$|^liblzma5$|^libncursesw6$|^libtinfo6$|^libedit2$|^libffi8$|^libbsd0$|^libmd0$'
+++ grep -E '^\s+(PreDepends|Depends):'
++ deps=libcrypt1
++ for d in $deps
++ '[' -z '' ']'
++ queue='rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base libgc1 gcc-12-base libc6-i386 gcc-12-base libc6-i386 libcrypt1'
++ '[' -n 'rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base libgc1 gcc-12-base libc6-i386 gcc-12-base libc6-i386 libcrypt1' ']'
+++ cut '-d ' -f1
+++ echo rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base libgc1 gcc-12-base libc6-i386 gcc-12-base libc6-i386 libcrypt1
++ pkg=rpcsvc-proto
+++ echo rpcsvc-proto libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base libgc1 gcc-12-base libc6-i386 gcc-12-base libc6-i386 libcrypt1
+++ cut '-d ' -f2- -s
++ queue='libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base libgc1 gcc-12-base libc6-i386 gcc-12-base libc6-i386 libcrypt1'
++ '[' -n '' ']'
++ seen[$pkg]=1
++ apt-get download rpcsvc-proto
++ echo rpcsvc-proto
+++ apt-cache depends rpcsvc-proto
+++ grep -v '[<>]'
+++ awk '{print $2}'
+++ grep -E '^\s+(PreDepends|Depends):'
+++ grep -v -E '^libc6$|^libstdc\+\+6$|^libgcc-s1$|^libzstd1$|^zlib1g$|^libxml2$|^libicu70$|^liblzma5$|^libncursesw6$|^libtinfo6$|^libedit2$|^libffi8$|^libbsd0$|^libmd0$'
++ deps=
++ '[' -n 'libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base libgc1 gcc-12-base libc6-i386 gcc-12-base libc6-i386 libcrypt1' ']'
+++ echo libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base libgc1 gcc-12-base libc6-i386 gcc-12-base libc6-i386 libcrypt1
+++ cut '-d ' -f1
++ pkg=libtirpc-dev
+++ echo libtirpc-dev libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base libgc1 gcc-12-base libc6-i386 gcc-12-base libc6-i386 libcrypt1
+++ cut '-d ' -f2- -s
++ queue='libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base libgc1 gcc-12-base libc6-i386 gcc-12-base libc6-i386 libcrypt1'
++ '[' -n '' ']'
++ seen[$pkg]=1
++ apt-get download libtirpc-dev
++ echo libtirpc-dev
+++ apt-cache depends libtirpc-dev
+++ grep -v '[<>]'
+++ awk '{print $2}'
+++ grep -E '^\s+(PreDepends|Depends):'
+++ grep -v -E '^libc6$|^libstdc\+\+6$|^libgcc-s1$|^libzstd1$|^zlib1g$|^libxml2$|^libicu70$|^liblzma5$|^libncursesw6$|^libtinfo6$|^libedit2$|^libffi8$|^libbsd0$|^libmd0$'
++ deps=libtirpc3
++ for d in $deps
++ '[' -z '' ']'
++ queue='libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base libgc1 gcc-12-base libc6-i386 gcc-12-base libc6-i386 libcrypt1 libtirpc3'
++ '[' -n 'libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base libgc1 gcc-12-base libc6-i386 gcc-12-base libc6-i386 libcrypt1 libtirpc3' ']'
+++ echo libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base libgc1 gcc-12-base libc6-i386 gcc-12-base libc6-i386 libcrypt1 libtirpc3
+++ cut '-d ' -f1
++ pkg=libnsl-dev
+++ echo libnsl-dev binutils-common libbinutils binutils-x86-64-linux-gnu gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base libgc1 gcc-12-base libc6-i386 gcc-12-base libc6-i386 libcrypt1 libtirpc3
+++ cut '-d ' -f2- -s
++ queue='binutils-common libbinutils binutils-x86-64-linux-gnu gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base libgc1 gcc-12-base libc6-i386 gcc-12-base libc6-i386 libcrypt1 libtirpc3'
++ '[' -n '' ']'
++ seen[$pkg]=1
++ apt-get download libnsl-dev
++ echo libnsl-dev
+++ apt-cache depends libnsl-dev
+++ grep -v '[<>]'
+++ awk '{print $2}'
+++ grep -v -E '^libc6$|^libstdc\+\+6$|^libgcc-s1$|^libzstd1$|^zlib1g$|^libxml2$|^libicu70$|^liblzma5$|^libncursesw6$|^libtinfo6$|^libedit2$|^libffi8$|^libbsd0$|^libmd0$'
+++ grep -E '^\s+(PreDepends|Depends):'
++ deps='libnsl2
+libtirpc-dev'
++ for d in $deps
++ '[' -z '' ']'
++ queue='binutils-common libbinutils binutils-x86-64-linux-gnu gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base libgc1 gcc-12-base libc6-i386 gcc-12-base libc6-i386 libcrypt1 libtirpc3 libnsl2'
++ for d in $deps
++ '[' -z 1 ']'
++ '[' -n 'binutils-common libbinutils binutils-x86-64-linux-gnu gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base libgc1 gcc-12-base libc6-i386 gcc-12-base libc6-i386 libcrypt1 libtirpc3 libnsl2' ']'
+++ echo binutils-common libbinutils binutils-x86-64-linux-gnu gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base libgc1 gcc-12-base libc6-i386 gcc-12-base libc6-i386 libcrypt1 libtirpc3 libnsl2
+++ cut '-d ' -f1
++ pkg=binutils-common
+++ echo binutils-common libbinutils binutils-x86-64-linux-gnu gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base libgc1 gcc-12-base libc6-i386 gcc-12-base libc6-i386 libcrypt1 libtirpc3 libnsl2
+++ cut '-d ' -f2- -s
++ queue='libbinutils binutils-x86-64-linux-gnu gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base libgc1 gcc-12-base libc6-i386 gcc-12-base libc6-i386 libcrypt1 libtirpc3 libnsl2'
++ '[' -n '' ']'
++ seen[$pkg]=1
++ apt-get download binutils-common
++ echo binutils-common
+++ apt-cache depends binutils-common
+++ grep -v '[<>]'
+++ awk '{print $2}'
+++ grep -E '^\s+(PreDepends|Depends):'
+++ grep -v -E '^libc6$|^libstdc\+\+6$|^libgcc-s1$|^libzstd1$|^zlib1g$|^libxml2$|^libicu70$|^liblzma5$|^libncursesw6$|^libtinfo6$|^libedit2$|^libffi8$|^libbsd0$|^libmd0$'
++ deps=
++ '[' -n 'libbinutils binutils-x86-64-linux-gnu gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base libgc1 gcc-12-base libc6-i386 gcc-12-base libc6-i386 libcrypt1 libtirpc3 libnsl2' ']'
+++ cut '-d ' -f1
+++ echo libbinutils binutils-x86-64-linux-gnu gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base libgc1 gcc-12-base libc6-i386 gcc-12-base libc6-i386 libcrypt1 libtirpc3 libnsl2
++ pkg=libbinutils
+++ cut '-d ' -f2- -s
+++ echo libbinutils binutils-x86-64-linux-gnu gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base libgc1 gcc-12-base libc6-i386 gcc-12-base libc6-i386 libcrypt1 libtirpc3 libnsl2
++ queue='binutils-x86-64-linux-gnu gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base libgc1 gcc-12-base libc6-i386 gcc-12-base libc6-i386 libcrypt1 libtirpc3 libnsl2'
++ '[' -n '' ']'
++ seen[$pkg]=1
++ apt-get download libbinutils
++ echo libbinutils
+++ apt-cache depends libbinutils
+++ grep -v '[<>]'
+++ awk '{print $2}'
+++ grep -E '^\s+(PreDepends|Depends):'
+++ grep -v -E '^libc6$|^libstdc\+\+6$|^libgcc-s1$|^libzstd1$|^zlib1g$|^libxml2$|^libicu70$|^liblzma5$|^libncursesw6$|^libtinfo6$|^libedit2$|^libffi8$|^libbsd0$|^libmd0$'
++ deps=binutils-common
++ for d in $deps
++ '[' -z 1 ']'
++ '[' -n 'binutils-x86-64-linux-gnu gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base libgc1 gcc-12-base libc6-i386 gcc-12-base libc6-i386 libcrypt1 libtirpc3 libnsl2' ']'
+++ echo binutils-x86-64-linux-gnu gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base libgc1 gcc-12-base libc6-i386 gcc-12-base libc6-i386 libcrypt1 libtirpc3 libnsl2
+++ cut '-d ' -f1
++ pkg=binutils-x86-64-linux-gnu
+++ echo binutils-x86-64-linux-gnu gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base libgc1 gcc-12-base libc6-i386 gcc-12-base libc6-i386 libcrypt1 libtirpc3 libnsl2
+++ cut '-d ' -f2- -s
++ queue='gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base libgc1 gcc-12-base libc6-i386 gcc-12-base libc6-i386 libcrypt1 libtirpc3 libnsl2'
++ '[' -n '' ']'
++ seen[$pkg]=1
++ apt-get download binutils-x86-64-linux-gnu
++ echo binutils-x86-64-linux-gnu
+++ apt-cache depends binutils-x86-64-linux-gnu
+++ grep -v '[<>]'
+++ awk '{print $2}'
+++ grep -E '^\s+(PreDepends|Depends):'
+++ grep -v -E '^libc6$|^libstdc\+\+6$|^libgcc-s1$|^libzstd1$|^zlib1g$|^libxml2$|^libicu70$|^liblzma5$|^libncursesw6$|^libtinfo6$|^libedit2$|^libffi8$|^libbsd0$|^libmd0$'
++ deps='binutils-common
+libbinutils
+libctf-nobfd0
+libctf0'
++ for d in $deps
++ '[' -z 1 ']'
++ for d in $deps
++ '[' -z 1 ']'
++ for d in $deps
++ '[' -z '' ']'
++ queue='gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base libgc1 gcc-12-base libc6-i386 gcc-12-base libc6-i386 libcrypt1 libtirpc3 libnsl2 libctf-nobfd0'
++ for d in $deps
++ '[' -z '' ']'
++ queue='gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base libgc1 gcc-12-base libc6-i386 gcc-12-base libc6-i386 libcrypt1 libtirpc3 libnsl2 libctf-nobfd0 libctf0'
++ '[' -n 'gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base libgc1 gcc-12-base libc6-i386 gcc-12-base libc6-i386 libcrypt1 libtirpc3 libnsl2 libctf-nobfd0 libctf0' ']'
+++ echo gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base libgc1 gcc-12-base libc6-i386 gcc-12-base libc6-i386 libcrypt1 libtirpc3 libnsl2 libctf-nobfd0 libctf0
+++ cut '-d ' -f1
++ pkg=gcc-12-base
+++ echo gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base libgc1 gcc-12-base libc6-i386 gcc-12-base libc6-i386 libcrypt1 libtirpc3 libnsl2 libctf-nobfd0 libctf0
+++ cut '-d ' -f2- -s
++ queue='gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base libgc1 gcc-12-base libc6-i386 gcc-12-base libc6-i386 libcrypt1 libtirpc3 libnsl2 libctf-nobfd0 libctf0'
++ '[' -n '' ']'
++ seen[$pkg]=1
++ apt-get download gcc-12-base
++ echo gcc-12-base
+++ apt-cache depends gcc-12-base
+++ grep -v '[<>]'
+++ awk '{print $2}'
+++ grep -E '^\s+(PreDepends|Depends):'
+++ grep -v -E '^libc6$|^libstdc\+\+6$|^libgcc-s1$|^libzstd1$|^zlib1g$|^libxml2$|^libicu70$|^liblzma5$|^libncursesw6$|^libtinfo6$|^libedit2$|^libffi8$|^libbsd0$|^libmd0$'
++ deps=
++ '[' -n 'gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base libgc1 gcc-12-base libc6-i386 gcc-12-base libc6-i386 libcrypt1 libtirpc3 libnsl2 libctf-nobfd0 libctf0' ']'
+++ echo gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base libgc1 gcc-12-base libc6-i386 gcc-12-base libc6-i386 libcrypt1 libtirpc3 libnsl2 libctf-nobfd0 libctf0
+++ cut '-d ' -f1
++ pkg=gcc-12-base
+++ echo gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base libgc1 gcc-12-base libc6-i386 gcc-12-base libc6-i386 libcrypt1 libtirpc3 libnsl2 libctf-nobfd0 libctf0
+++ cut '-d ' -f2- -s
++ queue='gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base libgc1 gcc-12-base libc6-i386 gcc-12-base libc6-i386 libcrypt1 libtirpc3 libnsl2 libctf-nobfd0 libctf0'
++ '[' -n 1 ']'
++ continue
++ '[' -n 'gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base libgc1 gcc-12-base libc6-i386 gcc-12-base libc6-i386 libcrypt1 libtirpc3 libnsl2 libctf-nobfd0 libctf0' ']'
+++ echo gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base libgc1 gcc-12-base libc6-i386 gcc-12-base libc6-i386 libcrypt1 libtirpc3 libnsl2 libctf-nobfd0 libctf0
+++ cut '-d ' -f1
++ pkg=gcc-12-base
+++ echo gcc-12-base gcc-12-base gcc-12-base gcc-12-base gcc-12-base libgc1 gcc-12-base libc6-i386 gcc-12-base libc6-i386 libcrypt1 libtirpc3 libnsl2 libctf-nobfd0 libctf0
+++ cut '-d ' -f2- -s
++ queue='gcc-12-base gcc-12-base gcc-12-base gcc-12-base libgc1 gcc-12-base libc6-i386 gcc-12-base libc6-i386 libcrypt1 libtirpc3 libnsl2 libctf-nobfd0 libctf0'
++ '[' -n 1 ']'
++ continue
++ '[' -n 'gcc-12-base gcc-12-base gcc-12-base gcc-12-base libgc1 gcc-12-base libc6-i386 gcc-12-base libc6-i386 libcrypt1 libtirpc3 libnsl2 libctf-nobfd0 libctf0' ']'
+++ echo gcc-12-base gcc-12-base gcc-12-base gcc-12-base libgc1 gcc-12-base libc6-i386 gcc-12-base libc6-i386 libcrypt1 libtirpc3 libnsl2 libctf-nobfd0 libctf0
+++ cut '-d ' -f1
++ pkg=gcc-12-base
+++ echo gcc-12-base gcc-12-base gcc-12-base gcc-12-base libgc1 gcc-12-base libc6-i386 gcc-12-base libc6-i386 libcrypt1 libtirpc3 libnsl2 libctf-nobfd0 libctf0
+++ cut '-d ' -f2- -s
++ queue='gcc-12-base gcc-12-base gcc-12-base libgc1 gcc-12-base libc6-i386 gcc-12-base libc6-i386 libcrypt1 libtirpc3 libnsl2 libctf-nobfd0 libctf0'
++ '[' -n 1 ']'
++ continue
++ '[' -n 'gcc-12-base gcc-12-base gcc-12-base libgc1 gcc-12-base libc6-i386 gcc-12-base libc6-i386 libcrypt1 libtirpc3 libnsl2 libctf-nobfd0 libctf0' ']'
+++ echo gcc-12-base gcc-12-base gcc-12-base libgc1 gcc-12-base libc6-i386 gcc-12-base libc6-i386 libcrypt1 libtirpc3 libnsl2 libctf-nobfd0 libctf0
+++ cut '-d ' -f1
++ pkg=gcc-12-base
+++ echo gcc-12-base gcc-12-base gcc-12-base libgc1 gcc-12-base libc6-i386 gcc-12-base libc6-i386 libcrypt1 libtirpc3 libnsl2 libctf-nobfd0 libctf0
+++ cut '-d ' -f2- -s
++ queue='gcc-12-base gcc-12-base libgc1 gcc-12-base libc6-i386 gcc-12-base libc6-i386 libcrypt1 libtirpc3 libnsl2 libctf-nobfd0 libctf0'
++ '[' -n 1 ']'
++ continue
++ '[' -n 'gcc-12-base gcc-12-base libgc1 gcc-12-base libc6-i386 gcc-12-base libc6-i386 libcrypt1 libtirpc3 libnsl2 libctf-nobfd0 libctf0' ']'
+++ echo gcc-12-base gcc-12-base libgc1 gcc-12-base libc6-i386 gcc-12-base libc6-i386 libcrypt1 libtirpc3 libnsl2 libctf-nobfd0 libctf0
+++ cut '-d ' -f1
++ pkg=gcc-12-base
+++ echo gcc-12-base gcc-12-base libgc1 gcc-12-base libc6-i386 gcc-12-base libc6-i386 libcrypt1 libtirpc3 libnsl2 libctf-nobfd0 libctf0
+++ cut '-d ' -f2- -s
++ queue='gcc-12-base libgc1 gcc-12-base libc6-i386 gcc-12-base libc6-i386 libcrypt1 libtirpc3 libnsl2 libctf-nobfd0 libctf0'
++ '[' -n 1 ']'
++ continue
++ '[' -n 'gcc-12-base libgc1 gcc-12-base libc6-i386 gcc-12-base libc6-i386 libcrypt1 libtirpc3 libnsl2 libctf-nobfd0 libctf0' ']'
+++ echo gcc-12-base libgc1 gcc-12-base libc6-i386 gcc-12-base libc6-i386 libcrypt1 libtirpc3 libnsl2 libctf-nobfd0 libctf0
+++ cut '-d ' -f1
++ pkg=gcc-12-base
+++ echo gcc-12-base libgc1 gcc-12-base libc6-i386 gcc-12-base libc6-i386 libcrypt1 libtirpc3 libnsl2 libctf-nobfd0 libctf0
+++ cut '-d ' -f2- -s
++ queue='libgc1 gcc-12-base libc6-i386 gcc-12-base libc6-i386 libcrypt1 libtirpc3 libnsl2 libctf-nobfd0 libctf0'
++ '[' -n 1 ']'
++ continue
++ '[' -n 'libgc1 gcc-12-base libc6-i386 gcc-12-base libc6-i386 libcrypt1 libtirpc3 libnsl2 libctf-nobfd0 libctf0' ']'
+++ echo libgc1 gcc-12-base libc6-i386 gcc-12-base libc6-i386 libcrypt1 libtirpc3 libnsl2 libctf-nobfd0 libctf0
+++ cut '-d ' -f1
++ pkg=libgc1
+++ echo libgc1 gcc-12-base libc6-i386 gcc-12-base libc6-i386 libcrypt1 libtirpc3 libnsl2 libctf-nobfd0 libctf0
+++ cut '-d ' -f2- -s
++ queue='gcc-12-base libc6-i386 gcc-12-base libc6-i386 libcrypt1 libtirpc3 libnsl2 libctf-nobfd0 libctf0'
++ '[' -n '' ']'
++ seen[$pkg]=1
++ apt-get download libgc1
++ echo libgc1
+++ apt-cache depends libgc1
+++ grep -v '[<>]'
+++ awk '{print $2}'
+++ grep -E '^\s+(PreDepends|Depends):'
+++ grep -v -E '^libc6$|^libstdc\+\+6$|^libgcc-s1$|^libzstd1$|^zlib1g$|^libxml2$|^libicu70$|^liblzma5$|^libncursesw6$|^libtinfo6$|^libedit2$|^libffi8$|^libbsd0$|^libmd0$'
++ deps=
++ '[' -n 'gcc-12-base libc6-i386 gcc-12-base libc6-i386 libcrypt1 libtirpc3 libnsl2 libctf-nobfd0 libctf0' ']'
+++ echo gcc-12-base libc6-i386 gcc-12-base libc6-i386 libcrypt1 libtirpc3 libnsl2 libctf-nobfd0 libctf0
+++ cut '-d ' -f1
++ pkg=gcc-12-base
+++ echo gcc-12-base libc6-i386 gcc-12-base libc6-i386 libcrypt1 libtirpc3 libnsl2 libctf-nobfd0 libctf0
+++ cut '-d ' -f2- -s
++ queue='libc6-i386 gcc-12-base libc6-i386 libcrypt1 libtirpc3 libnsl2 libctf-nobfd0 libctf0'
++ '[' -n 1 ']'
++ continue
++ '[' -n 'libc6-i386 gcc-12-base libc6-i386 libcrypt1 libtirpc3 libnsl2 libctf-nobfd0 libctf0' ']'
+++ echo libc6-i386 gcc-12-base libc6-i386 libcrypt1 libtirpc3 libnsl2 libctf-nobfd0 libctf0
+++ cut '-d ' -f1
++ pkg=libc6-i386
+++ echo libc6-i386 gcc-12-base libc6-i386 libcrypt1 libtirpc3 libnsl2 libctf-nobfd0 libctf0
+++ cut '-d ' -f2- -s
++ queue='gcc-12-base libc6-i386 libcrypt1 libtirpc3 libnsl2 libctf-nobfd0 libctf0'
++ '[' -n 1 ']'
++ continue
++ '[' -n 'gcc-12-base libc6-i386 libcrypt1 libtirpc3 libnsl2 libctf-nobfd0 libctf0' ']'
+++ echo gcc-12-base libc6-i386 libcrypt1 libtirpc3 libnsl2 libctf-nobfd0 libctf0
+++ cut '-d ' -f1
++ pkg=gcc-12-base
+++ echo gcc-12-base libc6-i386 libcrypt1 libtirpc3 libnsl2 libctf-nobfd0 libctf0
+++ cut '-d ' -f2- -s
++ queue='libc6-i386 libcrypt1 libtirpc3 libnsl2 libctf-nobfd0 libctf0'
++ '[' -n 1 ']'
++ continue
++ '[' -n 'libc6-i386 libcrypt1 libtirpc3 libnsl2 libctf-nobfd0 libctf0' ']'
+++ echo libc6-i386 libcrypt1 libtirpc3 libnsl2 libctf-nobfd0 libctf0
+++ cut '-d ' -f1
++ pkg=libc6-i386
+++ echo libc6-i386 libcrypt1 libtirpc3 libnsl2 libctf-nobfd0 libctf0
+++ cut '-d ' -f2- -s
++ queue='libcrypt1 libtirpc3 libnsl2 libctf-nobfd0 libctf0'
++ '[' -n 1 ']'
++ continue
++ '[' -n 'libcrypt1 libtirpc3 libnsl2 libctf-nobfd0 libctf0' ']'
+++ echo libcrypt1 libtirpc3 libnsl2 libctf-nobfd0 libctf0
+++ cut '-d ' -f1
++ pkg=libcrypt1
+++ echo libcrypt1 libtirpc3 libnsl2 libctf-nobfd0 libctf0
+++ cut '-d ' -f2- -s
++ queue='libtirpc3 libnsl2 libctf-nobfd0 libctf0'
++ '[' -n '' ']'
++ seen[$pkg]=1
++ apt-get download libcrypt1
++ echo libcrypt1
+++ apt-cache depends libcrypt1
+++ grep -v '[<>]'
+++ awk '{print $2}'
+++ grep -E '^\s+(PreDepends|Depends):'
+++ grep -v -E '^libc6$|^libstdc\+\+6$|^libgcc-s1$|^libzstd1$|^zlib1g$|^libxml2$|^libicu70$|^liblzma5$|^libncursesw6$|^libtinfo6$|^libedit2$|^libffi8$|^libbsd0$|^libmd0$'
++ deps=
++ '[' -n 'libtirpc3 libnsl2 libctf-nobfd0 libctf0' ']'
+++ echo libtirpc3 libnsl2 libctf-nobfd0 libctf0
+++ cut '-d ' -f1
++ pkg=libtirpc3
+++ echo libtirpc3 libnsl2 libctf-nobfd0 libctf0
+++ cut '-d ' -f2- -s
++ queue='libnsl2 libctf-nobfd0 libctf0'
++ '[' -n '' ']'
++ seen[$pkg]=1
++ apt-get download libtirpc3
++ echo libtirpc3
+++ apt-cache depends libtirpc3
+++ grep -v '[<>]'
+++ awk '{print $2}'
+++ grep -v -E '^libc6$|^libstdc\+\+6$|^libgcc-s1$|^libzstd1$|^zlib1g$|^libxml2$|^libicu70$|^liblzma5$|^libncursesw6$|^libtinfo6$|^libedit2$|^libffi8$|^libbsd0$|^libmd0$'
+++ grep -E '^\s+(PreDepends|Depends):'
++ deps='libgssapi-krb5-2
+libtirpc-common'
++ for d in $deps
++ '[' -z '' ']'
++ queue='libnsl2 libctf-nobfd0 libctf0 libgssapi-krb5-2'
++ for d in $deps
++ '[' -z '' ']'
++ queue='libnsl2 libctf-nobfd0 libctf0 libgssapi-krb5-2 libtirpc-common'
++ '[' -n 'libnsl2 libctf-nobfd0 libctf0 libgssapi-krb5-2 libtirpc-common' ']'
+++ echo libnsl2 libctf-nobfd0 libctf0 libgssapi-krb5-2 libtirpc-common
+++ cut '-d ' -f1
++ pkg=libnsl2
+++ echo libnsl2 libctf-nobfd0 libctf0 libgssapi-krb5-2 libtirpc-common
+++ cut '-d ' -f2- -s
++ queue='libctf-nobfd0 libctf0 libgssapi-krb5-2 libtirpc-common'
++ '[' -n '' ']'
++ seen[$pkg]=1
++ apt-get download libnsl2
++ echo libnsl2
+++ apt-cache depends libnsl2
+++ grep -v '[<>]'
+++ awk '{print $2}'
+++ grep -v -E '^libc6$|^libstdc\+\+6$|^libgcc-s1$|^libzstd1$|^zlib1g$|^libxml2$|^libicu70$|^liblzma5$|^libncursesw6$|^libtinfo6$|^libedit2$|^libffi8$|^libbsd0$|^libmd0$'
+++ grep -E '^\s+(PreDepends|Depends):'
++ deps=libtirpc3
++ for d in $deps
++ '[' -z 1 ']'
++ '[' -n 'libctf-nobfd0 libctf0 libgssapi-krb5-2 libtirpc-common' ']'
+++ echo libctf-nobfd0 libctf0 libgssapi-krb5-2 libtirpc-common
+++ cut '-d ' -f1
++ pkg=libctf-nobfd0
+++ echo libctf-nobfd0 libctf0 libgssapi-krb5-2 libtirpc-common
+++ cut '-d ' -f2- -s
++ queue='libctf0 libgssapi-krb5-2 libtirpc-common'
++ '[' -n '' ']'
++ seen[$pkg]=1
++ apt-get download libctf-nobfd0
++ echo libctf-nobfd0
+++ apt-cache depends libctf-nobfd0
+++ grep -v '[<>]'
+++ awk '{print $2}'
+++ grep -E '^\s+(PreDepends|Depends):'
+++ grep -v -E '^libc6$|^libstdc\+\+6$|^libgcc-s1$|^libzstd1$|^zlib1g$|^libxml2$|^libicu70$|^liblzma5$|^libncursesw6$|^libtinfo6$|^libedit2$|^libffi8$|^libbsd0$|^libmd0$'
++ deps=
++ '[' -n 'libctf0 libgssapi-krb5-2 libtirpc-common' ']'
+++ echo libctf0 libgssapi-krb5-2 libtirpc-common
+++ cut '-d ' -f1
++ pkg=libctf0
+++ echo libctf0 libgssapi-krb5-2 libtirpc-common
+++ cut '-d ' -f2- -s
++ queue='libgssapi-krb5-2 libtirpc-common'
++ '[' -n '' ']'
++ seen[$pkg]=1
++ apt-get download libctf0
++ echo libctf0
+++ apt-cache depends libctf0
+++ grep -v '[<>]'
+++ awk '{print $2}'
+++ grep -v -E '^libc6$|^libstdc\+\+6$|^libgcc-s1$|^libzstd1$|^zlib1g$|^libxml2$|^libicu70$|^liblzma5$|^libncursesw6$|^libtinfo6$|^libedit2$|^libffi8$|^libbsd0$|^libmd0$'
+++ grep -E '^\s+(PreDepends|Depends):'
++ deps=libbinutils
++ for d in $deps
++ '[' -z 1 ']'
++ '[' -n 'libgssapi-krb5-2 libtirpc-common' ']'
+++ echo libgssapi-krb5-2 libtirpc-common
+++ cut '-d ' -f1
++ pkg=libgssapi-krb5-2
+++ echo libgssapi-krb5-2 libtirpc-common
+++ cut '-d ' -f2- -s
++ queue=libtirpc-common
++ '[' -n '' ']'
++ seen[$pkg]=1
++ apt-get download libgssapi-krb5-2
++ echo libgssapi-krb5-2
+++ apt-cache depends libgssapi-krb5-2
+++ grep -v '[<>]'
+++ awk '{print $2}'
+++ grep -v -E '^libc6$|^libstdc\+\+6$|^libgcc-s1$|^libzstd1$|^zlib1g$|^libxml2$|^libicu70$|^liblzma5$|^libncursesw6$|^libtinfo6$|^libedit2$|^libffi8$|^libbsd0$|^libmd0$'
+++ grep -E '^\s+(PreDepends|Depends):'
++ deps='libcom-err2
+libk5crypto3
+libkrb5-3
+libkrb5support0'
++ for d in $deps
++ '[' -z '' ']'
++ queue='libtirpc-common libcom-err2'
++ for d in $deps
++ '[' -z '' ']'
++ queue='libtirpc-common libcom-err2 libk5crypto3'
++ for d in $deps
++ '[' -z '' ']'
++ queue='libtirpc-common libcom-err2 libk5crypto3 libkrb5-3'
++ for d in $deps
++ '[' -z '' ']'
++ queue='libtirpc-common libcom-err2 libk5crypto3 libkrb5-3 libkrb5support0'
++ '[' -n 'libtirpc-common libcom-err2 libk5crypto3 libkrb5-3 libkrb5support0' ']'
+++ echo libtirpc-common libcom-err2 libk5crypto3 libkrb5-3 libkrb5support0
+++ cut '-d ' -f1
++ pkg=libtirpc-common
+++ echo libtirpc-common libcom-err2 libk5crypto3 libkrb5-3 libkrb5support0
+++ cut '-d ' -f2- -s
++ queue='libcom-err2 libk5crypto3 libkrb5-3 libkrb5support0'
++ '[' -n '' ']'
++ seen[$pkg]=1
++ apt-get download libtirpc-common
++ echo libtirpc-common
+++ apt-cache depends libtirpc-common
+++ grep -v '[<>]'
+++ awk '{print $2}'
+++ grep -E '^\s+(PreDepends|Depends):'
+++ grep -v -E '^libc6$|^libstdc\+\+6$|^libgcc-s1$|^libzstd1$|^zlib1g$|^libxml2$|^libicu70$|^liblzma5$|^libncursesw6$|^libtinfo6$|^libedit2$|^libffi8$|^libbsd0$|^libmd0$'
++ deps=
++ '[' -n 'libcom-err2 libk5crypto3 libkrb5-3 libkrb5support0' ']'
+++ echo libcom-err2 libk5crypto3 libkrb5-3 libkrb5support0
+++ cut '-d ' -f1
++ pkg=libcom-err2
+++ echo libcom-err2 libk5crypto3 libkrb5-3 libkrb5support0
+++ cut '-d ' -f2- -s
++ queue='libk5crypto3 libkrb5-3 libkrb5support0'
++ '[' -n '' ']'
++ seen[$pkg]=1
++ apt-get download libcom-err2
++ echo libcom-err2
+++ apt-cache depends libcom-err2
+++ grep -v '[<>]'
+++ awk '{print $2}'
+++ grep -E '^\s+(PreDepends|Depends):'
+++ grep -v -E '^libc6$|^libstdc\+\+6$|^libgcc-s1$|^libzstd1$|^zlib1g$|^libxml2$|^libicu70$|^liblzma5$|^libncursesw6$|^libtinfo6$|^libedit2$|^libffi8$|^libbsd0$|^libmd0$'
++ deps=
++ '[' -n 'libk5crypto3 libkrb5-3 libkrb5support0' ']'
+++ echo libk5crypto3 libkrb5-3 libkrb5support0
+++ cut '-d ' -f1
++ pkg=libk5crypto3
+++ echo libk5crypto3 libkrb5-3 libkrb5support0
+++ cut '-d ' -f2- -s
++ queue='libkrb5-3 libkrb5support0'
++ '[' -n '' ']'
++ seen[$pkg]=1
++ apt-get download libk5crypto3
++ echo libk5crypto3
+++ apt-cache depends libk5crypto3
+++ grep -v '[<>]'
+++ awk '{print $2}'
+++ grep -E '^\s+(PreDepends|Depends):'
+++ grep -v -E '^libc6$|^libstdc\+\+6$|^libgcc-s1$|^libzstd1$|^zlib1g$|^libxml2$|^libicu70$|^liblzma5$|^libncursesw6$|^libtinfo6$|^libedit2$|^libffi8$|^libbsd0$|^libmd0$'
++ deps=libkrb5support0
++ for d in $deps
++ '[' -z '' ']'
++ queue='libkrb5-3 libkrb5support0 libkrb5support0'
++ '[' -n 'libkrb5-3 libkrb5support0 libkrb5support0' ']'
+++ echo libkrb5-3 libkrb5support0 libkrb5support0
+++ cut '-d ' -f1
++ pkg=libkrb5-3
+++ echo libkrb5-3 libkrb5support0 libkrb5support0
+++ cut '-d ' -f2- -s
++ queue='libkrb5support0 libkrb5support0'
++ '[' -n '' ']'
++ seen[$pkg]=1
++ apt-get download libkrb5-3
++ echo libkrb5-3
+++ apt-cache depends libkrb5-3
+++ awk '{print $2}'
+++ grep -E '^\s+(PreDepends|Depends):'
+++ grep -v '[<>]'
+++ grep -v -E '^libc6$|^libstdc\+\+6$|^libgcc-s1$|^libzstd1$|^zlib1g$|^libxml2$|^libicu70$|^liblzma5$|^libncursesw6$|^libtinfo6$|^libedit2$|^libffi8$|^libbsd0$|^libmd0$'
++ deps='libcom-err2
+libk5crypto3
+libkeyutils1
+libkrb5support0
+libssl3'
++ for d in $deps
++ '[' -z 1 ']'
++ for d in $deps
++ '[' -z 1 ']'
++ for d in $deps
++ '[' -z '' ']'
++ queue='libkrb5support0 libkrb5support0 libkeyutils1'
++ for d in $deps
++ '[' -z '' ']'
++ queue='libkrb5support0 libkrb5support0 libkeyutils1 libkrb5support0'
++ for d in $deps
++ '[' -z '' ']'
++ queue='libkrb5support0 libkrb5support0 libkeyutils1 libkrb5support0 libssl3'
++ '[' -n 'libkrb5support0 libkrb5support0 libkeyutils1 libkrb5support0 libssl3' ']'
+++ echo libkrb5support0 libkrb5support0 libkeyutils1 libkrb5support0 libssl3
+++ cut '-d ' -f1
++ pkg=libkrb5support0
+++ echo libkrb5support0 libkrb5support0 libkeyutils1 libkrb5support0 libssl3
+++ cut '-d ' -f2- -s
++ queue='libkrb5support0 libkeyutils1 libkrb5support0 libssl3'
++ '[' -n '' ']'
++ seen[$pkg]=1
++ apt-get download libkrb5support0
++ echo libkrb5support0
+++ apt-cache depends libkrb5support0
+++ grep -v '[<>]'
+++ awk '{print $2}'
+++ grep -E '^\s+(PreDepends|Depends):'
+++ grep -v -E '^libc6$|^libstdc\+\+6$|^libgcc-s1$|^libzstd1$|^zlib1g$|^libxml2$|^libicu70$|^liblzma5$|^libncursesw6$|^libtinfo6$|^libedit2$|^libffi8$|^libbsd0$|^libmd0$'
++ deps=
++ '[' -n 'libkrb5support0 libkeyutils1 libkrb5support0 libssl3' ']'
+++ echo libkrb5support0 libkeyutils1 libkrb5support0 libssl3
+++ cut '-d ' -f1
++ pkg=libkrb5support0
+++ echo libkrb5support0 libkeyutils1 libkrb5support0 libssl3
+++ cut '-d ' -f2- -s
++ queue='libkeyutils1 libkrb5support0 libssl3'
++ '[' -n 1 ']'
++ continue
++ '[' -n 'libkeyutils1 libkrb5support0 libssl3' ']'
+++ echo libkeyutils1 libkrb5support0 libssl3
+++ cut '-d ' -f1
++ pkg=libkeyutils1
+++ echo libkeyutils1 libkrb5support0 libssl3
+++ cut '-d ' -f2- -s
++ queue='libkrb5support0 libssl3'
++ '[' -n '' ']'
++ seen[$pkg]=1
++ apt-get download libkeyutils1
++ echo libkeyutils1
+++ apt-cache depends libkeyutils1
+++ grep -v '[<>]'
+++ awk '{print $2}'
+++ grep -E '^\s+(PreDepends|Depends):'
+++ grep -v -E '^libc6$|^libstdc\+\+6$|^libgcc-s1$|^libzstd1$|^zlib1g$|^libxml2$|^libicu70$|^liblzma5$|^libncursesw6$|^libtinfo6$|^libedit2$|^libffi8$|^libbsd0$|^libmd0$'
++ deps=
++ '[' -n 'libkrb5support0 libssl3' ']'
+++ echo libkrb5support0 libssl3
+++ cut '-d ' -f1
++ pkg=libkrb5support0
+++ echo libkrb5support0 libssl3
+++ cut '-d ' -f2- -s
++ queue=libssl3
++ '[' -n 1 ']'
++ continue
++ '[' -n libssl3 ']'
+++ echo libssl3
+++ cut '-d ' -f1
++ pkg=libssl3
+++ echo libssl3
+++ cut '-d ' -f2- -s
++ queue=
++ '[' -n '' ']'
++ seen[$pkg]=1
++ apt-get download libssl3
++ echo libssl3
+++ apt-cache depends libssl3
+++ grep -v '[<>]'
+++ awk '{print $2}'
+++ grep -v -E '^libc6$|^libstdc\+\+6$|^libgcc-s1$|^libzstd1$|^zlib1g$|^libxml2$|^libicu70$|^liblzma5$|^libncursesw6$|^libtinfo6$|^libedit2$|^libffi8$|^libbsd0$|^libmd0$'
+++ grep -E '^\s+(PreDepends|Depends):'
++ deps=
++ '[' -n '' ']'
++ echo '=== extract ==='
+=== extract ===
++ mkdir -p /home/sandbox/work/12/bin/pocl-prefix
++ for f in *.deb
++ dpkg-deb -x binutils-common_2.38-4ubuntu2.12_amd64.deb /home/sandbox/work/12/bin/pocl-prefix
++ for f in *.deb
++ dpkg-deb -x binutils-x86-64-linux-gnu_2.38-4ubuntu2.12_amd64.deb /home/sandbox/work/12/bin/pocl-prefix
++ for f in *.deb
++ dpkg-deb -x binutils_2.38-4ubuntu2.12_amd64.deb /home/sandbox/work/12/bin/pocl-prefix
++ for f in *.deb
++ dpkg-deb -x clang-11_1%3a11.1.0-6_amd64.deb /home/sandbox/work/12/bin/pocl-prefix
++ for f in *.deb
++ dpkg-deb -x gcc-11-base_11.4.0-1ubuntu1~22.04.3_amd64.deb /home/sandbox/work/12/bin/pocl-prefix
++ for f in *.deb
++ dpkg-deb -x gcc-12-base_12.3.0-1ubuntu1~22.04.3_amd64.deb /home/sandbox/work/12/bin/pocl-prefix
++ for f in *.deb
++ dpkg-deb -x lib32gcc-s1_12.3.0-1ubuntu1~22.04.3_amd64.deb /home/sandbox/work/12/bin/pocl-prefix
++ for f in *.deb
++ dpkg-deb -x lib32stdc++6_12.3.0-1ubuntu1~22.04.3_amd64.deb /home/sandbox/work/12/bin/pocl-prefix
++ for f in *.deb
++ dpkg-deb -x libasan6_11.4.0-1ubuntu1~22.04.3_amd64.deb /home/sandbox/work/12/bin/pocl-prefix
++ for f in *.deb
++ dpkg-deb -x libatomic1_12.3.0-1ubuntu1~22.04.3_amd64.deb /home/sandbox/work/12/bin/pocl-prefix
++ for f in *.deb
++ dpkg-deb -x libbinutils_2.38-4ubuntu2.12_amd64.deb /home/sandbox/work/12/bin/pocl-prefix
++ for f in *.deb
++ dpkg-deb -x libc-dev-bin_2.35-0ubuntu3.15_amd64.deb /home/sandbox/work/12/bin/pocl-prefix
++ for f in *.deb
++ dpkg-deb -x libc6-dev_2.35-0ubuntu3.15_amd64.deb /home/sandbox/work/12/bin/pocl-prefix
++ for f in *.deb
++ dpkg-deb -x libc6-i386_2.35-0ubuntu3.15_amd64.deb /home/sandbox/work/12/bin/pocl-prefix
++ for f in *.deb
++ dpkg-deb -x libclang-common-11-dev_1%3a11.1.0-6_amd64.deb /home/sandbox/work/12/bin/pocl-prefix
++ for f in *.deb
++ dpkg-deb -x libclang-cpp11_1%3a11.1.0-6_amd64.deb /home/sandbox/work/12/bin/pocl-prefix
++ for f in *.deb
++ dpkg-deb -x libclang1-11_1%3a11.1.0-6_amd64.deb /home/sandbox/work/12/bin/pocl-prefix
++ for f in *.deb
++ dpkg-deb -x libcom-err2_1.46.5-2ubuntu1.2_amd64.deb /home/sandbox/work/12/bin/pocl-prefix
++ for f in *.deb
++ dpkg-deb -x libcrypt-dev_1%3a4.4.27-1_amd64.deb /home/sandbox/work/12/bin/pocl-prefix
++ for f in *.deb
++ dpkg-deb -x libcrypt1_1%3a4.4.27-1_amd64.deb /home/sandbox/work/12/bin/pocl-prefix
++ for f in *.deb
++ dpkg-deb -x libctf-nobfd0_2.38-4ubuntu2.12_amd64.deb /home/sandbox/work/12/bin/pocl-prefix
++ for f in *.deb
++ dpkg-deb -x libctf0_2.38-4ubuntu2.12_amd64.deb /home/sandbox/work/12/bin/pocl-prefix
++ for f in *.deb
++ dpkg-deb -x libgc1_1%3a8.0.6-1.1build1_amd64.deb /home/sandbox/work/12/bin/pocl-prefix
++ for f in *.deb
++ dpkg-deb -x libgcc-11-dev_11.4.0-1ubuntu1~22.04.3_amd64.deb /home/sandbox/work/12/bin/pocl-prefix
++ for f in *.deb
++ dpkg-deb -x libgomp1_12.3.0-1ubuntu1~22.04.3_amd64.deb /home/sandbox/work/12/bin/pocl-prefix
++ for f in *.deb
++ dpkg-deb -x libgssapi-krb5-2_1.19.2-2ubuntu0.10_amd64.deb /home/sandbox/work/12/bin/pocl-prefix
++ for f in *.deb
++ dpkg-deb -x libhwloc15_2.7.0-2ubuntu1_amd64.deb /home/sandbox/work/12/bin/pocl-prefix
++ for f in *.deb
++ dpkg-deb -x libitm1_12.3.0-1ubuntu1~22.04.3_amd64.deb /home/sandbox/work/12/bin/pocl-prefix
++ for f in *.deb
++ dpkg-deb -x libk5crypto3_1.19.2-2ubuntu0.10_amd64.deb /home/sandbox/work/12/bin/pocl-prefix
++ for f in *.deb
++ dpkg-deb -x libkeyutils1_1.6.1-2ubuntu3_amd64.deb /home/sandbox/work/12/bin/pocl-prefix
++ for f in *.deb
++ dpkg-deb -x libkrb5-3_1.19.2-2ubuntu0.10_amd64.deb /home/sandbox/work/12/bin/pocl-prefix
++ for f in *.deb
++ dpkg-deb -x libkrb5support0_1.19.2-2ubuntu0.10_amd64.deb /home/sandbox/work/12/bin/pocl-prefix
++ for f in *.deb
++ dpkg-deb -x libllvm11_1%3a11.1.0-6_amd64.deb /home/sandbox/work/12/bin/pocl-prefix
++ for f in *.deb
++ dpkg-deb -x liblsan0_12.3.0-1ubuntu1~22.04.3_amd64.deb /home/sandbox/work/12/bin/pocl-prefix
++ for f in *.deb
++ dpkg-deb -x libnsl-dev_1.3.0-2build2_amd64.deb /home/sandbox/work/12/bin/pocl-prefix
++ for f in *.deb
++ dpkg-deb -x libnsl2_1.3.0-2build2_amd64.deb /home/sandbox/work/12/bin/pocl-prefix
++ for f in *.deb
++ dpkg-deb -x libobjc-11-dev_11.4.0-1ubuntu1~22.04.3_amd64.deb /home/sandbox/work/12/bin/pocl-prefix
++ for f in *.deb
++ dpkg-deb -x libobjc4_12.3.0-1ubuntu1~22.04.3_amd64.deb /home/sandbox/work/12/bin/pocl-prefix
++ for f in *.deb
++ dpkg-deb -x libpocl2-common_1.8-3_all.deb /home/sandbox/work/12/bin/pocl-prefix
++ for f in *.deb
++ dpkg-deb -x libpocl2_1.8-3_amd64.deb /home/sandbox/work/12/bin/pocl-prefix
++ for f in *.deb
++ dpkg-deb -x libquadmath0_12.3.0-1ubuntu1~22.04.3_amd64.deb /home/sandbox/work/12/bin/pocl-prefix
++ for f in *.deb
++ dpkg-deb -x libssl3_3.0.2-0ubuntu1.29_amd64.deb /home/sandbox/work/12/bin/pocl-prefix
++ for f in *.deb
++ dpkg-deb -x libstdc++-11-dev_11.4.0-1ubuntu1~22.04.3_amd64.deb /home/sandbox/work/12/bin/pocl-prefix
++ for f in *.deb
++ dpkg-deb -x libtirpc-common_1.3.2-2ubuntu0.1_all.deb /home/sandbox/work/12/bin/pocl-prefix
++ for f in *.deb
++ dpkg-deb -x libtirpc-dev_1.3.2-2ubuntu0.1_amd64.deb /home/sandbox/work/12/bin/pocl-prefix
++ for f in *.deb
++ dpkg-deb -x libtirpc3_1.3.2-2ubuntu0.1_amd64.deb /home/sandbox/work/12/bin/pocl-prefix
++ for f in *.deb
++ dpkg-deb -x libtsan0_11.4.0-1ubuntu1~22.04.3_amd64.deb /home/sandbox/work/12/bin/pocl-prefix
++ for f in *.deb
++ dpkg-deb -x libubsan1_12.3.0-1ubuntu1~22.04.3_amd64.deb /home/sandbox/work/12/bin/pocl-prefix
++ for f in *.deb
++ dpkg-deb -x libudev1_249.11-0ubuntu3.22_amd64.deb /home/sandbox/work/12/bin/pocl-prefix
++ for f in *.deb
++ dpkg-deb -x linux-libc-dev_5.15.0-194.204_amd64.deb /home/sandbox/work/12/bin/pocl-prefix
++ for f in *.deb
++ dpkg-deb -x llvm-11-linker-tools_1%3a11.1.0-6_amd64.deb /home/sandbox/work/12/bin/pocl-prefix
++ for f in *.deb
++ dpkg-deb -x pocl-opencl-icd_1.8-3_amd64.deb /home/sandbox/work/12/bin/pocl-prefix
++ for f in *.deb
++ dpkg-deb -x rpcsvc-proto_1.4.2-0ubuntu6_amd64.deb /home/sandbox/work/12/bin/pocl-prefix
++ ls /home/sandbox/work/12/bin/pocl-prefix/etc/OpenCL/vendors/
+pocl.icd
++ echo '=== smoke adgpu ==='
+=== smoke adgpu ===
++ P=/home/sandbox/work/12/bin/pocl-prefix
++ export LD_LIBRARY_PATH=/home/sandbox/work/12/bin/pocl-prefix/usr/lib/x86_64-linux-gnu:/home/sandbox/work/12/bin/pocl-prefix/usr/lib/x86_64-linux-gnu/pocl:
++ LD_LIBRARY_PATH=/home/sandbox/work/12/bin/pocl-prefix/usr/lib/x86_64-linux-gnu:/home/sandbox/work/12/bin/pocl-prefix/usr/lib/x86_64-linux-gnu/pocl:
++ export OCL_ICD_VENDORS=/home/sandbox/work/12/bin/pocl-prefix/etc/OpenCL/vendors/pocl.icd
++ OCL_ICD_VENDORS=/home/sandbox/work/12/bin/pocl-prefix/etc/OpenCL/vendors/pocl.icd
++ /home/sandbox/work/12/bin/adgpu/adgpu --help
++ head -30
+AutoDock-GPU version: v1.6
+
+Command line options:
+
+Arguments              | Description                                           | Default value
+-----------------------+-------------------------------------------------------+------------------
+
+INPUT
+--lfile             -L | Ligand pdbqt file                                     | no default
+--ffile             -M | Grid map files descriptor fld file                    | no default
+--flexres           -F | Flexible residue pdbqt file                           | no default
+--filelist          -B | Batch file                                            | no default
+--import_dpf        -I | Import AD4-type dpf input file (only partial support) | no default
+--xraylfile         -R | reference ligand file for RMSD analysis               | ligand file
+
+CONVERSION
+--xml2dlg           -X | One (or many) AD-GPU xml file(s) to convert to dlg(s) | no default
+
+OUTPUT
+--resnam            -N | Name for docking output log                           | ligand basename
+--contact_analysis  -C | Perform distance-based analysis (description below)   | 0 (no)
+--xmloutput         -x | Specify if xml output format is wanted                | 1 (yes)
+--dlgoutput         -d | Control if dlg output is created                      | 1 (yes)
+--dlg2stdout        -2 | Write dlg file output to stdout (if not OVERLAP=ON)   | 0 (no)
+--rlige                | Print reference ligand energies                       | 0 (no)
+--gfpop                | Output all poses from all populations of each LGA run | 0 (no)
+--npdb                 | # pose pdbqt files from populations of each LGA run   | 0
+--gbest                | Output single best pose as pdbqt file                 | 0 (no)
+--clustering           | Output clustering analysis in dlg and/or xml file     | 1 (yes)
+--output-cluster-poses | Output up to a certain number of poses per cluster    | 0 (all)
++ echo ACQUIRE_DONE
+ACQUIRE_DONE

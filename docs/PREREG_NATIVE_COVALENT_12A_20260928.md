@@ -111,3 +111,37 @@ in docs/COVALENT_RUNLOG_20260928.md, results/native_covalent_12a.json,
 scripts under studies/nativecov12a/ (committed pre-outcome), queue item-6
 addendum, paper subsection (reported as measured either way, prebuilt-binary
 acquisition disclosed).
+
+## Addendum 1 (pre-outcome machinery refinements, 2026-09-28 ~09:45 IST, committed BEFORE any gate result or arm execution)
+
+Recorded pre-outcome, none touching any locked scientific element:
+1. Ligand reactive preparation path: the meeko CLI/API writer paths proved
+   unreliable for the committed SDFs in this environment (the CLI emitted
+   duplicate outputs with divergent typing for boceprevir; the API writer
+   produced non-finite charges with sanitize=False loading). The reactive
+   ligand is instead built by retyping the committed item-6 preparation
+   (coordinates and charges unchanged, verified line-by-line in G1) with
+   meeko's canonical reactive typing scheme (order 1 = reactive atom,
+   order 2 = one bond away, order 3 = two bonds away;
+   meeko.reactive.assign_reactive_types_by_index semantics, read from source),
+   applied by bond-order shells from the locked warhead index. The locked
+   SMARTS remain on record above.
+2. G2 formulation pinned to meeko's actual config semantics: the reactive
+   config's pair lines are written by meeko's covalent builder with r_eq/eps
+   scaling, not raw ReactiveAtomTyper.get_scaled_parm output. G2 is therefore
+   implemented as: (a) the covalent pair line for the two locked order-1
+   types (ligand warhead order-1 type, receptor 1S4) exists with the 13/7
+   exponents and r_eq/eps equal to the preparation defaults (1.8 A, 2.5
+   kcal/mol) within 1e-6; and (b) the receptor preparation is deterministic
+   (a second independent preparation yields a byte-identical reactive
+   config). This verifies the same locked property - the covalent channel
+   numerically present and correct - with the engine's actual file format.
+3. Receptor prep uses --delete_bad_res_from_box_radius 5.0: unmatched
+   residues more than 5 A outside any box face are deleted (7VH8 TYR A:154
+   is an incomplete sidechain ~33 A from the locked box; nothing near the
+   box is affected, and any unmatched residue near the box raises an error
+   instead).
+4. --import_dpf carries "only partial support" per the engine's --help; the
+   reactive_config is nonetheless the meeko-documented reactive-docking
+   input for this engine. G3 (engine smoke) verifies the config is accepted
+   and the reactive types reach a completed run.

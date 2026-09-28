@@ -1,0 +1,20 @@
+[09:43:50] Warning: molecule is tagged as 2D, but at least one Z coordinate is not zero. Marking the mol as 3D.
+[09:43:50] Warning: molecule is tagged as 2D, but at least one Z coordinate is not zero. Marking the mol as 3D.
+{
+ "7vh8": {
+  "rc": 255,
+  "n_models": 0,
+  "G3_pass": false
+ },
+ "7c6s": {
+  "rc": 255,
+  "n_models": 0,
+  "G3_pass": false
+ }
+}
+Traceback (most recent call last):
+  File "/home/sandbox/work/12/studies/nativecov12a/run_12a.py", line 349, in <module>
+    {'prep': stage_prep, 'gates': stage_gates, 'smoke': stage_smoke,
+  File "/home/sandbox/work/12/studies/nativecov12a/run_12a.py", line 256, in stage_smoke
+    assert all(v['G3_pass'] for v in res.values()), 'SMOKE FAILURE - engine machinery not verified'
+AssertionError: SMOKE FAILURE - engine machinery not verified

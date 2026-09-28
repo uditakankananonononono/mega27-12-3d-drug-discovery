@@ -1,0 +1,27 @@
+parameter_file boron-silicon-atom_par.dat
+npts 64 64 64
+gridfld 7c6s_rec_rigid.maps.fld
+spacing 0.375
+receptor_types HD C A N NA OA F P SA S Cl Br I Mg Ca Mn Fe Zn
+ligand_types HD C A N NA OA F P SA S Cl Br I Si B
+receptor 7c6s_rec_rigid.pdbqt
+gridcenter -19.915 -21.076 0.485
+smooth 0.500
+map 7c6s_rec_rigid.HD.map
+map 7c6s_rec_rigid.C.map
+map 7c6s_rec_rigid.A.map
+map 7c6s_rec_rigid.N.map
+map 7c6s_rec_rigid.NA.map
+map 7c6s_rec_rigid.OA.map
+map 7c6s_rec_rigid.F.map
+map 7c6s_rec_rigid.P.map
+map 7c6s_rec_rigid.SA.map
+map 7c6s_rec_rigid.S.map
+map 7c6s_rec_rigid.Cl.map
+map 7c6s_rec_rigid.Br.map
+map 7c6s_rec_rigid.I.map
+map 7c6s_rec_rigid.Si.map
+map 7c6s_rec_rigid.B.map
+elecmap 7c6s_rec_rigid.e.map
+dsolvmap 7c6s_rec_rigid.d.map
+dielectric -42.000
