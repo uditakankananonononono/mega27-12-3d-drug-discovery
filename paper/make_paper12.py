@@ -27,6 +27,7 @@ delong = json.loads((RES / "ablation_delong_intervals.json").read_text())
 rank8v8e = json.loads((RES / "transfer_8v8e_rank.json").read_text())
 hydr = json.loads((RES / "hydration.json").read_text())
 hydr_sites = json.loads((RES / "hydration_sites.json").read_text())
+cov = json.loads((RES / "covalent_redock.json").read_text())
 
 doc = Document()
 style = doc.styles["Normal"]
@@ -178,7 +179,9 @@ para(
  "What this is not: not a validated inhibitor, not a clinical candidate, and not a "
  "synthesis plan - MPRO-D1 is a docking-ranked hypothesis with a live-verified novelty "
  "record. The limitations - rigid receptor, no covalency, hydration unmodeled - are "
- "stated where they bite.")
+ "stated where they bite - including a preregistered reactive-engine self-redock "
+ "audit that fails its locked criterion (Section 3.1e), so no covalent scoring capability "
+ "is claimed.")
 doc.add_page_break()
 
 # ---------- 1. introduction
@@ -465,6 +468,58 @@ para(
  f"crystallographic water positions are real pocket information, but with "
  f"13-16 held-out pose-available compounds per split this pipeline cannot show "
  f"they carry label information beyond the chemical descriptors.")
+
+heading("3.1e Covalent docking audit (bounded preregistration): a runnable engine and a plain negative", 2)
+para(
+ "The pipeline above is non-covalent, and the pocket's best-known ligands act by "
+ "bonding the catalytic cysteine - so a fair question is whether this lane can score "
+ "such compounds at all. Before any covalent run we locked a bounded branch "
+ "(docs/PREREG_COVALENT_BOUNDED_20260928.md): first establish whether a "
+ "reactive-capable engine can run here at all, and if it can, audit it by "
+ "self-redocking the ligands of two crystallographic covalent complexes of the same "
+ "protease (7VH8 at 1.59 A and 7C6S at 1.6 A; identities verified against RCSB), "
+ "three fixed seeds each, with the decision rule fixed in advance: best-energy-pose "
+ "heavy-atom RMSD at or below 2.0 A against the crystallographic ligand in at least "
+ "two of three seeds counts as a successful self-redock. The branch was explicitly "
+ "bounded: no activity ranking, no cross-structure docking, and a failed redock "
+ "reported as a plain negative.")
+para(
+ "Engine acquisition succeeded inside the locked budget. The prebuilt AutoDock-GPU "
+ "binary starts but cannot dock on this machine (no OpenCL platform), so autodock4 "
+ "4.2.7.x and autogrid4 4.2.8 were compiled from the official project sources "
+ "(provenance and binary checksums in docs/COVALENT_RUNLOG_20260928.md) and wired "
+ "for classic reactive docking with a flexible Cys145 sidechain: per complex, three "
+ "seeds of ten Lamarckian runs at one million evaluations each, in a 24 A box over "
+ "the pocket.")
+para(
+ f"Outcome, reported as measured (results/covalent_redock.json). For 7VH8 the "
+ f"best-pose RMSDs across the three seeds are {cov['7vh8']['seeds']['0']['rmsd']:.2f}, "
+ f"{cov['7vh8']['seeds']['1']['rmsd']:.2f} and {cov['7vh8']['seeds']['2']['rmsd']:.2f} A; "
+ f"for 7C6S they are {cov['7c6s']['seeds']['0']['rmsd']:.2f}, "
+ f"{cov['7c6s']['seeds']['1']['rmsd']:.2f} and {cov['7c6s']['seeds']['2']['rmsd']:.2f} A. "
+ "No seed of either complex reaches the locked 2.0 A criterion: self-redock FAILS for "
+ "both, and the covalent branch is NOT SUPPORTED on this audit. Atom matching for the "
+ "RMSD was coordinate-free (docked serial to ligand SMILES to crystal adduct by "
+ "maximum common substructure, symmetry-corrected) and covered every heavy atom "
+ f"({cov['7vh8']['seeds']['0']['atoms_matched']}/"
+ f"{cov['7vh8']['seeds']['0']['atoms_matched']} and "
+ f"{cov['7c6s']['seeds']['0']['atoms_matched']}/"
+ f"{cov['7c6s']['seeds']['0']['atoms_matched']}), so the negative is not a matching "
+ "artifact.")
+para(
+ "One observation, recorded post-hoc and explicitly not used to move any threshold: "
+ "the locked input generator wrote the pair minima between the flexible-sidechain "
+ "marker atoms and the ligand as sums of atomic radii (8.0, 7.5 and 7.2 A) instead of "
+ "the engine's arithmetic-mean combining rule. The engine flagged every one of those "
+ "lines at parse time as outside its 0.9-6.0 A sanity range, and the 7VH8 docked "
+ "energies are physically absurd (about +4e6 kcal/mol). Part of the measured failure "
+ "is therefore attributable to the locked parameterization rather than to the "
+ "reactive-docking method itself. Under the preregistration rule the runs stand as "
+ "the locked outcome and the negative is reported as measured; a "
+ "corrected-parameterization rerun would be a new experiment needing its own dated "
+ "preregistration. The honest summary: the lane can run a reactive engine, but it "
+ "does not today have a validated covalent scoring path, and the non-covalent numbers "
+ "above are the whole of the supported result.")
 
 heading("3.2 Screening campaign and an honest negative", 2)
 para(

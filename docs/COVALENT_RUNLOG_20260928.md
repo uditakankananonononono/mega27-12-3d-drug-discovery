@@ -94,3 +94,58 @@ Second issue found on relaunch: the 7c6s seed DPFs had been generated with
 them only in the 7vh8 DPFs); autodock4 exited 1 with "syntax error in
 GA_NUM_EVALS line". Regenerated with ga_num_evals 1000000, ga_run 10, matching
 the locked protocol and the 7vh8 DPFs. Relaunched 05:21 IST.
+
+## 2026-09-28 05:41 IST - Part B outcomes: plain negative for both complexes (locked criterion)
+
+Six runs completed (7vh8 seeds 0/1/2 ~05:12-05:15 IST; 7c6s seeds 0/1/2
+~05:25-05:36 IST after the pre-outcome DPF fixes above; all exit 0, 10 docked
+models per seed).
+
+Analysis-machinery validation (before any RMSD number existed; the locked
+criterion itself was never touched):
+1. rmsd_analysis.py v1 crashed: its energy regex did not accept '+' signs or
+   scientific notation. Fixed ('[-+]?[\d.]+(?:[eE][-+]?\d+)?').
+2. v1 matched docked vs crystal atoms by NAME. This could never have worked:
+   DLG ligand atom names are bare element symbols (non-unique across atoms),
+   while the crystal adduct uses CCD names. Replaced pre-first-outcome with a
+   coordinate-free deterministic chain (v2): docked serial -> free-ligand
+   SMILES atom (DLG REMARK SMILES IDX table) -> crystal adduct atom (RDKit
+   maximum common substructure; element comparison, any bond order,
+   ringMatchesRingOnly; adduct connectivity perceived from crystal
+   coordinates). RMSD is symmetry-corrected (minimum over MCS automorphism
+   assignments, the standard docking-RMSD convention as in obrms). No
+   coordinate-derived choice entered the matcher design.
+
+Locked-criterion outcomes (results/covalent_redock.json):
+- 7VH8: best-pose RMSD 14.789 / 21.936 / 22.199 A (seeds 0/1/2); 0/3 <= 2.0 A.
+  Best-pose energies +4.12e6 / +4.13e6 / +4.17e6 kcal/mol.
+- 7C6S: best-pose RMSD 10.830 / 6.926 / 9.376 A; 0/3 <= 2.0 A.
+  Best-pose energies -0.94 / -1.91 / -2.30 kcal/mol.
+- Verdict: self-redock FAILS for both complexes. Plain negative, reported as
+  such in the queue and the paper. Atom-match coverage was complete
+  (35/35 and 37/37 heavy atoms), so the negative is not a matching artifact.
+
+Post-hoc parameterization observation (recorded for the record; it cannot
+restore or move the locked gate):
+- The locked input generator computed intnbp_r_eps pair minima as
+  Rij = Rii_X + Rii_L (the formula recorded in the 05:09 protocol lock). The
+  standard AD4 combining rule is the arithmetic mean, Rij = (Rii + Rjj)/2
+  (e.g., C-C 4.00 A, C-OA 3.60 A from this library), so every generic X-pair
+  minimum in the runs was doubled (X1-C 8.00 A, X1-N 7.50 A, X1-OA 7.20 A,
+  X4-C 6.00 A). The three reactive overrides (X3-C1 1.8 A 13-7, X1/X2-C1
+  2.0 A, X4-C1 near-zero) were hand-set and are not affected by the formula.
+- Engine-side evidence predates any outcome inspection: every DLG carries
+  parse-time warnings "pairwise distance, Rij, 8.00, is not a very reasonable
+  value for the equilibrium separation of two atoms! (0.90 Angstroms <= Rij
+  <= 6.00 Angstroms)".
+- Consequence visible in the outcomes: 7VH8 docked energies are physically
+  absurd (+4.1e6 kcal/mol intermolecular; ligand internal energies up to
+  +1.35e4), i.e. the doubled-Rij X atoms act as hard spheres centered on the
+  warhead and repel the ligand from the pocket; 7C6S energies are near zero
+  with poses 6.9-10.8 A out, consistent with the same repulsion.
+- Honest reading: the measured negative is at least partly attributable to
+  this locked parameterization error, not only to the reactive-docking
+  method. Under the no-post-outcome-changes rule the runs above remain the
+  locked-protocol outcome and the negative stands. A corrected-protocol
+  rerun (arithmetic-mean Rij) would be a new experiment requiring its own
+  dated prereg before any outcome; that decision belongs to the parent/user.

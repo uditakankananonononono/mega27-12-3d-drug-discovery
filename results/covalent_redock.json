@@ -1,0 +1,52 @@
+{
+  "7vh8": {
+    "ligand": "4WI",
+    "seeds": {
+      "0": {
+        "best_energy": 4120000.0,
+        "rmsd": 14.789,
+        "atoms_matched": 35,
+        "n_models": 10
+      },
+      "1": {
+        "best_energy": 4130000.0,
+        "rmsd": 21.936,
+        "atoms_matched": 35,
+        "n_models": 10
+      },
+      "2": {
+        "best_energy": 4170000.0,
+        "rmsd": 22.199,
+        "atoms_matched": 35,
+        "n_models": 10
+      }
+    },
+    "seeds_passing": 0,
+    "redock_succeeds": false
+  },
+  "7c6s": {
+    "ligand": "U5G",
+    "seeds": {
+      "0": {
+        "best_energy": -0.94,
+        "rmsd": 10.83,
+        "atoms_matched": 37,
+        "n_models": 10
+      },
+      "1": {
+        "best_energy": -1.91,
+        "rmsd": 6.926,
+        "atoms_matched": 37,
+        "n_models": 10
+      },
+      "2": {
+        "best_energy": -2.3,
+        "rmsd": 9.376,
+        "atoms_matched": 37,
+        "n_models": 10
+      }
+    },
+    "seeds_passing": 0,
+    "redock_succeeds": false
+  }
+}
