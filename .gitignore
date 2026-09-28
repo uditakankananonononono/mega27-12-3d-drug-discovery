@@ -6,3 +6,7 @@ dist/
 results/transfer8v8e/_inflight.json
 results/transfer8v8e/_partials/
 bin/pocl-prefix/
+bin/mesa-prefix/
+bin/mesa-vendors/
+src/
+bin/ocl-headers/
