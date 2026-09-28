@@ -21,7 +21,8 @@ Pre-outcome machinery notes (documented in the runlog before any outcome):
 Gates G1-G3 run BEFORE any A2 outcome; script aborts if any gate fails."""
 import json, os, re, shutil, subprocess, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from run_12b import JOBS, OUT, SEEDS, build_matcher, sym_rmsd, g2_audit, g3_validate, fixed_pose_score
+from run_12b import JOBS, OUT, SEEDS, build_matcher, sym_rmsd, g2_audit, g3_validate, read_map
+from run_12b_ad4 import g1_pose, warhead_xyz, trilin
 
 VINA = '/home/sandbox/work/12/src/AutoDock-Vina/build/linux/release/vina'
 XS_FROM_AD4 = {'C_H': 'C', 'C_P': 'C', 'N_P': 'N', 'N_D': 'N', 'N_A': 'NA', 'N_DA': 'NA',
@@ -52,31 +53,39 @@ def affinity(stdout):
     return float(m.group(1))
 
 def stage_gates():
+    """Amended G1 (docs/PREREG_CONSTRAINT_GUIDED_12B_AMENDMENT_G1_20260928.md,
+    committed pre-outcome): well-recovery gate. The anchored Cl-typed gate pose
+    (warhead exactly on the locked SG target) is scored --score_only against the
+    unmodified (twice; determinism) and biased XS map sets with the source-built
+    binary; the observed delta must match the trilinear map-difference
+    interpolation at the warhead within 0.05 kcal/mol (tolerance locked in the
+    amendment). G2/G3 unchanged. Aborts before any arm on failure."""
     out = {}
     for tag, j in JOBS.items():
-        # G2 byte audit (locked formulation, AD4 map sets)
         g2 = g2_audit(tag, f'{OUT}/biased_{tag}')
-        # G3 self-RMSD (locked, engine-independent)
         matcher = build_matcher(j)
         r0, n0 = g3_validate(tag, j, matcher)
-        # G1 (locked): one fixed input pose, score-only via compute_vina_maps vs
-        # load_maps (unmodified maps), |diff| <= 0.05 kcal/mol.
-        pose = f'{OUT}/{tag}_g1_pose.pdbqt'
-        if not os.path.exists(pose):
-            fixed_pose_score(tag)  # locked pose machinery creates it (and errors on wheel load_maps)
-        s_compute = affinity(run_vina(['--score_only', '--receptor', j['rec'], '--ligand', pose,
-                                       '--center_x', str(j['center'][0]), '--center_y', str(j['center'][1]),
-                                       '--center_z', str(j['center'][2]),
-                                       '--size_x', '24', '--size_y', '24', '--size_z', '24', '--seed', '77000']))
-        s_load = affinity(run_vina(['--score_only', '--ligand', pose,
-                                    '--maps', f'{OUT}/xsstd_{tag}/{tag}_xs', '--seed', '77000']))
-        out[tag] = {'G1_compute_vina_maps': round(s_compute, 4), 'G1_load_maps': round(s_load, 4),
-                    'G1_absdiff': round(abs(s_compute - s_load), 4),
-                    'G1_pass': abs(s_compute - s_load) <= 0.05,
+        pose = g1_pose(tag)
+        wh = warhead_xyz(pose)
+        _, vu = read_map(f'{OUT}/{tag}_std.Cl.map')
+        _, vb = read_map(f'{OUT}/biased_{tag}/{tag}_std.Cl.map')
+        expected = trilin(vb, 65, j['center'], wh) - trilin(vu, 65, j['center'], wh)
+        e = {}
+        for label, kind in (('u1', 'std'), ('u2', 'std'), ('b', 'biased')):
+            e[label] = affinity(run_vina(['--score_only', '--ligand', pose,
+                                          '--maps', f'{OUT}/xs{kind}_{tag}/{tag}_xs',
+                                          '--seed', '77000']))
+        obs = e['b'] - e['u1']
+        out[tag] = {'score_unmod_1': round(e['u1'], 4), 'score_unmod_2': round(e['u2'], 4),
+                    'score_biased': round(e['b'], 4), 'observed_delta': round(obs, 4),
+                    'expected_delta': round(expected, 4),
+                    'G1_deterministic': abs(e['u1'] - e['u2']) < 1e-9,
+                    'G1_abserr': round(abs(obs - expected), 4),
+                    'G1_pass': abs(e['u1'] - e['u2']) < 1e-9 and abs(obs - expected) <= 0.05,
                     'G2_noncl_diffs': g2, 'G2_pass': g2 == [],
                     'G3_self_rmsd': None if r0 is None else round(r0, 6), 'G3_atoms': n0,
                     'G3_pass': r0 is not None and r0 < 1e-6}
-    json.dump(out, open(f'{OUT}/gates_vinacli.json', 'w'), indent=1)
+    json.dump(out, open(f'{OUT}/gates_vinacli2.json', 'w'), indent=1)
     print(json.dumps(out, indent=1))
     assert all(v['G1_pass'] and v['G2_pass'] and v['G3_pass'] for v in out.values()), 'GATE FAILURE - no outcomes may be read'
 
