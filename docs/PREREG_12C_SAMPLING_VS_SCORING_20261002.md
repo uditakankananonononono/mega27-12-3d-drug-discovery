@@ -1,6 +1,6 @@
-# DRAFT preregistration 12C (dated 2026-10-02, written BEFORE any 12C quantity is computed) - NOT YET ADJUDICATED
+# Preregistration 12C - LOCKED 2026-10-02 (written and committed BEFORE any 12C quantity is computed)
 
-Status: draft for parent adjudication. Nothing below has been computed. The 12A verdict
+Status: locked per parent 01:55 IST. Nothing below has been computed. The 12A verdict
 (NOT SUPPORTED, 0/4 arms) is final and is not revisited; this is a new question.
 
 ## Why (what informed the pivot)
@@ -13,8 +13,7 @@ Status: draft for parent adjudication. Nothing below has been computed. The 12A 
   standard remedy. Not used as a gate source; only to frame the question.
 - Uses only existing material: the 12 committed DLG/XML files (10 runs x 3 seeds per arm per
   complex = 30 poses per arm per complex). No new docking, no new compute beyond analysis.
-- Not yet done: ChatGPT steering (to be run per parent's standing instruction); this draft
-  should be revised pre-outcome if it changes the design.
+- No ChatGPT steering was used for this design. Judge review runs post-hoc through the in-house judge lane and is archived per repo; its verdict informs the NEXT pivot, not 12C numbers.
 
 ## Questions and locked rules (set before computing)
 Q1 sampling: for each complex/arm, minimum symmetry-corrected RMSD (same function as 12A)
