@@ -1,0 +1,116 @@
+{
+ "prereg": "docs/PREREG_NATIVE_COVALENT_12A_20260928.md",
+ "engine": "AutoDock-GPU v1.6 official source build, DEVICE=CPU (no source modifications), autodock_cpu_128wi; POCL 1.8 CPU OpenCL runtime, POCL_WORK_GROUP_METHOD=cbs; meeko 0.8.0 reactive preparation",
+ "criterion": "C2 best-energy-pose symmetry-corrected RMSD <= 2.0 A in >= 2/3 completed seeds per complex; both=SUPPORTED, one=mixed, zero=NOT SUPPORTED; <2 complete seeds = MACHINERY-INCOMPLETE",
+ "complexes": {
+  "7vh8": {
+   "C1": {
+    "seeds": {
+     "0": {
+      "best_energy": -11.03,
+      "rmsd": 5.75,
+      "atoms_matched": 35,
+      "n_models": 10
+     },
+     "1": {
+      "best_energy": -11.01,
+      "rmsd": 5.702,
+      "atoms_matched": 35,
+      "n_models": 10
+     },
+     "2": {
+      "best_energy": -11.26,
+      "rmsd": 5.857,
+      "atoms_matched": 35,
+      "n_models": 10
+     }
+    },
+    "seeds_complete": 3,
+    "machinery_incomplete": false,
+    "seeds_passing": 0,
+    "complex_pass": false
+   },
+   "C2": {
+    "seeds": {
+     "0": {
+      "best_energy": -13.95,
+      "rmsd": 5.804,
+      "atoms_matched": 35,
+      "n_models": 10
+     },
+     "1": {
+      "best_energy": -13.69,
+      "rmsd": 5.607,
+      "atoms_matched": 35,
+      "n_models": 10
+     },
+     "2": {
+      "best_energy": -13.78,
+      "rmsd": 5.752,
+      "atoms_matched": 35,
+      "n_models": 10
+     }
+    },
+    "seeds_complete": 3,
+    "machinery_incomplete": false,
+    "seeds_passing": 0,
+    "complex_pass": false
+   }
+  },
+  "7c6s": {
+   "C1": {
+    "seeds": {
+     "0": {
+      "best_energy": -9.77,
+      "rmsd": 5.531,
+      "atoms_matched": 37,
+      "n_models": 10
+     },
+     "1": {
+      "best_energy": -10.81,
+      "rmsd": 6.043,
+      "atoms_matched": 37,
+      "n_models": 10
+     },
+     "2": {
+      "best_energy": -11.14,
+      "rmsd": 6.038,
+      "atoms_matched": 37,
+      "n_models": 10
+     }
+    },
+    "seeds_complete": 3,
+    "machinery_incomplete": false,
+    "seeds_passing": 0,
+    "complex_pass": false
+   },
+   "C2": {
+    "seeds": {
+     "0": {
+      "best_energy": -13.7,
+      "rmsd": 5.522,
+      "atoms_matched": 37,
+      "n_models": 10
+     },
+     "1": {
+      "best_energy": -12.48,
+      "rmsd": 6.556,
+      "atoms_matched": 37,
+      "n_models": 10
+     },
+     "2": {
+      "best_energy": -13.27,
+      "rmsd": 5.692,
+      "atoms_matched": 37,
+      "n_models": 10
+     }
+    },
+    "seeds_complete": 3,
+    "machinery_incomplete": false,
+    "seeds_passing": 0,
+    "complex_pass": false
+   }
+  }
+ },
+ "verdict": "NOT SUPPORTED"
+}

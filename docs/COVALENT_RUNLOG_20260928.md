@@ -216,3 +216,24 @@ seed 77000. Seed 77001 is active; seed 77002 is queued. Completed-job count
 is execution progress only, not scientific success. VM pauses distort wall
 and elapsed timing, so no reliable finish time is claimed. Final analysis
 and manuscript results remain pending all 12 jobs.
+
+## 12A result (2026-10-02 01:53 IST)
+
+All 12 docking jobs finished rc=0, no timeouts, DLG/XML present (final job
+7C6S C2 seed 77002, DLG run time 24061.884 s; checkpoint 3a830d2). Because
+every seed completed, the prereg ("completed seeds") and the analysis code
+(complete == 3) agree; no rule choice arose. Analysis: results/native_covalent_12a.json,
+run with the locked rule, unchanged.
+
+Best-energy-pose symmetry-corrected RMSD to the crystal pose (A), seeds 0/1/2:
+- 7VH8 C1: 5.750 / 5.702 / 5.857 (0 of 3 pass at <= 2.0)
+- 7VH8 C2: 5.804 / 5.607 / 5.752 (0 of 3)
+- 7C6S C1: 5.531 / 6.043 / 6.038 (0 of 3)
+- 7C6S C2: 5.522 / 6.556 / 5.692 (0 of 3)
+
+Verdict by the locked rule: NOT SUPPORTED (zero complexes pass). Reactive
+(C2) best energies were lower than standard (C1) in both complexes
+(about -12.5 to -14.0 vs -9.8 to -11.3 kcal/mol), but poses were ~5.5-6.6 A
+from the crystal, so the energy gain does not reproduce the crystal pose.
+Thresholds and rule were not changed after outcomes. Follow-up requires a
+new dated prereg.
