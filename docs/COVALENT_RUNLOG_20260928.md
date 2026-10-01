@@ -237,3 +237,12 @@ Verdict by the locked rule: NOT SUPPORTED (zero complexes pass). Reactive
 from the crystal, so the energy gain does not reproduce the crystal pose.
 Thresholds and rule were not changed after outcomes. Follow-up requires a
 new dated prereg.
+
+## 12C result (2026-10-02 01:56 IST; prereg docs/PREREG_12C_SAMPLING_VS_SCORING_20261002.md, commit 1417524)
+
+Q1 (sampling): crystal pose never sampled in any arm. Minimum RMSD over all 30 poses per arm:
+7VH8 C1 5.427, 7VH8 C2 5.161, 7C6S C1 5.047, 7C6S C2 5.157 A. Poses <= 2.0 A: 0/30 in every arm; <= 3.0 A: 0/30.
+Q2: not applicable (needs adequate sampling). Q3: not run (stop rule). Verdict: sampling failure, not scoring.
+Observation (untested, hypothesis only): the narrow spread (all poses 5.0-6.5 A, none lower) fits a systematic
+offset (reference frame, matcher or search-box placement) as much as a search failure; a new dated prereg would
+be needed to test it. Script: studies/nativecov12a/run_12c.py; output: results/native_covalent_12c.json.
