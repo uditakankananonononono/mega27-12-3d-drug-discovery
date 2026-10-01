@@ -1,7 +1,8 @@
 # Preregistration 12D - setup-artifact test of the 12A pose band (dated 2026-10-02)
 
-Status: LOCKED 2026-10-02 01:57 IST per parent, before any 12D quantity is computed. (Draft text follows; the parent
-confirms it (or on the commit that says LOCKED). Nothing below has been computed.
+Status: LOCKED 2026-10-02 01:57 IST on parent confirmation (commit 5701ab5), before any 12D quantity was computed.
+Amendment 1 (below) was added at 02:00 IST before any amendment quantity was computed.
+Nothing in the amendment has been computed at the time of this text.
 The 12A verdict (NOT SUPPORTED) and 12C result (crystal pose never sampled, 0/30 <= 3.0 A
 per arm, all poses 5.0-6.5 A) stay as measured. This is a new question and cannot restore
 a failed 12A gate.
@@ -44,3 +45,28 @@ Thresholds above (0.05 A, 12 A half-edge, 1.0 A margin, 2.0 A, 0.8) are locked n
   MACHINERY-INCOMPLETE and treated as not passed for the artifact decision only if that
   item is the sole failure; otherwise the decision follows the computable items.
 - Judge-lane review is post-hoc and archived; it informs the next pivot, not 12D numbers.
+
+## Amendment 1 (2026-10-02, pre-outcome for these checks; from parent relay of an independent judge-lane review)
+Diagnostics D1b, D3b, D4b, D5, D6 are added, all descriptive/diagnostic and locked below. They
+run in parallel with the confirmation job (7VH8 C2 seed 77000, box 28.5 A = 76 grid points at
+0.375 A spacing, built in studies/nativecov12d; receptor config verified canonically equal to the
+12A config, only line order differs). The box edge was chosen after seeing D3 numbers (min margin
+0.276 A / -0.274 A) and before any run; it gives 2.5 A margin.
+D1b mapping hardening: for each arm's 30 poses (12C pooling) report best-mapping RMSD (sym_rmsd) vs
+   the RMSD under the first MCS mapping only; also confirm DLG ligand atom-name order equals the
+   PDBQT atom order used for serials. MAPPING SENSITIVE if median (first-mapping minus best) > 0.5 A.
+D3b distances: crystal-adduct warhead carbon to box center, and to Cys145 SG, and warhead-SG distance.
+D4b rigid alignment: per pose, Kabsch rotation+translation RMSD on matched atoms, and the same after
+   inverting the pose through its centroid (mirror test). FLAG MIRROR if min mirrored RMSD <= 2.0 A and
+   min unmirrored > 3.0 A. Report min and median per arm.
+D5 crystal-in-grid: fit the standard (C1) free ligand to the crystal matched atoms (Kabsch), then score it
+   with autodock4 energy evaluation in the same 12A rigid maps (24 A box, C1 setup). Report inter- and
+   intra-molecular energy and RMSD of the fit. CRYSTAL POSE IMPLAUSIBLE IN GRID if inter-molecular energy
+   > 0 kcal/mol (clash) or worse than the worst docked C1 pose's final intermolecular energy in the
+   30 pooled poses. If autodock4 cannot evaluate it, D5 is MACHINERY-INCOMPLETE (no substitute).
+D6 positive control: redock one non-covalent Mpro complex end to end through the same v1.6 CPU/POCL cbs
+   engine with the 12A search parameters (nrun 10). PIPELINE OK if best-energy-pose RMSD <= 2.0 A;
+   PIPELINE SUSPECT otherwise. The complex is chosen from the lane's existing 7KX5 redock set.
+Early-kill rule: if D5 reports CRYSTAL POSE IMPLAUSIBLE or D6 reports PIPELINE SUSPECT, the box is not
+the sole culprit; the confirmation job is stopped early and that is reported with the numbers.
+No threshold moves after outcomes.
