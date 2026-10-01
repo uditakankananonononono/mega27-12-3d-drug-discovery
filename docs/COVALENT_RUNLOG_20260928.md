@@ -246,3 +246,16 @@ Q2: not applicable (needs adequate sampling). Q3: not run (stop rule). Verdict: 
 Observation (untested, hypothesis only): the narrow spread (all poses 5.0-6.5 A, none lower) fits a systematic
 offset (reference frame, matcher or search-box placement) as much as a search failure; a new dated prereg would
 be needed to test it. Script: studies/nativecov12a/run_12c.py; output: results/native_covalent_12c.json.
+
+## 12D diagnostics (2026-10-02 01:57 IST; prereg locked in commit 5701ab5; script studies/nativecov12a/run_12d.py; results/native_covalent_12d.json)
+
+D1 matcher self-test: PASS both (self RMSD 0.0 A; 35 atoms 7VH8, 37 atoms 7C6S).
+D2 receptor frame: PASS both (2360 / 2323 atoms matched, max deviation 0.0 A).
+D3 search box (24 A edge, +/-12 A): FAIL both by the locked margin rule (>= 1.0 A edge margin).
+  7VH8: 0 atoms outside, min margin 0.276 A (z extent 11.724 A from center). 7C6S: 1 of 37 crystal
+  atoms outside the box (y offset 12.274 A, margin -0.274 A).
+D4 (descriptive): common-direction offset flag true for 7VH8 C2 and both 7C6S arms, false for 7VH8 C1;
+  mean offset magnitudes 0.81-1.78 A; translation-only-aligned RMSD still 4.88-6.10 A (min 4.882), so a pure
+  translation does not explain the band.
+Locked decision: ARTIFACT FOUND (D3). Honest reading: the box clips or nearly clips the crystal ligand, a real setup
+limit, but translation-aligned RMSDs show it is unlikely to be the whole explanation. The confirmation job tests it.
