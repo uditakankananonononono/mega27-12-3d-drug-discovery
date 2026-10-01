@@ -1,6 +1,6 @@
 # Preregistration 12D - setup-artifact test of the 12A pose band (dated 2026-10-02)
 
-Status: DRAFT written before any 12D quantity is computed; becomes LOCKED when the parent
+Status: LOCKED 2026-10-02 01:57 IST per parent, before any 12D quantity is computed. (Draft text follows; the parent
 confirms it (or on the commit that says LOCKED). Nothing below has been computed.
 The 12A verdict (NOT SUPPORTED) and 12C result (crystal pose never sampled, 0/30 <= 3.0 A
 per arm, all poses 5.0-6.5 A) stay as measured. This is a new question and cannot restore
