@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """12A native covalent engine - prereg docs/PREREG_NATIVE_COVALENT_12A_20260928.md
-(commit 6222c72, pre-outcome). Engine: AutoDock-GPU v1.6 prebuilt linux_x64
-OpenCL binary + POCL CPU runtime. Reactive docking (meeko 0.8.0 preparation),
+(commit 6222c72, pre-outcome). Engine: official AutoDock-GPU v1.6 source build
+(DEVICE=CPU, no source modifications) + POCL 1.8 CPU runtime with
+POCL_WORK_GROUP_METHOD=cbs. Reactive docking (meeko 0.8.0 preparation),
 the only native covalent method family per the meeko docs. Gates G1-G4 run
 BEFORE any C2 outcome; abort on gate failure. RMSD criterion and decision rule
 carried over unchanged from item 6 / 12B (run_12b.py machinery)."""
@@ -340,7 +341,7 @@ def stage_analyze():
                else 'SUPPORTED' if all(res[t]['C2']['complex_pass'] for t in res)
                else 'NOT SUPPORTED' if not any(res[t]['C2']['complex_pass'] for t in res) else 'mixed')
     out = {'prereg': 'docs/PREREG_NATIVE_COVALENT_12A_20260928.md',
-           'engine': 'AutoDock-GPU v1.6 prebuilt linux_x64 OpenCL + POCL CPU runtime; meeko 0.8.0 reactive preparation (disclosed prebuilt binary)',
+           'engine': 'AutoDock-GPU v1.6 official source build, DEVICE=CPU (no source modifications), autodock_cpu_128wi; POCL 1.8 CPU OpenCL runtime, POCL_WORK_GROUP_METHOD=cbs; meeko 0.8.0 reactive preparation',
            'criterion': 'C2 best-energy-pose symmetry-corrected RMSD <= 2.0 A in >= 2/3 completed seeds per complex; both=SUPPORTED, one=mixed, zero=NOT SUPPORTED; <2 complete seeds = MACHINERY-INCOMPLETE',
            'complexes': res, 'verdict': verdict}
     json.dump(out, open(f'{ROOT}/results/native_covalent_12a.json', 'w'), indent=1)

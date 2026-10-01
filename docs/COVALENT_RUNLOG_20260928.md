@@ -187,3 +187,32 @@ conflict):
   unidentified. No further post-outcome parameter changes were run.
 - The locked-protocol outcome and verdict (commit 3158ea1) stand unchanged;
   this branch is reported separately per the parent's 05:43 IST ruling.
+
+## 12A native covalent engine: build and execution provenance (2026-10-01 15:23 IST)
+
+This section describes the machinery already used by the locked 12A queue,
+not a new scientific branch. No docked-pose RMSD or verdict has been read.
+The preregistered engine fallback selected the official v1.6 source build
+when the prebuilt OpenCL binary could not use this CPU device: the prebuilt
+binary requests CL_DEVICE_TYPE_GPU. The upstream DEVICE=CPU build uses the
+same official source tag without source modifications. Binary:
+bin/adgpu/autodock_cpu_128wi, SHA-256
+e43957cd600ab6f44d3ee7ec0340cd22dc8128d115e02eb9dd5ebcefc11ff5a8
+(recomputed on 2026-10-01). Source tarball SHA-256, recorded at acquisition:
+1d76c7fa6ac15069c69dec3a36e56f5d5585a9b6f66e8a2c7c83a646d48b0a40.
+Original build record: d4a4a4263b60ad690db2ba416ca9c16f618eb504.
+
+Runtime is the unprivileged POCL 1.8 CPU OpenCL stack. The default work-group
+method crashed in the evolution loop, including a base non-covalent check;
+this was not specific to the reactive channel. POCL_WORK_GROUP_METHOD=cbs
+allowed the locked reactive smoke to finish. G1-G4 passed for both complexes
+before the full docking queue (record 1b658ee603a83cd6eea7c4d7c5e8e1a3b09bd75c).
+The analysis metadata's stale reference to the prebuilt binary is corrected
+to this actual stack; no search parameter, threshold or verdict rule changes.
+
+At this checkpoint 10 of 12 serial docking jobs have finished rc=0, with no
+reported timeout and DLG/XML present: six 7VH8, three 7C6S C1, and 7C6S C2
+seed 77000. Seed 77001 is active; seed 77002 is queued. Completed-job count
+is execution progress only, not scientific success. VM pauses distort wall
+and elapsed timing, so no reliable finish time is claimed. Final analysis
+and manuscript results remain pending all 12 jobs.
