@@ -70,3 +70,19 @@ D6 positive control: redock one non-covalent Mpro complex end to end through the
 Early-kill rule: if D5 reports CRYSTAL POSE IMPLAUSIBLE or D6 reports PIPELINE SUSPECT, the box is not
 the sole culprit; the confirmation job is stopped early and that is reported with the numbers.
 No threshold moves after outcomes.
+
+## Amendment 2 (2026-10-02 02:01 IST, written before any corrected RMSD was computed)
+D1b hardening exposed a measurement issue in the RMSD pipeline (found by atom-order inspection, no pose
+RMSD recomputed yet): sym_rmsd keys docked poses by PDBQT ATOM serial and looks them up as (SDF heavy-atom
+index + 1), but the PDBQT atom order differs from the SDF order (coordinate-identical atoms map with
+non-identity permutations: e.g. 7VH8 PDBQT serial 1 = SDF atom 7, serial 2 = SDF atom 12; 7C6S serial 1 =
+SDF atom 5). The 12A D1/G4 self-tests passed only because they used the same convention (vacuous).
+D7 corrected-mapping reanalysis (analysis only, existing DLGs, no docking): map PDBQT serials to SDF atom
+indices by exact coordinate identity (< 0.01 A) between the PDBQT input ligand and the SDF conformer
+(35/35 and 37/37 heavy atoms verified unique), then recompute best-energy-pose RMSD (12A analysis), the
+30-pose pooled min/median RMSD (12C analysis) and the criterion >= 2 of 3 seeds at <= 2.0 A per complex/arm.
+Labeling: this is a CORRECTED-ANALYSIS of a measurement defect, reported alongside the original 12A/12C
+numbers, which remain in the record unedited. Thresholds (2.0 A, 2/3 seeds) and the criterion are unchanged.
+Whether the corrected numbers supersede the 12A verdict is a parent adjudication; this amendment makes no
+such claim. Early-kill: if corrected best-pose RMSD <= 2.0 A in >= 2 of 3 seeds for any arm, the
+box-confirmation job's premise (box artifact) is no longer the main hypothesis; stop it and report.
