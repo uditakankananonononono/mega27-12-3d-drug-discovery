@@ -1569,7 +1569,30 @@ para(
  f"they carry label information beyond the chemical descriptors.")
 
 
-heading("Appendix AH. Closing Statement", 1)
+heading("Appendix AH. Native covalent docking (12A), preregistered and measured", 1)
+para(
+ "After the constraint-guided route was declared machinery-exhausted, the study "
+ "ran its remaining preregistered route under a new dated preregistration: the "
+ "official AutoDock-GPU v1.6 covalent (reactive) docking channel, built from the "
+ "upstream source with DEVICE=CPU and run on the POCL 1.8 CPU OpenCL stack "
+ "(work-group method cbs; the default method crashed in the evolution loop, "
+ "including in a non-covalent control). Four integrity gates passed for both "
+ "complexes before any docking. The 12-job queue (two covalent complexes, 7VH8 "
+ "and 7C6S; standard C1 and reactive C2 arms; three seeds each) completed with "
+ "every job rc=0 and no timeouts. The locked criterion was a best-energy-pose, "
+ "symmetry-corrected RMSD of 2.0 A or less to the crystal pose in at least two "
+ "of three seeds.")
+para(
+ "Outcome, reported as measured: no arm of either complex passes. Best-pose "
+ "RMSDs lie between 5.52 and 6.56 A for all twelve runs (7VH8 C1 5.70-5.86, "
+ "7VH8 C2 5.61-5.80, 7C6S C1 5.53-6.04, 7C6S C2 5.52-6.56). The verdict is NOT "
+ "SUPPORTED. The reactive channel did find lower best energies than the standard "
+ "arm in both complexes (about -12.5 to -14.0 against -9.8 to -11.3 kcal/mol), "
+ "which is a real scoring effect, but it does not translate into crystal-pose "
+ "recovery. Thresholds and the rule were not changed after outcomes. Provenance, "
+ "gate records and per-seed numbers are in the runlog and results/native_covalent_12a.json.")
+
+heading("Appendix AI. Closing Statement", 1)
 para(
  "This paper reports a validated protocol, a benchmark recovery, and a novel "
  "candidate, with the raw-engine negative kept as the measured baseline that makes "
