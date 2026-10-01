@@ -259,3 +259,20 @@ D4 (descriptive): common-direction offset flag true for 7VH8 C2 and both 7C6S ar
   translation does not explain the band.
 Locked decision: ARTIFACT FOUND (D3). Honest reading: the box clips or nearly clips the crystal ligand, a real setup
 limit, but translation-aligned RMSDs show it is unlikely to be the whole explanation. The confirmation job tests it.
+
+## 12D amendment 2 result: RMSD atom-mapping defect found, corrected reanalysis (2026-10-02 02:01 IST)
+
+Defect: sym_rmsd looks up docked poses by (SDF heavy-atom index + 1) but poses are keyed by PDBQT ATOM serial; the PDBQT atom
+order differs from the SDF order (verified by exact coordinate identity, 35/35 and 37/37 heavy atoms unique, non-identity
+permutation). The 12A G4/12D D1 self-tests used the same convention, so they passed vacuously. Prereg: amendment 2 (commit 60f1582,
+written before any corrected RMSD). Script: studies/nativecov12a/run_12d_remap.py; output: results/native_covalent_12d_remap.json.
+Original 12A numbers (verdict NOT SUPPORTED) and 12C numbers remain in the record unedited.
+
+Corrected best-energy-pose RMSD (A), seeds 0/1/2 [pass count at <= 2.0 A]:
+- 7VH8 C1: 1.157 / 1.329 / 1.524 [3/3]; C2: 1.404 / 1.180 / 1.181 [3/3]
+- 7C6S C1: 2.879 / 1.173 / 1.663 [2/3]; C2: 2.502 / 4.478 / 2.732 [0/3]
+Pooled 30-pose minimum RMSD: 7VH8 C1 1.157, C2 1.173; 7C6S C1 1.173, C2 2.502.
+Reading under the unchanged 12A criterion (C2, >= 2 of 3 seeds, per complex): 7VH8 pass, 7C6S fail = MIXED. Whether the corrected analysis
+supersedes the original verdict is a parent adjudication. The box-widening confirmation job (7VH8 C2 box 28.5 A) was stopped by the
+amendment-2 early-kill rule before completing; its premise is superseded. The 7VH8 result does not depend on the box (crystal inside
+the 24 A box), although 7C6S has one crystal atom outside it, which may bear on its C2 result.

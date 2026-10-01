@@ -1,0 +1,29 @@
+AutoDock-GPU version: c99c8f73a433d3ec8a67808e7a1dde8bbc488ee2-dirty
+
+Running 1 docking calculation
+
+Kernel source used for development:      ./device/calcenergy.cl                  
+Kernel string used for building:         ./host/inc/stringify.h                  
+Kernel compilation flags:                 -I ./device -I ./common -DN128WI   -cl-mad-enable
+OpenCL device:                           pthread-Intel(R) Xeon(R) Processor @ 2.60GHz
+(Thread 0 is setting up Job #1)
+
+Running Job #1
+    Using heuristics: (capped) number of evaluations set to 4951475
+    Overriding heuristics, setting number of evaluations to --nev = 1000000 instead.
+    Warning: The set number of evals is 11.86% of the uncapped heuristics estimate of 8429805 evals.
+             This means this docking may not be able to converge. Increasing --heurmax may improve
+             convergence but will also increase runtime.
+             AutoStop will not stop before 72.18% (721827) of the set number of evaluations.
+    Local-search chosen method is: ADADELTA (ad)
+
+Executing docking runs, stopping automatically after either reaching 0.15 kcal/mol standard deviation of
+the best molecules of the last 4 * 5 generations, 27000 generations, or 1000000 evaluations:
+
+Generations |  Evaluations |     Threshold    |  Average energy of best 10%  | Samples | Best Inter + Intra
+------------+--------------+------------------+------------------------------+---------+-------------------
+          0 |          150 |  150.69 kcal/mol |   26.27 +/-   33.18 kcal/mol |       4 |   -3.89 kcal/mol
+          5 |        45562 |  150.69 kcal/mol |   -1.41 +/-   15.33 kcal/mol |     452 |  -15.21 kcal/mol
+         10 |        94335 |   -0.90 kcal/mol |  -15.32 +/-    0.09 kcal/mol |       6 |  -15.41 kcal/mol
+         15 |       151986 |  -15.11 kcal/mol |  -15.79 +/-    0.51 kcal/mol |      12 |  -16.82 kcal/mol
+killed at 02:01 per amendment-2 early-kill; log tail:
