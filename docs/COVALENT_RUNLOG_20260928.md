@@ -286,3 +286,11 @@ arm; the 12B verdict (not supported / machinery-exhausted) is unchanged. Note th
 poses were never credible regardless of mapping. Item 6 (studies/covalent/rmsd_analysis.py) uses its own serial_by_smiles mapping parsed from the
 DLG, not this code path; not recomputed, so not shown affected. Not audited: Vina-CLI 12B gates (gates_vinacli*.json used coordinates for
 energy checks, not RMSD).
+
+## 12D D6 positive control (2026-10-02 19:42 IST; amendment 1 rule, locked pre-run)
+
+7KX5 / X7V non-covalent redock through the same v1.6 DEVICE=CPU + POCL cbs engine, 12A search parameters (nrun 10, nev 1e6, ngen 27000,
+psize 150, lsit 300), seed 77000, 20 A box, rc=0, DLG run time 6965.343 s. Best-energy pose (-10.78 kcal/mol) heavy-atom assignment
+RMSD 1.004 A vs the crystal; 4 of 10 poses <= 2.0 A. Verdict by the locked rule: PIPELINE OK. Reading: the engine and search pipeline
+recover a known pose, consistent with the corrected 12A analysis and against a pipeline-wide failure. Files: studies/nativecov12d/d6/,
+results/native_covalent_12d_d6.json. D5 (crystal-in-grid) not run.

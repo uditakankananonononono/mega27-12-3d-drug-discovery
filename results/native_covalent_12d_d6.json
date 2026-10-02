@@ -1,0 +1,11 @@
+{
+ "top1_energy": -10.78,
+ "top1_rmsd": 1.004,
+ "min_rmsd": 1.004,
+ "n_le_2": 4,
+ "n_models": 10,
+ "pipeline_ok": true,
+ "ref_atoms": 38,
+ "dlg_run_time_s": 6965.343,
+ "rmsd": "element-matched Hungarian assignment, heavy atoms, A->C typing map"
+}
