@@ -1,0 +1,14 @@
+{
+ "7vh8": {
+  "warhead_crystal_atom_nearest_SG": "C3",
+  "dist_to_box_center": 5.069,
+  "dist_to_SG": 1.814,
+  "SG_to_box_center": 4.635
+ },
+ "7c6s": {
+  "warhead_crystal_atom_nearest_SG": "C03",
+  "dist_to_box_center": 3.727,
+  "dist_to_SG": 1.766,
+  "SG_to_box_center": 4.629
+ }
+}

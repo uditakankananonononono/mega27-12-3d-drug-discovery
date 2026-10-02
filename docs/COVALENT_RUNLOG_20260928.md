@@ -309,3 +309,7 @@ D4b (rigid rotation+translation RMSD on matched atoms, 30 poses/arm; min / media
 MIRROR flag false in all four arms (unmirrored minima are not > 3.0 A in any arm that mirrors below 2.0 A).
 Early-kill rule consequence: the confirmation job is already stopped; the D5 result for 7C6S does not change any prior result. Judge-amendment
 list (D1b, D3b, D4b, D5, D6, D7) is now closed except D1b/D3b, which the mapping defect and D7 superseded for D1b; D3b distances not computed.
+
+D3b (crystal warhead atom nearest the locked SG; results/native_covalent_12d_d3b.json): warhead-to-SG 1.814 A (7VH8, atom C3) and 1.766 A (7C6S, C03),
+consistent with a covalent adduct bond; warhead-to-box-center 5.069 / 3.727 A; SG-to-box-center 4.635 / 4.629 A. The warhead and SG sit well inside both boxes, so the
+box margin issue concerns distal ligand atoms, not the reactive site. All judge-amendment items (D1b via D7, D3b, D4b, D5, D6) are now recorded.
