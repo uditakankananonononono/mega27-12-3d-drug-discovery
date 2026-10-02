@@ -1569,7 +1569,7 @@ para(
  f"they carry label information beyond the chemical descriptors.")
 
 
-heading("Appendix AH. Native covalent docking (12A), preregistered and measured", 1)
+heading("Appendix AH. Native covalent docking (12A): corrected analysis and the measurement defect", 1)
 para(
  "After the constraint-guided route was declared machinery-exhausted, the study "
  "ran its remaining preregistered route under a new dated preregistration: the "
@@ -1581,16 +1581,32 @@ para(
  "and 7C6S; standard C1 and reactive C2 arms; three seeds each) completed with "
  "every job rc=0 and no timeouts. The locked criterion was a best-energy-pose, "
  "symmetry-corrected RMSD of 2.0 A or less to the crystal pose in at least two "
- "of three seeds.")
+ "of three seeds, per complex.")
 para(
- "Outcome, reported as measured: no arm of either complex passes. Best-pose "
- "RMSDs lie between 5.52 and 6.56 A for all twelve runs (7VH8 C1 5.70-5.86, "
- "7VH8 C2 5.61-5.80, 7C6S C1 5.53-6.04, 7C6S C2 5.52-6.56). The verdict is NOT "
- "SUPPORTED. The reactive channel did find lower best energies than the standard "
- "arm in both complexes (about -12.5 to -14.0 against -9.8 to -11.3 kcal/mol), "
- "which is a real scoring effect, but it does not translate into crystal-pose "
- "recovery. Thresholds and the rule were not changed after outcomes. Provenance, "
- "gate records and per-seed numbers are in the runlog and results/native_covalent_12a.json.")
+ "Corrected result. A follow-up setup audit found a defect in the RMSD code: docked "
+ "poses were indexed by PDBQT atom serial but matched to the crystal through the SDF "
+ "atom index, and the two orders differ (verified by exact coordinate identity, 35 of 35 "
+ "and 37 of 37 heavy atoms). The integrity gates used the same convention and so could "
+ "not detect it. With the mapping corrected by coordinate identity, and thresholds, "
+ "criterion and docking outputs unchanged, the best-energy-pose RMSDs are: 7VH8 C1 "
+ "1.16 / 1.33 / 1.52 A and 7VH8 C2 1.40 / 1.18 / 1.18 A (every seed passes, both arms); "
+ "7C6S C1 2.88 / 1.17 / 1.66 A (two of three seeds pass) and 7C6S C2 2.50 / 4.48 / 2.73 A "
+ "(none pass). Under the locked criterion the reactive channel therefore reproduces the "
+ "crystal pose for 7VH8 and not for 7C6S, a mixed outcome. Pooled over all 30 sampled "
+ "poses, the minimum RMSD is 1.16 and 1.17 A for 7VH8 (C1, C2), 1.17 A for 7C6S C1 and "
+ "2.50 A for 7C6S C2. The 7VH8 positive does not depend on the search box; for 7C6S, "
+ "one crystal ligand atom lies 0.27 A outside the 24 A box, which may bear on its C2 result "
+ "and was not tested.")
+para(
+ "Superseded measurement, kept for the record. Computed with the defective mapping, "
+ "the same 12 runs gave best-pose RMSDs of 5.52 to 6.56 A and a NOT SUPPORTED verdict. "
+ "That analysis is retained unedited in the runlog; the corrected numbers are a "
+ "reanalysis of a measurement defect, not a threshold change, and whether they replace "
+ "the original verdict is recorded as a separate adjudication. The same defect was "
+ "checked in the constraint-guided branch: re-scoring all 18 AD4 poses with the corrected "
+ "mapping leaves every RMSD above 6.9 A, so that branch's machinery-exhausted outcome "
+ "is unchanged. Provenance, gates and per-seed numbers are in the runlog, "
+ "results/native_covalent_12a.json and results/native_covalent_12d_remap.json.")
 
 heading("Appendix AI. Closing Statement", 1)
 para(
