@@ -276,3 +276,13 @@ Reading under the unchanged 12A criterion (C2, >= 2 of 3 seeds, per complex): 7V
 supersedes the original verdict is a parent adjudication. The box-widening confirmation job (7VH8 C2 box 28.5 A) was stopped by the
 amendment-2 early-kill rule before completing; its premise is superseded. The 7VH8 result does not depend on the box (crystal inside
 the 24 A box), although 7C6S has one crystal atom outside it, which may bear on its C2 result.
+
+## 12B / item-6 sym_rmsd audit (2026-10-02 17:37 IST)
+
+Same PDBQT-serial vs SDF-index defect applies to the 12B code path (run_12b.sym_rmsd, run_12b_ad4, run_12b_vinacli; 12B ligand
+PDBQT is byte-identical to the 12A C1 ligand). Re-scored all 18 existing 12B AD4 DLG best-energy poses with the coordinate-identity
+remap (no new docking): 7VH8 corrected 14.7-22.9 A (original 14.6-23.4), 7C6S corrected 6.9-9.6 A (original 6.9-8.6); no seed reaches 2.0 A in any
+arm; the 12B verdict (not supported / machinery-exhausted) is unchanged. Note the 7VH8 12B energies are ~4e6 kcal/mol (clash-dominated), so those
+poses were never credible regardless of mapping. Item 6 (studies/covalent/rmsd_analysis.py) uses its own serial_by_smiles mapping parsed from the
+DLG, not this code path; not recomputed, so not shown affected. Not audited: Vina-CLI 12B gates (gates_vinacli*.json used coordinates for
+energy checks, not RMSD).
