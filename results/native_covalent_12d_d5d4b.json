@@ -1,0 +1,56 @@
+{
+ "7vh8": {
+  "fit_rmsd_matched_atoms": 1.282,
+  "n_matched": 35,
+  "epdb_rc": 0,
+  "crystalfit_intermolecular": -10.39,
+  "docked_C1_inter_best": -13.94,
+  "docked_C1_inter_worst": -9.87,
+  "n_docked": 30,
+  "crystal_implausible": false,
+  "epdb_text_tail": "",
+  "D4b": {
+   "C1": {
+    "unmirrored_min": 1.035,
+    "unmirrored_median": 1.292,
+    "mirrored_min": 2.456,
+    "mirrored_median": 2.702,
+    "flag_mirror": false
+   },
+   "C2": {
+    "unmirrored_min": 1.034,
+    "unmirrored_median": 1.935,
+    "mirrored_min": 2.241,
+    "mirrored_median": 2.743,
+    "flag_mirror": false
+   }
+  }
+ },
+ "7c6s": {
+  "fit_rmsd_matched_atoms": 1.377,
+  "n_matched": 37,
+  "epdb_rc": 0,
+  "crystalfit_intermolecular": 18.799,
+  "docked_C1_inter_best": -14.42,
+  "docked_C1_inter_worst": -10.27,
+  "n_docked": 30,
+  "crystal_implausible": true,
+  "epdb_text_tail": "",
+  "D4b": {
+   "C1": {
+    "unmirrored_min": 0.853,
+    "unmirrored_median": 3.824,
+    "mirrored_min": 2.031,
+    "mirrored_median": 4.069,
+    "flag_mirror": false
+   },
+   "C2": {
+    "unmirrored_min": 2.335,
+    "unmirrored_median": 3.907,
+    "mirrored_min": 2.398,
+    "mirrored_median": 3.53,
+    "flag_mirror": false
+   }
+  }
+ }
+}

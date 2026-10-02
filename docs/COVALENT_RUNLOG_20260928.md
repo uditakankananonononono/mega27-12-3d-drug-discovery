@@ -294,3 +294,18 @@ psize 150, lsit 300), seed 77000, 20 A box, rc=0, DLG run time 6965.343 s. Best-
 RMSD 1.004 A vs the crystal; 4 of 10 poses <= 2.0 A. Verdict by the locked rule: PIPELINE OK. Reading: the engine and search pipeline
 recover a known pose, consistent with the corrected 12A analysis and against a pipeline-wide failure. Files: studies/nativecov12d/d6/,
 results/native_covalent_12d_d6.json. D5 (crystal-in-grid) not run.
+
+## 12D D5 (crystal-in-grid) and D4b (rigid alignment + mirror test) (2026-10-02 19:44 IST; amendment 1 rules, locked pre-run)
+
+Script: studies/nativecov12d/run_12d_d5d4b.py; output results/native_covalent_12d_d5d4b.json. D4b uses the corrected atom mapping (amendment 2).
+D5: standard (C1) ligand rigidly Kabsch-fit to the crystal matched atoms (fit RMSD 1.282 A / 1.377 A, 35/37 atoms; conformer not re-optimized),
+scored by autodock4 epdb in the exact 12A rigid maps (24 A box). Intermolecular energy of the crystal-fit pose vs the 30 pooled docked C1 poses:
+- 7VH8: -10.39 kcal/mol (docked C1 range -13.94 to -9.87): within the docked range, NOT implausible.
+- 7C6S: +18.80 kcal/mol (docked range -14.42 to -10.27): CRYSTAL POSE IMPLAUSIBLE IN GRID by the locked rule. Caveats: rigid fit leaves 1.4 A
+  conformer mismatch, and one crystal atom lies outside the 24 A box (D3), which the grid penalizes; this value therefore cannot separate a
+  box clip from a prep or adduct-handling problem. It is consistent with 7C6S being the weaker complex in the corrected analysis.
+D4b (rigid rotation+translation RMSD on matched atoms, 30 poses/arm; min / median): unmirrored 7VH8 C1 1.035 / 1.292, C2 1.034 / 1.935;
+7C6S C1 0.853 / 3.824, C2 2.335 / 3.907. Mirrored (inversion) 7VH8 C1 2.456 / 2.702, C2 2.241 / 2.743; 7C6S C1 2.031 / 4.069, C2 2.398 / 3.530.
+MIRROR flag false in all four arms (unmirrored minima are not > 3.0 A in any arm that mirrors below 2.0 A).
+Early-kill rule consequence: the confirmation job is already stopped; the D5 result for 7C6S does not change any prior result. Judge-amendment
+list (D1b, D3b, D4b, D5, D6, D7) is now closed except D1b/D3b, which the mapping defect and D7 superseded for D1b; D3b distances not computed.
