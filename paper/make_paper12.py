@@ -21,6 +21,7 @@ denovo = json.loads((RES / "denovo_mpro_d1.json").read_text())
 verif = json.loads((RES / "external_verification.json").read_text())
 verif2 = json.loads((RES / "external_verification2.json").read_text())
 gnnrob = json.loads((RES / "gnn_robustness.json").read_text())
+e12 = json.loads((RES / "native_covalent_12e.json").read_text())
 big = json.loads((RES / "bigscreen_analysis.json").read_text())
 abl = json.loads((RES / "ablation.json").read_text())
 delong = json.loads((RES / "ablation_delong_intervals.json").read_text())
@@ -1608,6 +1609,26 @@ para(
  "mapping leaves every RMSD above 6.9 A, so that branch's machinery-exhausted outcome "
  "is unchanged. Provenance, gates and per-seed numbers are in the runlog, "
  "results/native_covalent_12a.json and results/native_covalent_12d_remap.json.")
+
+para(
+ "Follow-up audit (12E, preregistered 2026-10-07 before any score was read): the "
+ "7C6S crystal-in-grid anomaly from the D5 diagnostic deconfounds into geometry and "
+ "containment. Scoring the committed D5 crystal-fit pose (Pose A) and an exact-crystal-"
+ "coordinate pose (Pose B, matched atoms at crystal coordinates, RMSD 0.0) against the "
+ "original 24 A maps and minimally expanded maps (same receptor, spacing and center; "
+ "72 points for 7C6S, 68 for 7VH8, by a pre-locked 1.0 A margin rule) gives epdb "
+ "intermolecular energies of "
+ f"{e12['7c6s']['epdb']['A_box0']['e']:.2f} and {e12['7c6s']['epdb']['A_box1']['e']:.2f} kcal/mol "
+ "for Pose A (24 A and expanded box) versus "
+ f"{e12['7c6s']['epdb']['B_box0']['e']:.2f} and {e12['7c6s']['epdb']['B_box1']['e']:.2f} for Pose B. "
+ "Under the frozen plausibility rule, only Pose B in the expanded box is plausible "
+ f"(worst pooled docked C1 energy {e12['7c6s']['docked_C1_worst']:.2f} kcal/mol): the rigid-fit "
+ "conformer mismatch dominates (+18.80 to +1.61 in the same box) and the single crystal "
+ "atom outside the 24 A box contributes the remainder (+1.61 to -11.27). The 7VH8 paired "
+ "control stayed plausible in all four arms and reproduced its D5 score exactly. The "
+ "frozen classification is a joint geometry-plus-containment rescue of the D5 anomaly; "
+ "it motivates a separately preregistered confirmation redock and changes no prior "
+ "verdict, threshold, or result.")
 
 heading("Appendix AI. Closing Statement", 1)
 para(

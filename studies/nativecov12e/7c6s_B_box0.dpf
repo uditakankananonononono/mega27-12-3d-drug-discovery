@@ -1,0 +1,27 @@
+autodock_parameter_version 4.2
+outlev 1
+parameter_file /home/sandbox/work/12/studies/nativecov12a/boron-silicon-atom_par.dat
+intelec
+seed 12345
+ligand_types HD C A N NA OA F P SA S Cl Br I Si B
+fld /home/sandbox/work/12/studies/nativecov12a/7c6s_rec_rigid.maps.fld
+map /home/sandbox/work/12/studies/nativecov12a/7c6s_rec_rigid.HD.map
+map /home/sandbox/work/12/studies/nativecov12a/7c6s_rec_rigid.C.map
+map /home/sandbox/work/12/studies/nativecov12a/7c6s_rec_rigid.A.map
+map /home/sandbox/work/12/studies/nativecov12a/7c6s_rec_rigid.N.map
+map /home/sandbox/work/12/studies/nativecov12a/7c6s_rec_rigid.NA.map
+map /home/sandbox/work/12/studies/nativecov12a/7c6s_rec_rigid.OA.map
+map /home/sandbox/work/12/studies/nativecov12a/7c6s_rec_rigid.F.map
+map /home/sandbox/work/12/studies/nativecov12a/7c6s_rec_rigid.P.map
+map /home/sandbox/work/12/studies/nativecov12a/7c6s_rec_rigid.SA.map
+map /home/sandbox/work/12/studies/nativecov12a/7c6s_rec_rigid.S.map
+map /home/sandbox/work/12/studies/nativecov12a/7c6s_rec_rigid.Cl.map
+map /home/sandbox/work/12/studies/nativecov12a/7c6s_rec_rigid.Br.map
+map /home/sandbox/work/12/studies/nativecov12a/7c6s_rec_rigid.I.map
+map /home/sandbox/work/12/studies/nativecov12a/7c6s_rec_rigid.Si.map
+map /home/sandbox/work/12/studies/nativecov12a/7c6s_rec_rigid.B.map
+elecmap /home/sandbox/work/12/studies/nativecov12a/7c6s_rec_rigid.e.map
+desolvmap /home/sandbox/work/12/studies/nativecov12a/7c6s_rec_rigid.d.map
+move /home/sandbox/work/12/studies/nativecov12e/7c6s_poseB.pdbqt
+about -20.188 -26.832 1.029
+epdb

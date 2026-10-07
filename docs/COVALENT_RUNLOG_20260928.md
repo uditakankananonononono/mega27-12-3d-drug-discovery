@@ -339,3 +339,33 @@ a current open decision. No research or amendment item remains in the 12A-12D
 queue. A next question requires a separate proposal and pre-outcome lock.
 Sources: results/native_covalent_12a.json, results/native_covalent_12c.json,
 results/native_covalent_12d*.json and the dated preregistration/amendments.
+
+## 12E geometry/containment audit (2026-10-07; prereg docs/PREREG_12E_GEOMETRY_CONTAINMENT_20261007.md, locked pre-outcome; script studies/nativecov12e/run_12e.py; results/native_covalent_12e.json)
+
+Machinery record, disclosed: the first execution aborted at gate G1 without reading any
+score. My autogrid4 invocation ran with the wrong working directory and overwrote the
+original 24 A map files in place; the maps were restored byte-identical from git, the
+output paths were made absolute, and a parser gap on leading-plus energies ("+18.80")
+was fixed. The prereg, poses, boxes, thresholds, and classification table were unchanged;
+the rerun executed the locked protocol as written.
+
+Gates: G1 passed both complexes (Pose A on the original maps reproduces D5 exactly:
+-10.39 / +18.80 kcal/mol). G2 passed: 7VH8 Pose A and Pose B plausible in both boxes
+(A -10.39 / -10.39, B -12.56 / -12.56; box expansion does not perturb in-box scores).
+Geometry audit: Pose B matched atoms sit at exact crystal coordinates (RMSD 0.0,
+37/37 and 35/35); Pose B equals Pose A outside coordinate fields; Pose B 7C6S has the
+one known crystal atom outside the 24 A box (margin -0.274) and zero outside the
+expanded box (72 pts, margin +1.226). 7VH8 expanded box is 68 pts (margin +1.026).
+
+7C6S epdb intermolecular energies (kcal/mol): Pose A +18.80 (24 A box) and +18.80
+(expanded); Pose B +1.61 (24 A) and -11.27 (expanded). Worst pooled docked C1 energy
+-10.27. Under the frozen D5 plausibility rule: A implausible in both boxes, B implausible
+in the 24 A box, B plausible only in the expanded box.
+
+Classification by the frozen table: R3 JOINT-RESCUE. The +18.80 anomaly deconfounds into
+a dominant conformer-mismatch component (rigid fit leaves 1.377 A; exact-coordinate Pose B
+recovers +18.80 -> +1.61 in the same box) and a secondary box-clip component (the one
+crystal atom outside the 24 A box accounts for the remaining +1.61 -> -11.27). Neither
+component alone explains the anomaly. Per the locked reading, R3 motivates a separately
+preregistered confirmation redock proposal; it does not rescue or alter any 12A-12D
+verdict, threshold, or result. 7VH8 served only as the paired control.
