@@ -549,7 +549,7 @@ para(
  f"class. The headline is a negative, reported as measured: raw Vina affinity ranks "
  f"actives above inactives at AUROC {analysis['auroc_raw_vina']:.3f}, below the 0.5 "
  f"chance line, and actives occupy {analysis['top8_actives']} of the top eight "
- f"positions against a chance expectation of {8*analysis['actives']/analysis['n_labeled']:.1f} "
+ f"positions among the {analysis['n_labeled']} labeled compounds (unlabeled ligands excluded) against a chance expectation of {8*analysis['actives']/analysis['n_labeled']:.1f} "
  f"(hypergeometric p = {analysis['hypergeometric_p']:.3f}). On this label set, plain "
  "docking does not enrich. This is not a rare outcome in the field - rigid-receptor "
  "empirical scoring is known to struggle on protease pockets with water-mediated "
@@ -1122,7 +1122,7 @@ table(["quantity", "value"],
       [["compounds docked", str(analysis["n_docked"])],
        ["labeled compounds", str(analysis["n_labeled"])],
        ["known actives", str(analysis["actives"])],
-       ["actives in top 8", str(analysis["top8_actives"])],
+       ["actives in top 8 (of the labeled compounds)", str(analysis["top8_actives"])],
        ["hypergeometric p", f"{analysis['hypergeometric_p']:.4f}"],
        ["AUROC raw Vina", f"{analysis['auroc_raw_vina']:.3f}"],
        ["AUROC descriptor MLP (LOO)", f"{analysis['auroc_nn_rescorer_loo']:.3f}"],
