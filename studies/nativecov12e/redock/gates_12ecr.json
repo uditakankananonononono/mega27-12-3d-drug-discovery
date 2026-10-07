@@ -1,0 +1,114 @@
+{
+ "7c6s": {
+  "G5_input_coords_equal_poseB": true,
+  "autogrid_rc": 0,
+  "G5_map_header_ok": true,
+  "maps_sha_vs_12e_e_map_equal": false,
+  "M1_epdb": -11.27,
+  "M1_ref": -11.27,
+  "M1_pass": true,
+  "G1": {
+   "lig_order1": [
+    18
+   ],
+   "warhead_coord_hit_in_12A_prep": [
+    18
+   ],
+   "names_identical": true,
+   "flex_residues": [
+    [
+     "CYS",
+     "A",
+     "145"
+    ]
+   ],
+   "rec_order1_atoms": [
+    [
+     "SG",
+     "CYS",
+     "145"
+    ]
+   ]
+  },
+  "G1_pass": true,
+  "G2": {
+   "pair_line": [
+    "intnbp_r_eps",
+    "1.800000",
+    "2.500000",
+    "13",
+    "7",
+    "1S4",
+    "C1"
+   ],
+   "n_scaled_lines_checked": 105,
+   "n_mismatch": 0,
+   "mismatch_examples": []
+  },
+  "G2_pass": true,
+  "G4_self_rmsd": 0.0,
+  "G4_atoms": 37,
+  "G4_pass": true,
+  "info_input_poseB_rmsd_through_pipeline": 0.0,
+  "info_input_atoms": 37,
+  "G3_rc": 0,
+  "G3_pass": true,
+  "G3_reactive_types_echoed": true
+ },
+ "7vh8": {
+  "G5_input_coords_equal_poseB": true,
+  "autogrid_rc": 0,
+  "G5_map_header_ok": true,
+  "maps_sha_vs_12e_e_map_equal": false,
+  "M1_epdb": -12.56,
+  "M1_ref": -12.56,
+  "M1_pass": true,
+  "G1": {
+   "lig_order1": [
+    28
+   ],
+   "warhead_coord_hit_in_12A_prep": [
+    28
+   ],
+   "names_identical": true,
+   "flex_residues": [
+    [
+     "CYS",
+     "A",
+     "145"
+    ]
+   ],
+   "rec_order1_atoms": [
+    [
+     "SG",
+     "CYS",
+     "145"
+    ]
+   ]
+  },
+  "G1_pass": true,
+  "G2": {
+   "pair_line": [
+    "intnbp_r_eps",
+    "1.800000",
+    "2.500000",
+    "13",
+    "7",
+    "1S4",
+    "C1"
+   ],
+   "n_scaled_lines_checked": 105,
+   "n_mismatch": 0,
+   "mismatch_examples": []
+  },
+  "G2_pass": true,
+  "G4_self_rmsd": 0.0,
+  "G4_atoms": 35,
+  "G4_pass": true,
+  "info_input_poseB_rmsd_through_pipeline": 0.0,
+  "info_input_atoms": 35,
+  "G3_rc": 0,
+  "G3_pass": true,
+  "G3_reactive_types_echoed": true
+ }
+}

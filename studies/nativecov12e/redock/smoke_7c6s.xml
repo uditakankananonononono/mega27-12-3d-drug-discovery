@@ -1,0 +1,35 @@
+<?xml version="1.0" ?>
+<autodock_gpu>
+	<version>c99c8f73a433d3ec8a67808e7a1dde8bbc488ee2-dirty</version>
+	<arguments>--lfile /home/sandbox/work/12/studies/nativecov12a/7c6s_lig_reactive_anchor.pdbqt --flexres /home/sandbox/work/12/studies/nativecov12e/redock/maps/7c6s_rec_flex.pdbqt --ffile /home/sandbox/work/12/studies/nativecov12e/redock/maps/7c6s_rec_rigid.maps.fld --import_dpf /home/sandbox/work/12/studies/nativecov12e/redock/maps/7c6s_rec.reactive_config --resnam /home/sandbox/work/12/studies/nativecov12e/redock/smoke_7c6s --nrun 1 --nev 10000 --ngen 100 --seed 77000</arguments>
+	<dpf>/home/sandbox/work/12/studies/nativecov12e/redock/maps/7c6s_rec.reactive_config</dpf>
+	<grid>/home/sandbox/work/12/studies/nativecov12e/redock/maps/7c6s_rec_rigid.maps.fld</grid>
+	<ligand>/home/sandbox/work/12/studies/nativecov12a/7c6s_lig_reactive_anchor.pdbqt</ligand>
+	<flexres>/home/sandbox/work/12/studies/nativecov12e/redock/maps/7c6s_rec_flex.pdbqt</flexres>
+	<seed>77000</seed>
+	<ls_method>ad</ls_method>
+	<autostop>yes</autostop>
+	<heuristics>yes</heuristics>
+	<run_requested>1</run_requested>
+	<runs>
+		<run id="1">
+			<free_NRG_binding>   -5.20</free_NRG_binding>
+			<final_intermol_NRG> -8.48</final_intermol_NRG>
+			<internal_ligand_NRG>-2.47</internal_ligand_NRG>
+			<torsonial_free_NRG> 3.28</torsonial_free_NRG>
+			<tran0>10.106400 8.907909 15.822806</tran0>
+			<axisangle0>0.10931570 -0.98973616 0.09204566 262.881714</axisangle0>
+			<ndihe>13</ndihe>
+			<dihe0>14.328536 135.141373 277.366058 105.286240 255.669159 258.642395 231.338058 158.390396 252.780945 308.732483 279.520691 216.038834 301.548767
+			</dihe0>
+		</run>
+	</runs>
+	<result>
+		<clustering_histogram>
+			<cluster cluster_rank="1" lowest_binding_energy="-5.20" run="1" mean_binding_energy="-5.20" num_in_clus="1" />
+		</clustering_histogram>
+		<rmsd_table>
+			<run rank="1" sub_rank="1" run="1" binding_energy="-5.20" cluster_rmsd="0.00" reference_rmsd="3.96" />
+		</rmsd_table>
+	</result>
+</autodock_gpu>

@@ -11,3 +11,4 @@ bin/mesa-vendors/
 src/
 bin/ocl-headers/
 studies/nativecov12e/maps/
+studies/nativecov12e/redock/maps/
