@@ -15,3 +15,14 @@ pushed as far as a 1-2 GB CPU sandbox allows.
 
 Hermetic pytest suite (committed mini-receptor/ligand fixtures); live structure and
 PubChem fetches only outside CI.
+
+## Active compute state (2026-10-07, 23:25 IST)
+The 12E-CR confirmation redock (locked prereg
+docs/PREREG_12E_CONFIRMATION_REDOCK_20261007.md) is running, not stalled: the
+driver process and first-seed engine are alive and consuming CPU whenever the
+workspace is awake. This sandbox is suspended for most of each wall-clock
+hour, so only about 70 seconds of compute advances per 16 wall-clock minutes.
+At that throttle the six serial one-hour engine caps can stretch across days;
+there is no credible wall-clock completion window. This state is deliberate:
+a smaller grid or shorter search would be a different preregistration, so the
+locked protocol stays unchanged and consumes no CPU while the workspace sleeps.
