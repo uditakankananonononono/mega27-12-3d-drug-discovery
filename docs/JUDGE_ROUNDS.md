@@ -1,5 +1,24 @@
 # JUDGE_ROUNDS - MEGA27-12 (verbatim ChatGPT judge logs)
 
+## Current judge mandate correction - 2026-10-07
+
+The ten-round minimum was rescinded on 2026-09-27. The owner wrote at
+10:00:07 IST: "NOT 10 ROUNDS OOF CHATGPT CHECK JUST ONE WHICH I PROVIDE OK?"
+(message wamid.HBgMOTE4MTM0MDk4NTcxFQIAEhgWM0VCMDJCMTZGRTVEMkQwMTFBQzc4MQA=),
+and at 10:28:55 IST: "and listen, the checks i am doing now will be the only
+checks i have removed the 10x checks from chatgpt requirement"
+(message wamid.HBgMOTE4MTM0MDk4NTcxFQIAEhgWM0VCMEE0MDAxOTMyQTU4NEM1QjUyRQA=).
+Both original owner messages were read from the authenticated WhatsApp archive
+on 2026-10-07. The amendment already recorded in docs/PREREGISTER.md agrees.
+
+The historical prompts, responses, round headings and assessments below remain
+unchanged. Their /10 numbering and older ten-round language are historical,
+not an active completion gate. There is no quota of additional rounds. Any
+further per-project critique is advice, not a replacement for the user-provided
+review, and must be assessed against current evidence. The attempted resumption
+on 2026-10-07 sent no prompt and added no completed rounds.
+
+
 Rule source: user WhatsApp 4:11:18 (minimum 10 judging rounds on weaknesses +
 what to add), 4:12:25 (ask ChatGPT how to redirect when a negative is not
 moving forward). Mechanism: cloud browser on the user's ChatGPT account.
