@@ -237,9 +237,9 @@ def stage_analyze():
                 seeds[str(s)] = {'machinery': 'timeout' if st.get('timeout') else 'rc=%s' % st.get('rc')}; continue
             pose, e, nm = lig_pose_from_dlg(f'{HERE}/dock_{key}.dlg', names)
             r, n = sym_rmsd(j, matcher, fixpose(perm, pose))
-            seeds[str(s)] = {'best_energy': e, 'rmsd': round(r, 3), 'atoms_matched': n, 'n_models': nm, 'wall_s': st.get('wall_s')}
+            seeds[str(s)] = {'best_energy': e, 'rmsd': round(r, 3), 'rmsd_full_precision': float(r), 'atoms_matched': n, 'n_models': nm, 'wall_s': st.get('wall_s')}
             complete += 1
-        wins = sum(1 for v in seeds.values() if v.get('rmsd', 99) <= 2.0)
+        wins = sum(1 for v in seeds.values() if v.get('rmsd_full_precision', 99) <= 2.0)
         res[tag] = {'seeds': seeds, 'seeds_complete': complete, 'machinery_incomplete': complete < 2,
                     'seeds_passing': wins, 'complex_pass': (wins >= 2) if complete >= 2 else None}
     if any(res[t]['machinery_incomplete'] for t in TAGS):

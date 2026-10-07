@@ -369,3 +369,18 @@ crystal atom outside the 24 A box accounts for the remaining +1.61 -> -11.27). N
 component alone explains the anomaly. Per the locked reading, R3 motivates a separately
 preregistered confirmation redock proposal; it does not rescue or alter any 12A-12D
 verdict, threshold, or result. 7VH8 served only as the paired control.
+
+## 12E-CR pre-outcome analyzer boundary correction - 2026-10-07 23:51 IST
+
+The first docking seed is still running and no seed output/status has been
+written. A code-path preflight found that the analyzer rounded RMSD to three
+decimals before applying the frozen <=2.0 A rule. This would falsely pass a
+synthetic raw RMSD of 2.0004 A as displayed 2.000 A. The analyzer now retains
+`rmsd_full_precision` and uses that value for the verdict; `rmsd` remains a
+three-decimal display field. No prereg threshold, docking parameter, running
+process or empirical outcome was changed. Original code remains in git history.
+
+`tests/test_12ecr_verdict.py` exercises the analyzer function on synthetic poses:
+rounded-boundary rejection, exact-boundary/two-of-three acceptance, control
+discordance, and machinery precedence. All four pass through a standard-library
+runner. Pytest is absent in this environment, so no pytest-suite pass is claimed.
