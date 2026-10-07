@@ -12,8 +12,9 @@ pushed as far as a 1-2 GB CPU sandbox allows.
 2. **Screening campaign**: dock a curated set of 22 approved/clinical drugs
    (canonical SMILES pulled live from PubChem) against Mpro; rank by Vina affinity.
 3. **Enrichment analysis**: known Mpro actives are scored against the ranking. Result
-   (results/screen_summary.json): 2 of 7 actives in the top 8 vs 2.55 expected by chance,
-   enrichment factor 0.79; raw-Vina AUROC 0.34 (results/screen_analysis.json). This is a
+   (results/screen_summary.json): 2 of 7 actives in the top 8 of all 22 docked (2.55 expected, EF 0.79;
+   2 of those top 8 are unlabeled; 7 of all 22 are unlabeled). Among the 15 labeled ligands only, 3 of 7 actives are in the top 8
+   (3.73 expected, hypergeometric p = 0.90; results/screen_analysis.json); raw-Vina AUROC 0.34 (results/screen_analysis.json). This is a
    negative result: Vina ranking does not enrich the known actives in this set.
 4. **CNN/GNN rescoring**: pose-graph neural rescoring trained on docked pose features,
    compared against raw Vina. Leave-one-out AUROC on the 15 labeled ligands: GNN 0.95,
