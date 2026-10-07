@@ -1583,7 +1583,7 @@ para(
  "symmetry-corrected RMSD of 2.0 A or less to the crystal pose in at least two "
  "of three seeds, per complex.")
 para(
- "Corrected result. A follow-up setup audit found a defect in the RMSD code: docked "
+ "Corrected post-hoc reanalysis. A follow-up setup audit found a defect in the RMSD code: docked "
  "poses were indexed by PDBQT atom serial but matched to the crystal through the SDF "
  "atom index, and the two orders differ (verified by exact coordinate identity, 35 of 35 "
  "and 37 of 37 heavy atoms). The integrity gates used the same convention and so could "
@@ -1601,8 +1601,9 @@ para(
  "Superseded measurement, kept for the record. Computed with the defective mapping, "
  "the same 12 runs gave best-pose RMSDs of 5.52 to 6.56 A and a NOT SUPPORTED verdict. "
  "That analysis is retained unedited in the runlog; the corrected numbers are a "
- "reanalysis of a measurement defect, not a threshold change, and whether they replace "
- "the original verdict is recorded as a separate adjudication. The same defect was "
+ "post-hoc reanalysis of a measurement defect, not a threshold change. The October 2 "
+ "close-out decision retains both the original verdict and corrected analysis with the "
+ "defect disclosed; neither is silently substituted for the other. The same defect was "
  "checked in the constraint-guided branch: re-scoring all 18 AD4 poses with the corrected "
  "mapping leaves every RMSD above 6.9 A, so that branch's machinery-exhausted outcome "
  "is unchanged. Provenance, gates and per-seed numbers are in the runlog, "
