@@ -10,5 +10,11 @@
   "timeout": false,
   "dlg": true,
   "wall_s": 13216.5
+ },
+ "7c6s_seed2": {
+  "rc": 0,
+  "timeout": false,
+  "dlg": true,
+  "wall_s": 897.3
  }
 }
