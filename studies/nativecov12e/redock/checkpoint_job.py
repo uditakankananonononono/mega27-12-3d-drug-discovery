@@ -1,6 +1,6 @@
 """Persist completed jobs before the runner advances. Scientific settings are unchanged."""
 import pathlib, subprocess, sys
-root=pathlib.Path(__file__).resolve().parents[2]
+root=pathlib.Path(__file__).resolve().parents[3]
 here=pathlib.Path(__file__).resolve().parent
 remote_url='git@github.com:uditakankananonononono/mega27-12-3d-drug-discovery.git'
 key=sys.argv[1]
