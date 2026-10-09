@@ -222,6 +222,7 @@ def stage_dock():
                 status[key] = {'rc': None, 'timeout': True, 'dlg': False, 'wall_s': round(time.time() - t0, 1)}
             json.dump(status, open(st_p, 'w'), indent=1)
             print('done', key, status[key], flush=True)
+            subprocess.check_call([sys.executable, f'{HERE}/checkpoint_job.py', key])
     print('ALL_DONE')
 
 def stage_analyze():

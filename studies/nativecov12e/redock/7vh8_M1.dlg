@@ -10,7 +10,7 @@
                    Compiled on Sep 28 2026 at 04:55:45
 
 
-This file was created at:			9:16 58" p.m., 10/07/2026
+This file was created at:			3:21 36" p.m., 10/09/2026
                    on host:		"e2b.local"
 Current Working Directory = "/home/sandbox/work/12/studies/nativecov12a"
 
@@ -20,7 +20,7 @@ Current Working Directory = "/home/sandbox/work/12/studies/nativecov12a"
       ________________________________________________________________
 
 
-Random number generator was seeded with values 4104, 1791388018.
+Random number generator was seeded with values 3194, 1791539496.
 Docking parameter file (DPF) used for this docking:		/home/sandbox/work/12/studies/nativecov12e/redock/7vh8_M1.dpf
 DPF> autodock_parameter_version 4.2
 
@@ -37,7 +37,7 @@ DPF> intelec
 Electrostatic energies will be calculated for all non-bonds between moving atoms.
 DPF> seed 12345
 
-Random number generator was seeded with values 12345, 1791388018.
+Random number generator was seeded with values 12345, 1791539496.
 DPF> ligand_types HD C A N NA OA F P SA S Cl Br I Si B
 
 DPF> fld /home/sandbox/work/12/studies/nativecov12e/redock/maps/7vh8_rec_rigid.maps.fld
@@ -874,13 +874,13 @@ epdb: USER
 epdb: USER    
 
 >>> Closing the docking parameter file (DPF)...
-This docking finished at:			9:16 59" p.m., 10/07/2026
+This docking finished at:			3:21 37" p.m., 10/09/2026
 
 
 ________________________________________________________________________________
 
 /home/sandbox/work/12/bin/ad4/autodock4: Successful Completion on "e2b.local"
 
-Real= 1.14s,  CPU= 1.13s,  System= 0.02s
+Real= 0.87s,  CPU= 0.84s,  System= 0.02s
 ________________________________________________________________________________
 

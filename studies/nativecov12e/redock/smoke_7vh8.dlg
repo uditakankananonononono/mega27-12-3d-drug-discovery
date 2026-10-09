@@ -177,7 +177,7 @@ INPUT-FLEXRES-PDBQT: END_RES CYS A 145
 
 
 Run:   1 / 1
-Time taken for this run:   4.541s
+Time taken for this run:   3.048s
 
 DOCKED: MODEL        1
 DOCKED: USER    Run = 1
@@ -306,5 +306,5 @@ Rank | Sub- | Run  | Binding   | Cluster | Reference       | Grep
 _____|______|______|___________|_________|_________________|___________
    1      1      1       -5.51      0.00      6.21           RANKING
 
-Run time 2.326 sec
-Idle time 0.327 sec
+Run time 1.573 sec
+Idle time 0.246 sec
