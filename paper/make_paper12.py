@@ -1630,6 +1630,23 @@ para(
  "it motivates a separately preregistered confirmation redock and changes no prior "
  "verdict, threshold, or result.")
 
+heading("12E-CR: locked confirmation of pose recovery", 2)
+para(
+ "The preregistered confirmation redock is CONFIRMED. With exact-crystal-coordinate "
+ "Pose B inputs and the expanded Box 1 maps, all three seeds pass the locked "
+ "best-energy-pose heavy-atom RMSD <= 2.0 A gate: 7C6S gives 1.567, 1.626 and "
+ "1.653 A; paired control 7VH8 gives 1.719, 1.039 and 0.755 A. All six runs finish "
+ "successfully. RMSD uses the coordinate-identity remap without superposition; "
+ "the analyzer compares full precision, not rounded display values. The required "
+ "two-of-three rule was locked before outcomes, and both complexes pass three-of-three. "
+ "This confirms pose recovery in this specific input/box setting, not prospective "
+ "screening performance, new ligand activity or generalization beyond these structures. "
+ "A workspace reset lost the earlier uncommitted outputs; the complete locked rerun "
+ "is retained with per-job DLG/XML checkpoints. No lost-run measurement is pooled "
+ "or inferred. Earlier defective-mapping verdicts and the separate geometry/containment "
+ "audit remain in the record. Source: results/native_covalent_12e_redock.json and "
+ "docs/PREREG_12E_CONFIRMATION_REDOCK_20261007.md (locked 989e2d0).")
+
 heading("Appendix AI. Closing Statement", 1)
 para(
  "This paper reports a validated protocol, a benchmark recovery, and a novel "

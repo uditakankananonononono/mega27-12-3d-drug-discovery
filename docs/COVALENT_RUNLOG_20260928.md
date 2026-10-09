@@ -384,3 +384,12 @@ process or empirical outcome was changed. Original code remains in git history.
 rounded-boundary rejection, exact-boundary/two-of-three acceptance, control
 discordance, and machinery precedence. All four pass through a standard-library
 runner. Pytest is absent in this environment, so no pytest-suite pass is claimed.
+
+
+## 12E-CR confirmation redock, recovery completed 2026-10-10
+
+Frozen prereg: docs/PREREG_12E_CONFIRMATION_REDOCK_20261007.md, locked at 989e2d020d65236d08baaeee2658bb6012413595 before outcomes. Rule: best-energy-pose heavy-atom symmetry-corrected RMSD, coordinate-identity remap without superposition, <=2.0 A in at least 2/3 seeds. All machinery gates passed.
+
+CONFIRMED: 7C6S passes 3/3 seeds (77000-77002: 1.567, 1.626, 1.653 A); paired 7VH8 control passes 3/3 (1.719, 1.039, 0.755 A). Best energies respectively -14.46/-14.49/-14.48 and -12.96/-13.74/-13.67 kcal/mol. Comparison uses unrounded RMSDs in results/native_covalent_12e_redock.json. Six jobs returned rc0 with DLG/XML outputs and no timeout.
+
+The earlier workspace-loss run's five successful status observations have no surviving pose artifacts and are not analyzed or pooled. This is the full locked rerun, with per-job Git checkpoints. The confirmed claim is restricted to pose recovery under the exact-crystal-coordinate input and expanded Box 1 setup; it is not ligand discovery, prospective screening validation or proof of receptor/chemotype generalization. Earlier mapping-defect numbers, original verdicts and geometry/containment audit remain unchanged.

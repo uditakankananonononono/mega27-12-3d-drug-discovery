@@ -1,0 +1,71 @@
+{
+ "prereg": "docs/PREREG_12E_CONFIRMATION_REDOCK_20261007.md (989e2d020d65236d08baaeee2658bb6012413595)",
+ "criterion": "best-energy-pose heavy-atom symmetry-corrected RMSD (coordinate-identity remap, no superposition) <= 2.0 A in >= 2/3 seeds",
+ "complexes": {
+  "7c6s": {
+   "seeds": {
+    "0": {
+     "best_energy": -14.46,
+     "rmsd": 1.567,
+     "rmsd_full_precision": 1.566864410560493,
+     "atoms_matched": 37,
+     "n_models": 10,
+     "wall_s": 32598.1
+    },
+    "1": {
+     "best_energy": -14.49,
+     "rmsd": 1.626,
+     "rmsd_full_precision": 1.626228151275214,
+     "atoms_matched": 37,
+     "n_models": 10,
+     "wall_s": 13216.5
+    },
+    "2": {
+     "best_energy": -14.48,
+     "rmsd": 1.653,
+     "rmsd_full_precision": 1.6528964258520842,
+     "atoms_matched": 37,
+     "n_models": 10,
+     "wall_s": 897.3
+    }
+   },
+   "seeds_complete": 3,
+   "machinery_incomplete": false,
+   "seeds_passing": 3,
+   "complex_pass": true
+  },
+  "7vh8": {
+   "seeds": {
+    "0": {
+     "best_energy": -12.96,
+     "rmsd": 1.719,
+     "rmsd_full_precision": 1.7191236970370356,
+     "atoms_matched": 35,
+     "n_models": 10,
+     "wall_s": 673.8
+    },
+    "1": {
+     "best_energy": -13.74,
+     "rmsd": 1.039,
+     "rmsd_full_precision": 1.0392550766225364,
+     "atoms_matched": 35,
+     "n_models": 10,
+     "wall_s": 740.0
+    },
+    "2": {
+     "best_energy": -13.67,
+     "rmsd": 0.755,
+     "rmsd_full_precision": 0.7550239352875794,
+     "atoms_matched": 35,
+     "n_models": 10,
+     "wall_s": 652.4
+    }
+   },
+   "seeds_complete": 3,
+   "machinery_incomplete": false,
+   "seeds_passing": 3,
+   "complex_pass": true
+  }
+ },
+ "classification": "CONFIRMED"
+}
