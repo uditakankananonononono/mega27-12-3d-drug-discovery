@@ -4,5 +4,11 @@
   "timeout": false,
   "dlg": true,
   "wall_s": 32598.1
+ },
+ "7c6s_seed1": {
+  "rc": 0,
+  "timeout": false,
+  "dlg": true,
+  "wall_s": 13216.5
  }
 }
